@@ -75,7 +75,7 @@ class EBooking {
 	}
 	/**
      * @access public
-     * @return Array
+     * @return array
      */
 	public function getPartecipanti(){
 		return $this->partecipanti;
@@ -100,7 +100,7 @@ class EBooking {
 	}
 	/**
      * @access public
-     * @param $partecip Array
+     * @param $partecip array
      */
 	public function setPartecipanti(Array $partecip) {
 		$this->partecipanti = $partecip;
@@ -110,7 +110,7 @@ class EBooking {
      * @param $par EPartita
      */
     public function setPartita(EPartita $par) {
-        $this->partita = $parts;
+        $this->partita = $par;
     }
 
 	///**
