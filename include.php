@@ -1,0 +1,20 @@
+<?php
+
+ /**
+ * La funzione require_once non consente di includere più volte lo stesso file; in particolare, 
+ * nel caso in cui c'è bisogno di una doppia inclusione
+ * Mentre, in caso di file non trovato, genera un parse error che interrompe l'esecuzione dello script.
+ */
+  
+   /**
+    * Inclusione dei file contenuti nella cartella Entity
+    */
+  require_once 'Entity/EUser.php';
+  require_once 'Entity/EAccount.php';
+  require_once 'Entity/EAddress.php';
+  require_once 'Entity/EAdmin.php';
+  require_once 'Entity/EBooking.php';
+  require_once 'Entity/ECentroSportivo.php';
+
+
+?>
