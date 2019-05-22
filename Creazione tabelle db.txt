@@ -1,0 +1,87 @@
+DROP DATABASE IF EXISTS bookeplay;
+CREATE DATABASE bookeplay;
+USE bookeplay;
+
+CREATE TABLE IF NOT EXISTS  `Account` (
+  `id` CHAR(4) not NULL,
+  `password` VARCHAR(45) not NULL,
+  `email` varchar(45) NULL,
+  `conto` float NULL,
+  `username` varchar(45) NOT NULL,
+  `telnumb` int(10) NOT NULL,
+  `descrizione` varchar(150) NULL,
+  
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `Utente` (
+  `idAcc` char(4) not null,
+  `name` VARCHAR(45) not NULL,
+  `surname` VARCHAR(45) not NULL,
+  `account` varchar(45) NULL,
+  `gender` ENUM('M','F') NULL,
+  `tipo` enum('registrato', 'admin'),
+  PRIMARY KEY (`name`, `surname`),
+  FOREIGN KEY (idAcc) REFERENCES Account(`id`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `Indirizzo` (
+  `Via` varchar(45) not null,
+  `CAP` CHAR(5) not NULL,
+  `Comune` VARCHAR(45) not NULL,
+  `Provincia` varchar(45) NULL,
+  `idAcc` char(4) not NULL,
+  `NumCivico` char(3) not null,
+  PRIMARY KEY (`Via`, `CAP`),
+  FOREIGN KEY (idAcc) REFERENCES Utente(`idAcc`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `Fasce_Orarie` (
+  `Fascia` char(2) not null,
+  PRIMARY KEY (`Fascia`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `Giorno` (
+  `Giorno` varchar(10) not null,
+  `FasciaOraria` char(2) not null,
+   PRIMARY KEY (`Giorno`, `FasciaOraria`)
+)
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `Prenotazione` (
+  `idP` char(5) not null,
+  `Quota` int NULL,
+  `Giorno` VARCHAR(45) not NULL,
+  `FasciaOraria` varchar(45) NULL,
+  PRIMARY KEY (`idP`),
+  FOREIGN KEY (Giorno) REFERENCES Giorno(`Giorno`),
+  FOREIGN KEY (FasciaOraria) REFERENCES Fasce_Orarie(`Fascia`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `Pren_creata` (
+  `idPren` char(5) not null,
+  `idAcc` char(4) not null,
+   PRIMARY KEY (`idPren`, `idAcc`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `Pren_Partecipa` (
+  `idPren` char(5) not null,
+  `idAcc` char(4) not null,
+   PRIMARY KEY (`idPren`, `idAcc`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `Partita` (
+  `idPren` char(5) not null,
+  `MaxNumGioc` int NULL,
+  `Livello` enum('principiante','medio','avanzato','professionista') DEFAULT 'medio',
+  `Note` varchar(255) NULL,
+  PRIMARY KEY (`idPren`)
+)
+ENGINE = InnoDB;
