@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `Utente` (
   `idAcc` char(4) not null,
   `name` VARCHAR(45) not NULL,
   `surname` VARCHAR(45) not NULL,
+  `dataNascita` DATE not NULL,
   `account` varchar(45) NULL,
   `gender` ENUM('M','F') NULL,
   `tipo` enum('registrato', 'admin'),
