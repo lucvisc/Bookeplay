@@ -4,7 +4,8 @@
  * Contiene i seguenti attributi (e i relativi metodi):
  * -name : nome dell'utente 
  * -Surname : cognome dell'utente
- * -gender: specifica il sesso della persona
+ * -datanasc : data di nascita dell'utente
+ * -gender : specifica il sesso della persona
  * -address: indirizzo dell'utente 
  * -account: account dell'utente 
  *
@@ -23,6 +24,10 @@ class EUser {
      * @AttributeType string 
      */
  	private $surname;
+    /**
+     * @AttributeType date
+     */
+    private $datanasc;
  	/**
      * @AttributeType string 
      */
@@ -37,9 +42,10 @@ class EUser {
  	private $account;
 
  	//Dichiarazione del costruttore 
- 	function __construct(string $nam=null, string $surna=null, string $gend=null, EAddress $addr=null, EAccount $acc=null){
+ 	function __construct(string $nam=null, string $surna=null, date $dat, string $gend=null, EAddress $addr=null, EAccount $acc=null){
  		$this->name = $nam;
  		$this->surname = $surna;
+ 		$this->datanasc = $dat;
  		$this->gender = $gend;
  		$this->address = $addr;
  		$this->account = $acc;
@@ -65,6 +71,13 @@ class EUser {
  	public function getSurname(){
  		return $this->surname;
  	}
+    /**
+     * @access public
+     * @return date
+     */
+    public function getDatanasc(){
+        return $this->datanasc;
+    }
  	/**
      * @access public
      * @return string
@@ -101,6 +114,13 @@ class EUser {
  	public function setSurname(string $sur){
  		$this->surname = $sur;
  	}
+    /**
+     * @access public
+     * @param $datnas date
+     */
+    public function setDatanasc(date $datnas){
+        $this->datanasc = $datnas;
+    }
  	/**
      * @access public
      * @param $gen string
@@ -122,10 +142,20 @@ class EUser {
  	public function setAccount(EAccount $acco){
  		$this->account = $acco;
  	}
+    /**
+     * Aggiorna
+     * @param $field campo selezionato
+     * @param $val
+     * @param $id
+     */
+    static function Update($field,$val,$id){
+        $db=FDatabase::getInstance();
+        $db->update('Utente',$id,$field,$val);
+    }
 
-     /********************VALIDATION*******************/
-     /*Funzioni ausiliari che verificano la corrispendenza con i valori di ingresso 
-    
+     /********************VALIDATION*******************
+     *Funzioni ausiliari che verificano la corrispendenza con i valori di ingresso
+     */
      /**
      * Verificano la corrispondenza con il valore in input con i requisiti
      * @param $val valore in input
@@ -151,6 +181,18 @@ class EUser {
           }
           else return true;
      }
+    /**
+     * Verificano la corrispondenza con il valore in input con i requisiti richiesti
+     * @param $val valore inserito
+     * @return bool
+     */
+    static function valDatanasc($val):bool{
+        $date=explode('-',$val);
+        if(!checkdate($date[1],$date[2],$date[0])){
+            return false;
+        }
+        else return true;
+    }
 
      /**
      * Verificano la corrispondenza con il valore in input con i requisiti
