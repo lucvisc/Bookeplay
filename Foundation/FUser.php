@@ -3,15 +3,14 @@
 //require_once 'include.php';
 
 /**
- * La classe FUtente fornisce query per gli oggetti EUser
+ * La classe FUser fornisce query per gli oggetti EUser
  * @author Luca, Catriel
  * @package Foundation
  */
 
-class FUtente
-{
+class FUser extends FDatabase {
     private static $tables="utenti";
-    private static $values="(:id,:username,:password,:name,:surname,:sex,:datan,:email,:telnumber,:description,:activate)";
+    private static $values="(:name,:surname,:gender,:datanasc,:address,:account)";
 
     public function __construct(){}
 
@@ -49,7 +48,7 @@ class FUtente
     }
 
 
-    public static function store($user){
+    public static function storeUser($user){
         $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
         $db=FDatabase::getInstance();
         $id=$db->store($sql,"FUser",$user);
@@ -98,7 +97,7 @@ class FUtente
      * @return bool
      */
 
-    public static function delete($id){
+    public static function deleteUser($id){
         $sql="DELETE FROM ".static::getTables()." WHERE id=".$id.";";
         $db=FDatabase::getInstance();
         if($db->delete($sql)) return true;
@@ -128,7 +127,7 @@ class FUtente
      * @return bool
      */
 
-    public static function Update($id,$field,$newvalue){
+    public static function UpdateUser($id,$field,$newvalue){
         $sql="UPDATE ".static::getTables()." SET ".$field."='".$newvalue."' WHERE id=".$id.";";
         $db=FDatabase::getInstance();
         if($db->update($sql)) return true;
