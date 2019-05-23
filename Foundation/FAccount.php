@@ -7,8 +7,7 @@ require_once 'include.php';
  * @author Luca, Catriel
  * @package Foundation
  */
-class FAccount
-{
+class FAccount extends FDatabase {
     private static $tables = "account";
     private static $values = "(:id,:username,:password,:email,:telnumber,:conto,:descrizione,:activate)";
 
@@ -20,7 +19,6 @@ class FAccount
      * @param PDOStatement $stmt
      * @param EAccount $acc account i cui dati devono essere inseriti nel DB
      */
-
     public static function bind($stmt, EAccount $acc)
     {
         $stmt->bindValue(':id', NULL, PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
@@ -60,7 +58,7 @@ class FAccount
      * @param int $id dell'account di riferimento
      * @return object $account
      */
-    public static function store($acc)
+    public static function storeAccount($acc)
     {
         $sql = "INSERT INTO " . static::getTables() . " VALUES " . static::getValues();
         $db = FDatabase::getInstance();
@@ -111,7 +109,7 @@ class FAccount
      * @param int $id dell'account che si vuole eliminare
      * @return bool
      */
-    public static function delete($id)
+    public static function deleteAccount($id)
     {
         $sql = "DELETE FROM " . static::getTables() . " WHERE id=" . $id . ";";
         $db = FDatabase::getInstance();
@@ -171,7 +169,7 @@ class FAccount
      */
 
 
-    public static function Update($id, $field, $newvalue)
+    public static function UpdateAccount($id, $field, $newvalue)
     {
         $sql = "UPDATE " . static::getTables() . " SET " . $field . "='" . $newvalue . "' WHERE id=" . $id . ";";
         $db = FDatabase::getInstance();
@@ -244,7 +242,7 @@ class FAccount
         $acc->setConto($row['conto']);
         $acc->setDescrizione($row['descrizione']);
 
-        return $utente;
+        return $acc;
     }
 
 }
