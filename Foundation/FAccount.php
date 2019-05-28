@@ -228,7 +228,7 @@ class FAccount extends FDatabase {
     }
 
     /**
-     * Istanzia l'oggetto utente dai risultati della query.
+     * Istanzia l'oggetto Account dai risultati della query.
      * @param row tupla restituita dal dbms
      * @return l'oggetto utente
      */
