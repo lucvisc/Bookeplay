@@ -6,10 +6,10 @@
  * @package Foundation
  */
 
-class FAddress extends FDatabase {
+class FAccount extends FDatabase {
 
-private static $tables="Address";
-private static $values="(:id,:username,:password,:comune,:provincia,:cap,:via,:ncivico)";
+    private static $tables="Account";
+    private static $values="(:id,:username,:password,:email,:telnumer,:conto,:descrizione,:activate)";
 
 
     public static function getTables(){
@@ -26,32 +26,35 @@ private static $values="(:id,:username,:password,:comune,:provincia,:cap,:via,:n
         return static::$values;
     }
 
- public static function bind($stmt, EAddress $addr)
-{
-    $stmt->bindValue(':comune', $addr->getComune(), PDO::PARAM_STR);
-    $stmt->bindValue(':provincia', $addr->getProvincia(), PDO::PARAM_STR);
-    $stmt->bindValue(':cap', $addr->getCap(), PDO::PARAM_STR);
-    $stmt->bindValue(':via', $addr->getVia(), PDO::PARAM_STR);
-    $stmt->bindValue(':nciv', $addr->getNcivico(), PDO::PARAM_STR);
-}
+    public static function bind($stmt, EAccount $acc)
+    {
+        $stmt->bindValue(':id', $acc->getId(), PDO::PARAM_STR);
+        $stmt->bindValue(':username', $acc->getUsername(), PDO::PARAM_STR);
+        $stmt->bindValue(':password', $acc->getPassword(), PDO::PARAM_STR);
+        $stmt->bindValue(':email', $acc->getEmail(), PDO::PARAM_STR);
+        $stmt->bindValue(':telnumber', $acc->getTelnumber(), PDO::PARAM_INT);
+        $stmt->bindValue(':conto', $acc->getConto(), PDO::PARAM_STR);
+        $stmt->bindValue(':descrizione', $acc->getDescrizione(), PDO::PARAM_STR);
+        $stmt->bindValue(':active', $acc->getDescrizione(), PDO::PARAM_BOOL);
+    }
 
 
-    public static function storeAddress($addr){
+    public static function storeAccount($acc){
         $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
         $db=FDatabase::getInstance();
-        $id=$db->store($sql,"FAddress",$addr);
+        $id=$db->store($sql,"FAccount",$acc);
         if($id) return $id;
         else return null;
     }
 
-    public static function loadAddressById($id){
+    public static function loadAccountById($id){
         $sql="SELECT * FROM ".static::getTables()." WHERE id=".$id.";";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){
-            $addr=new EAddress($result['comune'], $result['provincia'],$result['cap'],$result['via'], $result['ncivico']);
-            $addr->setId($result['id']);
-            return $addr;
+            $acc=new EAccount($result['id'], $result['username'],$result['password'],$result['email'], $result['telnumber'], $result['conto'], $result['descrizione'], $result['active']);
+            $acc->setId($result['id']);
+            return $acc;
         }
         else return null;
     }
@@ -62,14 +65,14 @@ private static $values="(:id,:username,:password,:comune,:provincia,:cap,:via,:n
      * @return object $user
      */
 
-    public static function loadByComune($comune){
-        $sql="SELECT * FROM ".static::getTables()." WHERE Comune='".$comune."';";
+    public static function loadAccountByUsername($username){
+        $sql="SELECT * FROM ".static::getTables()." WHERE Username='".$username."';";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){
-            $addr=new EAddress($result['comune'], $result['provincia'],$result['cap'],$result['via'], $result['ncivico']);
-            $addr->setId($result['id']);
-            return $addr;
+            $acc=new EAccount($result['id'], $result['username'],$result['password'],$result['email'], $result['telnumber'], $result['conto'], $result['descrizione'], $result['active']);
+            $acc->setId($result['id']);
+            return $acc;
         }
         else return null;
     }
@@ -80,14 +83,14 @@ private static $values="(:id,:username,:password,:comune,:provincia,:cap,:via,:n
      * @param int $id dell'user
      * @return object $user
      */
-    public static function loadById($id){
-        $sql="SELECT * FROM ".static::getTables()." WHERE id=".$id.";";
+    public static function loadAccountByEmail($email){
+        $sql="SELECT * FROM ".static::getTables()." WHERE Email=".$email.";";
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){
-            $addr=new EAddress($result['comune'], $result['provincia'],$result['cap'],$result['via'], $result['ncivico']);
-            $addr->setId($result['id']);
-            return $addr;
+            $acc=new EAccount($result['id'], $result['username'],$result['password'],$result['email'], $result['telnumber'], $result['conto'], $result['descrizione'], $result['active']);
+            $acc->setId($result['id']);
+            return $acc;
         }
         else return null;
     }
@@ -98,9 +101,9 @@ private static $values="(:id,:username,:password,:comune,:provincia,:cap,:via,:n
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){
-            $addr=new EAddress($result['comune'], $result['provincia'],$result['cap'],$result['via'], $result['ncivico']);
-            $addr->setId($result['id']);
-            return $addr;
+            $acc=new EAccount($result['id'], $result['username'],$result['password'],$result['email'], $result['telnumber'], $result['conto'], $result['descrizione'], $result['active']);
+            $acc->setId($result['id']);
+            return $acc;
         }
         else return null;
     }
@@ -111,7 +114,7 @@ private static $values="(:id,:username,:password,:comune,:provincia,:cap,:via,:n
      * @return bool
      */
 
-    public static function deleteAddress($id){
+    public static function deleteAccount($id){
         $sql="DELETE FROM ".static::getTables()." WHERE id=".$id.";";
         $db=FDatabase::getInstance();
         if($db->delete($sql)) return true;
@@ -127,7 +130,7 @@ private static $values="(:id,:username,:password,:comune,:provincia,:cap,:via,:n
      * @return bool
      */
 
-    public static function UpdateAddress($id,$field,$newvalue){
+    public static function UpdateAccount($id,$field,$newvalue){
         $sql="UPDATE ".static::getTables()." SET ".$field."='".$newvalue."' WHERE id=".$id.";";
         $db=FDatabase::getInstance();
         if($db->update($sql)) return true;
@@ -141,14 +144,16 @@ private static $values="(:id,:username,:password,:comune,:provincia,:cap,:via,:n
      */
     static function createObjectFromRow($row)
     {
-        $indirizzo = new EAddress(); //costruisce l'istanza dell'oggetto
-        $indirizzo->setComune($row['comune']);
-        $indirizzo->setProvincia($row['provincia']);
-        $indirizzo->setCap($row['cap']);
-        $indirizzo->setVia($row['via']);
-        $indirizzo->setNcivicos($row['ncivico']);
+        $account = new EAccount(); //costruisce l'istanza dell'oggetto
+        $account->setUsername($row['username']);
+        $account->setPassword($row['password']);
+        $account->setEmail($row['email']);
+        $account->setTelnumber($row['telnumber']);
+        $account->setDescrizione($row['descrizione']);
+        $account->setConto($row['conto']);
+        $account->setActivate($row['activate']);
 
-        return $indirizzo;
+        return $account;
     }
 }
 
