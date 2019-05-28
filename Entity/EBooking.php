@@ -113,44 +113,44 @@ class EBooking {
         $this->partita = $par;
     }
 
-	///**
+	/**
     // * @access public
     // * @param $quot float 
     // * Per difedrse fasce orarie c'è una diversa quota da pagare, impostare per alcune fasce orarie, per esempio
     // * quelle serali, impostare una tariffa aggiuntiva per la luce ed il riscaldamento !!!!!!!!!!!!!!!!!!!
     // */
-	//public function setQuota(float $quot){
-	//	$this->quota = $quot;
-	//}
+	public function setQuota(float $quot){
+		$this->quota = $quot;
+	}
 
-	// * @access public
-    // * @param $date datetime
-    // */
-	//public function setDatebooking(DateTime $date){
-	//	$this->datebooking = $date;
-	//}
+	/** @access public
+    /* @param $date datetime
+     */
+	public function setDatebooking(DateTime $date){
+		$this->datebooking = $date;
+	}
     
-	///**
-    // * @access public
-    // * @param $time DateTime
-    // */
-	//public function setTimebooking(DateTime $time){
-	//	$thia->timebooking = $time;
+	/**
+    / * @access public
+    / * @param $time DateTime
+    / */
+	public function setTimebooking(DateTime $time){
+		$thia->timebooking = $time;
 
-	///**
-    // * @access public
-    // * @return DateTime
-    // */
-	//public function getDatebooking(){
-	//	return $this->datebooking;
-	//}
-	///**
-    // * @access public
-    // * @return DateTime
-    // */
-	//public function getTimebooking(){
-	//	return $this->timebooking;
-	//}
-	//}
+	/*
+    / * @access public
+    / * @return DateTime
+    /
+	public function getDatebooking(){
+		return $this->datebooking;
+	}
+	/**
+    / * @access public
+    / * @return DateTime
+    /
+	public function getTimebooking(){
+		return $this->timebooking;
+	}*/
+	}
 }
 ?>

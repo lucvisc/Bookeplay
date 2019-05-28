@@ -3,15 +3,14 @@
 //require_once 'include.php';
 
 /**
- * La classe FUtente fornisce query per gli oggetti EUser
+ * La classe FUser fornisce query per gli oggetti EUser
  * @author Luca, Catriel
  * @package Foundation
  */
 
-class FUtente extends FDatabase
-{
+class FUser extends FDatabase {
     private static $tables="utenti";
-    private static $values="(:id,:username,:password,:name,:surname,:sex,:datan,:email,:telnumber,:description,:activate)";
+    private static $values="(:name,:surname,:gender,:datanasc,:address,:account)";
 
     public function __construct(){}
 
@@ -81,7 +80,7 @@ class FUtente extends FDatabase
      */
 
     public static function loadByUsername($username){
-        $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
+        $sql=cercaUtenteByUsername();
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){

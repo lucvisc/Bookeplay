@@ -11,7 +11,7 @@ class FAccount extends FDatabase
 {
 
     private static $tables = "Account";
-    private static $values = "(:id,:username,:password,:email,:telnumer,:conto,:descrizione,:activate)";
+    private static $values = "(:idbooking,:quota,:giornobooking,:partita,:giornobooking)";
 
 
     public static function getTables()
@@ -30,37 +30,34 @@ class FAccount extends FDatabase
         return static::$values;
     }
 
-    public static function bind($stmt, EAccount $acc)
+    public static function bind($stmt, EBooking $booking)
     {
-        $stmt->bindValue(':id', $acc->getId(), PDO::PARAM_STR);
-        $stmt->bindValue(':username', $acc->getUsername(), PDO::PARAM_STR);
-        $stmt->bindValue(':password', $acc->getPassword(), PDO::PARAM_STR);
-        $stmt->bindValue(':email', $acc->getEmail(), PDO::PARAM_STR);
-        $stmt->bindValue(':telnumber', $acc->getTelnumber(), PDO::PARAM_INT);
-        $stmt->bindValue(':conto', $acc->getConto(), PDO::PARAM_STR);
-        $stmt->bindValue(':descrizione', $acc->getDescrizione(), PDO::PARAM_STR);
-        $stmt->bindValue(':active', $acc->getDescrizione(), PDO::PARAM_BOOL);
+        $stmt->bindValue(':idbooking',NULL, PDO::PARAM_INT);
+        $stmt->bindValue(':quota', $booking->getQuota(), PDO::PARAM_STR);
+        $stmt->bindValue(':giornobooking', $booking->getPartecipanti(), PDO::PARAM_STR);
+        $stmt->bindValue(':partita', $booking->getPartita(), PDO::PARAM_STR);
+        $stmt->bindValue(':giornobooking', $booking->getGiornobooking(), PDO::PARAM_STR);
     }
 
 
-    public static function storeAccount($acc)
+    public static function storeBooking($booking)
     {
         $sql = "INSERT INTO " . static::getTables() . " VALUES " . static::getValues();
         $db = FDatabase::getInstance();
-        $id = $db->store($sql, "FAccount", $acc);
+        $id = $db->store($sql, "FAccount", $booking);
         if ($id) return $id;
         else return null;
     }
 
-    public static function loadAccountById($id)
+    public static function loadBookingById($idbooking)
     {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE id=" . $id . ";";
+        $sql = "SELECT * FROM " . static::getTables() . " WHERE id=" . $idbooking . ";";
         $db = FDatabase::getInstance();
         $result = $db->loadSingle($sql);
         if ($result != null) {
-            $acc = new EAccount($result['id'], $result['username'], $result['password'], $result['email'], $result['telnumber'], $result['conto'], $result['descrizione'], $result['active']);
-            $acc->setId($result['id']);
-            return $acc;
+            $booking = new EBooking($result['idbooking'], $result['quota'], $result['giornobooking'], $result['partita'], $result['giornobooking']);
+            $booking->setId($result['id']);
+            return $booking;
         } else return null;
     }
 
@@ -70,15 +67,15 @@ class FAccount extends FDatabase
      * @return object $user
      */
 
-    public static function loadAccountByUsername($username)
+    public static function loadBookingByGiorno($giornobooking)
     {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE Username='" . $username . "';";
+        $sql = "SELECT * FROM " . static::getTables() . " WHERE giorno='" . $giornobooking . "';";
         $db = FDatabase::getInstance();
         $result = $db->loadSingle($sql);
         if ($result != null) {
-            $acc = new EAccount($result['id'], $result['username'], $result['password'], $result['email'], $result['telnumber'], $result['conto'], $result['descrizione'], $result['active']);
-            $acc->setId($result['id']);
-            return $acc;
+            $booking =  $booking = new EBooking($result['idbooking'], $result['quota'], $result['giornobooking'], $result['partita'], $result['giornobooking']);
+            $booking->setId($result['id']);
+            return $booking;
         } else return null;
     }
 
@@ -94,22 +91,26 @@ class FAccount extends FDatabase
         $db = FDatabase::getInstance();
         $result = $db->loadSingle($sql);
         if ($result != null) {
-            $acc = new EAccount($result['id'], $result['username'], $result['password'], $result['email'], $result['telnumber'], $result['conto'], $result['descrizione'], $result['active']);
-            $acc->setId($result['id']);
-            return $acc;
+            $booking = new EBooking($result['idbooking'], $result['quota'], $result['giornobooking'], $result['partita'], $result['giornobooking']);
+            $booking->setId($result['id']);
+            return $booking;
         } else return null;
     }
 
-
-    public static function loadByProvincia($provincia)
+    /**
+     * Metodo che restituisce un determinato oggetto di tipo EBooking dal db in base alla fascia di prenotazione
+     * @param $fascia è la fascia oraria di partenza
+     * @return EBooking|null
+     */
+    public static function loadByFascia($fascia)
     {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE provincia=" . $provincia . ";";
+        $sql = "SELECT * FROM " . static::getTables() . " WHERE fascia>=" . $fascia . ";";
         $db = FDatabase::getInstance();
         $result = $db->loadSingle($sql);
         if ($result != null) {
-            $acc = new EAccount($result['id'], $result['username'], $result['password'], $result['email'], $result['telnumber'], $result['conto'], $result['descrizione'], $result['active']);
-            $acc->setId($result['id']);
-            return $acc;
+            $booking = new EBooking($result['idbooking'], $result['quota'], $result['giornobooking'], $result['partita'], $result['giornobooking']);
+            $booking->setId($result['id']);
+            return $booking;
         } else return null;
     }
 
@@ -119,7 +120,7 @@ class FAccount extends FDatabase
      * @return bool
      */
 
-    public static function deleteAccount($id)
+    public static function deleteBooking($id)
     {
         $sql = "DELETE FROM " . static::getTables() . " WHERE id=" . $id . ";";
         $db = FDatabase::getInstance();
@@ -136,7 +137,7 @@ class FAccount extends FDatabase
      * @return bool
      */
 
-    public static function UpdateAccount($id, $field, $newvalue)
+    public static function UpdateBooking($id, $field, $newvalue)
     {
         $sql = "UPDATE " . static::getTables() . " SET " . $field . "='" . $newvalue . "' WHERE id=" . $id . ";";
         $db = FDatabase::getInstance();
@@ -151,16 +152,16 @@ class FAccount extends FDatabase
      */
     static function createObjectFromRow($row)
     {
-        $account = new EAccount(); //costruisce l'istanza dell'oggetto
-        $account->setUsername($row['username']);
-        $account->setPassword($row['password']);
-        $account->setEmail($row['email']);
-        $account->setTelnumber($row['telnumber']);
-        $account->setDescrizione($row['descrizione']);
-        $account->setConto($row['conto']);
-        $account->setActivate($row['activate']);
+        $booking = new Ebooking(); //costruisce l'istanza dell'oggetto
+        $booking->setIdbooking($row['$idbooking']);
+        $booking->setPartecipanti($row['password']);
+        $booking->setPartita($row['email']);
+        $booking->setDatebooking($row['telnumber']);
+        $booking->setQuota($row['descrizione']);
+        $booking->setTimebooking($row['conto']);
+        $booking->setActivate($row['activate']);
 
-        return $account;
+        return $booking;
     }
 }
 
