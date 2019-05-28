@@ -12,7 +12,8 @@
  * @access public
  * @package Entity
  */
-//Implementazione della classe Indirizzo 
+//Implementazione della classe Indirizzo
+
 class EAddress {
 	/**
      * @AttributeType string 
@@ -23,7 +24,7 @@ class EAddress {
      */
 	private $provincia;
     /**
-     * @AttributeType string
+     * @AttributeType int
      */
     private $cap;
 	/**
@@ -36,9 +37,10 @@ class EAddress {
 	private $ncivico;
 
 	//Dichiarazione del costruttore 
-	function __construct(string $c=null, string $p=null, string $v=null, string $n=null){
+	function __construct(string $c=null, string $p=null, int $ca=null,  string $v=null, string $n=null){
 		$this->comune = $c;
 		$this->provincia = $p;
+		$this->cap = ca;
 		$this->via = $v;
 		$this->ncivico = $n;
 	}
@@ -60,7 +62,7 @@ class EAddress {
 	}
     /**
      * @access public
-     * @return string
+     * @return int
      */
     public function getCap(){
         return $this->cap;// restituisce il codice di avviamento postale
@@ -97,9 +99,9 @@ class EAddress {
 	}
     /**
      * @access public
-     * @param $ca string
+     * @param $ca int
      */
-    public function setCap(string $ca){
+    public function setCap(int $ca){
         $this->cap = $ca;
     }
 	/**
