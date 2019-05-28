@@ -15,6 +15,7 @@
  */
 include "EAccount.php";
 include "EAddress.php";
+//require_once 'include.php';
 class EUser {
  	/**
      * @AttributeType string 
@@ -25,7 +26,7 @@ class EUser {
      */
  	private $surname;
     /**
-     * @AttributeType date
+     * @AttributeType string
      */
     private $datanasc;
  	/**
@@ -42,7 +43,7 @@ class EUser {
  	private $account;
 
  	//Dichiarazione del costruttore 
- 	function __construct(string $nam=null, string $surna=null, date $dat, string $gend=null, EAddress $addr=null, EAccount $acc=null){
+ 	function __construct(string $nam=null, string $surna=null, string $dat, string $gend=null, EAddress $addr=null, EAccount $acc=null){
  		$this->name = $nam;
  		$this->surname = $surna;
  		$this->datanasc = $dat;
@@ -50,12 +51,12 @@ class EUser {
  		$this->address = $addr;
  		$this->account = $acc;
  	}
-
+    /*
      public function __toString(){
         $st="Nome: ".$this->name." Cognome: ".$this->surname." Username: ".$this->username;
         return $st;
      }
-
+    */
  	//Dichiarazione dei metodi Get
  	/**
      * @access public
@@ -73,7 +74,7 @@ class EUser {
  	}
     /**
      * @access public
-     * @return date
+     * @return string
      */
     public function getDatanasc(){
         return $this->datanasc;
@@ -116,9 +117,9 @@ class EUser {
  	}
     /**
      * @access public
-     * @param $datnas date
+     * @param $datnas string
      */
-    public function setDatanasc(date $datnas){
+    public function setDatanasc(string $datnas){
         $this->datanasc = $datnas;
     }
  	/**
