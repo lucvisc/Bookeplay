@@ -36,7 +36,7 @@ class EUser {
  	/**
      * @AttributeType EAddress
      */
- 	private $address;
+ 	private  $address;
  	/**
      * @AttributeType EAccount
      */
@@ -48,7 +48,7 @@ class EUser {
  		$this->surname = $surna;
  		$this->datanasc = $dat;
  		$this->gender = $gend;
- 		$this->address = $addr;
+ 		$this->address = $addr; //gli vene già passato come oggetto
  		$this->account = $acc;
  	}
     /*

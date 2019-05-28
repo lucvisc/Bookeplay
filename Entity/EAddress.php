@@ -36,6 +36,7 @@ class EAddress {
      */
 	private $ncivico;
 
+
 	//Dichiarazione del costruttore 
 	function __construct(string $c=null, string $p=null, int $ca=null,  string $v=null, string $n=null){
 		$this->comune = $c;

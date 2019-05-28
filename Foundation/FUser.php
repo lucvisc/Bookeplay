@@ -80,7 +80,7 @@ class FUser extends FDatabase {
      */
 
     public static function loadByUsername($username){
-        $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
+        $sql=cercaUtenteByUsername();
         $db=FDatabase::getInstance();
         $result=$db->loadSingle($sql);
         if($result!=null){
