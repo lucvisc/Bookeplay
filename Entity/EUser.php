@@ -13,9 +13,9 @@
  * @access public
  * @package Entity
  */
-include "EAccount.php";
-include "EAddress.php";
-//require_once 'include.php';
+
+require_once '../include.php';
+
 class EUser {
  	/**
      * @AttributeType string 

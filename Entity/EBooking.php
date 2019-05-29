@@ -12,8 +12,8 @@
  * @access public
  * @package Entity
  */
-include "EGiorno.php";
-include "EPartita.php";
+
+require_once '../include.php';
 
 class EBooking {
 	/**

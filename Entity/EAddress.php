@@ -12,6 +12,9 @@
  * @access public
  * @package Entity
  */
+
+require_once '../include.php';
+
 //Implementazione della classe Indirizzo
 
 class EAddress {
@@ -41,7 +44,7 @@ class EAddress {
 	function __construct(string $c=null, string $p=null, int $ca=null,  string $v=null, string $n=null){
 		$this->comune = $c;
 		$this->provincia = $p;
-		$this->cap = ca;
+		$this->cap = $ca;
 		$this->via = $v;
 		$this->ncivico = $n;
 	}

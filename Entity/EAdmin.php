@@ -3,9 +3,9 @@
  * @access public
  * @package Entity
  */
-include "EUser.php";
-//include "EAccount.php";
-class EAdmin extends EUser{
+
+require_once '../include.php';
+class EAdmin {
 
 
 	function __construct(){				//in php la classe figlia deve necessariamente richiamare il costruttore 

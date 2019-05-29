@@ -13,6 +13,8 @@
  * @access public
  * @package Entity
  */
+require_once '../include.php';
+
  //Implementazione della classe Account 
 class EAccount {
 	/**
@@ -50,8 +52,7 @@ class EAccount {
 
 
 	//Dichiarazione del costruttore 
-	function __construct(string $i=null,string $un=null,string $pass=null, string $ema=null,int $tn=null,string $descr=null, string $cont=null){
-		$this->id = EAccount::generaStringaRandom(10);
+	function __construct(string $un=null,string $pass=null, string $ema=null,int $tn=null,string $descr=null, string $cont=null){
 		$this->username = $un;
 		$this->password = $pass;
 		$this->email = $ema;
@@ -128,7 +129,14 @@ class EAccount {
     //    $i = EAccount::generaStringaRandom(10);
 	//	$this->id =$i;
 	//}
-    
+    /**
+     * @access public
+     * @param $ID int
+     */
+    public function setId(int $ID){
+        $this->id =$ID;
+    }
+
 	/**
      * @access public
      * @param $un string

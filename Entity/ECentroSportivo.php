@@ -10,8 +10,8 @@
  * @access public
  * @package Entity
  */
-include "EAddress.php";
-include "EBooking.php";
+
+require_once '../include.php';
 
 class ECentroSportivo{
 	/**
