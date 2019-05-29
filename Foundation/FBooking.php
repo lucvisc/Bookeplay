@@ -5,10 +5,13 @@
  * @package Foundation
  */
 
-class FAccount extends FDatabase
+require_once '../include.php';
+
+
+class FBooking extends FDatabase
 {
 
-    private static $tables = "Account";
+    private static $tables = "prenotazione";
     private static $values = "(:idbooking,:quota,:giornobooking,:partita,:giornobooking)";
 
     /**
@@ -136,15 +139,14 @@ class FAccount extends FDatabase
      * @param string $row restituita dal dmbs
      * @return EBooking|obj
      */
-    static function createObjectFromRow($row) {
+    public function createObjectFromRow($row) {
         $booking = new Ebooking(); //costruisce l'istanza dell'oggetto
         $booking->setGiornobooking($row['giornobooking']);
         $booking->setQuota($row['quota']);
         $booking->setPartecipanti($row['partecipanti']);
         $booking->setPartita($row['partita']);
-
         return $booking;
     }
 }
-
+?>
 

@@ -1,7 +1,6 @@
 <?php
 
-
-//require_once 'include.php';
+require_once '../include.php';
 
 if (file_exists('config.inc.php')) require_once 'config.inc.php';
 /*  Singleton: rappresenta un tipo particolare di classe che garantisce
@@ -16,8 +15,7 @@ if (file_exists('config.inc.php')) require_once 'config.inc.php';
  * @author Luca, Catriel
  * @package Foundation
  */
-class FDatabase
-{
+class FDatabase {
 
     private static $instance = null;     /** l'unica istanza della classe */
 
@@ -41,7 +39,7 @@ class FDatabase
      * Metodo che restituisce l'unica istanza dell'oggetto.
      * @return FPersistantManager l'istanza dell'oggetto.
      */
-    public static function getInstance()    //restituisce l'unica istanza, l'istanza viene creata se non esiste
+    public static function getInstance()    //restituisce l'unica istanza di FDatabase, l'istanza viene creata se non esiste
     {
         if (static::$instance == null) {
             static::$instance = new FDatabase();
@@ -220,7 +218,7 @@ class FDatabase
 
     /**
      * Funzione privata che prepara ed esegue la query.
-     * @return obj torna l'oggetto (Utente o Campagna) ricercato
+     * @return obj torna l'oggetto (User) ricercato
      */
     private function exeCerca(string $className, string $value, string $str, string $sql)
     {
@@ -287,7 +285,6 @@ class FDatabase
             return $this->exeCerca('F' . $className, $value, $str, $sql);
         else return NULL;
     }
-
-
 }
 ?>
+

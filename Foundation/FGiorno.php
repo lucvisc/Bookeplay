@@ -1,11 +1,12 @@
 <?php
-require_once 'include.php';
 
 /**
  * La classe FGiorno fornisce query per gli oggetti EGiorno
  * @author Luca, Catriel
  * @package Foundation
  */
+require_once '../include.php';
+
 class FGiorno extends FDatabase {
 
     private static $tables = "giorno";
@@ -141,7 +142,7 @@ class FGiorno extends FDatabase {
      * @param row tupla restituita dal dbms
      * @return l'oggetto giorno
      */
-    static function createObjectFromRow($row)
+    public function createObjectFromRow($row)
     {
         $gior = new EGiorno();              //costruisce l'oggetto della classe EAccount
         $gior->setGiorno($row['giorno']);

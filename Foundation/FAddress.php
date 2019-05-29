@@ -5,6 +5,7 @@
  * @author Luca, Catriel
  * @package Foundation
  */
+require_once '../include.php';
 
 class FAddress extends FDatabase {
 
@@ -139,7 +140,7 @@ private static $values="(:id,:username,:password,:comune,:provincia,:cap,:via,:n
      * @param string $row restituita dal dmbs
      * @return EAddress|obj
      */
-    static function createObjectFromRow($row)
+    public function createObjectFromRow($row)
     {
         $indirizzo = new EAddress(); //costruisce l'istanza dell'oggetto
         $indirizzo->setComune($row['comune']);
