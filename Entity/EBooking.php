@@ -4,8 +4,6 @@
  * Contiene i seguenti attributi (e i relativi metodi):
  * -idbookin: identificativo incrementato riferito ad una prenotazione;
  * -giornoboking: identifica il giorno e la relativa fascia oraria 
- * -datebooking: data della prenotazione
- * -timebooking: fascia oraria della prenotazione
  * -quota: pagamento della prenotazione
  * -partecipanti: array di user partecipanti alla prenotazione
  * -conto: conto relativo ad un utente, per poter pagare le partite
@@ -91,13 +89,13 @@ class EBooking {
 	//Dichiarazione dei metodi Set 
 	/**
      * @access public
-     * questo metodo viene utilizzato per identificare univocamente una prenotazione, è indentificata da 
-     * una concatenazione tra date e fascia oraria 
+     * questo metodo viene utilizzato per identificare univocamente una prenotazione, è indentificata automaticamente
+     * dal db con numeri incrementali
      */
-	public function setIdbooking(int $i){
+	/*public function setIdbooking(int $i){
 		$id = getGiorno()."-".getSingolaFasciaOraria($i);
 		$this->idbooking = $id;
-	}
+	}*/
 	/**
      * @access public
      * @param $partecip array
@@ -105,6 +103,15 @@ class EBooking {
 	public function setPartecipanti(Array $partecip) {
 		$this->partecipanti = $partecip;
 	}
+
+    /**
+     * @access public
+     * @param $giorno EGiorno
+     */
+    public function setGiornobooking(EGiorno $giorno) {
+        $this->giornobooking = $giorno;
+    }
+
     /**
      * @access public
      * @param $par EPartita
@@ -121,36 +128,6 @@ class EBooking {
     // */
 	public function setQuota(float $quot){
 		$this->quota = $quot;
-	}
-
-	/** @access public
-    /* @param $date datetime
-     */
-	public function setDatebooking(DateTime $date){
-		$this->datebooking = $date;
-	}
-    
-	/**
-    / * @access public
-    / * @param $time DateTime
-    / */
-	public function setTimebooking(DateTime $time){
-		$thia->timebooking = $time;
-
-	/*
-    / * @access public
-    / * @return DateTime
-    /
-	public function getDatebooking(){
-		return $this->datebooking;
-	}
-	/**
-    / * @access public
-    / * @return DateTime
-    /
-	public function getTimebooking(){
-		return $this->timebooking;
-	}*/
 	}
 }
 ?>
