@@ -9,12 +9,24 @@
    /**
     * Inclusione dei file contenuti nella cartella Entity
     */
-  require_once 'Entity/EUser.php';
-  require_once 'Entity/EAccount.php';
-  require_once 'Entity/EAddress.php';
-  require_once 'Entity/EAdmin.php';
-  require_once 'Entity/EBooking.php';
-  require_once 'Entity/ECentroSportivo.php';
+  require_once 'Entity\EUser.php';
+  require_once 'Entity\EAccount.php';
+  require_once 'Entity\EAddress.php';
+  require_once 'Entity\EAdmin.php';
+  require_once 'Entity\EBooking.php';
+  require_once 'Entity\ECentroSportivo.php';
+  require_once 'Entity\EGiorno.php';
+  require_once 'Entity\EPartita.php';
 
+  /**
+   * Inclusione dei file contenuti nella cartella Foundation
+   */
+  require_once 'Foundation\FDatabase.php';
+  require_once 'Foundation\FAccount.php';
+  require_once 'Foundation\FUser.php';
+  require_once 'Foundation\FAddress.php';
+  require_once 'Foundation\FBooking.php';
+  require_once 'Foundation\FGiorno.php';
+  require_once 'Foundation\FPartita.php';
 
 ?>
