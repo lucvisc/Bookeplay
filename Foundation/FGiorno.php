@@ -9,29 +9,26 @@ require_once '../include.php';
 
 class FGiorno extends FDatabase {
 
-    private static $tables = "giorno";
-    private static $values = "(:giorno,:fasciaoraria)";
+    private static $tables = "Giorno";
+    private static $values = "(:Giorno,:idFasciaOraria)";
 
-    public function __construct() {
-    }
+    public function __construct() {}
 
     /**
      * Questo metodo lega gli attributi del giorno da inserire con i parametri della INSERT
      * @param PDOStatement $stmt
      * @param EGiorno $gg giorno i cui dati devono essere inseriti nel DB
      */
-    public static function bind($stmt, EGiorno $gg)
-    {
-        $stmt->bindValue(':giorno', $gg->getGiorno(), PDO::PARAM_STR);
-        $stmt->bindValue(':fasciaoraria', $gg->getFasceOrarie(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
+    public static function bind($stmt, EGiorno $gg) {
+        $stmt->bindValue(':Giorno', $gg->getGiorno(), PDO::PARAM_STR);
+        $stmt->bindValue(':idFasciaOraria', $gg->getFasceOrarie(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
     }
 
     /**
      * questo metodo restituisce il nome della tabella sul DB per la costruzione delle Query
      * @return string $tables nome della tabella di riferimento
      */
-    public static function getTables()
-    {
+    public static function getTables() {
         return static::$tables;
     }
 
@@ -40,8 +37,7 @@ class FGiorno extends FDatabase {
      * @return string $values valori della tabella di riferimento
      */
 
-    public static function getValues()
-    {
+    public static function getValues() {
         return static::$values;
     }
 
@@ -50,8 +46,7 @@ class FGiorno extends FDatabase {
      * @param string $giorno del giorno di riferimento
      * @return object $gg
      */
-    public static function storeGiorno($gg)
-    {
+    public static function storeGiorno($gg) {
         $sql = "INSERT INTO " . static::getTables() . " VALUES " . static::getValues();
         $db = FDatabase::getInstance();
         $id = $db->store($sql, "FGiorno", $gg);
@@ -64,27 +59,24 @@ class FGiorno extends FDatabase {
      * @param string $gg del giorno di riferimento
      * @return object $gior
      */
-    public static function loadByGiorno($gg)
-    {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE giorno=" . $gg . ";";
+    public static function loadByGiorno($gg) {
+        $sql = "SELECT * FROM " . static::getTables() . " WHERE Giorno=" . $gg . ";";
         $db = FDatabase::getInstance();
         $result = $db->loadSingle($sql);
         if ($result != null) {
-            $gior = new EGiorno($result['giorno'], $result['fasciaoraria']);
-            $gior->setGiorno($result['giorno']);
+            $gior = new EGiorno($result['Giorno'], $result['idFasciaOraria']);
+            $gior->setGiorno($result['Giorno']);
             return $gior;
         } else return null;
     }
-
 
     /**
      * Funzione che permette la delete dell'account in base all'id
      * @param int $id dell'account che si vuole eliminare
      * @return bool
      */
-    public static function deleteGiorno($gg)
-    {
-        $sql = "DELETE FROM " . static::getTables() . " WHERE giorno=" . $gg . ";";
+    public static function deleteGiorno($gg) {
+        $sql = "DELETE FROM " . static::getTables() . " WHERE Giorno=" . $gg . ";";
         $db = FDatabase::getInstance();
         if ($db->delete($sql)) return true;
         else return false;
@@ -97,8 +89,7 @@ class FGiorno extends FDatabase {
      * @param string $fasceorarie
      * @return bool
      */
-    public static function UpdateFasceOrarie($gg, $fasce)
-    {
+    public static function UpdateFasceOrarie($gg, $fasce) {
         $field = "fasceorarie";
         if (FGiorno::update($gg, $field, $fasce)) return true;
         else return false;
@@ -112,9 +103,8 @@ class FGiorno extends FDatabase {
      * @return bool
      */
 
-    public static function UpdateGiorno($gg, $field, $newvalue)
-    {
-        $sql = "UPDATE " . static::getTables() . " SET " . $field . "='" . $newvalue . "' WHERE giorno=" . $gg . ";";
+    public static function UpdateGiorno($gg, $field, $newvalue) {
+        $sql = "UPDATE " . static::getTables() . " SET " . $field . "='" . $newvalue . "' WHERE Giorno=" . $gg . ";";
         $db = FDatabase::getInstance();
         if ($db->update($sql)) return true;
         else return false;
@@ -125,14 +115,13 @@ class FGiorno extends FDatabase {
      * @param string $gg
      * @return object $gior
      */
-    public static function ExistGiorno($gg)
-    {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE giorno='" . $gg . "';";
+    public static function ExistGiorno($gg) {
+        $sql = "SELECT * FROM " . static::getTables() . " WHERE Giorno='" . $gg . "';";
         $db = FDatabase::getInstance();
         $result = $db->exist($sql);
         if ($result != null) {
-            $gior = new EGiorno($result['giorno'], $result['fasceorarie']);
-            $gior->setGiorno($result['giorno']);
+            $gior = new EGiorno($result['Giorno'], $result['idFasceOrarie']);
+            $gior->setGiorno($result['Giorno']);
             return $gior;
         } else return null;
     }
@@ -146,7 +135,7 @@ class FGiorno extends FDatabase {
     {
         $gior = new EGiorno();              //costruisce l'oggetto della classe EAccount
         $gior->setGiorno($row['giorno']);
-        $gior->getFasceOrarie($row['fasceorarie']);
+        $gior->getFasceOrarie($row['idFasceOrarie']);
 
         return $gior;
     }
