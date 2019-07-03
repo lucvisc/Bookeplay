@@ -5,7 +5,7 @@
  * @author Luca, Catriel
  * @package Foundation
  */
-require_once '../include.php';
+require_once 'include.php';
 
 class FAddress extends FDatabase {
 

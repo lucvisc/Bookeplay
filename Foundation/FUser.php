@@ -1,6 +1,6 @@
 <?php
 
-require_once '../include.php';
+require_once 'include.php';
 
 /**
  * La classe FUser fornisce query per gli oggetti EUser

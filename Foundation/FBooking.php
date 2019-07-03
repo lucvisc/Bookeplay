@@ -5,7 +5,7 @@
  * @package Foundation
  */
 
-require_once '../include.php';
+require_once 'include.php';
 
 
 class FBooking extends FDatabase

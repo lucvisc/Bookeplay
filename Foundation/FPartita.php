@@ -1,5 +1,5 @@
 <?php
-require_once '../include.php';
+require_once 'include.php';
 
 /**
  * La classe FPartita fornisce query per gli oggetti EPartita
