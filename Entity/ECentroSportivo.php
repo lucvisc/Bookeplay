@@ -11,7 +11,7 @@
  * @package Entity
  */
 
-require_once '../include.php';
+require_once 'include.php';
 
 class ECentroSportivo{
 	/**

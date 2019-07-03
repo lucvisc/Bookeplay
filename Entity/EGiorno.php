@@ -10,7 +10,7 @@
  * @package Entity
  */
 
-require_once '../include.php';
+require_once 'include.php';
  //Implementazione della classe Giorno
 class EGiorno {
 	/**
