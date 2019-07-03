@@ -9,7 +9,7 @@ require_once '../include.php';
 class FPartita extends FDatabase
 {
     private static $tables = "partita";
-    private static $values = "(:nummax,:livello,:note)";
+    private static $values = "(:idPren,:MaxNumGioc,:Livello,:Note)";
 
     public function __construct() {
     }
@@ -20,10 +20,10 @@ class FPartita extends FDatabase
      * @param EPartita $par partita i cui dati devono essere inseriti nel DB
      */
     public static function bind($stmt, EPartita $par) {
-        //$stmt->bindValue(':idPren', $par->FBooking::getId(), PDO::PARAM_STR);
-        $stmt->bindValue(':nummax', $par->getNumMax(), PDO::PARAM_STR);
-        $stmt->bindValue(':livello', $par->getLivello(), PDO::PARAM_STR);
-        $stmt->bindValue(':note', $par->getNote(), PDO::PARAM_STR);
+        $stmt->bindValue(':idPren',NULL, PDO::PARAM_INT); //l'id è posto a NULL perche viene incrementato automaticamente dal DB
+        $stmt->bindValue(':MaxNumGioc', $par->getNumMax(), PDO::PARAM_STR);
+        $stmt->bindValue(':Livello', $par->getLivello(), PDO::PARAM_STR);
+        $stmt->bindValue(':Note', $par->getNote(), PDO::PARAM_STR);
     }
 
     /**
@@ -63,7 +63,7 @@ class FPartita extends FDatabase
      * @return bool
      */
     public static function UpdateLivello($idPren, $liv) {
-        $field = "livello";
+        $field = "Livello";
         if (FPartita::update($idPren, $field, $liv)) return true;
         else return false;
     }
@@ -76,7 +76,7 @@ class FPartita extends FDatabase
      * @return bool
      */
     public static function UpdateNumeroMax($idPren, $num) {
-        $field = "nummax";
+        $field = "MaxNunGioc";
         if (FPartita::update($idPren, $field, $num)) return true;
         else return false;
     }
@@ -90,7 +90,7 @@ class FPartita extends FDatabase
      */
 
     public static function UpdateNote($idPren, $not) {
-        $field = "note";
+        $field = "Note";
         if (FPartita::update($idPren, $field, $not)) return true;
         else return false;
     }
@@ -119,7 +119,7 @@ class FPartita extends FDatabase
         $db = FDatabase::getInstance();
         $result = $db->exist($sql);
         if ($result != null) {
-            $part = new EPartita($result['idPren'], $result['nummax'], $result['livello'], $result['note']);
+            $part = new EPartita($result['idPren'], $result['MaxNumGioc'], $result['Livello'], $result['Note']);
             return $part;
         } else return null;
     }
@@ -130,9 +130,9 @@ class FPartita extends FDatabase
      */
     public function createObjectFromRow($row) {
         $part = new EPartita();           //costruisce l'oggetto della classe EPartita
-        $part->setNumeroMax($row['nummax']);
-        $part->setLivello($row['livello']);
-        $part->setNote($row['note']);
+        $part->setNumeroMax($row['MaxNumGioc']);
+        $part->setLivello($row['Livello']);
+        $part->setNote($row['Note']);
         return $part;
     }
 
