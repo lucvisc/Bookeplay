@@ -18,13 +18,11 @@ if (file_exists('config.inc.php')) require_once 'config.inc.php';
 class FDatabase {
 
     private static $instance = null;     /** l'unica istanza della classe */
-
     private $db;        /** oggetto PDO che effettua la connessione al dbms */
-
     private static $UpPath = "Upload/";     /** percorso */
 
     /** dichiarazione del costruttore privato, l'unico accesso è dato dal metodo getInstance() */
-    private function __construct()
+   /* private function __construct()
     {
         global $host, $bookeplay, $username, $password;
         try {
@@ -33,6 +31,20 @@ class FDatabase {
             echo "Attenzione errore: " . $e->getMessage();
             die;
         }
+        return $db;
+    }
+   */
+
+    public static function Connect()
+    {
+        global $host, $database, $username, $password;
+        try {
+            $db = new PDO("mysql:host=$host; dbname=$database", $username, $password);
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            die;
+        }
+        return $db;
     }
 
     /**
