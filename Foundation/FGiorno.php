@@ -7,29 +7,49 @@
  */
 require_once 'include.php';
 
-class FGiorno extends FDatabase {
-
-    private static $tables = "Giorno";
+class FGiorno {
+    /**
+     * classe foundation
+     */
+    private static $class = "FGiorno";
+    /**
+     * tabella di riferimento
+     */
+    private static $tables = "giorno";
+    /**
+     * valori della tabella
+     */
     private static $values = "(:Giorno,:idFasciaOraria)";
 
-    public function __construct() {}
+    public function __construct(){}
 
     /**
      * Questo metodo lega gli attributi del giorno da inserire con i parametri della INSERT
      * @param PDOStatement $stmt
      * @param EGiorno $gg giorno i cui dati devono essere inseriti nel DB
      */
-    public static function bind($stmt, EGiorno $gg) {
+    public static function bind($stmt, EGiorno $gg)
+    {
         $stmt->bindValue(':Giorno', $gg->getGiorno(), PDO::PARAM_STR);
         $stmt->bindValue(':idFasciaOraria', $gg->getFasceOrarie(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
+    }
+
+    /**
+     * questo metodo restituisce la classe della tabella sul DB per la costruzione delle Query
+     * @return string $class classe della tabella di riferimento
+     */
+    public static function getClass()
+    {
+        return self::$class;
     }
 
     /**
      * questo metodo restituisce il nome della tabella sul DB per la costruzione delle Query
      * @return string $tables nome della tabella di riferimento
      */
-    public static function getTables() {
-        return static::$tables;
+    public static function getTables()
+    {
+        return self::$tables;
     }
 
     /**
@@ -37,8 +57,9 @@ class FGiorno extends FDatabase {
      * @return string $values valori della tabella di riferimento
      */
 
-    public static function getValues() {
-        return static::$values;
+    public static function getValues()
+    {
+        return self::$values;
     }
 
     /**
@@ -46,12 +67,10 @@ class FGiorno extends FDatabase {
      * @param string $giorno del giorno di riferimento
      * @return object $gg
      */
-    public static function storeGiorno($gg) {
-        $sql = "INSERT INTO " . static::getTables() . " VALUES " . static::getValues();
+    public static function store($giorno)
+    {
         $db = FDatabase::getInstance();
-        $id = $db->store($sql, "FGiorno", $gg);
-        if ($id) return $id;
-        else return null;
+        $id = $db->storeDB(static::getClass(), $giorno);
     }
 
     /**
@@ -59,85 +78,94 @@ class FGiorno extends FDatabase {
      * @param string $gg del giorno di riferimento
      * @return object $gior
      */
-    public static function loadByGiorno($gg) {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE Giorno=" . $gg . ";";
+    public static function loadByField($field, $id)
+    {
+        $giorno = null;
         $db = FDatabase::getInstance();
-        $result = $db->loadSingle($sql);
-        if ($result != null) {
-            $gior = new EGiorno($result['Giorno'], $result['idFasciaOraria']);
-            $gior->setGiorno($result['Giorno']);
-            return $gior;
-        } else return null;
-    }
-
-    /**
-     * Funzione che permette la delete dell'account in base all'id
-     * @param int $id dell'account che si vuole eliminare
-     * @return bool
-     */
-    public static function deleteGiorno($gg) {
-        $sql = "DELETE FROM " . static::getTables() . " WHERE Giorno=" . $gg . ";";
-        $db = FDatabase::getInstance();
-        if ($db->delete($sql)) return true;
-        else return false;
-    }
-
-    /**
-     * Funzione che permette di modificare le fasce orarie
-     * associato ad un certo giorno di un utente
-     * @param string $gg del giorno che si vuole effettuare la modifica
-     * @param string $fasceorarie
-     * @return bool
-     */
-    public static function UpdateFasceOrarie($gg, $fasce) {
-        $field = "fasceorarie";
-        if (FGiorno::update($gg, $field, $fasce)) return true;
-        else return false;
-    }
-
-    /**
-     * Funzione che permette di modificare una generico attributo del giorno
-     * @param int $id dell'account che vuole effettuare la modifica
-     * @param string $field campo da modificare
-     * @param string $newvalue nuovo valore
-     * @return bool
-     */
-
-    public static function UpdateGiorno($gg, $field, $newvalue) {
-        $sql = "UPDATE " . static::getTables() . " SET " . $field . "='" . $newvalue . "' WHERE Giorno=" . $gg . ";";
-        $db = FDatabase::getInstance();
-        if ($db->update($sql)) return true;
-        else return false;
+        $result = $db->loadDB(static::getClass(), $field, $id);
+        $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
+        if (($result != null) && ($rows_number == 1)) {
+            $giorno = new EGiorno($result['giorno'], $result['idFasciaOraria']);
+        } else {
+            if (($result != null) && ($rows_number > 1)) {
+                $giorno = array();
+                for ($i = 0; $i < count($result); $i++) {
+                    $giorno[] = new EGiorno($result[$i]['giorno'], $result[$i]['idFasciaOraria']);
+                }
+            }
+        }
+        return $giorno;
     }
 
     /**
      * Funzione che verifica l'esistenza di un giorno
-     * @param string $gg
-     * @return object $gior
+     * @param  $id valore di cui verificare l'esistenza
+     * @param $field colonna su ci eseguire la verifica
+     * @return bool
      */
-    public static function ExistGiorno($gg) {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE Giorno='" . $gg . "';";
+    public static function exist($field, $id)
+    {
         $db = FDatabase::getInstance();
-        $result = $db->exist($sql);
-        if ($result != null) {
-            $gior = new EGiorno($result['Giorno'], $result['idFasceOrarie']);
-            $gior->setGiorno($result['Giorno']);
-            return $gior;
-        } else return null;
+        $result = $db->existDB(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
+        if ($result != null)
+            return true;
+        else
+            return null;
     }
 
     /**
-     * Istanzia l'oggetto Giorno dai risultati della query.
-     * @param row tupla restituita dal dbms
-     * @return l'oggetto giorno
+     * Metodo che aggiorna i campi di un Giorno
+     * @param $field campo nel quale si vuole modificare il valore
+     * @param $newvalue nuovo valore da assegnare
+     * @param $pk nome della colonna utilizzata per l'espressione "where" della query
+     * @param $id valore della primary key da usare come riferimento
+     * @return true se esiste, altrimenti false
      */
-    public function createObjectFromRow($row)
+    public static function update($field, $newvalue, $pk, $id)
     {
-        $gior = new EGiorno();              //costruisce l'oggetto della classe EAccount
-        $gior->setGiorno($row['giorno']);
-        $gior->getFasceOrarie($row['idFasceOrarie']);
+        $db = FDatabase::getInstance();
+        $result = $db->updateDB(static::getClass(), $field, $newvalue, $pk, $id);
+        if ($result) return true;
+        else return false;
+    }
 
-        return $gior;
+    /**
+     * Permette la delete sul db in base all'id
+     * @param $field nome del campo della tabella nel quale ricercare il valore immesso
+     * @param $id valore del campo
+     * @return bool
+     */
+    public static function delete($field, $id)
+    {
+        $db = FDatabase::getInstance();
+        $result = $db->deleteDB(static::getClass(), $field, $id);   //funzione richiamata,presente in FDatabase
+        if ($result)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Metodo che permette di ritornare tutti i giorni presenti sul db
+     * @param $state valore dello stato
+     * @return object $giorno Giorno
+     */
+    public static function loadGiorni($giorno){
+        $giorno = null;
+        $db=FDatabase::getInstance();
+        list ($result, $rows_number)=$db->getGiorni($giorno);
+        if(($result!=null) && ($rows_number == 1)) {        //:Giorno,:idFasciaOraria
+            $giorno=new EGiorno($result['Giorno'],$result['idFasciaOraria']);
+        }
+        else {
+            if(($result!=null) && ($rows_number > 1)){
+                $giorno = array();
+                for($i=0; $i<count($result); $i++){
+                    $Giorno[]=new EGiorno($result[$i]['Giorno'],$result[$i]['idFasciaOraria']);
+                }
+            }
+        }
+        return $giorno;
     }
 
 }
