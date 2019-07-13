@@ -147,7 +147,7 @@ class FGiorno {
 
     /**
      * Metodo che permette di ritornare tutti i giorni presenti sul db
-     * @param $state valore dello stato
+     * @param $giorno 
      * @return object $giorno Giorno
      */
     public static function loadGiorni($giorno){
