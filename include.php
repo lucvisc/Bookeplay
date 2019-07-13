@@ -5,7 +5,9 @@
  * nel caso in cui c'è bisogno di una doppia inclusione
  * Mentre, in caso di file non trovato, genera un parse error che interrompe l'esecuzione dello script.
  */
-  
+
+
+  require_once 'config.inc.php';
    /**
     * Inclusione dei file contenuti nella cartella Entity
     */
@@ -28,5 +30,6 @@
   require_once 'Foundation\FBooking.php';
   require_once 'Foundation\FGiorno.php';
   require_once 'Foundation\FPartita.php';
+
 
 ?>

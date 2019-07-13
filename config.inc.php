@@ -1,6 +1,7 @@
 <?php
-    $host= 'localhost';
-    $database= 'bookeplay';
-    $username= 'root';
-    $password= '';
+
+   $database= 'bookeplay';
+   $username= 'root';
+   $password= '';
+   $host= 'localhost';
 ?>
