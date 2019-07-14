@@ -9,7 +9,8 @@
     /**
      * Inclusione del file contenente la configurazione iniziale del database
      */
-  require_once 'config.inc.php';
+
+    require_once 'config.inc.php';
    /**
     * Inclusione dei file contenuti nella cartella Entity
     */
@@ -32,5 +33,8 @@
   require_once 'Foundation\FBooking.php';
   require_once 'Foundation\FGiorno.php';
   require_once 'Foundation\FPartita.php';
+  require_once 'Foundation\FPren_creata.php';
+  require_once 'Foundation\FPren_partecipa.php';
+  require_once 'Foundation\FFascieorarie';
 
 ?>

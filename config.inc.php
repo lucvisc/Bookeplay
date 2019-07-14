@@ -7,3 +7,4 @@
       $GLOBALS['username'] = 'root';
       $GLOBALS['password'] = '';
 ?>
+
