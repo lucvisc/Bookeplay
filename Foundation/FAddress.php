@@ -21,6 +21,8 @@ class FAddress {
      */
     private static $values="(:idAcc,:Comune,:Provincia,:CAP,:Via,:NumCivico)";
 
+    public function __construct(){}
+
     public static function bind($stmt, EAddress $addr) {
         $stmt->bindValue(':idAcc', NULL, PDO::PARAM_INT);  // l'id è posto a NULL poiché viene assegnato automaticamente
                                                             // dal DBMS tramite (AUTOINCREMENT_ID)
