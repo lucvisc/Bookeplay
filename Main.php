@@ -9,6 +9,7 @@ $var81= new FUser();
 //$var85->storeAddress($var50);
 FDatabase::getInstance();
 FUser::storeUser($var80);
+//FAccount::deleteAccount($var51);
 /*
 $var70 ='ERFJ678';
 $var71 =new EGiorno('10/12/2019');
