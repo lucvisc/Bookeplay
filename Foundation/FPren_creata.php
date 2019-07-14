@@ -1,7 +1,7 @@
 <?php
 /**
-* La classe FUtenteloggato fornisce query per gli oggetti EUtenteloggato
-* @author Gruppo 8
+* La classe FPren_creata associa l'id della prenotazione all'id del account che ha effettuato la prenotazione
+* @author Luca,Catriel
 * @package Foundation
 */
 
@@ -23,7 +23,7 @@ class FPren_creata {
      * FPren_creata construct
      */
     public function __construct(){}
-    
+
     /**
      * questo metodo restituisce il nome della classe per la costruzione delle Query
      * @return string $class nome della classe
