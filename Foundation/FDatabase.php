@@ -416,6 +416,28 @@ class FDatabase {
             return null;
         }
     }
+    /**
+     * Metodo che aggiunge una possibile fascia oraria
+     * @param $idFascia, id della fascia oraria su cui effettuare una prenotazione
+     * @param $fasce, orario a disposizione
+     * @param $disp, per verificare se una fascia oraria è disponibile o meno
+     * @return false|PDOStatement|null
+     */
+    public function insertFasceorarie ($idFascia, $Fascia, $disp) {
+        try {
+            $this->db->beginTransaction();
+            $id = $this->db->query("INSERT INTO fasceorarie (idFascia, Fascia, disp) VALUES('$idFascia','$Fascia','$disp')");
+            $this->db->commit();
+            $this->closeDbConnection();
+            return $id;
+
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
 
     /******************RICERCA*******************/
 
