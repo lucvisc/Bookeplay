@@ -18,11 +18,10 @@ if (file_exists('config.inc.php')) require_once 'config.inc.php';
 class FDatabase {
 
     private static $instance = null;     /** l'unica istanza della classe */
-    private $db;        /** oggetto PDO che effettua la connessione al dbms */
-    private static $UpPath = "Upload/";     /** percorso */
+    private $db;                         /** oggetto PDO che effettua la connessione al dbms */
 
     /** dichiarazione del costruttore privato, l'unico accesso è dato dal metodo getInstance() */
-   /* private function __construct()
+    /*private function __construct()
     {
         global $host, $bookeplay, $username, $password;
         try {
@@ -31,20 +30,17 @@ class FDatabase {
             echo "Attenzione errore: " . $e->getMessage();
             die;
         }
-        return $db;
-    }
-   */
-
-    public static function Connect()
-    {
-        global $host, $database, $username, $password;
+        return $this->db;
+    }*/
+    private function __construct () {
         try {
-            $db = new PDO("mysql:host=$host; dbname=$database", $username, $password);
+            $this->db = new PDO ("mysql:dbname=".$GLOBALS['database'].";host=localhost; charset=utf8;", $GLOBALS['username'], $GLOBALS['password']);
+
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             die;
         }
-        return $db;
+
     }
 
     /**
@@ -59,25 +55,63 @@ class FDatabase {
         return static::$instance;
     }
 
+    public function closeDbConnection() //funzione ausiliaria che pone il paramentro instance a null e che quindi
+    {                                   // chiude la connessione al DB
+        static::$instance = null;
+    }
+
     /**
      * Metodo che permette di salvare le informazioni contenute in un oggetto
      * delle classe Entity sul database.
      */
-    public function store($sql, $class, $eobj)
+    public function storeDB($class, $eobj)
     {
         try {
-            $this->db->beginTransaction();
-            $stmt = $this->db->prepare($sql);
-            $class::bind($stmt, $eobj);
-            $stmt->execute();
-            $id = $this->db->lastInsertId();
-            $this->db->commit();
-            $this->closeDbConnection();
+            $this->db->beginTransaction();      //Contrassegna il  punto di inizio di una transazione locale esplicita
+            $query = "INSERT INTO " . $class::getTable() . " VALUES " . $class::getValues();
+            $stmt = $this->db->prepare($query);   //prepara la query sql
+            $class::bind($stmt, $eobj);         //costruisce l'oggetto della classe
+            $stmt->execute();                   //esegue la query
+            $id = $this->db->lastInsertId();    // Returns the ID of the last inserted row or sequence value
+            $this->db->commit();                //Commette una transazione, restituendo la connessione del database alla modalità di autocommit fino alla successiva chiama a PDO :: beginTransaction () avvia una nuova transazione
+            $this->closeDbConnection();         //Cambia l'attributo instance a nulle chiude la connessione al db
             return $id;
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
+                $this->db->rollBack();          //Contrassegna il punto di fine di una transazione locale esplicita
             die;
+            return null;
+        }
+    }
+
+    /**
+     * Metodo ci dupporto per le load degli oggetti presenti nelle varie tabelle
+     * @param $class classe del foundation che sfrutta il metodo
+     * @param $field campo da usare per la ricerca
+     * @param $id valore da usare per la ricerca
+     * @return array|mixed|null valore che cambia a seconda che il risultato sia zero, uono o più oggetti
+     */
+    public function loadDB ($class, $field, $id)
+    {
+        try {
+            $query = "SELECT * FROM " . $class::getTable() . " WHERE " . $field . "='" . $id . "';";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;        //nessuna riga interessata. return null
+            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            } else {
+                $result = array();                         //nel caso in cui piu' righe fossero interessate
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
+                while ($row = $stmt->fetch())
+                    $result[] = $row;                    //ritorna un array di righe.
+            }
+            return $result;
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
             return null;
         }
     }
@@ -190,16 +224,6 @@ class FDatabase {
         }
     }
 
-
-    public static function getUpPath()
-    {
-        return static::$UpPath;
-    }
-
-    public function closeDbConnection() //funzione ausiliaria che pone il paramentro instance a null e che quindi
-    {                                   // chiude la connessione al DB
-        static::$instance = null;
-    }
 
 
     /******************RICERCA*******************/
