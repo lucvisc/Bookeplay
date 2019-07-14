@@ -212,7 +212,7 @@ class FDatabase {
     public function loadVerificaAccesso ($email, $pass) {
         try {
             $query = null;
-            $class = "FUtenteloggato";
+            $class = "FAccount";
             $query = "SELECT * FROM " . $class::getTable() . " WHERE email ='" . $email . "' AND password ='" . $pass . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -388,7 +388,6 @@ class FDatabase {
             return null;
         }
     }
-    
     /**
      * Metodo che aggiunge una prenotazione nel db
      * @param $idPren , id della prenotazione
