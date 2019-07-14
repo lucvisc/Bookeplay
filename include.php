@@ -5,7 +5,11 @@
  * nel caso in cui c'è bisogno di una doppia inclusione
  * Mentre, in caso di file non trovato, genera un parse error che interrompe l'esecuzione dello script.
  */
-  
+
+    /**
+     * Inclusione del file contenente la configurazione iniziale del database
+     */
+  require_once 'config.inc.php';
    /**
     * Inclusione dei file contenuti nella cartella Entity
     */

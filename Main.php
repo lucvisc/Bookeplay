@@ -7,8 +7,9 @@ $var51= new EAccount('lucvisc','luca','luca@ciccio.com','3456543222','ciao sono 
 $var80= new EUser('Luca','Visconti', '19/09/1997', 'm',$var50, $var51);
 $var81= new FUser();
 //$var85->storeAddress($var50);
-FDatabase::Connect();
+FDatabase::getInstance();
 FUser::storeUser($var80);
+//FAccount::deleteAccount($var51);
 /*
 $var70 ='ERFJ678';
 $var71 =new EGiorno('10/12/2019');
