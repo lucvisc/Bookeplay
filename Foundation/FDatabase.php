@@ -47,10 +47,11 @@ class FDatabase {
         return self::$instance;
     }
 
-    /**
-     * Metodo che permette di salvare le informazioni contenute in un oggetto
-     * delle classe Entity sul database.
-     */
+    public function closeDbConnection() //funzione ausiliaria che pone il paramentro instance a null e che quindi
+    {                                   // chiude la connessione al DB
+        static::$instance = null;
+    }
+
     /**
      * Metodo che permette di salvare informazioni contenute in un oggetto Entity sul database.
      * @param class classe da passare
@@ -61,22 +62,30 @@ class FDatabase {
     public function storeDB ($class, $obj) {
         //viene passato il nome della classe che ermetterà di richiamare tutti i metodi di classe
         try {
-            $this->db->beginTransaction();// inizio di una transazione
+            $this->db->beginTransaction();                                          // inizio di una transazione
             $query = "INSERT INTO " . $class::getTable() . " VALUES " . $class::getValues();//costruzione della query
-            $stmt = $this->db->prepare($query);// prepara la query restituendo l'oggetto query
-            $class::bind($stmt, $obj);//fa il matching tra i parametri ed i valori delle variabili
-            $stmt->execute();//esecuzione dell'oggetto stmt
-            $id = $this->db->lastInsertId();// Returns the ID of the last inserted row or sequence value
-            $this->db->commit();// rende definitiva la transazione
-            $this->closeDbConnection();//chiudiamo la connessione al db
-            return $id;//Ritorna l'id del record appena inserito nel db
+            $stmt = $this->db->prepare($query);                         // prepara la query restituendo l'oggetto query
+            $class::bind($stmt, $obj);                      //fa il matching tra i parametri ed i valori delle variabili
+            $stmt->execute();                               //esecuzione dell'oggetto stmt
+            $id = $this->db->lastInsertId();                // Returns the ID of the last inserted row or sequence value
+            $this->db->commit();                            // rende definitiva la transazione
+            $this->closeDbConnection();                     //chiudiamo la connessione al db
+            return $id;                                     //Ritorna l'id del record appena inserito nel db
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
+
             return null;
         }
     }
 
+    /**
+     * Metodo ci dupporto per le load degli oggetti presenti nelle varie tabelle
+     * @param $class classe del foundation che sfrutta il metodo
+     * @param $field campo da usare per la ricerca
+     * @param $id valore da usare per la ricerca
+     * @return array|mixed|null valore che cambia a seconda che il risultato sia zero, uono o più oggetti
+     */
     public function loadDB ($class, $field, $id)
     {
         try {
@@ -85,14 +94,14 @@ class FDatabase {
             $stmt->execute();
             $num = $stmt->rowCount();
             if ($num == 0) {
-                $result = null;        //nessuna riga interessata. return null
+                $result = null;                             //nessuna riga interessata. return null
             } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
             } else {
                 $result = array();                         //nel caso in cui piu' righe fossero interessate
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
                 while ($row = $stmt->fetch())
-                    $result[] = $row;                    //ritorna un array di righe.
+                    $result[] = $row;                       //ritorna un array di righe.
             }
             return $result;
         } catch (PDOException $e) {
@@ -103,7 +112,7 @@ class FDatabase {
     }
 
     /**
-     *  Metodo che restituisce il numero di righe ineteressate dalla query
+     * Metodo che restituisce il numero di righe ineteressate dalla query
      * @param $class classe del foundation che sfrutta il metodo
      * @param $field campo da usare per la ricerca
      * @param $id valore da usare per la ricerca
@@ -178,7 +187,6 @@ class FDatabase {
         }
     }
 
-
     /**
      * Metodo che verifica l'esistenza di un oggetto nel database
      * @param $class nome della classe
@@ -205,9 +213,9 @@ class FDatabase {
 
     /**
      * Metodo che verifica l'accesso di un utente , controllando che le credenziali (email e password) siano presenti nel db
-     * @param $email ,email del utente
-     * @param $pass, password dell utente
-     * @return mixed|null a seconda se l'utente è presento o meno della tabella
+     * @param $email ,email dell'account dell' utente
+     * @param $pass, password dell'account dell'utente
+     * @return mixed|null a seconda se l'account dell'utente è presente o meno della tabella
      */
     public function loadVerificaAccesso ($email, $pass) {
         try {
@@ -218,8 +226,8 @@ class FDatabase {
             $stmt->execute();
             $num = $stmt->rowCount();
             if ($num == 0) {
-                $result = null;        //nessuna riga interessata. return null
-            } else {                          //nel caso in cui una sola riga fosse interessata
+                $result = null;                 //nessuna riga interessata. return null
+            } else {                             //nel caso in cui una sola riga fosse interessata
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
             }
             return $result;
@@ -351,7 +359,6 @@ class FDatabase {
         }
     }
 
-
     /**
      * Da una tupla ricevuta di una query istanzia l'oggetto corrispondente
      * @param class il nome della classe
@@ -408,19 +415,30 @@ class FDatabase {
             return null;
         }
     }
+    /**
+     * Metodo che aggiunge una possibile fascia oraria
+     * @param $idFascia, id della fascia oraria su cui effettuare una prenotazione
+     * @param $fasce, orario a disposizione
+     * @param $disp, per verificare se una fascia oraria è disponibile o meno
+     * @return false|PDOStatement|null
+     */
+    public function insertFasceorarie ($idFascia, $Fascia, $disp) {
+        try {
+            $this->db->beginTransaction();
+            $id = $this->db->query("INSERT INTO fasceorarie (idFascia, Fascia, disp) VALUES('$idFascia','$Fascia','$disp')");
+            $this->db->commit();
+            $this->closeDbConnection();
+            return $id;
 
-
-
-    public function closeDbConnection() //funzione ausiliaria che pone il paramentro instance a null e che quindi
-    {                                   // chiude la connessione al DB
-        static::$instance = null;
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
     }
 
 
-
     /******************RICERCA*******************/
-
-
 
     /**
      * Funzione utilizzata per ritornare tutti gli utenti che verificano determinate caratteristiche date in input
@@ -432,9 +450,9 @@ class FDatabase {
     public function utentiByString ($array, $toSearch)
     {
         if ($toSearch == 'nome')
-            $query = "SELECT * FROM utenteloggato where name = '" . $array[0] . "' OR surname = '" . $array[0] . "';";
+            $query = "SELECT * FROM account where name = '" . $array[0] . "' OR surname = '" . $array[0] . "';";
         else
-            $query = "SELECT * FROM utenteloggato where name = '" . $array[0] . "' AND surname = '" . $array[1] . "' OR name = '" . $array[1] . "' AND surname = '" . $array[0] . "';";
+            $query = "SELECT * FROM account where name = '" . $array[0] . "' AND surname = '" . $array[1] . "' OR name = '" . $array[1] . "' AND surname = '" . $array[0] . "';";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         $num = $stmt->rowCount();
@@ -451,16 +469,15 @@ class FDatabase {
         return array($result, $num);
     }
 
-
     /**
      * Funzione utilizzata per ritornare gli utenti attivi e bannati.
      * Utilizzata nella pagina admin
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
      * @return array|null
      */
-    public function getUtenti ($state) {
+    public function getUtenti ($tipo) {
         try {
-            $query = "SELECT * FROM utenteLoggato WHERE  state = " . $state . " AND email <> 'admin@admin.com';";
+            $query = "SELECT * FROM user WHERE  tipo = " . $tipo . " AND email <> 'admin@admin.com';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
@@ -496,14 +513,14 @@ class FDatabase {
             $stmt->execute();
             $num = $stmt->rowCount();
             if ($num == 0) {
-                $result = null;        //nessuna riga interessata. return null
+                $result = null;                             //nessuna riga interessata. return null
             } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
             } else {
                 $result = array();                         //nel caso in cui piu' righe fossero interessate
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
                 while ($row = $stmt->fetch())
-                    $result[] = $row;                    //ritorna un array di righe.
+                    $result[] = $row;                       //ritorna un array di righe.
             }
             return array($result, $num);
         } catch (PDOException $e) {
