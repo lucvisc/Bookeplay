@@ -7,6 +7,12 @@
 
 require_once 'include.php';
 
+
+/**
+ * La classe FUser fornisce query per gli oggetti EAccount
+ * @author Luca, Catriel
+ * @package Foundation
+ */
 class FAccount extends FDatabase {
 
     /**
@@ -81,15 +87,15 @@ class FAccount extends FDatabase {
      * Permette la load sul db
      * @param $id valore da confrontare per trovare l'oggetto
      * @param $field campo nel quale effettuare la ricerca
-     * @return object $acc Address
+     * @return object $acc Account
      */
     public static function loadByField($field, $id){
         $acc = null;
         $db=FDatabase::getInstance();
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
-        if(($result!=null) && ($rows_number == 1)) {        //:idAcc,:Comune,:Provincia,:CAP,:Via,:NumCivico
-            $address=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+        if(($result!=null) && ($rows_number == 1)) {        //:id,:username,:password,:email,:telnumb,:conto,:descrizione, :activate
+            $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
@@ -103,7 +109,7 @@ class FAccount extends FDatabase {
     }
 
     /**
-     * Funzione che permette di verificare se esiste un un account nel database
+     * Funzione che permette di verificare se esiste un account nel database
      * @param  $id valore di cui verificare la presenza
      * @param $field colonna su ci eseguire la verifica
      * @return bool
@@ -144,6 +150,42 @@ class FAccount extends FDatabase {
         if($result) return true;
         else return false;
     }
+
+    /**
+     * Metodo che permette di ritornare tutti gli account con quel username presenti sul db
+     * @param $giorno
+     * @return object $username Account
+     */
+    public static function LoadAccount($username){
+        $acc=null;
+        $db=FDatabase::getInstance();
+        list ($result, $rows_number)=$db->getAccount($username);
+        if(($result!=null) && ($rows_number == 1)) {        //:id,:username,:password,:email,:telnumb,:conto,:descrizione, :activate
+            $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+        }
+        else {
+            if(($result!=null) && ($rows_number > 1)){
+                $acc = array();
+                for($i=0; $i<count($result); $i++){
+                    $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+                }
+            }
+        }
+        return $acc;
+    }
+
+
+    /**
+     * @return ritorna la somma di tutti i conti di tutti gli utenti
+     */
+    public static function loadContoTot(){
+    if ($db->ContaUtenti()>1)
+    return $db->ContoTot();
+    }
+
+
+
+
 
 
 
