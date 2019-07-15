@@ -9,10 +9,22 @@ require_once 'include.php';
 
 class FAccount extends FDatabase {
 
+    /**
+     * classe foundation
+     */
+    private static $class="FAccount";
+    /**
+     * @Tabella di riferimento
+     */
     private static $tables = "account";
+    /**
+     * campi della tabella
+     */
     private static $values = "(:id,:username,:password,:email,:telnumb,:conto,:descrizione, :activate)";
 
     public function __construct(){}
+
+
 
     /**
      * Questo metodo lega gli attributi dell'account da inserire con i parametri della INSERT
@@ -33,6 +45,13 @@ class FAccount extends FDatabase {
     }
 
     /**
+     * questo metodo restituisce il nome della classe sul DB per la costruzione delle Query
+     * @return string $class classe della tabella di riferimento
+     */
+    public function getClass(){
+        return self::$class;
+    }
+    /**
      * questo metodo restituisce il nome della tabella sul DB per la costruzione delle Query
      * @return string $tables nome della tabella di riferimento
      */
@@ -49,59 +68,97 @@ class FAccount extends FDatabase {
     }
 
     /**
-     * Funzione ch permette lo store dei dati di account in base al parametro id
-     * @param int $id dell'account di riferimento
-     * @return object $account
+     * Metodo che permette la store di un Account
+     * @param $utente Account da salvare
      */
     public static function storeAccount($acc)
     {
-        $sql = "INSERT INTO " . static::getTables() . " VALUES " . static::getValues();
-        $db = FDatabase::getInstance();
-        $id = $db->store($sql, "FAccount", $acc);
-        if ($id) return $id;
-        else return null;
+        $db=FDatabase::getInstance();
+        $id=$db->storeDB(static::getClass() ,$acc);
     }
 
     /**
-     * Funzione ch permette la load dell'account in base al paramentro id
-     * @param int $id dell'account di riferimento
-     * @return object $acc
+     * Permette la load sul db
+     * @param $id valore da confrontare per trovare l'oggetto
+     * @param $field campo nel quale effettuare la ricerca
+     * @return object $acc Address
      */
-    public static function loadById($id) {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE id=" . $id . ";";
-        $db = FDatabase::getInstance();
-        $result = $db->loadSingle($sql);
-        if ($result != null) {
-            $acc = new EAccount($result['username'], $result['password'],$result['email'],$result['conto'], $result['telnumb'], $result['descrizione']);
-            $acc->setId($result['id']);
-            $acc->setActivate($result['activate']);
-            return $acc;
-        } else return null;
+    public static function loadByField($field, $id){
+        $acc = null;
+        $db=FDatabase::getInstance();
+        $result=$db->loadDB(static::getClass(), $field, $id);
+        $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
+        if(($result!=null) && ($rows_number == 1)) {        //:idAcc,:Comune,:Provincia,:CAP,:Via,:NumCivico
+            $address=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+        }
+        else {
+            if(($result!=null) && ($rows_number > 1)){
+                $acc = array();
+                for($i=0; $i<count($result); $i++){
+                    $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+                }
+            }
+        }
+        return $acc;
     }
 
     /**
-     * Funzione ch permette la load dell'account in base all'username
-     * @param string $username dell'account di riferimento
-     * @return object $acc
+     * Funzione che permette di verificare se esiste un un account nel database
+     * @param  $id valore di cui verificare la presenza
+     * @param $field colonna su ci eseguire la verifica
+     * @return bool
      */
-    public static function loadByUsername($username) {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE username='" . $username . "';";
-        $db = FDatabase::getInstance();
-        $result = $db->loadSingle($sql);
-        if ($result != null) {
-            $acc = new EAccount($result['username'], $result['password'],$result['email'],$result['conto'], $result['telnumb'], $result['descrizione']);
-            $acc->setId($result['id']);
-            $acc->setActivate($result['activate']);
-            return $acc;
-        } else return null;
+    public static function exist($field, $id){
+        $db=FDatabase::getInstance();
+        $result=$db->existDB(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
+        if($result!=null)
+            return true;
+        else
+            return false;
     }
+
+    /**
+     * Metodo che aggiorna i campi di un Address
+     * @param $field campo nel quale si vuole modificare il valore
+     * @param $newvalue nuovo valore da assegnare
+     * @param $pk nome della colonna utilizzata per l'espressione "where" della query
+     * @param $id valore della primary key da usare come riferimento
+     * @return true se esiste il mezzo, altrimenti false
+     */
+    public static function update($field, $newvalue, $pk, $id){
+        $db=FDatabase::getInstance();
+        $result = $db->updateDB(static::getClass(), $field, $newvalue, $pk, $id);
+        if($result) return true;
+        else return false;
+    }
+
+    /**
+     * Permette la delete sul db in base all'id
+     * @param $field nome del campo della tabella nel quale ricercare il valore immesso
+     * @param $id valore del campo
+     * @return bool
+     */
+    public static function delete($field, $id){
+        $db=FDatabase::getInstance();
+        $result = $db->deleteDB(static::getClass(), $field, $id);   //funzione richiamata,presente in FDatabase
+        if($result) return true;
+        else return false;
+    }
+
+
+
+
+    ////////// CONTINUARE DA QUI!!!!!! /////
+
+
+
 
     /**
      * Funzione che permette la delete dell'account in base all'id
      * @param int $id dell'account che si vuole eliminare
      * @return bool
      */
-    public static function deleteAccount($id) {
+   /* public static function deleteAccount($id) {
         $sql = "DELETE FROM " . static::getTables() . " WHERE id=" . $id . ";";
         $db = FDatabase::getInstance();
         if ($db->delete($sql)) return true;
@@ -109,15 +166,17 @@ class FAccount extends FDatabase {
     }
 
     /**
-     * Funzione che permette di modificare il numero di telefono
-     * associato ad un certo account di un utente
-     * @param int $id dell'account che vuole effettuare la modifica
-     * @param string $telnum numero di telefono
-     * @return bool
+     * Metodo che aggiorna i campi di un Address
+     * @param $field campo nel quale si vuole modificare il valore
+     * @param $newvalue nuovo valore da assegnare
+     * @param $pk nome della colonna utilizzata per l'espressione "where" della query
+     * @param $id valore della primary key da usare come riferimento
+     * @return true se esiste il mezzo, altrimenti false
      */
-    public static function UpdateTelNum($id, $telnum) {
-        $field = "telnumb";
-        if (FAccount::update($id, $field, $telnum)) return true;
+    /*public static function update($field, $newvalue, $pk, $id){
+        $db=FDatabase::getInstance();
+        $result = $db->updateDB(static::getClass(), $field, $newvalue, $pk, $id);
+        if($result) return true;
         else return false;
     }
 
@@ -125,7 +184,7 @@ class FAccount extends FDatabase {
      * Query che restituisce gli account in base al nome
      * @return string la query sql
      */
-    static function cercaAccountByUsername() : string {
+   /* static function cercaAccountByUsername() : string {
         return "SELECT *
                 FROM utenti
                 WHERE LOCATE( :username , username) > 0;";
@@ -138,7 +197,7 @@ class FAccount extends FDatabase {
      * @param string $description "nuova"
      * @return bool
      */
-    public static function UpdateDescription($id, $description) {
+   /* public static function UpdateDescription($id, $description) {
         $field = "descrizione";
         if (FAccount::update($id, $field, $description)) return true;
         else return false;
@@ -151,7 +210,7 @@ class FAccount extends FDatabase {
      * @param bool $attivo
      * @return bool
      */
-    public static function UpdateActivate($id, $attivo) {
+   /* public static function UpdateActivate($id, $attivo) {
         $field = "activate";
         if (FAccount::update($id, $field, $attivo)) return true;
         else return false;
@@ -164,7 +223,7 @@ class FAccount extends FDatabase {
      * @param string $newvalue nuovo valore
      * @return bool
      */
-    public static function UpdateAccount($id, $field, $newvalue) {
+    /*public static function UpdateAccount($id, $field, $newvalue) {
         $sql = "UPDATE " . static::getTables() . " SET " . $field . "='" . $newvalue . "' WHERE id=" . $id . ";";
         $db = FDatabase::getInstance();
         if ($db->update($sql)) return true;
@@ -178,7 +237,7 @@ class FAccount extends FDatabase {
      * @param string $password
      * @return object $acc
      */
-    public static function ExistAccount($username, $password) {
+   /* public static function ExistAccount($username, $password) {
         $sql = "SELECT * FROM " . static::getTables() . " WHERE username='" . $username . "' AND " . "password='" . $password . "';";
         $db = FDatabase::getInstance();
         $result = $db->exist($sql);
@@ -197,7 +256,7 @@ class FAccount extends FDatabase {
      * @return bool
      */
 
-    public static function ExistUsername($username) {
+   /* public static function ExistUsername($username) {
         $sql = "SELECT * FROM " . static::getTables() . " WHERE username='" . $username . "';";
         $db = FDatabase::getInstance();
         $result = $db->exist($sql);
@@ -210,7 +269,7 @@ class FAccount extends FDatabase {
      * @param string $mail da cercare
      * @return bool
      */
-    public static function ExistMail($mail) {
+   /* public static function ExistMail($mail) {
         $sql = "SELECT * FROM " . static::getTables() . " WHERE email='" . $mail . "';";
         $db = FDatabase::getInstance();
         $result = $db->exist($sql);
@@ -223,7 +282,7 @@ class FAccount extends FDatabase {
      * @param row tupla restituita dal dbms
      * @return l'oggetto utente
      */
-    public function createObjectFromRow($row) {
+   /* public function createObjectFromRow($row) {
         $acc = new EAccount();           //costruisce l'oggetto della classe EAccount
         $acc->setId($row['id']);
         $acc->setUsername($row['username']);
@@ -233,7 +292,7 @@ class FAccount extends FDatabase {
         $acc->setDescrizione($row['descrizione']);
         $acc->setActivate($row['Activate']);
         return $acc;
-    }
+    }*/
 
 }
 ?>
