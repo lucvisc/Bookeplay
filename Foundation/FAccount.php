@@ -13,7 +13,7 @@ require_once 'include.php';
  * @author Luca, Catriel
  * @package Foundation
  */
-class FAccount extends FDatabase {
+class FAccount {
 
     /**
      * classe foundation
@@ -179,6 +179,7 @@ class FAccount extends FDatabase {
      * @return ritorna la somma di tutti i conti di tutti gli utenti
      */
     public static function loadContoTot(){
+        $db=FDatabase::getInstance();
     if ($db->ContaUtenti()>1)
     return $db->ContoTot();
     }

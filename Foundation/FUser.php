@@ -8,7 +8,7 @@ require_once 'include.php';
  * @package Foundation
  */
 
-class FUser extends FDatabase {
+class FUser {
     private static $class="FUser";
     private static $tables="utente";
     private static $values="(:idAcc,:name,:surname,:dataNascita,:gender,:tipo)";
@@ -60,7 +60,7 @@ class FUser extends FDatabase {
      * Metodo che permette la store di uno user
      * @param $us User da salvare
      */
-    public static function storeAccount($us)
+    public static function storeUser($us)
     {
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$us);
@@ -139,7 +139,7 @@ class FUser extends FDatabase {
      * @param $giorno
      * @return object $user User
      */
-    public static function LoadAccount($idacc){
+    public static function loadUser($idacc){
         $us=null;
         $db=FDatabase::getInstance();
         list ($result, $rows_number)=$db->getUser($idacc);

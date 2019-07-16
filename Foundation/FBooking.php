@@ -13,8 +13,7 @@ require_once 'include.php';
  * @author Luca, Catriel
  * @package Foundation
  */
-class FBooking extends FDatabase
-{
+class FBooking{
 
     /**
      * classe foundation
@@ -28,6 +27,9 @@ class FBooking extends FDatabase
      * campi della tabella
      */
     private static $values = "(:idbooking,:quota,:giornobooking,:partita,:giornobooking)";
+
+
+    public function __construct(){}
 
     /**
      * Questo metodo lega gli attributi della classe booking da inserire con i parametri della INSERT
