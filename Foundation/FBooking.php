@@ -76,7 +76,7 @@ class FBooking{
      * Metodo che permette la store di una prenotazione
      * @param $boo prenotazione da salvare
      */
-    public static function storeAccount($boo)
+    public static function store($boo)
     {
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$boo);

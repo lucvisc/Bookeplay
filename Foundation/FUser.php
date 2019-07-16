@@ -67,7 +67,7 @@ class FUser {
      * Metodo che permette la store di uno user
      * @param $us User da salvare
      */
-    public static function storeUser($us)
+    public static function store($us)
     {
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$us);

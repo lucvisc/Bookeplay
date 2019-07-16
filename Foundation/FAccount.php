@@ -77,7 +77,7 @@ class FAccount {
      * Metodo che permette la store di un Account
      * @param $utente Account da salvare
      */
-    public static function storeAccount($acc)
+    public static function store($acc)
     {
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$acc);
