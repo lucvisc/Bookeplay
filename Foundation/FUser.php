@@ -9,7 +9,17 @@ require_once 'include.php';
  */
 
 class FUser extends FDatabase {
+    /**
+     * classe foundation
+     */
+    private static $class="FUser";
+    /**
+     * tabella su cui opera
+     */
     private static $tables="utente";
+    /**
+     * Valori della tabella
+     */
     private static $values="(:idAcc,:name,:surname,:dataNascita,:gender,:tipo)";
 
     public function __construct(){}
@@ -28,14 +38,20 @@ class FUser extends FDatabase {
         $stmt->bindValue(':gender', $user->getGender(), PDO::PARAM_STR);
         $stmt->bindValue(':tipo', "User", PDO::PARAM_STR);
     }
-
+    /**
+     * questo metodo restituisce il nome della classe per la costruzione delle Query
+     * @return string $class nome della classe
+     */
+    public static function getClass(){
+        return self::$class;
+    }
     /**
      *
      * questo metodo restituisce il nome della tabella sul DB per la costruzione delle Query
      * @return string $tables nome della tabella di riferimento
      */
     public static function getTables(){
-        return static::$tables;
+        return self::$tables;
     }
 
     /**
@@ -44,20 +60,19 @@ class FUser extends FDatabase {
      * @return string $values valori della tabella di riferimento
      */
     public static function getValues(){
-        return static::$values;
+        return self::$values;
     }
 
 
-    public static function storeUser($user){
-        $sql="INSERT INTO ".static::getTables()." VALUES ".static::getValues();
+    public static function storeUser($utente){
+
         $db=FDatabase::getInstance();
-        $id=$db->store($sql,"FUser",$user);
-        if($id) return $id;
-        else return null;
+        $id=$db->storeDB(static::getClass() ,$utente);
+
     }
 
     /**
-     * Funzione ch permette la load dell'utente in base al paramentro id
+     * Funzione che permette la load dell'utente in base al paramentro id
      * @param int $id dell'user
      * @return object $user
      */
