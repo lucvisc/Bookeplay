@@ -511,7 +511,7 @@ class FDatabase {
      */
     public function getBooking ($giorno) {
         try {
-            $query = "SELECT * FROM prenotazione where giorno=$giorno  ;";
+            $query = "SELECT * FROM prenotazione where giorno=".$giorno."  ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();

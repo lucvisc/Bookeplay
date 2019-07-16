@@ -8,11 +8,8 @@ require_once 'include.php';
  * @package Foundation
  */
 
-class FUser extends FDatabase {
+class FUser {
 
-    /**
-     * classe foundation
-     */
     private static $class="FUser";
     /**
      * tabella su cui opera
