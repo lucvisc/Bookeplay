@@ -4,6 +4,7 @@
  * @author Luca,Catriel
  * @package Foundation
  */
+require_once 'include.php';
 
 class FFasceorarie {
     /**
@@ -71,6 +72,6 @@ class FFasceorarie {
         $result=$db->loadDB(static::getClass(), $field, $id);
         return ($result);
     }
-  
+
 }
 ?>

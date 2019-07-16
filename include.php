@@ -35,6 +35,6 @@
   require_once 'Foundation\FPartita.php';
   require_once 'Foundation\FPren_creata.php';
   require_once 'Foundation\FPren_partecipa.php';
-  require_once 'Foundation\FFascieorarie';
+  require_once 'Foundation\FFasceorarie.php';
 
 ?>

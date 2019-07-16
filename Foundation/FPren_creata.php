@@ -4,6 +4,7 @@
 * @author Luca,Catriel
 * @package Foundation
 */
+require_once 'include.php';
 
 class FPren_creata {
     /**
