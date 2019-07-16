@@ -438,6 +438,136 @@ class FDatabase {
     }
 
 
+    /**
+     * Funzione utilizzata per ritornare l'account specificato.
+     * Utilizzata nella pagina admin
+     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @return array|null
+     */
+    public function getAccount ($acc) {
+        try {
+            $query = "SELECT * FROM account WHERE  username = " . $acc . " ;";
+            $stmt = $this->db->prepare($query);
+
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;        //nessuna riga interessata. return null
+            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            } else {
+                $result = array();                         //nel caso in cui piu' righe fossero interessate
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
+                while ($row = $stmt->fetch())
+                    $result[] = $row;                    //ritorna un array di righe.
+            }
+            return array($result, $num);
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
+     * @return il numero degli utenti nel database
+     */
+    public function ContaUtenti()
+    {
+        try {
+            $query=("SELECT COUNT(*) FROM account");
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
+     * @return la somma di tutti i conti di tutti gli utenti oppure |null in caso di errore
+     */
+    public function ContoTot(){
+            try {
+                $query=("SELECT SUM(conto) FROM account GROUP BY (id)");
+                $stmt = $this->db->prepare($query);
+                $stmt->execute();
+                return $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo "Attenzione errore: " . $e->getMessage();
+                $this->db->rollBack();
+                return null;
+            }
+    }
+
+    /**
+     * Funzione utilizzata per ritornare le prenotazioni di un specifico giorno.
+     * Utilizzata nella pagina admin
+     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @return array|null
+     */
+    public function getBooking ($giorno) {
+        try {
+            $query = "SELECT * FROM prenotazione where giorno=$giorno  ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;        //nessuna riga interessata. return null
+            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            } else {
+                $result = array();                         //nel caso in cui piu' righe fossero interessate
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
+                while ($row = $stmt->fetch())
+                    $result[] = $row;                    //ritorna un array di righe.
+            }
+            return array($result, $num);
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
+     * Funzione utilizzata per ritornare lo user specificato.
+     * Utilizzata nella pagina admin
+     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @return array|null
+     */
+    public function getUser ($us) {
+        try {
+            $query = "SELECT * FROM user WHERE  idacc = " . $us . " ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;        //nessuna riga interessata. return null
+            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            } else {
+                $result = array();                         //nel caso in cui piu' righe fossero interessate
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
+                while ($row = $stmt->fetch())
+                    $result[] = $row;                    //ritorna un array di righe.
+            }
+            return array($result, $num);
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+
+
+
+
+
     /******************RICERCA*******************/
 
     /**
