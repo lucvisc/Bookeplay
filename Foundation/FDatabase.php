@@ -37,37 +37,6 @@ class FDatabase {
         }
     }
 
-    public function prova(){
-        //$db->query("INSERT INTO utente(CF, Nome, Cognome) VALUES('DCSCRL96C27I156R', 'Catriel', 'DeBiase')");//query manuale di prova
-        $sql = "INSERT INTO utente(idAcc, name, surname, gender, tipo) VALUES(':idAcc',':name',':surname',':dataNascita',':gender',':tipo')"; //inizializzazione della query parametrica
-        //':idAcc',':name',':surname',':dataNascita',':gender',':tipo'
-        $stmt = $this->db->prepare($sql); //Prepares a statement for execution and returns a statement object
-//in pratica abbiamo trasformato la nostra query in uno oggetto che è quindi capace di sfruttare alcune suo funzioni dategli da PDO
-
-        $nome="Catriel";
-        $cognome="DeBiase";
-        $datanascita="";
-        $gender="M";
-        $tipo="registrato";
-
-        $stmt->bindParam(':name' , $nome, PDO::PARAM_STR);// notare che se da adesso in poi cambiasse il varole di una delle variabili cambierebbe anche quello del parametro
-        $stmt->bindParam(':surname' , $cognome, PDO::PARAM_STR);
-        $stmt->bindParam(':dataNascita' , $datanascita, PDO::PARAM_STR);
-        $stmt->bindParam(':gender' , $gender, PDO::PARAM_STR);
-        $stmt->bindParam(':tipo' , $tipo, PDO::PARAM_STR);
-
-        $top=$stmt->execute();//esecuzione della query tramite la funzione nativa dell'oggetto stmt
-
-        /*$sql = ("INSERT INTO utente(CF, Nome, Cognome) VALUES( '$cf', '$nome', '$cognome' )");
-        $stmt = $db->prepare($sql);
-        $stmt->execute();*/
-
-        $arr = $stmt->errorInfo();
-        print ($top);//verifica se la variabile detiene il valore datogli
-    }
-
-
-
     /**
      * Metodo che restituisce l'unica istanza dell'oggetto.
      * @return FDataBase l'istanza dell'oggetto.
@@ -97,20 +66,9 @@ class FDatabase {
         try {
             $this->db->beginTransaction();// inizio di una transazione
             $query = 'INSERT INTO ' . $class::getTables() . ' VALUES ' . $class::getValues();//costruzione della query
-            print ($query."\n");
             $stmt = $this->db->prepare($query);                         // prepara la query restituendo l'oggetto query
             $class::bind($stmt, $obj);//fa il matching tra i parametri ed i valori delle variabili
-            print_r($stmt);
-            $check=$stmt->execute();//esecuzione dell'oggetto stmt
-            if ($check){
-                print("si \n");
-            }
-            else{
-                print("no");
-                echo "\nPDOStatement::errorInfo():\n";
-                $arr = $stmt->errorInfo();
-                print_r($arr);
-            }
+            $stmt->execute();//esecuzione dell'oggetto stmt
             $id = $this->db->lastInsertId();                // Returns the ID of the last inserted row or sequence value
             $this->db->commit();                            // rende definitiva la transazione
             $this->closeDbConnection();                     //chiudiamo la connessione al db
@@ -118,7 +76,6 @@ class FDatabase {
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
-
             return null;
         }
     }

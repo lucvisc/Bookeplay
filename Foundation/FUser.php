@@ -29,7 +29,6 @@ class FUser {
      */
     public static function bind($stmt,EUser $user){
         $stmt->bindValue(':idAcc', EUser::getID(), PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
-                                                                                // dal DBMS tramite (AUTOINCREMENT_ID)
         $stmt->bindValue(':name', $user->getName(), PDO::PARAM_STR);
         $stmt->bindValue(':surname', $user->getSurname(), PDO::PARAM_STR);
         $stmt->bindValue(':dataNascita', $user->getDatanasc(), PDO::PARAM_STR);

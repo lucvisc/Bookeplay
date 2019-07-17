@@ -22,11 +22,11 @@ class FAccount {
     /**
      * @Tabella di riferimento
      */
-    private static $tables = "account(`username`,`password`,`email`,`telnumb`,`conto`,`descrizione`)";
+    private static $tables = "account(`username`,`password`,`email`,`telnumb`,`conto`,`descrizione`, `activate`)";
     /**
      * campi della tabella
      */
-    private static $values = "(:username,:password,:email,:telnumb,:conto,:descrizione)";
+    private static $values = "(:username,:password,:email,:telnumb,:conto,:descrizione, :activate)";
 
     public function __construct(){}
 
@@ -38,18 +38,14 @@ class FAccount {
      * @param EAccount $acc account i cui dati devono essere inseriti nel DB
      */
     public static function bind($stmt, EAccount $acc) {
-                                              // dal DBMS tramite (AUTOINCREMENT_ID)
-        $check=$stmt->bindValue(':username', $acc->getUsername(), PDO::PARAM_STR);
-        if($check)print("sì \n");
-        print($acc->getUsername()."\n");
+        //non c'è il bind di id erchè la query di insert non necessita del campo id visto che nel db è auto-incrementale e quindi viene inserito automaticamente dal db
+        $stmt->bindValue(':username', $acc->getUsername(), PDO::PARAM_STR);
         $stmt->bindValue(':password', $acc->getPassword(), PDO::PARAM_STR);//ricorda di "collegare" la giusta variabile al bind
         $stmt->bindValue(':email', $acc->getEmail(), PDO::PARAM_STR);
-        $check=$stmt->bindValue(':telnumb', $acc->getTelnumber(), PDO::PARAM_STR);
-        if($check)print("sì \n");
-        print($acc->getTelnumber()."\n");
+        $stmt->bindValue(':telnumb', $acc->getTelnumber(), PDO::PARAM_STR);
         $stmt->bindValue(':conto', $acc->getConto(), PDO::PARAM_STR);
         $stmt->bindValue(':descrizione', $acc->getDescrizione(), PDO::PARAM_STR);
-        //$stmt->bindValue(':activate', $acc->getActivate(), PDO::PARAM_BOOL);
+        $stmt->bindValue(':activate', $acc->getActivate(), PDO::PARAM_BOOL);//sul database sarà 0 se è falso altrimenti 1
 
     }
 
@@ -85,7 +81,6 @@ class FAccount {
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$acc);
         EUser::setID($id);
-        print("$id \n");
         FUser::store($obj);
 
 

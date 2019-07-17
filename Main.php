@@ -2,7 +2,6 @@
 
 require_once 'include.php';
 $var50= new EAccount('Zorro','pass','blabla', '1123456789','blabli', 'blablu');
-print_r($var50);
 $var80= new EUser('Luca','Visconti', '19/09/1997');
 //$var85->storeAddress($var50);
 //FDatabase::getInstance();

@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS  `Account` (
   `telnumb` char(10) NOT NULL,
   `conto` float NULL,
   `descrizione` varchar(150) NULL,
+  `activate` Boolean not null,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
