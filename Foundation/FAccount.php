@@ -22,11 +22,11 @@ class FAccount {
     /**
      * @Tabella di riferimento
      */
-    private static $tables = "account";
+    private static $tables = "account(`username`,`password`,`email`,`telnumb`,`conto`,`descrizione`)";
     /**
      * campi della tabella
      */
-    private static $values = "(:id,:username,:password,:email,:telnumb,:conto,:descrizione, :activate)";
+    private static $values = "(:username,:password,:email,:telnumb,:conto,:descrizione)";
 
     public function __construct(){}
 
@@ -38,15 +38,18 @@ class FAccount {
      * @param EAccount $acc account i cui dati devono essere inseriti nel DB
      */
     public static function bind($stmt, EAccount $acc) {
-        $stmt->bindValue(':id', NULL, PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
-                                                                                // dal DBMS tramite (AUTOINCREMENT_ID)
-        $stmt->bindValue(':username', $acc->getUsername(), PDO::PARAM_STR);
-        $stmt->bindValue(':password', $acc->getPassword(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
+                                              // dal DBMS tramite (AUTOINCREMENT_ID)
+        $check=$stmt->bindValue(':username', $acc->getUsername(), PDO::PARAM_STR);
+        if($check)print("sì \n");
+        print($acc->getUsername()."\n");
+        $stmt->bindValue(':password', $acc->getPassword(), PDO::PARAM_STR);//ricorda di "collegare" la giusta variabile al bind
         $stmt->bindValue(':email', $acc->getEmail(), PDO::PARAM_STR);
+        $check=$stmt->bindValue(':telnumb', $acc->getTelnumber(), PDO::PARAM_STR);
+        if($check)print("sì \n");
+        print($acc->getTelnumber()."\n");
         $stmt->bindValue(':conto', $acc->getConto(), PDO::PARAM_STR);
-        $stmt->bindValue(':telnumb', $acc->getTelnumber(), PDO::PARAM_STR);
         $stmt->bindValue(':descrizione', $acc->getDescrizione(), PDO::PARAM_STR);
-        $stmt->bindValue(':activate', $acc->getActivate(), PDO::PARAM_STR);
+        //$stmt->bindValue(':activate', $acc->getActivate(), PDO::PARAM_BOOL);
 
     }
 
@@ -77,10 +80,15 @@ class FAccount {
      * Metodo che permette la store di un Account
      * @param $utente Account da salvare
      */
-    public static function store($acc)
+    public static function store($acc, EUser $obj)
     {
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$acc);
+        EUser::setID($id);
+        print("$id \n");
+        FUser::store($obj);
+
+
     }
 
     /**

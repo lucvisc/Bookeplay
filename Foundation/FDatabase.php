@@ -17,23 +17,56 @@ if (file_exists('config.inc.php')) require_once 'config.inc.php';
  */
 class FDatabase {
 
+
     /** l'unica istanza della classe */
     private static $instance;
     /** oggetto PDO che effettua la connessione al dbms */
     private $db;
 
-
     /** costruttore privato, l'unico accesso è dato dal metodo getInstance() */
     private function __construct () {
         try {
-            $this->db = new PDO ("mysql:dbname=".$GLOBALS['database'].";host=localhost; charset=utf8;", $GLOBALS['username'], $GLOBALS['password']);
-
+            $hostname="127.0.0.1";
+            $dbname = "bookeplay";
+            $user = "root";
+            $pass= "";
+            $this->db = new PDO ("mysql:host=$hostname;dbname=$dbname", $user, $pass);
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             die;
         }
-
     }
+
+    public function prova(){
+        //$db->query("INSERT INTO utente(CF, Nome, Cognome) VALUES('DCSCRL96C27I156R', 'Catriel', 'DeBiase')");//query manuale di prova
+        $sql = "INSERT INTO utente(idAcc, name, surname, gender, tipo) VALUES(':idAcc',':name',':surname',':dataNascita',':gender',':tipo')"; //inizializzazione della query parametrica
+        //':idAcc',':name',':surname',':dataNascita',':gender',':tipo'
+        $stmt = $this->db->prepare($sql); //Prepares a statement for execution and returns a statement object
+//in pratica abbiamo trasformato la nostra query in uno oggetto che è quindi capace di sfruttare alcune suo funzioni dategli da PDO
+
+        $nome="Catriel";
+        $cognome="DeBiase";
+        $datanascita="";
+        $gender="M";
+        $tipo="registrato";
+
+        $stmt->bindParam(':name' , $nome, PDO::PARAM_STR);// notare che se da adesso in poi cambiasse il varole di una delle variabili cambierebbe anche quello del parametro
+        $stmt->bindParam(':surname' , $cognome, PDO::PARAM_STR);
+        $stmt->bindParam(':dataNascita' , $datanascita, PDO::PARAM_STR);
+        $stmt->bindParam(':gender' , $gender, PDO::PARAM_STR);
+        $stmt->bindParam(':tipo' , $tipo, PDO::PARAM_STR);
+
+        $top=$stmt->execute();//esecuzione della query tramite la funzione nativa dell'oggetto stmt
+
+        /*$sql = ("INSERT INTO utente(CF, Nome, Cognome) VALUES( '$cf', '$nome', '$cognome' )");
+        $stmt = $db->prepare($sql);
+        $stmt->execute();*/
+
+        $arr = $stmt->errorInfo();
+        print ($top);//verifica se la variabile detiene il valore datogli
+    }
+
+
 
     /**
      * Metodo che restituisce l'unica istanza dell'oggetto.
@@ -62,11 +95,22 @@ class FDatabase {
     public function storeDB ($class, $obj) {
         //viene passato il nome della classe che ermetterà di richiamare tutti i metodi di classe
         try {
-            $this->db->beginTransaction();                                          // inizio di una transazione
-            $query = "INSERT INTO " . $class::getTable() . " VALUES " . $class::getValues();//costruzione della query
+            $this->db->beginTransaction();// inizio di una transazione
+            $query = 'INSERT INTO ' . $class::getTables() . ' VALUES ' . $class::getValues();//costruzione della query
+            print ($query."\n");
             $stmt = $this->db->prepare($query);                         // prepara la query restituendo l'oggetto query
-            $class::bind($stmt, $obj);                      //fa il matching tra i parametri ed i valori delle variabili
-            $stmt->execute();                               //esecuzione dell'oggetto stmt
+            $class::bind($stmt, $obj);//fa il matching tra i parametri ed i valori delle variabili
+            print_r($stmt);
+            $check=$stmt->execute();//esecuzione dell'oggetto stmt
+            if ($check){
+                print("si \n");
+            }
+            else{
+                print("no");
+                echo "\nPDOStatement::errorInfo():\n";
+                $arr = $stmt->errorInfo();
+                print_r($arr);
+            }
             $id = $this->db->lastInsertId();                // Returns the ID of the last inserted row or sequence value
             $this->db->commit();                            // rende definitiva la transazione
             $this->closeDbConnection();                     //chiudiamo la connessione al db

@@ -3,24 +3,24 @@ CREATE DATABASE bookeplay;
 USE bookeplay;
 
 CREATE TABLE IF NOT EXISTS  `Account` (
-  `id` int(4) not NULL AUTO_INCREMENT,
-  `username` varchar(45) NOT NULL,
+  `id` int(4) not null AUTO_INCREMENT,
+  `username` varchar(45)  NOT NULL UNIQUE,
   `password` VARCHAR(45) not NULL,
   `email` varchar(45) NULL,
-  `telnumb` int(10) NOT NULL,
+  `telnumb` char(10) NOT NULL,
   `conto` float NULL,
   `descrizione` varchar(150) NULL,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Utente` (
-  `idAcc` int(4) not null AUTO_INCREMENT,
+  `idAcc` int(4) not null,
   `name` VARCHAR(45) not NULL,
   `surname` VARCHAR(45) not NULL,
-  `dataNascita` DATE not NULL,
+  `dataNascita` DATE NULL,
   `gender` ENUM('M','F') NULL,
   `tipo` enum('registrato', 'admin'),
-  PRIMARY KEY (`name`, `surname`),
+  PRIMARY KEY (idAcc),
   FOREIGN KEY (idAcc) REFERENCES Account(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;

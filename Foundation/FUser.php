@@ -28,13 +28,13 @@ class FUser {
      * @param EUser $user i cui dati devono essere inseriti nel DB
      */
     public static function bind($stmt,EUser $user){
-        $stmt->bindValue(':idAcc', NULL, PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
+        $stmt->bindValue(':idAcc', EUser::getID(), PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
                                                                                 // dal DBMS tramite (AUTOINCREMENT_ID)
         $stmt->bindValue(':name', $user->getName(), PDO::PARAM_STR);
         $stmt->bindValue(':surname', $user->getSurname(), PDO::PARAM_STR);
         $stmt->bindValue(':dataNascita', $user->getDatanasc(), PDO::PARAM_STR);
         $stmt->bindValue(':gender', $user->getGender(), PDO::PARAM_STR);
-        $stmt->bindValue(':tipo', "User", PDO::PARAM_STR);
+        $stmt->bindValue(':tipo', 'registrato', PDO::PARAM_STR);
     }
     /**
      * questo metodo restituisce il nome della classe per la costruzione delle Query
@@ -84,7 +84,7 @@ class FUser {
         $db=FDatabase::getInstance();
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
-        if(($result!=null) && ($rows_number == 1)) {        //:idAcc,:name,:surname,:dataNascita,:gender,:tipo
+        if(($result!=null) && ($rows_number == 1)) {        //':idAcc',':name',':surname',':dataNascita',':gender',':tipo'
             $us=new EUser($result['idAcc'], $result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
         }
         else {
