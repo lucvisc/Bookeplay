@@ -25,9 +25,9 @@ class FDatabase {
 
     /** costruttore privato, l'unico accesso è dato dal metodo getInstance() */
     private function __construct () {
-        try {
-            $this->db = new PDO ("mysql:dbname=".$GLOBALS['database'].";host=localhost; charset=utf8;", $GLOBALS['username'], $GLOBALS['password']);
-
+        try {       //"mysql:dbname=".$GLOBALS['database'].";host=localhost; charset=utf8;", $GLOBALS['username'], $GLOBALS['password'])
+            //$this->db = new PDO ("mysql:host=".$GLOBALS['hostname'].";dbname=".$GLOBALS['database'], $GLOBALS['username'], $GLOBALS['password']);
+          $this->db = new PDO ("mysql:dbname=".$GLOBALS['database'].";host=localhost; charset=utf8;", $GLOBALS['username'], $GLOBALS['password']);
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             die;
@@ -58,13 +58,13 @@ class FDatabase {
      * @param obj oggetto da salvare
      * @return $id id dell'oggetto inserito
      */
-
     public function storeDB ($class, $obj) {
         //viene passato il nome della classe che ermetterà di richiamare tutti i metodi di classe
         try {
-            $this->db->beginTransaction();                                          // inizio di una transazione
-            $query = "INSERT INTO " . $class::getTable() . " VALUES " . $class::getValues();//costruzione della query
-            $stmt = $this->db->prepare($query);                         // prepara la query restituendo l'oggetto query
+            $this->db->beginTransaction();// inizio di una transazione
+            $query ="INSERT INTO " . $class::getTables() . " VALUES " . $class::getValues();//costruzione della query
+            print($query);
+            $stmt = $this->db->prepare($query);             // prepara la query restituendo l'oggetto query
             $class::bind($stmt, $obj);                      //fa il matching tra i parametri ed i valori delle variabili
             $stmt->execute();                               //esecuzione dell'oggetto stmt
             $id = $this->db->lastInsertId();                // Returns the ID of the last inserted row or sequence value
@@ -72,7 +72,7 @@ class FDatabase {
             $this->closeDbConnection();                     //chiudiamo la connessione al db
             return $id;                                     //Ritorna l'id del record appena inserito nel db
         } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
+            echo "Attenzione errore: ". $e->getMessage();
             $this->db->rollBack();
 
             return null;

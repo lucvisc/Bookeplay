@@ -4,11 +4,12 @@ require_once 'include.php';
 
 $var50= new EAddress('Popoli','Pescara','65026','viale dei tigli','26' );
 $var51= new EAccount('lucvisc','luca','luca@ciccio.com','3456543222','ciao sono Luca');
-$var80= new EUser('Luca','Visconti', '19/09/1997', 'm',$var50, $var51);
+$var80= new EUser('Luca','Visconti', '19/09/1997', 'm');
 $var81= new FUser();
 //$var85->storeAddress($var50);
-FDatabase::getInstance();
-FUser::storeUser($var80);
+//FDatabase::getInstance();
+FUser::store($var80);
+FAddress::store($var50);
 //FAccount::deleteAccount($var51);
 /*
 $var70 ='ERFJ678';
