@@ -8,8 +8,16 @@ $var80= new EUser('Luca','Visconti', '19/09/1997', 'm');
 $var81= new FUser();
 //$var85->storeAddress($var50);
 //FDatabase::getInstance();
-FUser::store($var80);
-FAddress::store($var50);
+//FUser::store($var80);
+//FAddress::store($var50);
+
+$var50= new EAccount('Zorro','pass','blabla', '1123456789','blabli', 'blablu');
+$var80= new EUser('Luca','Visconti', '19/09/1997');
+//$var85->storeAddress($var50);
+//FDatabase::getInstance();
+//$con->prova();
+FAccount::store($var50, $var80);
+
 //FAccount::deleteAccount($var51);
 /*
 $var70 ='ERFJ678';

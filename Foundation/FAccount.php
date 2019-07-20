@@ -22,11 +22,11 @@ class FAccount {
     /**
      * @Tabella di riferimento
      */
-    private static $tables = "account";
+    private static $tables = "account(`username`,`password`,`email`,`telnumb`,`conto`,`descrizione`, `activate`)";
     /**
      * campi della tabella
      */
-    private static $values = "(:id,:username,:password,:email,:telnumb,:conto,:descrizione, :activate)";
+    private static $values = "(:username,:password,:email,:telnumb,:conto,:descrizione, :activate)";
 
     public function __construct(){}
 
@@ -38,15 +38,14 @@ class FAccount {
      * @param EAccount $acc account i cui dati devono essere inseriti nel DB
      */
     public static function bind($stmt, EAccount $acc) {
-        $stmt->bindValue(':id', NULL, PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
-                                                                                // dal DBMS tramite (AUTOINCREMENT_ID)
+        //non c'è il bind di id erchè la query di insert non necessita del campo id visto che nel db è auto-incrementale e quindi viene inserito automaticamente dal db
         $stmt->bindValue(':username', $acc->getUsername(), PDO::PARAM_STR);
-        $stmt->bindValue(':password', $acc->getPassword(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
+        $stmt->bindValue(':password', $acc->getPassword(), PDO::PARAM_STR);//ricorda di "collegare" la giusta variabile al bind
         $stmt->bindValue(':email', $acc->getEmail(), PDO::PARAM_STR);
-        $stmt->bindValue(':conto', $acc->getConto(), PDO::PARAM_STR);
         $stmt->bindValue(':telnumb', $acc->getTelnumber(), PDO::PARAM_STR);
+        $stmt->bindValue(':conto', $acc->getConto(), PDO::PARAM_STR);
         $stmt->bindValue(':descrizione', $acc->getDescrizione(), PDO::PARAM_STR);
-        $stmt->bindValue(':activate', $acc->getActivate(), PDO::PARAM_STR);
+        $stmt->bindValue(':activate', $acc->getActivate(), PDO::PARAM_BOOL);//sul database sarà 0 se è falso altrimenti 1
 
     }
 
@@ -77,10 +76,14 @@ class FAccount {
      * Metodo che permette la store di un Account
      * @param $utente Account da salvare
      */
-    public static function store($acc)
+    public static function store($acc, EUser $obj)
     {
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$acc);
+        EUser::setID($id);
+        FUser::store($obj);
+
+
     }
 
     /**

@@ -22,17 +22,15 @@ class FDatabase {
     /** oggetto PDO che effettua la connessione al dbms */
     private $db;
 
-
     /** costruttore privato, l'unico accesso è dato dal metodo getInstance() */
     private function __construct () {
-        try {       //"mysql:dbname=".$GLOBALS['database'].";host=localhost; charset=utf8;", $GLOBALS['username'], $GLOBALS['password'])
+        try {
             //$this->db = new PDO ("mysql:host=".$GLOBALS['hostname'].";dbname=".$GLOBALS['database'], $GLOBALS['username'], $GLOBALS['password']);
           $this->db = new PDO ("mysql:dbname=".$GLOBALS['database'].";host=localhost; charset=utf8;", $GLOBALS['username'], $GLOBALS['password']);
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             die;
         }
-
     }
 
     /**
@@ -74,13 +72,12 @@ class FDatabase {
         } catch (PDOException $e) {
             echo "Attenzione errore: ". $e->getMessage();
             $this->db->rollBack();
-
             return null;
         }
     }
 
     /**
-     * Metodo ci dupporto per le load degli oggetti presenti nelle varie tabelle
+     * Metodo di supporto per le load degli oggetti presenti nelle varie tabelle
      * @param $class classe del foundation che sfrutta il metodo
      * @param $field campo da usare per la ricerca
      * @param $id valore da usare per la ricerca

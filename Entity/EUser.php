@@ -17,6 +17,10 @@
 require_once 'include.php';
 
 class EUser {
+    /**
+     * @var integer
+     */
+    private static $idacc;
  	/**
      * @AttributeType string 
      */
@@ -51,6 +55,14 @@ class EUser {
  		$this->address = $addr; //gli vene già passato come oggetto
  		$this->account = $acc;
  	}
+
+ 	public static function setID (int $id){
+ 	    self::$idacc=$id;
+    }
+
+ 	public static function getID(){
+ 	    return self::$idacc;
+    }
     /*
      public function __toString(){
         $st="Nome: ".$this->name." Cognome: ".$this->surname." Username: ".$this->username;
