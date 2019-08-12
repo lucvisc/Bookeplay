@@ -17,7 +17,6 @@ if (file_exists('config.inc.php')) require_once 'config.inc.php';
  */
 class FDatabase {
 
-
     /** l'unica istanza della classe */
     private static $instance;
     /** oggetto PDO che effettua la connessione al dbms */
@@ -26,11 +25,8 @@ class FDatabase {
     /** costruttore privato, l'unico accesso è dato dal metodo getInstance() */
     private function __construct () {
         try {
-            $hostname="127.0.0.1";
-            $dbname = "bookeplay";
-            $user = "root";
-            $pass= "";
-            $this->db = new PDO ("mysql:host=$hostname;dbname=$dbname", $user, $pass);
+            //$this->db = new PDO ("mysql:host=".$GLOBALS['hostname'].";dbname=".$GLOBALS['database'], $GLOBALS['username'], $GLOBALS['password']);
+          $this->db = new PDO ("mysql:dbname=".$GLOBALS['database'].";host=localhost; charset=utf8;", $GLOBALS['username'], $GLOBALS['password']);
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             die;
@@ -72,7 +68,6 @@ class FDatabase {
      * @param obj oggetto da salvare
      * @return $id id dell'oggetto inserito
      */
-
     public function storeDB ($class, $obj) {
         //viene passato il nome della classe che ermetterà di richiamare tutti i metodi di classe
         try {
@@ -90,14 +85,14 @@ class FDatabase {
             $this->closeDbConnection();                     //chiudiamo la connessione al db
             return $id;                                     //Ritorna l'id del record appena inserito nel db
         } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
+            echo "Attenzione errore: ". $e->getMessage();
             $this->db->rollBack();
             return null;
         }
     }
 
     /**
-     * Metodo ci dupporto per le load degli oggetti presenti nelle varie tabelle
+     * Metodo di supporto per le load degli oggetti presenti nelle varie tabelle
      * @param $class classe del foundation che sfrutta il metodo
      * @param $field campo da usare per la ricerca
      * @param $id valore da usare per la ricerca

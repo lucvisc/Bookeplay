@@ -32,8 +32,8 @@ class FUser {
         $stmt->bindValue(':name', $user->getName(), PDO::PARAM_STR);
         $stmt->bindValue(':surname', $user->getSurname(), PDO::PARAM_STR);
         $stmt->bindValue(':dataNascita', $user->getDatanasc(), PDO::PARAM_STR);
-        $stmt->bindValue(':gender', $user->getGender(), PDO::PARAM_STR);
-        $stmt->bindValue(':tipo', 'registrato', PDO::PARAM_STR);
+        $stmt->bindValue(':tipo', "registrato", PDO::PARAM_STR);
+
     }
     /**
      * questo metodo restituisce il nome della classe per la costruzione delle Query
