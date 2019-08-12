@@ -38,6 +38,18 @@ class FDatabase {
     }
 
     /**
+     * funzione di supporto che serve a reperire solo il nome della tabella senza i riferiti campi
+     * quando viene passato l'attributo values delle classi per le query che non siano di store
+     * @param $Par la stringa del $values della classe da elaborare
+     * @return nome della tabella di riferimento
+     */
+    public static function tabella ($Par){
+        $pattern="/^(\w*)\s(\S*)$/"; //espressione regolare che separa le due substringhe
+        preg_match($pattern , $Par, $result);
+        return $result[1];
+    }
+
+    /**
      * Metodo che restituisce l'unica istanza dell'oggetto.
      * @return FDataBase l'istanza dell'oggetto.
      */
@@ -64,13 +76,17 @@ class FDatabase {
     public function storeDB ($class, $obj) {
         //viene passato il nome della classe che ermetterà di richiamare tutti i metodi di classe
         try {
+            print_r($obj);
             $this->db->beginTransaction();// inizio di una transazione
             $query = 'INSERT INTO ' . $class::getTables() . ' VALUES ' . $class::getValues();//costruzione della query
+            print ("$query\n");
             $stmt = $this->db->prepare($query);                         // prepara la query restituendo l'oggetto query
             $class::bind($stmt, $obj);//fa il matching tra i parametri ed i valori delle variabili
             $stmt->execute();//esecuzione dell'oggetto stmt
+            print_r($this->db->errorInfo());
             $id = $this->db->lastInsertId();                // Returns the ID of the last inserted row or sequence value
             $this->db->commit();                            // rende definitiva la transazione
+            print_r($this->db->errorInfo());
             $this->closeDbConnection();                     //chiudiamo la connessione al db
             return $id;                                     //Ritorna l'id del record appena inserito nel db
         } catch (PDOException $e) {
@@ -90,9 +106,10 @@ class FDatabase {
     public function loadDB ($class, $field, $id)
     {
         try {
-            $query = "SELECT * FROM " . $class::getTable() . " WHERE " . $field . "='" . $id . "';";
+            $query = "SELECT * FROM " . self::tabella($class::getTables()). " WHERE " . $field . "='" . $id . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
+            //print_r($this->db->errorInfo());
             $num = $stmt->rowCount();
             if ($num == 0) {
                 $result = null;                             //nessuna riga interessata. return null
@@ -123,7 +140,7 @@ class FDatabase {
     {
         try {
             $this->db->beginTransaction();
-            $query = "SELECT * FROM " . $class::getTable() . " WHERE " . $field . "='" . $id . "';";
+            $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE " . $field . "='" . $id . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
@@ -149,7 +166,7 @@ class FDatabase {
             $this->db->beginTransaction();
             $esiste = $this->existDB($class, $field, $id);
             if ($esiste) {
-                $query = "DELETE FROM " . $class::getTable() . " WHERE " . $field . "='" . $id . "';";
+                $query = "DELETE FROM " . self::tabella($class::getTables()). " WHERE " . $field . "='" . $id . "';";
                 $stmt = $this->db->prepare($query);
                 $stmt->execute();
                 $this->db->commit();
@@ -175,7 +192,7 @@ class FDatabase {
     public function updateDB ($class, $field, $newvalue, $pk, $id) {
         try {
             $this->db->beginTransaction();
-            $query = "UPDATE " . $class::getTable() . " SET " . $field . "='" . $newvalue . "' WHERE " . $pk . "='" . $id . "';";
+            $query = "UPDATE " . self::tabella($class::getTables()) . " SET " . $field . "='" . $newvalue . "' WHERE " . $pk . "='" . $id . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $this->db->commit();
@@ -197,7 +214,7 @@ class FDatabase {
      */
     public function existDB ($class, $field, $id) {
         try {
-            $query = "SELECT * FROM " . $class::getTable() . " WHERE " . $field . "='" . $id . "'";
+            $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE " . $field . "='" . $id . "'";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -222,7 +239,7 @@ class FDatabase {
         try {
             $query = null;
             $class = "FAccount";
-            $query = "SELECT * FROM " . $class::getTable() . " WHERE email ='" . $email . "' AND password ='" . $pass . "';";
+            $query = "SELECT * FROM " . $class::getTables() . " WHERE email ='" . $email . "' AND password ='" . $pass . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
@@ -447,11 +464,13 @@ class FDatabase {
      */
     public function getAccount ($acc) {
         try {
-            $query = "SELECT * FROM account WHERE  username = " . $acc . " ;";
+            echo $acc;
+            $query = "SELECT * FROM account WHERE  username = '" . $acc . " ';";
             $stmt = $this->db->prepare($query);
-
             $stmt->execute();
+            print_r($this->db->errorInfo());
             $num = $stmt->rowCount();
+            print ("$num\n") ;
             if ($num == 0) {
                 $result = null;        //nessuna riga interessata. return null
             } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
@@ -462,6 +481,7 @@ class FDatabase {
                 while ($row = $stmt->fetch())
                     $result[] = $row;                    //ritorna un array di righe.
             }
+            print_r($result);
             return array($result, $num);
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
@@ -493,7 +513,7 @@ class FDatabase {
      */
     public function ContoTot(){
             try {
-                $query=("SELECT SUM(conto) FROM account GROUP BY (id)");
+                $query=("SELECT SUM(conto) as totale FROM account GROUP BY (id)");
                 $stmt = $this->db->prepare($query);
                 $stmt->execute();
                 return $result = $stmt->fetch(PDO::FETCH_ASSOC);

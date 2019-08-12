@@ -17,6 +17,7 @@ require_once 'include.php';
 
  //Implementazione della classe Account 
 class EAccount {
+    private static $num=1;
 	/**
      * @AttributeType string 
      */
@@ -34,7 +35,7 @@ class EAccount {
      */
 	private $email;
 	/**
-     * @AttributeType int 
+     * @AttributeType string
      */
 	private $telnumber;
 	/**
@@ -52,15 +53,21 @@ class EAccount {
 
 
 	//Dichiarazione del costruttore 
-	function __construct(string $un=null,string $pass=null, string $ema=null,int $tn=null,string $descr=null, string $cont=null){
-		$this->username = $un;
+	function __construct( string $un=null ,string $pass=null, string $ema=null, string $tn=null , float $cont=null,string $descr=null,  int $status=null){
+	    $this->id=null;
+	    $this->username = $un;
 		$this->password = $pass;
 		$this->email = $ema;
 		$this->telnumber = $tn;
 		$this->descrizione = $descr;
 		$this->conto = $cont;
-		$this->activate = false;
+		$this->activate = $status;
+		self::increment();
 	}
+
+	private static function increment(){
+	    self::$num++;
+    }
 
 	//Dichiarazione dei metodi Get
 	/**

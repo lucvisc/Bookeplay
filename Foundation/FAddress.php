@@ -13,9 +13,9 @@ class FAddress {
      */
     private static $class="FAddress";
     /**
-     * tabella di riferimento
+     * tabella di riferimento con i campi per lo store
      */
-    private static $tables="Address";
+    private static $tables="indirizzo (`idAcc`,`Comune`,`Provincia`,`CAP`,`Via`,`NumCivico`)";
     /**
      * valori della tabella
      */
@@ -24,8 +24,7 @@ class FAddress {
     public function __construct(){}
 
     public static function bind($stmt, EAddress $addr) {
-        $stmt->bindValue(':idAcc', NULL, PDO::PARAM_INT);  // l'id è posto a NULL poiché viene assegnato automaticamente
-                                                            // dal DBMS tramite (AUTOINCREMENT_ID)
+        $stmt->bindValue(':idAcc', EAddress::getID(), PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
         $stmt->bindValue(':Comune', $addr->getComune(), PDO::PARAM_STR);
         $stmt->bindValue(':Provincia', $addr->getProvincia(), PDO::PARAM_STR);
         $stmt->bindValue(':CAP', $addr->getCap(), PDO::PARAM_STR);
@@ -39,6 +38,7 @@ class FAddress {
     public static function getClass(){
         return self::$class;
     }
+
 
     /**
      * questo metodo restituisce la stringa dei valori della tabella sul DB per la costruzione delle Query
@@ -58,7 +58,7 @@ class FAddress {
 
     /**
      * Metodo che permette la store di un Utenteloggato
-     * @param $utente Utenteloggato da salvare
+     * @param $utente indirizzo da salvare
      */
     public static function store($address){
         $db=FDatabase::getInstance();

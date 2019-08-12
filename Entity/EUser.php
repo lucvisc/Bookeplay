@@ -57,11 +57,11 @@ class EUser {
  	}
 
  	public static function setID (int $id){
- 	    self::$idacc=$id;
+ 	    self::$idacc=$id;//prende in ingresso l'id dell'ultima istanza di account e lo registra nell'attributo di classe $idacc
     }
 
  	public static function getID(){
- 	    return self::$idacc;
+ 	    return self::$idacc;//restituisce l'id dell'istanza utente creata con il corrispondente account
     }
     /*
      public function __toString(){
