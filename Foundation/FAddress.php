@@ -23,7 +23,7 @@ class FAddress {
 
     public function __construct(){}
 
-    public static function bind($stmt, EAddress $addr) {
+    public static function bind(PDOStatement $stmt, EAddress $addr) {
         $stmt->bindValue(':idAcc', EAddress::getID(), PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
         $stmt->bindValue(':Comune', $addr->getComune(), PDO::PARAM_STR);
         $stmt->bindValue(':Provincia', $addr->getProvincia(), PDO::PARAM_STR);

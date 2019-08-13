@@ -74,11 +74,10 @@ class FDatabase {
             print_r($obj);
             $this->db->beginTransaction();// inizio di una transazione
             $query = 'INSERT INTO ' . $class::getTables() . ' VALUES ' . $class::getValues();//costruzione della query
-            print ("$query\n");
             $stmt = $this->db->prepare($query);                         // prepara la query restituendo l'oggetto query
             $class::bind($stmt, $obj);//fa il matching tra i parametri ed i valori delle variabili
             $stmt->execute();//esecuzione dell'oggetto stmt
-            print_r($this->db->errorInfo());
+            print_r($stmt->errorInfo());
             $id = $this->db->lastInsertId();                // Returns the ID of the last inserted row or sequence value
             $this->db->commit();                            // rende definitiva la transazione
             print_r($this->db->errorInfo());
@@ -130,7 +129,7 @@ class FDatabase {
             $query = "SELECT * FROM " . self::tabella($class::getTables()). " WHERE " . $field . "='" . $id . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-            //print_r($this->db->errorInfo());
+            print_r($stmt->errorInfo());
             $num = $stmt->rowCount();
             if ($num == 0) {
                 $result = null;                             //nessuna riga interessata. return null

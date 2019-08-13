@@ -79,10 +79,10 @@ class FAccount {
     {
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$acc);
-        EAddress::setID($id);
-        FAddress::store($obj2);
         EUser::setID($id);
         FUser::store($obj1);
+        EAddress::setID($id);
+        FAddress::store($obj2);
     }
 
     /**
