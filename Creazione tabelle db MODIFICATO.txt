@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `Utente` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Indirizzo` (
-  `idAcc` int(4) not NULL AUTO_INCREMENT,
+  `idAcc` int(4) not NULL,
   `Comune` VARCHAR(45) not NULL,
   `Provincia` varchar(45) NULL,
   `CAP` CHAR(5) not NULL,

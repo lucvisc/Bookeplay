@@ -2,21 +2,26 @@
 
 require_once 'include.php';
 
-$var50= new EAddress('Popoli','Pescara','65026','viale dei tigli','26' );
-$var51= new EAccount('lucvisc','luca','luca@ciccio.com','3456543222','ciao sono Luca');
-$var80= new EUser('Luca','Visconti', '19/09/1997', 'm');
-$var81= new FUser();
-//$var85->storeAddress($var50);
-//FDatabase::getInstance();
-//FUser::store($var80);
-//FAddress::store($var50);
+$acc=new EAccount("bla", " ", "bli", "0123456789", 0, "blu", "1");
+$adr=new EAddress("Pescara", "PE", "65120", "Via sela", "134");
+$use=new EUser("blabla", "blibli", "00/00/2000", "M", $adr, $acc);
+FAccount::store($acc, $use, $adr);
 
-$var50= new EAccount('Zorro','pass','blabla', '1123456789','blabli', 'blablu');
-$var80= new EUser('Luca','Visconti', '19/09/1997');
-//$var85->storeAddress($var50);
-//FDatabase::getInstance();
-//$con->prova();
-FAccount::store($var50, $var80);
+/*$acc=FAccount::loadByField("username", "Garcia");
+print_r($acc);
+$acc=Faccount::exist("username", "Garcia");
+print ("$acc\n");
+FAccount::update("username", "Zorro", "username", "Garcia");
+$acc=FAccount::loadByField("username", "Zorro");
+print_r($acc);
+$tot=FAccount::loadContoTot();
+print("$tot[totale]\n");
+$acc=FAccount::LoadAccount("Zorro");
+print_r($acc);
+$bo=Faccount::delete("username", "Zorro");
+echo $bo;*/
+
+
 
 //FAccount::deleteAccount($var51);
 /*
@@ -70,5 +75,4 @@ $var41=new EGiorno($var40);
 //$var42->setFasceOrarie();
 print_r($var41);
 */
-
 ?>

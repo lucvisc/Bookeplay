@@ -13,9 +13,9 @@ class FAddress {
      */
     private static $class="FAddress";
     /**
-     * tabella di riferimento
+     * tabella di riferimento con i campi per lo store
      */
-    private static $tables="indirizzo";
+    private static $tables="indirizzo (`idAcc`,`Comune`,`Provincia`,`CAP`,`Via`,`NumCivico`)";
     /**
      * valori della tabella
      */
@@ -24,8 +24,7 @@ class FAddress {
     public function __construct(){}
 
     public static function bind($stmt, EAddress $addr) {
-        $stmt->bindValue(':idAcc', NULL, PDO::PARAM_INT);  // l'id è posto a NULL poiché viene assegnato automaticamente
-                                                            // dal DBMS tramite (AUTOINCREMENT_ID)
+        $stmt->bindValue(':idAcc', EAddress::getID(), PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
         $stmt->bindValue(':Comune', $addr->getComune(), PDO::PARAM_STR);
         $stmt->bindValue(':Provincia', $addr->getProvincia(), PDO::PARAM_STR);
         $stmt->bindValue(':CAP', $addr->getCap(), PDO::PARAM_STR);
@@ -39,6 +38,7 @@ class FAddress {
     public static function getClass(){
         return self::$class;
     }
+
 
     /**
      * questo metodo restituisce la stringa dei valori della tabella sul DB per la costruzione delle Query
@@ -58,7 +58,7 @@ class FAddress {
 
     /**
      * Metodo che permette la store di un Utenteloggato
-     * @param $utente Utenteloggato da salvare
+     * @param $utente indirizzo da salvare
      */
     public static function store($address){
         $db=FDatabase::getInstance();
@@ -100,7 +100,7 @@ class FAddress {
         $result=$db->loadsingle($sql);
         if($result!=null){
             $address=new EAddress($result['idAcc'],$result['Comune'], $result['Provincia'], $result['CAP'],$result['Via'],$result['NumCivico']);
-            $address->setId($row['id']);
+            $address->setId($result['id']);
             return $address;
         }
         else return null;
@@ -148,82 +148,6 @@ class FAddress {
         if($result) return true;
         else return false;
     }
-
-
-/*
-    /**
-     * Funzione ch permette la load dell comune
-     * @param string $comune dell'user di riferimento
-     * @return object $user
-     */
- /*   public static function loadByComune($comune){
-        $sql="SELECT * FROM ".static::getTables()." WHERE Comune='".$comune."';";
-        $db=FDatabase::getInstance();
-        $result=$db->loadSingle($sql);
-        if($result!=null){          //:idAcc,:Comune,:Provincia,:CAP,:Via,:NumCivico
-            $addr=new EAddress($result['Comune'], $result['Provincia'],$result['CAP'],$result['Via'], $result['NumCivico']);
-            $addr->setId($result['id']);
-            return $addr;
-        }
-        else return null;
-    }
-
-    /**
-     * Funzione ch permette la load dell'indirizzo in base al paramentro id
-     * @param int $id dell'account che fa riferimento ad un utente
-     * @return object $addr
-     */
-/*    public static function loadById($id){
-        $sql="SELECT * FROM ".static::getTables()." WHERE id=".$id.";";
-        $db=FDatabase::getInstance();
-        $result=$db->loadSingle($sql);
-        if($result!=null){
-            $addr=new EAddress($result['Comune'], $result['Provincia'],$result['CAP'],$result['Via'], $result['NumCivico']);
-            $addr->setId($result['id']);
-            return $addr;
-        }
-        else return null;
-    }
-
-    public static function loadByProvincia($provincia){
-        $sql="SELECT * FROM ".static::getTables()." WHERE Provincia=".$provincia.";";
-        $db=FDatabase::getInstance();
-        $result=$db->loadSingle($sql);
-        if($result!=null){
-            $addr=new EAddress($result['Comune'], $result['Provincia'],$result['CAP'],$result['Via'], $result['NumCivico']);
-            $addr->setId($result['id']);
-            return $addr;
-        }
-        else return null;
-    }
-
-    /**
-     * Funzione che permette la delete dell'utente in base all'id
-     * @param int $id dell'utente che si vuole eliminare
-     * @return bool
-     */
- /*   public static function deleteAddress($id){
-        $sql="DELETE FROM ".static::getTables()." WHERE idAcc=".$id.";";
-        $db=FDatabase::getInstance();
-        if($db->delete($sql)) return true;
-        else return false;
-    }
-
-
-    /**
-     * Funzione che permette di modificare una generico attributo dell'indirizzo
-     * @param int $id identificativo dell'account a cui fa riferimento un utente che vuole effettuare la modifica
-     * @param string $field campo da modificare
-     * @param string $newvalue nuovo valore da inserire nel DB
-     * @return bool
-     */
- /*   public static function UpdateAddress($id,$field,$newvalue){
-        $sql="UPDATE ".static::getTables()." SET ".$field."='".$newvalue."' WHERE idAcc=".$id.";";
-        $db=FDatabase::getInstance();
-        if($db->update($sql)) return true;
-        else return false;
-    }
- */
 
 }
 ?>

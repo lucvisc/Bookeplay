@@ -18,6 +18,10 @@ require_once 'include.php';
 //Implementazione della classe Indirizzo
 
 class EAddress {
+    /**
+     * @var integer
+     */
+    private static $idadr;
 	/**
      * @AttributeType string 
      */
@@ -41,13 +45,21 @@ class EAddress {
 
 
 	//Dichiarazione del costruttore 
-	function __construct(string $c=null, string $p=null, int $ca=null,  string $v=null, string $n=null){
+	function __construct(string $c=null, string $p=null, string $ca=null,  string $v=null, string $n=null){
 		$this->comune = $c;
 		$this->provincia = $p;
 		$this->cap = $ca;
 		$this->via = $v;
 		$this->ncivico = $n;
 	}
+
+    public static function setID (int $id){
+        self::$idadr=$id;//prende in ingresso l'id dell'ultima istanza di account e lo registra nell'attributo di classe $idacc
+    }
+
+    public static function getID(){
+        return self::$idadr;//restituisce l'id dell'istanza utente creata con il corrispondente account
+    }
 
 	//Dichichiarazione dei metodi Get
 	/**

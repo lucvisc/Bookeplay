@@ -20,13 +20,13 @@ class FAccount {
      */
     private static $class="FAccount";
     /**
-     * @Tabella di riferimento
+     * @Tabella di riferimento con campi per l'inserimento
      */
-    private static $tables = "account(`username`,`password`,`email`,`telnumb`,`conto`,`descrizione`, `activate`)";
+    private static $tables = "account (`username`,`password`,`email`,`telnumb`,`conto`,`descrizione`,`activate`)";
     /**
      * campi della tabella
      */
-    private static $values = "(:username,:password,:email,:telnumb,:conto,:descrizione, :activate)";
+    private static $values = "(:username,:password,:email,:telnumb,:conto,:descrizione,:activate)";
 
     public function __construct(){}
 
@@ -46,7 +46,6 @@ class FAccount {
         $stmt->bindValue(':conto', $acc->getConto(), PDO::PARAM_STR);
         $stmt->bindValue(':descrizione', $acc->getDescrizione(), PDO::PARAM_STR);
         $stmt->bindValue(':activate', $acc->getActivate(), PDO::PARAM_BOOL);//sul database sarà 0 se è falso altrimenti 1
-
     }
 
     /**
@@ -76,14 +75,14 @@ class FAccount {
      * Metodo che permette la store di un Account
      * @param $utente Account da salvare
      */
-    public static function store($acc, EUser $obj)
+    public static function store($acc, EUser $obj1, EAddress $obj2)
     {
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$acc);
+        EAddress::setID($id);
+        FAddress::store($obj2);
         EUser::setID($id);
-        FUser::store($obj);
-
-
+        FUser::store($obj1);
     }
 
     /**
@@ -96,7 +95,7 @@ class FAccount {
         $acc = null;
         $db=FDatabase::getInstance();
         $result=$db->loadDB(static::getClass(), $field, $id);
-        $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
+        $rows_number = $db->interestedRows(static::getClass(), $field, $id);//funzione richiamata,presente in FDatabase
         if(($result!=null) && ($rows_number == 1)) {        //:id,:username,:password,:email,:telnumb,:conto,:descrizione, :activate
             $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
         }
