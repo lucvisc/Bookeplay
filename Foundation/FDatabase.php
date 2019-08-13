@@ -92,6 +92,32 @@ class FDatabase {
     }
 
     /**
+     * Funzione che si occupa del salvataggio di un media nel database
+     * @param $class classe dell'oggetto da salvare
+     * @param $obj oggetto da salvare nel database
+     * @param $nome_file nome della chiave dell'array superglobale $_FILE
+     * @return string|null
+     */
+    public function storeMedia ($class , $obj, $nome_file) {
+        try {
+            $this->db->beginTransaction();
+            $query = "INSERT INTO ".$class::getTable()." VALUES ".$class::getValues();
+            $stmt = $this->db->prepare($query);
+            $class::bind($stmt,$obj,$nome_file);
+            $stmt->execute();
+            $id=$this->db->lastInsertId();
+            $this->db->commit();
+            $this->closeDbConnection();
+            return $id;
+        }
+        catch(PDOException $e) {
+            echo "Attenzione errore: ".$e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
      * Metodo di supporto per le load degli oggetti presenti nelle varie tabelle
      * @param $class classe del foundation che sfrutta il metodo
      * @param $field campo da usare per la ricerca
@@ -120,6 +146,26 @@ class FDatabase {
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
+     * Funzione che viene utilizzata per la load quando ci si aspetta che la query produca un solo risultato (esempio load per id).
+     * @param $sql query da eseguire
+     */
+    public function loadSingle($sql){
+        try{
+            $this->db->beginTransaction();
+            $stmt=$this->db->prepare($sql);
+            $stmt->execute();
+            $row=$stmt->fetch(PDO::FETCH_ASSOC);
+            $this->closeDbConnection();
+            return $row;
+        }
+        catch(PDOException $e){
+            echo "Attenzione errore: ".$e->getMessage();
+            die;
             return null;
         }
     }
@@ -450,6 +496,56 @@ class FDatabase {
         }
     }
 
+    /**
+     * Metodo che aggiunge un nuovo possibile giorno nel db
+     * @param $id, fk booking
+     * @return false|PDOStatement|null
+     */
+    public function insertGiorno ($ad) {
+        try {
+            $this->db->beginTransaction();
+            $id = $this->db->query("INSERT INTO giorno (id) VALUES($id);");
+            $this->db->commit();
+            $this->closeDbConnection();
+            return $id;
+
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
+     * Funzione utilizzata per ritornare gli account
+     * Utilizzata nella pagina admin
+     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @return array|null
+     */
+    public function loadAcc () {
+        try {
+            $query = "SELECT * FROM account ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;        //nessuna riga interessata. return null
+            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            } else {
+                $result = array();                         //nel caso in cui piu' righe fossero interessate
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
+                while ($row = $stmt->fetch())
+                    $result[] = $row;                    //ritorna un array di righe.
+            }
+            return array($result, $num);
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
 
     /**
      * Funzione utilizzata per ritornare l'account specificato.
@@ -550,6 +646,34 @@ class FDatabase {
     }
 
     /**
+     * Funzione utilizzata per ritornare solamente le partite attive
+     * @return array|mixed|null
+     */
+    public function loadBooking () {
+        try {
+            $query = "SELECT * FROM prenotazione ;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;        //nessuna riga interessata. return null
+            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            } else {
+                $result = array();                         //nel caso in cui piu' righe fossero interessate
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
+                while ($row = $stmt->fetch())
+                    $result[] = $row;                    //ritorna un array di righe.
+            }
+            return $result;
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
      * Funzione utilizzata per ritornare lo user specificato.
      * Utilizzata nella pagina admin
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
@@ -572,6 +696,27 @@ class FDatabase {
                     $result[] = $row;                    //ritorna un array di righe.
             }
             return array($result, $num);
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
+     * Metodo che restituisce il numero di righe interessate dalla query
+     * @return int|null
+     */
+    public function rowsPrenotazione ()
+    {
+        try {
+            $this->db->beginTransaction();
+            $query = "SELECT * FROM prenotazione;";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            $this->closeDbConnection();
+            return $num;
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();

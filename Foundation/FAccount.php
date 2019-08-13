@@ -111,6 +111,42 @@ class FAccount {
     }
 
     /**
+     * Funzione ch permette la load dell'utente in base all'username
+     * @param string $username dell'user
+     * @return object $user
+     */
+    public static function loadByUsername($username){
+        $sql="SELECT * FROM ".static::getTables()." WHERE username='".$username."';";
+        $db=FDatabase::getInstance();
+        $result=$db->loadSingle($sql);
+        if($result!=null){
+            $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+            $acc->setId($result['id']);
+            $acc->setActivate($result['activate']);
+            return $acc;
+        }
+        else return null;
+    }
+
+    /**
+     * Funzione ch permette la load dell'utente in base all'username
+     * @param string $username dell'user
+     * @return object $user
+     */
+    public static function loadById($id){
+        $sql="SELECT * FROM ".static::getTables()." WHERE idAcc='".$id."';";
+        $db=FDatabase::getInstance();
+        $result=$db->loadSingle($sql);
+        if($result!=null){
+            $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+            $acc->setId($result['id']);
+            $acc->setActivate($result['activate']);
+            return $acc;
+        }
+        else return null;
+    }
+
+    /**
      * Funzione che permette di verificare se esiste un account nel database
      * @param  $id valore di cui verificare la presenza
      * @param $field colonna su ci eseguire la verifica

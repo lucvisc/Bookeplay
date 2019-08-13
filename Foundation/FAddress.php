@@ -89,6 +89,22 @@ class FAddress {
         }
         return $address;
     }
+    /**
+     * Permette la load sul db
+     * @param int l'id dell'oggetto indirizzo
+     * @return object $address indirizzo
+     */
+    public static function loadByIdAccount($id){
+        $sql="SELECT * FROM ".static::getTables()." WHERE idAcc=".$id.";";
+        $db=FDatabase::getInstance();
+        $result=$db->loadsingle($sql);
+        if($result!=null){
+            $address=new EAddress($result['idAcc'],$result['Comune'], $result['Provincia'], $result['CAP'],$result['Via'],$result['NumCivico']);
+            $address->setId($result['id']);
+            return $address;
+        }
+        else return null;
+    }
 
     /**
      * Funzione che permette di verificare se esiste un indirizzo nel database
@@ -132,82 +148,6 @@ class FAddress {
         if($result) return true;
         else return false;
     }
-
-
-/*
-    /**
-     * Funzione ch permette la load dell comune
-     * @param string $comune dell'user di riferimento
-     * @return object $user
-     */
- /*   public static function loadByComune($comune){
-        $sql="SELECT * FROM ".static::getTables()." WHERE Comune='".$comune."';";
-        $db=FDatabase::getInstance();
-        $result=$db->loadSingle($sql);
-        if($result!=null){          //:idAcc,:Comune,:Provincia,:CAP,:Via,:NumCivico
-            $addr=new EAddress($result['Comune'], $result['Provincia'],$result['CAP'],$result['Via'], $result['NumCivico']);
-            $addr->setId($result['id']);
-            return $addr;
-        }
-        else return null;
-    }
-
-    /**
-     * Funzione ch permette la load dell'indirizzo in base al paramentro id
-     * @param int $id dell'account che fa riferimento ad un utente
-     * @return object $addr
-     */
-/*    public static function loadById($id){
-        $sql="SELECT * FROM ".static::getTables()." WHERE id=".$id.";";
-        $db=FDatabase::getInstance();
-        $result=$db->loadSingle($sql);
-        if($result!=null){
-            $addr=new EAddress($result['Comune'], $result['Provincia'],$result['CAP'],$result['Via'], $result['NumCivico']);
-            $addr->setId($result['id']);
-            return $addr;
-        }
-        else return null;
-    }
-
-    public static function loadByProvincia($provincia){
-        $sql="SELECT * FROM ".static::getTables()." WHERE Provincia=".$provincia.";";
-        $db=FDatabase::getInstance();
-        $result=$db->loadSingle($sql);
-        if($result!=null){
-            $addr=new EAddress($result['Comune'], $result['Provincia'],$result['CAP'],$result['Via'], $result['NumCivico']);
-            $addr->setId($result['id']);
-            return $addr;
-        }
-        else return null;
-    }
-
-    /**
-     * Funzione che permette la delete dell'utente in base all'id
-     * @param int $id dell'utente che si vuole eliminare
-     * @return bool
-     */
- /*   public static function deleteAddress($id){
-        $sql="DELETE FROM ".static::getTables()." WHERE idAcc=".$id.";";
-        $db=FDatabase::getInstance();
-        if($db->delete($sql)) return true;
-        else return false;
-    }
-
-
-    /**
-     * Funzione che permette di modificare una generico attributo dell'indirizzo
-     * @param int $id identificativo dell'account a cui fa riferimento un utente che vuole effettuare la modifica
-     * @param string $field campo da modificare
-     * @param string $newvalue nuovo valore da inserire nel DB
-     * @return bool
-     */
- /*   public static function UpdateAddress($id,$field,$newvalue){
-        $sql="UPDATE ".static::getTables()." SET ".$field."='".$newvalue."' WHERE idAcc=".$id.";";
-        $db=FDatabase::getInstance();
-        if($db->update($sql)) return true;
-        else return false;
-    }
- */
 
 }
 ?>
