@@ -15,7 +15,7 @@ class FAddress {
     /**
      * tabella di riferimento
      */
-    private static $tables="Address";
+    private static $tables="indirizzo";
     /**
      * valori della tabella
      */
@@ -88,6 +88,22 @@ class FAddress {
             }
         }
         return $address;
+    }
+    /**
+     * Permette la load sul db
+     * @param int l'id dell'oggetto indirizzo
+     * @return object $address indirizzo
+     */
+    public static function loadByIdAccount($id){
+        $sql="SELECT * FROM ".static::getTables()." WHERE idAcc=".$id.";";
+        $db=FDatabase::getInstance();
+        $result=$db->loadsingle($sql);
+        if($result!=null){
+            $address=new EAddress($result['idAcc'],$result['Comune'], $result['Provincia'], $result['CAP'],$result['Via'],$result['NumCivico']);
+            $address->setId($row['id']);
+            return $address;
+        }
+        else return null;
     }
 
     /**
