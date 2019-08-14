@@ -15,16 +15,16 @@ class FAddress {
     /**
      * tabella di riferimento con i campi per lo store
      */
-    private static $tables="indirizzo (`idAcc`,`Comune`,`Provincia`,`CAP`,`Via`,`NumCivico`)";
+    private static $tables="indirizzo (`email`,`Comune`,`Provincia`,`CAP`,`Via`,`NumCivico`)";
     /**
      * valori della tabella
      */
-    private static $values="(:idAcc,:Comune,:Provincia,:CAP,:Via,:NumCivico)";
+    private static $values="(:email,:Comune,:Provincia,:CAP,:Via,:NumCivico)";
 
     public function __construct(){}
 
     public static function bind(PDOStatement $stmt, EAddress $addr) {
-        $stmt->bindValue(':idAcc', EAddress::getID(), PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
+        $stmt->bindValue(':email', $addr->getID(), PDO::PARAM_STR);// l'id è posto a NULL poiché viene assegnato automaticamente
         $stmt->bindValue(':Comune', $addr->getComune(), PDO::PARAM_STR);
         $stmt->bindValue(':Provincia', $addr->getProvincia(), PDO::PARAM_STR);
         $stmt->bindValue(':CAP', $addr->getCap(), PDO::PARAM_STR);
