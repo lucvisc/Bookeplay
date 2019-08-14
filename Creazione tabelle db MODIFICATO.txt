@@ -3,38 +3,37 @@ CREATE DATABASE bookeplay;
 USE bookeplay;
 
 CREATE TABLE IF NOT EXISTS  `Account` (
-  `id` int(4) not null AUTO_INCREMENT,
+  `email` varchar(45) NULL UNIQUE,
   `username` varchar(45)  NOT NULL UNIQUE,
   `password` VARCHAR(45) not NULL,
-  `email` varchar(45) NULL,
   `telnumb` char(10) NOT NULL,
   `conto` float NULL,
   `descrizione` varchar(150) NULL,
   `activate` Boolean not null,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`email`) )
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Utente` (
-  `idAcc` int(4) not null,
+  `email` varchar(45) not null,
   `name` VARCHAR(45) not NULL,
   `surname` VARCHAR(45) not NULL,
   `dataNascita` DATE NULL,
   `gender` ENUM('M','F') NULL,
   `tipo` enum('registrato', 'admin'),
-  PRIMARY KEY (idAcc),
-  FOREIGN KEY (idAcc) REFERENCES Account(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (email),
+  FOREIGN KEY (email) REFERENCES Account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Indirizzo` (
-  `idAcc` int(4) not NULL,
+  `email` varchar(45) not NULL,
   `Comune` VARCHAR(45) not NULL,
   `Provincia` varchar(45) NULL,
   `CAP` CHAR(5) not NULL,
   `Via` varchar(45) not null,
   `NumCivico` char(3) not null,
   PRIMARY KEY (`Via`, `CAP`),
-  FOREIGN KEY (idAcc) REFERENCES Utente(`idAcc`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (email) REFERENCES Utente(`email`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
@@ -67,19 +66,19 @@ ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Pren_creata` (
   `idPren` int(5) not null,
-  `idAcc` int(4) not null,
-   PRIMARY KEY (`idPren`, `idAcc`),
+  `username` varchar(45) not null,
+   PRIMARY KEY (`idPren`, `username`),
    FOREIGN KEY (idPren) REFERENCES Prenotazione(`idP`) ON DELETE CASCADE ON UPDATE CASCADE,
-   FOREIGN KEY (idAcc) REFERENCES Account(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+   FOREIGN KEY (username) REFERENCES Account(`username`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Pren_Partecipa` (
   `idPren` int(5) not null,
-  `idAcc` int(4) not null,
-   PRIMARY KEY (`idPren`, `idAcc`),
+  `username` varchar(45) not null,
+   PRIMARY KEY (`idPren`, `username`),
    FOREIGN KEY (idPren) REFERENCES Prenotazione(`idP`) ON DELETE CASCADE ON UPDATE CASCADE,
-   FOREIGN KEY (idAcc) REFERENCES Account(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+   FOREIGN KEY (username) REFERENCES Account(`username`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
