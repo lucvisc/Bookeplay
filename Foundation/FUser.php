@@ -18,7 +18,7 @@ class FUser {
     /**
      * Valori della tabella
      */
-    private static $values="(:idAcc,:name,:surname,:dataNascita,:gender,:tipo)";
+    private static $values="(:mail,:name,:surname,:dataNascita,:gender,:tipo)";
 
     public function __construct(){}
 
@@ -28,7 +28,7 @@ class FUser {
      * @param EUser $user i cui dati devono essere inseriti nel DB
      */
     public static function bind($stmt,EUser $user){
-        $stmt->bindValue(':idAcc', EUser::getID(), PDO::PARAM_INT);// l'id è posto a NULL poiché viene assegnato automaticamente
+        $stmt->bindValue(':mail', $user->getID(), PDO::PARAM_STR);// l'id è posto a NULL poiché viene assegnato automaticamente
         $stmt->bindValue(':name', $user->getName(), PDO::PARAM_STR);
         $stmt->bindValue(':surname', $user->getSurname(), PDO::PARAM_STR);
         $stmt->bindValue(':dataNascita', $user->getDatanasc(), PDO::PARAM_STR);

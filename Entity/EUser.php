@@ -20,7 +20,7 @@ class EUser {
     /**
      * @var integer
      */
-    private static $idacc;
+    private $email;
  	/**
      * @AttributeType string 
      */
@@ -48,7 +48,8 @@ class EUser {
 
  	//Dichiarazione del costruttore 
  	function __construct(string $nam=null, string $surna=null, string $dat, string $gend=null, EAddress $addr=null, EAccount $acc=null){
- 		$this->name = $nam;
+ 	    $this->email=null;
+ 	    $this->name = $nam;
  		$this->surname = $surna;
  		$this->datanasc = $dat;
  		$this->gender = $gend;
@@ -56,12 +57,12 @@ class EUser {
  		$this->account = $acc;
  	}
 
- 	public static function setID (int $id){
- 	    self::$idacc=$id;//prende in ingresso l'id dell'ultima istanza di account e lo registra nell'attributo di classe $idacc
+ 	public function setID (string $mail){
+ 	    $this->email=$mail;//prende in ingresso l'id dell'ultima istanza di account e lo registra nell'attributo di classe $idacc
     }
 
- 	public static function getID(){
- 	    return self::$idacc;//restituisce l'id dell'istanza utente creata con il corrispondente account
+ 	public function getID(){
+ 	    return $this->email;//restituisce l'id dell'istanza utente creata con il corrispondente account
     }
     /*
      public function __toString(){
