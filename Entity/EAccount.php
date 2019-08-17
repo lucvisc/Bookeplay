@@ -203,6 +203,7 @@ class EAccount {
 		$cont= $this->getConto();
 		$cont += $cifra;
 		$this->setConto($cont);
+		return $cont;
 	}
 
 	/**

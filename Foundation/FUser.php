@@ -98,6 +98,23 @@ class FUser {
     }
 
     /**
+     * Permette la load sul db
+     * @param int l'id dell'oggetto indirizzo
+     * @return object $address indirizzo
+     */
+    public static function loadByIdAccount($id){
+        $sql="SELECT * FROM ".static::getTables()." WHERE idAcc=".$id.";";
+        $db=FDatabase::getInstance();
+        $result=$db->loadsingle($sql);
+        if($result!=null){
+            $us=new EUser($result['idAcc'], $result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
+            $us->setId($result['id']);
+            return $us;
+        }
+        else return null;
+    }
+
+    /**
      * Funzione che permette di verificare se esiste un account nel database
      * @param  $id valore di cui verificare la presenza
      * @param $field colonna su ci eseguire la verifica
@@ -163,95 +180,63 @@ class FUser {
         return $us;
     }
 
-    /*/**
-     * Funzione ch permette la load dell'utente in base al paramentro id
-     * @param int $id dell'user
-     * @return object $user
+    /**
+     * Funzione che permette di poter reperire dal database eventuali istanze di oggetti che soddisfano i dati immessi
+     * in input nella form di login. L'utente recuperato potrà essere utente e admin.
+     * Viene ritornato l'utente utente/admin
+     * @param $email valore dell'email immessa
+     * @param $pass valore della password immessa
+     * @return object|null utente/admin
      */
-    /*public static function loadById($id){
-        $sql="SELECT * FROM ".static::getTables()." WHERE idAcc=".$id.";";
-        $db=FDatabase::getInstance();
-        $result=$db->loadSingle($sql);
-        if($result!=null){
-            $user=new EUser($result['idAcc'],$result['name'], $result['surname'],$result['dataNascita'],$result['gender'], $result['tipo']);
-            $user->setId($result['id']);
-            return $user;
+    public static function loadLogin ($email, $pass) {
+    $utente = null;
+    $db=FDatabase::getInstance();
+    $result=$db->loadVerificaAccesso($email, $pass);
+         if (isset($result)){
+            $tra = FUser::loadByField("emailUtente" , $result["email"]);
+            $admin = static::loadByField("email", $result["email"]);
+            if ($tra)
+            $utente = $tra;
+            elseif ($admin)
+            $utente = $admin;
+         }
+    return $utente;
+    }
+
+
+    /**
+     * Metodo che  permette di ritornare gli utenti del db, filtrandoli attraverso una stringa in input,
+     * la quale può contenere solo il nome, solo il cognome o nome e cognome dell'utente interessato
+     * @param $string valore inserito nella barra di ricerca dell'admin
+     * @return object|null $utente Utenteloggato
+     */
+    public static function loadUtentiByString($string){
+        $utente = null;
+        $toSearch = null;
+        // attraverso gli spazi divido le parole immesse nella barra di ricerca
+        $pieces = explode(" ", $string);
+        // prendo l'ultimo elemento dell'array e se questo coincide con il primo elemento, so che devo cercare il match
+        // o solo con il nome o solo con il cognome
+        $lastElement = end($pieces);
+        if ($pieces[0] == $lastElement) {
+            $toSearch = 'nome';
         }
-        else return null;
-    }
-
-    /**
-     * Funzione ch permette la load dell'utente in base all'username
-     * @param string $username dell'user di riferimento
-     * @return object $user
-     */
-   /* public static function loadByUsername($username){
-        $sql=cercaUtenteByUsername();
         $db=FDatabase::getInstance();
-        $result=$db->loadSingle($sql);
-        if($result!=null){
-            $user=new EUser($result['idAcc'],$result['name'], $result['surname'],$result['dataNascita'],$result['gender'], $result['tipo']);
-            $user->setId($result['id']);
-            return $user;
+        list ($result, $rows_number)=$db->utentiByString($pieces, $toSearch);
+        if(($result!=null) && ($rows_number == 1)) {
+            $utente= new EUser($result['idAcc'],$result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
         }
-        else return null;
-    }
-
-    /**
-     * Funzione che permette la delete dell'utente in base all'id
-     * @param int $id dell'utente che si vuole eliminare
-     * @return bool
-     */
-   /* public static function deleteUser($id){
-        $sql="DELETE FROM ".static::getTables()." WHERE idAcc=".$id.";";
-        $db=FDatabase::getInstance();
-        if($db->delete($sql)) return true;
-        else return false;
-    }
-
-    /**
-     * Funzione che permette di modificare la data di nascita
-     * di un certo utente
-     * @param int $id dell'utente che vuole effettuare la modifica
-     * @param date $dataNa data di nascita "nuova"
-     * @return bool
-     */
-   /* public static function UpdateDatanascita($id,$dataNa){
-        $field="dataNascita";
-        if(FUser::update($id,$field,$dataNa)) return true;
-        else return false;
-    }
-
-    /**
-     * Funzione che permette di modificare una generico attributo dell'utente
-     * @param int $id dell'utente che vuole effettuare la modifica
-     * @param string $field campo da modificare
-     * @param string $newvalue nuovo valore da inserire nel DB
-     * @return bool
-     */
-   /* public static function UpdateUser($id,$field,$newvalue){
-        $sql="UPDATE ".static::getTables()." SET ".$field."='".$newvalue."' WHERE idAcc=".$id.";";
-        $db=FDatabase::getInstance();
-        if($db->update($sql)) return true;
-        else return false;
-    }
-
-    /**
-     * Istanzia l'oggetto utente dai risultati della query.
-     * @param row tupla restituita dal dbms
-     * @return l'oggetto utente
-     */
-    /*public function createObjectFromRow($row)
-    {
-        $utente = new EUser(); //costruisce l'istanza dell'oggetto
-        $utente->setName($row['name']);
-        $utente->setSurname($row['surname']);
-        $utente->setDatanasc($row['datanasc']);
-        $utente->setGender($row['gender']);
-        //$utente->setAddress($row['address']);
-       // $utente->setAccount($row['account']);
-
+        else {
+            if(($result!=null) && ($rows_number > 1)){
+                $utente = array();
+                for($i=0; $i<count($result); $i++){
+                    $utente[]=new EUser($result['idAcc'],$result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
+                }
+            }
+        }
         return $utente;
-    }*/
+    }
+
+
 }
 ?>
