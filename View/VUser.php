@@ -7,12 +7,11 @@ require_once 'include.php';
  * @package View
  *
  */
-class VUtente {
+class VUser {
 
     private $smarty;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->smarty = ConfSmarty::configuration();  //configurazione di smarty
     }
 
