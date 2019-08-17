@@ -7,7 +7,7 @@
 
 require_once 'include.php';
 
-class VGestioneAnnunci {
+class VGestionePartite {
 
     private $smarty;
 
@@ -17,6 +17,70 @@ class VGestioneAnnunci {
     public function __construct()
     {
         $this->smarty = StartSmarty::configuration();
+    }
+    /**
+     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=giorno
+     * @return mixed|null
+     */
+    public function getGiorno(){
+        $value = null;
+        if (isset($_POST['giorno']))
+            $value = $_POST['giorno'];
+        return $value;
+    }
+
+    /**
+     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=fascia_oraria
+     * @return mixed|null
+     */
+    public function getFasciaOraria(){
+        $value = null;
+        if (isset($_POST['facia_oraria']))
+            $value = $_POST['fascia_oraria'];
+        return $value;
+    }
+
+    /**
+     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=livello
+     * @return mixed|null
+     */
+    public function getLivello(){
+        $value = null;
+        if (isset($_POST['livello']))
+            $value = $_POST['livello'];
+        return $value;
+    }
+
+    /**
+     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=num_gioc
+     * @return mixed|null
+     */
+    public function getNumeroGiocatori(){
+        $value = null;
+        if (isset($_POST['num_gioc']))
+            $value = $_POST['num_gioc'];
+        return $value;
+    }
+
+    /**
+     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=old_fascia_oraria
+     * @return mixed|null
+     */
+    public function getOldFasciaOraria(){
+        $value = null;
+        if (isset($_POST['old_fascia_oraria']))
+            $value = $_POST['old_fascia_oraria'];
+        return $value;
+    }
+    /**
+     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=new_fascia_oraria
+     * @return mixed|null
+     */
+    public function getNewFasciaOraria(){
+        $value = null;
+        if (isset($_POST['new_fascia_oraria']))
+            $value = $_POST['new_fascia_oraria'];
+        return $value;
     }
 
     /**
@@ -49,6 +113,17 @@ class VGestioneAnnunci {
             $this->smarty->assign('conto', $acc->getConto());
             $this->smarty->assign('userlogged', "loggato");
             $this->smarty->display('crea-partita.tpl');
+    }
+
+    /**
+     * Funzione che si occupa di far visualizzare la pagina di fine creazione della prenotazione
+     * @param $idPren id della campagna appena creata.
+     */
+
+    public function showFinePrenotazione($idPren){
+        if(CUtente::isLogged()) $this->smarty->assign('userlogged',$_SESSION['username']);
+        $this->smarty->assign('idPren',$idPren);
+        $this->smarty->display('finePrenotazione.tpl');
     }
 
     /**
@@ -124,7 +199,7 @@ class VGestioneAnnunci {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $part,$img) {
+    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $idPren,$img) {
         //list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         //$this->smarty->assign('pic64', $pic64);
@@ -134,6 +209,24 @@ class VGestioneAnnunci {
         $this->smarty->assign('conto',$acc->getConto());
         $this->smarty->assign('array',$part);
         $this->smarty->display('prenotazione-effettuata.tpl');
+    }
+
+    /**
+     * Funzione utile per gestire i vari errori possibili dovuti dall'inserimento dei dati nella form
+     * @param $error
+     */
+    public function statoForm($error) {
+        switch ($error) {
+            case "no" :
+                $this->smarty->assign('successo', "si");
+                break;
+            case "no_facia_oraria":
+                $this->smarty->assign('no_fascia_oraria', "errore");
+                break;
+            case "no_giorno":
+                $this->smarty->assign('giorno', "errore");
+                break;
+        }
     }
 
 }

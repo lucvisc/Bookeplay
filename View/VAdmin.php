@@ -17,14 +17,26 @@ class VAdmin {
     }
 
     /**
-     * Restituisce l'username dell'utente da bloccare/sbloccare dal campo hidden di input
+     * Restituisce l'username dell'utente da bloccare/sbloccare dal campodi input
      * Inviato con metodo post
-     * @return string contenente l'email dell'utente
+     * @return string contenente l'username dell'utente
      */
     function getUsername(){
         $value = null;
         if (isset($_POST['username']))
             $value = $_POST['username'];
+        return $value;
+    }
+
+    /**
+     * Restituisce l'email dell'utente da bloccare/sbloccare dal campodi input
+     * Inviato con metodo post
+     * @return string contenente l'email dell'utente
+     */
+    function getEmail(){
+        $value = null;
+        if (isset($_POST['email']))
+            $value = $_POST['email'];
         return $value;
     }
 
@@ -73,7 +85,7 @@ class VAdmin {
      * @param $giorno associazione tra giorno e tutte le fasce orarie
      * @throws SmartyException
      */
-    public function showCreaCancella(EGioeno $giorno) {
+    public function showCrea(EGioeno $giorno) {
         $this->smarty->assign('giorno',$giorno);
         $this->smarty->display('adminCrea.tpl');
     }
