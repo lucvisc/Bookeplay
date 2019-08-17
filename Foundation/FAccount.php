@@ -22,11 +22,11 @@ class FAccount {
     /**
      * @Tabella di riferimento con campi per l'inserimento
      */
-    private static $tables = "account (`username`,`password`,`email`,`telnumb`,`conto`,`descrizione`,`activate`)";
+    private static $tables = "account (`email`,`username`,`password`,`telnumb`,`conto`,`descrizione`,`activate`)";
     /**
      * campi della tabella
      */
-    private static $values = "(:username,:password,:email,:telnumb,:conto,:descrizione,:activate)";
+    private static $values = "(:email,:username,:password,:telnumb,:conto,:descrizione,:activate)";
 
     public function __construct(){}
 
@@ -39,9 +39,9 @@ class FAccount {
      */
     public static function bind($stmt, EAccount $acc) {
         //non c'è il bind di id erchè la query di insert non necessita del campo id visto che nel db è auto-incrementale e quindi viene inserito automaticamente dal db
+        $stmt->bindValue(':email', $acc->getEmail(), PDO::PARAM_STR);
         $stmt->bindValue(':username', $acc->getUsername(), PDO::PARAM_STR);
         $stmt->bindValue(':password', $acc->getPassword(), PDO::PARAM_STR);//ricorda di "collegare" la giusta variabile al bind
-        $stmt->bindValue(':email', $acc->getEmail(), PDO::PARAM_STR);
         $stmt->bindValue(':telnumb', $acc->getTelnumber(), PDO::PARAM_STR);
         $stmt->bindValue(':conto', $acc->getConto(), PDO::PARAM_STR);
         $stmt->bindValue(':descrizione', $acc->getDescrizione(), PDO::PARAM_STR);
@@ -75,14 +75,15 @@ class FAccount {
      * Metodo che permette la store di un Account
      * @param $utente Account da salvare
      */
-    public static function store($acc, EUser $obj1, EAddress $obj2)
+    public static function store(EAccount $acc, EUser $obj1, EAddress $obj2)
     {
         $db=FDatabase::getInstance();
-        $id=$db->storeDB(static::getClass() ,$acc);
-        EAddress::setID($id);
-        FAddress::store($obj2);
-        EUser::setID($id);
+        $db->storeDB(static::getClass() ,$acc);
+        $id=$acc->getEmail();
+        $obj1->setID($id);
         FUser::store($obj1);
+        $obj2->setID($id);
+        FAddress::store($obj2);
     }
 
     /**

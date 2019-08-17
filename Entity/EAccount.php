@@ -17,11 +17,7 @@ require_once 'include.php';
 
  //Implementazione della classe Account 
 class EAccount {
-    private static $num=1;
-	/**
-     * @AttributeType string 
-     */
-	private $id;
+
 	/**
      * @AttributeType string 
      */
@@ -53,8 +49,7 @@ class EAccount {
 
 
 	//Dichiarazione del costruttore 
-	function __construct( string $un=null ,string $pass=null, string $ema=null, string $tn=null , float $cont=null,string $descr=null,  int $status=null){
-	    $this->id=null;
+	function __construct(string $ema=null, string $un=null ,string $pass=null, string $tn=null , float $cont=null,string $descr=null,  int $status=null){
 	    $this->username = $un;
 		$this->password = $pass;
 		$this->email = $ema;
@@ -62,21 +57,9 @@ class EAccount {
 		$this->descrizione = $descr;
 		$this->conto = $cont;
 		$this->activate = $status;
-		self::increment();
 	}
-
-	private static function increment(){
-	    self::$num++;
-    }
 
 	//Dichiarazione dei metodi Get
-	/**
-     * @access public
-     * @return string
-     */
-	public function getId(){
-		return $this->id;
-	}
 	/**
      * @access public
      * @return string
@@ -136,13 +119,6 @@ class EAccount {
     //    $i = EAccount::generaStringaRandom(10);
 	//	$this->id =$i;
 	//}
-    /**
-     * @access public
-     * @param $ID int
-     */
-    public function setId(int $ID){
-        $this->id =$ID;
-    }
 
 	/**
      * @access public

@@ -19,9 +19,9 @@ require_once 'include.php';
 
 class EAddress {
     /**
-     * @var integer
+     * @var string
      */
-    private static $idadr;
+    private $email;
 	/**
      * @AttributeType string 
      */
@@ -46,19 +46,20 @@ class EAddress {
 
 	//Dichiarazione del costruttore 
 	function __construct(string $c=null, string $p=null, string $ca=null,  string $v=null, string $n=null){
-		$this->comune = $c;
+		$this->email=null;
+	    $this->comune = $c;
 		$this->provincia = $p;
 		$this->cap = $ca;
 		$this->via = $v;
 		$this->ncivico = $n;
 	}
 
-    public static function setID (int $id){
-        self::$idadr=$id;//prende in ingresso l'id dell'ultima istanza di account e lo registra nell'attributo di classe $idacc
+    public function setID (string $mail){
+        $this->email=$mail;//prende in ingresso l'id dell'ultima istanza di account e lo registra nell'attributo di classe $idacc
     }
 
-    public static function getID(){
-        return self::$idadr;//restituisce l'id dell'istanza utente creata con il corrispondente account
+    public function getID(){
+        return $this->email;//restituisce l'id dell'istanza utente creata con il corrispondente account
     }
 
 	//Dichichiarazione dei metodi Get

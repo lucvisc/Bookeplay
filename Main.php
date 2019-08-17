@@ -2,7 +2,7 @@
 
 require_once 'include.php';
 
-$acc=new EAccount("bla", " ", "bli", "0123456789", 0, "blu", "1");
+$acc=new EAccount("bla", "blu", "bli", "0123456789", 0, "blu", "1");
 $adr=new EAddress("Pescara", "PE", "65120", "Via sela", "134");
 $use=new EUser("blabla", "blibli", "00/00/2000", "M", $adr, $acc);
 FAccount::store($acc, $use, $adr);
