@@ -8,16 +8,15 @@
  */
 
 require_once "include.php";
-class FMediaUtente
-{
+class FMediaUser {
     /** nome della classe */
-    private static $class = "FMediaUtente";
+    private static $class = "FMediaUser";
 
     /** tabella con la quale opera */
-    private static $table="mediautente";
+    private static $table="mediauser";
 
     /** valori della tabella */
-    private static $values="(:id,:nome,:type,:emailutente,:immagine)";    /**il primo id è quello di Emedia,il secondo di EMediaUtente**/
+    private static $values="(:id,:filename,:type,:emailutente,:immagine)";    /**il primo id è quello di Emedia,il secondo di EMediaUtente**/
 
     /** costruttore */
     public function __construct(){}
