@@ -60,7 +60,7 @@ class EMedia
     /**
      * @return string email utente
      */
-    public function getEmailUte()
+    public function getEmailUser()
     {
         return $this->emailute;
     }
@@ -100,7 +100,7 @@ class EMedia
     /**
      * @param $email string email utente
      */
-    public function setMailUte($email)
+    public function setEmailUser($email)
     {
         $this->emailUser = $email;
     }
