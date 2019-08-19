@@ -89,7 +89,7 @@ class FMediaUser {
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);
         if(($result!=null) && ($rows_number == 1)) {
-            $user=new EMediaUtente($result['nome'],$result['emailutente']);
+            $user=new EMediaUtente($result['filename'],$result['emailutente']);
             $user->setType($result['type']);
             $user->setData($result['immagine']);
             $user->setId($result['id']);
@@ -98,7 +98,7 @@ class FMediaUser {
             if(($result!=null) && ($rows_number > 1)){
                 $user = array();
                 for($i=0; $i<count($result); $i++){
-                    $user[]=new EMediaUtente($result[$i]['nome'],$result[$i]['emailutente']);
+                    $user[]=new EMediaUtente($result[$i]['filename'],$result[$i]['emailutente']);
                     $user[$i]->setType($result[$i]['type']);
                     $user[$i]->setData($result[$i]['immagine']);
                     $usser[$i]->setId($result[$i]['id']);
