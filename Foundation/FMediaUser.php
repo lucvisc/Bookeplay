@@ -3,7 +3,7 @@
 
 /**
  * La classe FMediaUtente fornisce query per gli oggetti EMediaUtente (foto riguardanti l'utente)
- * @author Gruppo 8
+ * @author Luca, Catriel
  * @package Foundation
  */
 

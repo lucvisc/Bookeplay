@@ -13,8 +13,7 @@
  */
 require_once "include.php";
 
-class EMedia
-{
+class EMediaUser {
     /**
      * id identificativo del media
      * @AttributeType int
