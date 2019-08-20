@@ -26,7 +26,7 @@ class FBooking{
     /**
      * campi della tabella
      */
-    private static $values = "(:idbooking,:quota,:giornobooking,:partita,:giornobooking)";
+    private static $values = "(:idP,:quota,:livello,:note)";
 
 
     public function __construct(){}
@@ -39,11 +39,10 @@ class FBooking{
 
     public static function bind($stmt, EBooking $booking)
     {
-        $stmt->bindValue(':idbooking',NULL, PDO::PARAM_INT); //l'id è posto a NULL perche viene incrementato automaticamente dal DB
-        $stmt->bindValue(':giornobooking', $booking->getGiornobooking(), PDO::PARAM_STR);
+        $stmt->bindValue(':idP',NULL, PDO::PARAM_INT); //l'id è posto a NULL perche viene incrementato automaticamente dal DB
         $stmt->bindValue(':quota', $booking->getQuota(), PDO::PARAM_STR);
-        $stmt->bindValue(':partecipanti', $booking->getPartecipanti(), PDO::PARAM_STR);
-        $stmt->bindValue(':partita', $booking->getPartita(), PDO::PARAM_STR);
+        $stmt->bindValue(':livello', $booking->getLivello(), PDO::PARAM_STR);
+        $stmt->bindValue(':note', $booking->getNote(), PDO::PARAM_STR);
     }
 
     /**
@@ -76,7 +75,7 @@ class FBooking{
      * Metodo che permette la store di una prenotazione
      * @param $boo prenotazione da salvare
      */
-    public static function store($boo)
+    public static function store(EBooking $boo) //, EGiorno $obj1, EPartita $obj2
     {
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$boo);
@@ -94,13 +93,13 @@ class FBooking{
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
         if(($result!=null) && ($rows_number == 1)) {        //:idbooking,:quota,:giornobooking,:partita,:giornobooking
-            $boo=new EBooking($result['idbooking'],$result['quota'], $result['giornobooking'], $result['partita'],$result['giornobooking']);
+            $boo=new EBooking($result['idP'],$result['quota'], $result['livello'], $result['note']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                     $boo=new EBooking($result['idbooking'],$result['quota'], $result['giornobooking'], $result['partita'],$result['giornobooking']);
+                    $boo=new EBooking($result['idP'],$result['quota'], $result['livello'], $result['note']);
                 }
             }
         }
@@ -157,118 +156,19 @@ class FBooking{
         $db=FDatabase::getInstance();
         list ($result, $rows_number)=$db->getbooking();
         if(($result!=null) && ($rows_number == 1)) {        //:idbooking,:quota,:giornobooking,:partita,:giornobooking
-            $boo=new EBooking($result['idbooking'],$result['quota'], $result['giornobooking'], $result['partita'],$result['giornobooking']);
+            $boo=new EBooking($result['idP'],$result['quota'], $result['livello'], $result['note']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                    $boo=new EBooking($result['idbooking'],$result['quota'], $result['giornobooking'], $result['partita'],$result['giornobooking']);
+                    $boo=new EBooking($result['idP'],$result['quota'], $result['livello'], $result['note']);
                 }
             }
         }
         return $boo;
     }
 
-
-
-
-
-
-
-/////////OLD SCRIPT///////////
-
-
-
-
-
-    /*/**
-     * Funzione ch permette la load della prenotazione in base al paramentro id
-     * @param int $id della prenotazione di riferimento
-     * @return object $idbooking
-     */
-   /* public static function loadBookingById($idbooking) {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE id=" . $idbooking . ";";
-        $db = FDatabase::getInstance();
-        $result = $db->loadSingle($sql);
-        if ($result != null) {
-            $booking = new EBooking($result['idbooking'], $result['giornobooking'], $result['quota'], $result['partecipanti'], $result['partita']);
-            $booking->setId($result['id']);
-            return $booking;
-        } else return null;
-    }
-
-    /**
-     * Funzione che permette la load della prenotazione in base al giorno
-     * @param string $giornobooking della prenotazione di riferimento
-     * @return object $giornobooking
-     */
-   /* public static function loadBookingByGiorno($giornobooking) {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE giorno='" . $giornobooking . "';";
-        $db = FDatabase::getInstance();
-        $result = $db->loadSingle($sql);
-        if ($result != null) {
-            $booking = new EBooking($result['idbooking'], $result['giornobooking'], $result['quota'], $result['partecipanti'], $result['partita']);
-            $booking->setId($result['id']);
-            return $booking;
-        } else return null;
-    }
-
-    /**
-     * Metodo che restituisce un determinato oggetto di tipo EBooking dal db in base alla fascia di prenotazione
-     * @param $fascia è la fascia oraria di partenza
-     * @return EBooking|null
-     */
-   /* public static function loadByFascia($fascia) {
-        $sql = "SELECT * FROM " . static::getTables() . " WHERE fascia>=" . $fascia . ";";
-        $db = FDatabase::getInstance();
-        $result = $db->loadSingle($sql);
-        if ($result != null) {
-            $booking = new EBooking($result['idbooking'], $result['giornobooking'], $result['quota'], $result['partecipanti'], $result['partita']);
-            $booking->setId($result['id']);
-            return $booking;
-        } else return null;
-    }
-
-    /**
-     * Funzione che permette la delete della prenotazione in base all'id
-     * @param int $id dell'utente che si vuole eliminare
-     * @return bool
-     */
-   /* public static function deleteBooking($id) {
-        $sql = "DELETE FROM " . static::getTables() . " WHERE idP=" . $id . ";";
-        $db = FDatabase::getInstance();
-        if ($db->delete($sql)) return true;
-        else return false;
-    }
-
-    /**
-     * Funzione che permette di modificare una generico attributo della prenotazione
-     * @param int $id della prenotazione che si vuole effettuare la modifica
-     * @param string $field campo da modificare
-     * @param string $newvalue nuovo valore da inserire nel DB
-     * @return bool
-     */
-   /* public static function UpdateBooking($id, $field, $newvalue) {
-        $sql = "UPDATE " . static::getTables() . " SET " . $field . "='" . $newvalue . "' WHERE idP=" . $id . ";";
-        $db = FDatabase::getInstance();
-        if ($db->update($sql)) return true;
-        else return false;
-    }
-
-    /**
-     * Istanzia l'oggetto Booking dai risultati della query.
-     * @param string $row restituita dal dmbs
-     * @return EBooking|obj
-     */
-   /* public function createObjectFromRow($row) {
-        $booking = new Ebooking(); //costruisce l'istanza dell'oggetto
-        $booking->setGiornobooking($row['giornobooking']);
-        $booking->setQuota($row['quota']);
-        $booking->setPartecipanti($row['partecipanti']);
-        $booking->setPartita($row['partita']);
-        return $booking;
-    }  */
 }
 ?>
 
