@@ -28,20 +28,20 @@ class EGiorno {
 
 			//Inizializzazione dell'attributo fasce che contiene gli orari disponibili per un giorno
 			$fasce = array(
-				'08'=>array('fascia'=>'8.00-9.00', 'disp'=>'Disponibile'),
-				'09'=>array('fascia'=>'9.00-10.00', 'disp'=>'Disponibile'),
-				'10'=>array('fascia'=>'10.00-11.00', 'disp'=>'Disponibile'),
-				'11'=>array('fascia'=>'11.00-12.00', 'disp'=>'Disponibile'),
-				'12'=>array('fascia'=>'12.00-13.00', 'disp'=>'Disponibile'),
-				'13'=>array('fascia'=>'13.00-14.00', 'disp'=>'Disponibile'),
-				'14'=>array('fascia'=>'14.00-16.00', 'disp'=>'Disponibile'),
-				'15'=>array('fascia'=>'15.00-16.00', 'disp'=>'Disponibile'),
-				'16'=>array('fascia'=>'16.00-17.00', 'disp'=>'Disponibile'),
-				'17'=>array('fascia'=>'17.00-18.00', 'disp'=>'Disponibile'),
-				'18'=>array('fascia'=>'18.00-19.00', 'disp'=>'Disponibile'),
-				'19'=>array('fascia'=>'19.00-20.00', 'disp'=>'Disponibile'),
-				'20'=>array('fascia'=>'20.00-21.00', 'disp'=>'Disponibile'),
-				'21'=>array('fascia'=>'21.00-22.00', 'disp'=>'Disponibile')	);
+				'8.00-9.00'=>'Disponibile',
+				'9.00-10.00'=>'Disponibile',
+				'10.00-11.00'=>'Disponibile',
+				'11.00-12.00'=>'Disponibile',
+				'11.00-13.00'=>'Disponibile',
+				'13.00-14.00'=>'Disponibile',
+				'14.00-15.00'=>'Disponibile',
+				'15.00-16.00'=>'Disponibile',
+				'16.00-17.00'=>'Disponibile',
+				'17.00-18.00'=>'Disponibile',
+				'18.00-19.00'=>'Disponibile',
+				'19.00-20.00'=>'Disponibile',
+				'20.00-21.00'=>'Disponibile',
+				'21.00-22.00'=>'Disponibile',
 			$this->fasciaoraria = $fasce;
 	}
 
