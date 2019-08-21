@@ -29,25 +29,25 @@ class EBooking {
      * @AttributeType float 
      */
 	private $quota;
-	/**
-     * @AttributeType Array 
-     */
-	private $partecipanti;
     /**
-     * @AttributeType partita
+     * @AttributeType string
      */
-    private $partita;
+    private $livello;
+    /**
+     * @AttributeType string
+     */
+    private $note;
 
 	//Dichiarazione del costruttore 
-	function __construct(string $id=null, EGiorno $gbooking=null, float $quot=null, Array $partecip=null, EPartita $par=null){
+	function __construct(string $id=null, string $liv=null, string $not){
 		$this->idbooking = $id;
-		$this->giornobooking = $gbooking;
-		$this->quota = 50;
-		$this->partecipanti = $partecip;
-		$this->partita = $par;
+        $this->quota = 50;
+        $this->livello = $liv;
+        $this->note= $not;
 	}
 
 	//Dichiarazione dei metodi Get
+
 	/**
      * @access public
      * @return string
@@ -56,13 +56,13 @@ class EBooking {
 		return $this->idbooking;
 	}
 
-	/**
+ /*    /**
      * @access public
      * @return Egiorno 
      */
-	public function getGiornobooking(){
+/*	public function getGiornobooking(){
 		return $this->giornobooking;
-	}
+	}*/
 
 	/**
      * @access public
@@ -71,20 +71,21 @@ class EBooking {
 	public function getQuota(){
 		return $this->quota;
 	}
-	/**
-     * @access public
-     * @return array
-     */
-	public function getPartecipanti(){
-		return $this->partecipanti;
-	}
     /**
      * @access public
-     * @return EPartita
+     * @return float
      */
-    public function getPartita(){
-        return $this->partita;
+    public function getLivello(){
+        return $this->livello;
     }
+    /**
+     * @access public
+     * @return float
+     */
+    public function getNote(){
+        return $this->note;
+    }
+
 
 	//Dichiarazione dei metodi Set 
 	/**
@@ -96,28 +97,20 @@ class EBooking {
 		$id = getGiorno()."-".getSingolaFasciaOraria($i);
 		$this->idbooking = $id;
 	}*/
-	/**
-     * @access public
-     * @param $partecip array
-     */
-	public function setPartecipanti(Array $partecip) {
-		$this->partecipanti = $partecip;
-	}
-
     /**
      * @access public
-     * @param $giorno EGiorno
+     * @param $liv string
      */
-    public function setGiornobooking(EGiorno $giorno) {
-        $this->giornobooking = $giorno;
+    public function setLivello(string $liv) {
+        $this->livello = $liv;
     }
 
     /**
      * @access public
-     * @param $par EPartita
+     * @param $not string
      */
-    public function setPartita(EPartita $par) {
-        $this->partita = $par;
+    public function setNote(string $not) {
+        $this->note = $not;
     }
 
 	/**
