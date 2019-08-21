@@ -26,7 +26,7 @@ class FBooking{
     /**
      * campi della tabella
      */
-    private static $values = "(:idbooking,:quota,:giornobooking,:partita,:giornobooking)";
+    private static $values = "(:idbooking,:giornobooking,:fasciaOraria,:quota)";
 
 
     public function __construct(){}
