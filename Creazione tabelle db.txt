@@ -4,13 +4,12 @@ USE bookeplay;
 
 CREATE TABLE IF NOT EXISTS  `Account` (
   `id` CHAR(4) not NULL,
+  `username` varchar(45) NOT NULL,
   `password` VARCHAR(45) not NULL,
   `email` varchar(45) NULL,
-  `conto` float NULL,
-  `username` varchar(45) NOT NULL,
   `telnumb` int(10) NOT NULL,
+  `conto` float NULL,
   `descrizione` varchar(150) NULL,
-  
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

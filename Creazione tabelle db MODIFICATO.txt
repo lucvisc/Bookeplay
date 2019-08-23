@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `Indirizzo` (
 ENGINE = InnoDB;
 
 
+
 CREATE TABLE IF NOT EXISTS `Giorno` (
   `Giorno` varchar(10) not null,
   `FasciaOraria` varchar(10) not null,
@@ -47,36 +48,26 @@ CREATE TABLE IF NOT EXISTS `Giorno` (
 )
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Prenotazione` (
+CREATE TABLE IF NOT EXISTS `prenotazione` (
   `idP` int(5) not null AUTO_INCREMENT,
   `Quota` int not NULL,
-  `livello` varchar(45),
+  `livello` enum('principiante','medio','avanzato','professionista') DEFAULT 'medio',
   `Giorno` VARCHAR(45) not NULL,
   `FasciaOraria` varchar(10) not NULL,
   `note` varchar(100),
    
- 
   PRIMARY KEY (`idP`),
   FOREIGN KEY (Giorno,FasciaOraria) REFERENCES Giorno(`Giorno`,`FasciaOraria`) ON DELETE CASCADE ON UPDATE CASCADE
+
 )
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Pren_Partecipa` (
   `idPren` int(5) not null,
-  `username` varchar(45) not null,
-   PRIMARY KEY (`idPren`, `username`),
+  `email` varchar(60) not null,
+   PRIMARY KEY (`idPren`, `email`),
    FOREIGN KEY (idPren) REFERENCES Prenotazione(`idP`) ON DELETE CASCADE ON UPDATE CASCADE,
-   FOREIGN KEY (username) REFERENCES Account(`username`) ON DELETE CASCADE ON UPDATE CASCADE
-)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `Partita` (
-  `idPren` int(5) not null AUTO_INCREMENT,
-  `MaxNumGioc` int NULL,
-  `Livello` enum('principiante','medio','avanzato','professionista') DEFAULT 'medio',
-  `Note` varchar(255) NULL,
-  PRIMARY KEY (`idPren`),
-  FOREIGN KEY (idPren) REFERENCES Prenotazione(`idP`) ON DELETE CASCADE ON UPDATE CASCADE
+   FOREIGN KEY (email) REFERENCES Account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
@@ -88,4 +79,6 @@ CREATE TABLE mediauser (
     `immagine` blob NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (emailutente) REFERENCES Account(email)  ON DELETE CASCADE ON UPDATE CASCADE
-);
+)
+ENGINE=InnoDB;
+

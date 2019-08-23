@@ -23,7 +23,7 @@ class EGiorno {
 	private $fasciaoraria; 
 
 	//Dichiarazione del costruttore 
-	function __construct(string $gg=null, array $fasce= null){	
+	function __construct(string $gg=null, int $id){
 			$this->giorno = $gg;
 
 			//Inizializzazione dell'attributo fasce che contiene gli orari disponibili per un giorno
