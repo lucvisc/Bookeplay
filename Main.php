@@ -2,10 +2,26 @@
 
 require_once 'include.php';
 
-$acc=new EAccount("bla", "blu", "bli", "0123456789", 0, "blu", "1");
-$adr=new EAddress("Pescara", "PE", "65120", "Via sela", "134");
-$use=new EUser("blabla", "blibli", "00/00/2000", "M", $adr, $acc);
+/*$view = new VUser();
+$view->showFormLogin();
+$info= new VInfo();
+$info->showInformazioni();
+*/
+$index= new VIndex();
+$index->showHomepage();
+
+/*$booking = new EBooking('','professionista','livello molto alto');
+FBooking::store($booking);
+FPren_creata::insert('1','luca.visco@hotmail.com');
+FFasceorarie::update('08:00-09:00','Non Disponibile', 'giornoFascia', '19/09/2019');
+*/
+/*$acc=new EAccount("luca.visco@hotmail.com", "lucvisc", "lucvisc", "0123456789", 0, "Livello medio", "1");
+$adr=new EAddress("Popoli", "PE", "65026", "Viale dei tigli ", "26");
+$use=new EUser("Luca", "Visconti", "19/09/1997", "M", $adr, $acc);
 FAccount::store($acc, $use, $adr);
+*/
+//FAccount::update('conto', '50','conto','luca.visco@hotmail.com');
+//FAccount::delete('email', 'luca.visco@hotmail.com')
 
 /*$acc=FAccount::loadByField("username", "Garcia");
 print_r($acc);
@@ -20,7 +36,6 @@ $acc=FAccount::LoadAccount("Zorro");
 print_r($acc);
 $bo=Faccount::delete("username", "Zorro");
 echo $bo;*/
-
 
 
 //FAccount::deleteAccount($var51);
