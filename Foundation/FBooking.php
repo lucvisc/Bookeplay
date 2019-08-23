@@ -22,12 +22,12 @@ class FBooking{
     /**
      * @Tabella di riferimento
      */
-    private static $tables = "prenotazione";
+    private static $tables = "prenotazione (`Quota`,`livello`,`Giorno`,`FasciaOraria`,`note`)";
     /**
      * campi della tabella
      */
 
-    private static $values = "(:idP,:quota,:livello,:note)";
+    private static $values = "(:quota,:livello,:giorno,:fasciaOraria,:note)";
 
 
     public function __construct(){}
@@ -40,9 +40,11 @@ class FBooking{
 
     public static function bind($stmt, EBooking $booking)
     {
-        $stmt->bindValue(':idP',NULL, PDO::PARAM_INT); //l'id è posto a NULL perche viene incrementato automaticamente dal DB
+        //l'id è posto a NULL perche viene incrementato automaticamente dal DB
         $stmt->bindValue(':quota', $booking->getQuota(), PDO::PARAM_STR);
         $stmt->bindValue(':livello', $booking->getLivello(), PDO::PARAM_STR);
+        $stmt->bindValue(':giorno', $booking->getGiornobooking()->getGiorno(), PDO::PARAM_STR);
+        $stmt->bindValue(':fasciaOraria', $booking->getFascia(), PDO::PARAM_STR);
         $stmt->bindValue(':note', $booking->getNote(), PDO::PARAM_STR);
     }
 
@@ -76,10 +78,12 @@ class FBooking{
      * Metodo che permette la store di una prenotazione
      * @param $boo prenotazione da salvare
      */
-    public static function store(EBooking $boo) //, EGiorno $obj1, EPartita $obj2
+    public static function store(EBooking $boo) // viene storizzato prima L'oggetto giorno perchè sarà poi foreign key di prenotazione
     {
         $db=FDatabase::getInstance();
+        FGiorno::store($boo->getGiornobooking());
         $id=$db->storeDB(static::getClass() ,$boo);
+        $boo->setIdbooking($id);//siccome idBooking è autoincrementate viene inserito nell'oggetto passato solo dopo lo store e quindi la creazione del suo id
     }
 
     /**
