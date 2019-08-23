@@ -15,7 +15,7 @@ class CAdmin{
 	 * 2) se il metodo di richiesta HTTP è GET e si è loggati ma non come amministratore, viene visualizzata una pagina di errore 401;
 	 * 3) altrimenti, reindirizza alla pagina di login.
      */
-	static function homeAccount () {
+	static function homepage () {
 		if($_SERVER['REQUEST_METHOD'] == "GET") {
 			if (CUser::isLogged()) {
 				$account = unserialize($_SESSION['account']);
@@ -32,7 +32,7 @@ class CAdmin{
 				}
 			}
 			else
-				header('Location: /BookAndPlay/Utente/login');
+				header('Location: /BookAndPlay/User/login');
 		}
     }
 
@@ -51,13 +51,13 @@ class CAdmin{
 			$email = $view->getEmail();
 			$account = $pm->load("email", $email, "FAccount");
             $pm->update("activate", 0, "email", $email, "FAccount");
-			header('Location: /BookAndPlay/Admin/homeAccount');
+			header('Location: /BookAndPlay/Admin/homepage');
 		}
 		elseif($_SERVER['REQUEST_METHOD'] == "GET") {
 			if (CUser::isLogged()) {
 				$account = unserialize($_SESSION['account']);
 				if ($account->getEmail() == "admin@admin.com") {
-					header('Location: /BookAndPlay/Admin/homeAccount');
+					header('Location: /BookAndPlay/Admin/homepage');
 				}
 				else {
 					$view = new VError();
@@ -65,7 +65,7 @@ class CAdmin{
 				}
 			}
 			else
-				header('Location: /BookAndPlay/Utente/login');
+				header('Location: /BookAndPlay/User/login');
 		}
     }
 
@@ -82,13 +82,13 @@ class CAdmin{
 			$pm = new FPersistentManager();
 			$email = $view->getEmail();
 			$pm->update("activate", 1, "email", $email, "FAccount");
-			header('Location: /BookAndPlay/Admin/homeAccount');
+			header('Location: /BookAndPlay/Admin/homepage');
 		}
 		elseif($_SERVER['REQUEST_METHOD'] == "GET") {
 			if (CUser::isLogged()) {
 				$account = unserialize($_SESSION['account']);
 				if ($account->getEmail() == "admin@admin.com") {
-					header('Location: /BookAndPlay/Admin/homeAccount');
+					header('Location: /BookAndPlay/Admin/homepage');
 				}
 				else {
 					$view = new VError();
@@ -96,7 +96,7 @@ class CAdmin{
 				}
 			}
 			else
-				header('Location: /BookAndPlay/Utente/login');
+				header('Location: /BookAndPlay/User/login');
 		}
     }
 
@@ -127,7 +127,7 @@ class CAdmin{
 				}
 			}
 			else
-				header('Location: /BookAndPlay/Utente/login');
+				header('Location: /BookAndPlay/User/login');
 		}
     }
 
@@ -157,7 +157,7 @@ class CAdmin{
 				}
 			}
 			else
-				header('Location: /BookAndPlay/Utente/login');
+				header('Location: /BookAndPlay/User/login');
 		}
 	}
 
@@ -191,7 +191,7 @@ class CAdmin{
                 }
             }
             else
-                header('Location: /BookAndPlay/Utente/login');
+                header('Location: /BookAndPlay/User/login');
         }
     }
 

@@ -11,8 +11,7 @@ class VUser {
 
     private $smarty;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->smarty = ConfSmarty::configuration();  //configurazione di smarty
     }
 
@@ -31,11 +30,14 @@ class VUser {
      * @param $array elenco delle partite da visualizzare
      * @throws SmartyException
      */
-    public function loginOk($array)
+    public function loginOk()
     {
         $this->smarty->assign('userlogged', "loggato");
-        $this->smarty->assign('array', $array);
         $this->smarty->display('profilo.tpl');
+    }
+
+    public function Homepage(){
+        $this->smarty->display('index.tpl');
     }
 
     /**
@@ -57,7 +59,7 @@ class VUser {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showProfile(EUtente $user, $img, $part, EAccount $acc, EAddress $addr)
+    public function showProfile(EUser $user, $img, $part, EAccount $acc, EAddress $addr)
     {
         list($type, $pic64) = $this->setImage($img, 'user');
         $this->smarty->assign('type', $type);
@@ -80,7 +82,7 @@ class VUser {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showProfileUser(EUtente $user, $img, EAccount $acc, EAddress $addr)
+    public function showProfileUser(EUser $user, $img, EAccount $acc, EAddress $addr)
     {
         list($type, $pic64) = $this->setImage($img, 'user');
         $this->smarty->assign('type', $type);

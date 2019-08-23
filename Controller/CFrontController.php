@@ -5,27 +5,32 @@
  * @package Controller
  */
 
-require_once 'include.php';
+//require_once 'include.php';
+require_once 'ConfSmarty.php';
 
-class CFrontController
-{
+class CFrontController {
 
     public function run($path)
     {
         $resource = explode('/', $path);
+        print_r($path); echo "\n";
 
         array_shift($resource);
         array_shift($resource);
+        print_r($resource); echo "\n";
 
         if ($resource[0] != 'api') {
 
             $controller = "C" . $resource[0];
+            print_r($controller); echo "\n";
             $dir = 'Controller';
             $eledir = scandir($dir);
+            print_r($eledir); echo "\n";
 
             if (in_array($controller . ".php", $eledir)) {
                 if (isset($resource[1])) {
                     $function = $resource[1];
+                    print_r($function); echo "\n";
                     if (method_exists($controller, $function)) {
 
                         $param = array();
@@ -34,7 +39,9 @@ class CFrontController
                             $a = $i - 2;
                         }
                         $num = (count($param));
-                        if ($num == 0) $controller::$function();
+                        print_r($num); echo "\n";
+                        if ($num == 0) {$controller::$function();
+                        print($controller::$function()); echo "\n"; }
                         else if ($num == 1) $controller::$function($param[0]);
                         else if ($num == 2) $controller::$function($param[0], $param[1]);
                         //else if ($num == 3) $controller::$function($param[0], $param[1], $param[2]);

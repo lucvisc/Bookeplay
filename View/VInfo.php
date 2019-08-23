@@ -16,16 +16,16 @@ class VInfo
      * Funzione che inizializza e configura smarty.
      */
     function __construct() {
-        $this->smarty = StartSmarty::configuration();
+        $this->smarty = ConfSmarty::configuration();
     }
 
     /**
      * Mostra la pagina di informazioni dell'applicazione
      */
     public function showInformazioni(){
-        if(CUtente::isLogged())
-                $this->smarty->assign('userlogged',"loggato");
+        //if(//CUtente::isLogged())
         $this->smarty->display('informazioni.tpl');
     }
 
 }
+?>
