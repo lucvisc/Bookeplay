@@ -23,7 +23,7 @@ class EGiorno {
 	private $fasciaoraria; 
 
 	//Dichiarazione del costruttore 
-	function __construct(string $gg=null, array $fasce= null){	
+	function __construct(string $gg=null, int $id){
 			$this->giorno = $gg;
 
 			//Inizializzazione dell'attributo fasce che contiene gli orari disponibili per un giorno
@@ -42,6 +42,7 @@ class EGiorno {
 				'19'=>array('fascia'=>'19.00-20.00', 'disp'=>'Disponibile'),
 				'20'=>array('fascia'=>'20.00-21.00', 'disp'=>'Disponibile'),
 				'21'=>array('fascia'=>'21.00-22.00', 'disp'=>'Disponibile')	);
+			$fasce = $this->getSingolaFasciaOraria($id);
 			$this->fasciaoraria = $fasce;
 	}
 
