@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.33, created on 2019-08-23 11:13:15
+  from 'C:\Users\Bonifacio\Desktop\Prog web\BookAndPlay\Smarty\template\informazioni.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5d5fae2b8d6191_77496078',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '3e43e9a67e118a2f20c43e18068a60c9ccdb7b79' => 
+    array (
+      0 => 'C:\\Users\\Bonifacio\\Desktop\\Prog web\\BookAndPlay\\Smarty\\template\\informazioni.tpl',
+      1 => 1566298953,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5d5fae2b8d6191_77496078 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html>
 
 <head>
@@ -9,7 +32,7 @@
   <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/template/img/favicon.png">
 </head>
 
-<body style="	background-image: url(../img/sfondo_2.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0 collapsed" type="button" data-toggle="collapse" data-target="#navbar12" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
@@ -30,7 +53,7 @@
   </nav>
   <div class="py-5">
     <div class="container">
-      <div class="row" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+      <div class="row" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
         <div class="col-md-10" style="">
           <h2 class="mb-3 text-light">BookAndPlay: un modo semplice e veloce per giocare a calcetto</h2>
           <p class="text-light">Il progetto nasce dall'idea di due giovani studenti dell'università dell'Aquila: Luca Visconti e Catriel del biase. BookAndPlay è stato sviluppato per rispondere alle esigenze di organizzazione amatoriale che ogni giorno si presentano, mettendo a disposizione una piattaforma di "incontri" per partite di calcetto per uno specifico centro sportivo.&nbsp;</p>
@@ -40,7 +63,7 @@
   </div>
   <div class="py-5">
     <div class="container">
-      <div class="row" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+      <div class="row" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
         <div class="col-md-10">
           <h2 class="mb-3 text-light">Come funziona:</h2>
           <p class="text-light">Hai voglia di giocare una partita di calcetto ma non hai tempo di organizzarla?<br>Tranquillo, ci pensa BookAndPlay ad organizzarla, Registrati subito e crea o partecipa ad una partita&nbsp;</p>
@@ -50,7 +73,7 @@
   </div>
   <div class="py-5">
     <div class="container">
-      <div class="row" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+      <div class="row" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
         <div class="col-md-10" style="">
           <h2 class="mb-3 text-light">Perché sceglierci?</h2>
           <p class="text-light">Da utente non registrato puoi solo visionare le partite che altri utenti registrati hanno creato.<br>Da utente registrato oltre a poter visionare le partire, puoi partecipare ad una partita creata da un altro utente, in più puoi creare una partita nel giorno e nell'orario che più ti è comodo.&nbsp;<br>Che cosa aspetti a registrarti?&nbsp;</p>
@@ -62,7 +85,7 @@
     </div>
   </div>
   <div class="py-5 text-center text-white" style="">
-    <div class="container" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+    <div class="container" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
       <div class="row">
         <div class="mx-auto col-md-12">
           <h1 class="mb-3 text-center">Our team</h1>
@@ -71,13 +94,13 @@
       <div class="row">
       </div>
       <div class="row mx-5" style="">
-        <div class="col-lg-4 col-md-1 p-4" style=""> <img class="img-fluid d-block mb-3 mx-auto rounded-circle" src="img/avatar_luca.jpg" alt="Card image cap" width="200" style="	background-image: url(../img/avatar_luca.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+        <div class="col-lg-4 col-md-1 p-4" style=""> <img class="img-fluid d-block mb-3 mx-auto rounded-circle" src="img/avatar_luca.jpg" alt="Card image cap" width="200" style="  background-image: url(../img/avatar_luca.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <h4> <b>Luca Visconti</b></h4>
           <p class="mb-0">CEO and founder</p>
           <p class="mb-0">luca.visco@hotmail.com</p>
           <p class="mb-0">+39 1234567890</p>
         </div>
-        <div class="col-lg-4 col-md-8 p-4 offset-md-4" style=""> <img class="img-fluid d-block mb-3 mx-auto rounded-circle" src="img/avatar_catriel.jpg" alt="Card image cap" width="200" style="	background-image: url(../img/avatar_catriel.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+        <div class="col-lg-4 col-md-8 p-4 offset-md-4" style=""> <img class="img-fluid d-block mb-3 mx-auto rounded-circle" src="img/avatar_catriel.jpg" alt="Card image cap" width="200" style=" background-image: url(../img/avatar_catriel.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <h4>Catriel De Biase</h4>
           <p class="mb-0">CEO and founder</p>
           <p class="mb-0">catriel.debiase@gmail.com</p>
@@ -86,7 +109,7 @@
       </div>
     </div>
   </div>
-  <div class="py-3" style="	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 255), rgba(0, 0, 0, 255));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+  <div class="py-3" style=" background-image: linear-gradient(to bottom, rgba(0, 0, 0, 255), rgba(0, 0, 0, 255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-6 p-3" style="">
@@ -125,9 +148,16 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" style=""></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" style=""><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
 </body>
 
-</html>
+</html><?php }
+}

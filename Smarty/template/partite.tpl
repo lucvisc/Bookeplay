@@ -4,7 +4,7 @@
 
 <head></head>
 
-<body style="	background-image: url(img/sfondo_2.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+<body style=" background-image: url(img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -13,47 +13,38 @@
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="#"><i class="fa d-inline fa-lg fa-circle" aria-hidden="true"></i>
-          <b id="index.html"> BookAndPlay</b>
+      <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="/BookAndPlay/">
+          <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="index.html">Home</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="partiteAttive.html">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="informazioni.html">Informazioni</a> </li>
-        </ul>
+          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+          {if $userlogged!='nouser'}
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Utente/ProfiloUtente">Profilo</a> <li>
+          </ul>
         <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link text-primary" href="index.html">Logout</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Logout">Logout</a> </li>
         </ul>
+        {else} 
+          <ul class="navbar-nav">
+          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/Utente/Login">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Registrati">Register</a> </li>
+        </ul>
+        {/if}
       </div>
     </div>
   </nav>
   <div class="py-5" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="d-block img-thumbnail img-fluid ml-2" src="https://static.pingendo.com/img-placeholder-3.svg"></div>
-        <div class="offset-md-1 col-md-8" style="">
+        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}"  alt="profile picture" /></div>
+        <div class="offset-md-1 col-md-7" style="">
           <div class="row">
-            <div class="col-md-10" style="">
-              <div class="row rounded" style="">
-                <div class="col-md-11" style="">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="row">
-                        <div class="col-md-3" style="">
-                          <h3 class="text-light">Nome:</h3>
-                          <h3 class="text-light">Cognome:</h3>
-                          <h3 class="text-light">Conto:</h3>
-                        </div>
-                        <div class="col-md-8  offset-md-1" style="">
-                          <h3 class="text-light">{$nome}</h3>
-                          <h3 class="text-light">{$cognome}</h3>
-                          <h3 class="text-light">{$conto}</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="col-md-8" style="">
+              <h3 class="text-light">Nome:{$nome}</h3>
+              <h3 class="text-light">Cognome:{$cognome}</h3>
+              <h3 class="text-light">Conto:{$conto}</h3>
             </div>
           </div>
         </div>
@@ -61,17 +52,21 @@
     </div>
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-3" style=""><a class="btn btn-block btn-info" href="profilo.html"><i class="fa fa-user fa-fw"></i>Profilo</a><a class="btn btn-block btn-info" href="partite.html"><i class="fa fa-calendar-plus-o">Crea/Partecipa</i></a><a class="btn btn-block btn-info" href="riepilogo.html">Riepilogo</a></div>
+        <div class="col-md-3" style="">
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Profilo">Profilo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Riepilogo">Riepilogo</a>
+        </div>
+      </div>
         <div class="col-9 col-md-8" style="">
           <div class="tab-content">
             <div class="tab-pane fade" id="tabthree" role="tabpanel">
-              <p class="">Which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite. When I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms.</p>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-11 col-lg-12 rounded" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+                <div class="col-md-11 col-lg-12 rounded" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
                   <div class="col-md-12   " style="">
                     <div class="form-group row m-2" style="">
                       <div class="col-md-2 mt-1 text-body" style=""><label class="col-2 col-md-6 text-right text-light">Giorno:</label></div>
@@ -89,29 +84,20 @@
                         <h3 class="text-center mt-1 mb-0 text-light">Partite Attive&nbsp;</h3>
                       </div>
                     </div>
-                  </div>
-                  {if $array}
-                  {foreach $array as $booking}
-                  <div class="row" style="">
+                  </div> {if $array} {foreach $array as $booking} <div class="row" style="">
                     <div class="col-md-12 ">
                       <div class="row" style="">
                         <div class="col-md-12">
                           <div class="row">
                             <div class="col-md-11" style="">
                               <div class="col-md-12 col-1 m-2" style="">
-                                <h3 class="m-0 text-light" style="">
+                                <h3 class="m-0 text-light border border-light rounded" style="">
                                   <div class="row">
-                                    <div class="border-light border-top border-bottom border-left my-2 ml-2" style="">
-                                      <h4 class="ml-5 text-light">ID Partite:</h4>
-                                      <h4 class="ml-5 text-light">Campetto Numero:</h4>
-                                      <h4 class="ml-5 text-light">Partecipanti:</h4>
-                                      <h4 class="ml-5 text-light">Fascia Oraria:</h4>
-                                    </div>
-                                    <div class="col-md-4 col-lg-6 border-top border-bottom border-right my-2 mr-2 border-light" style="">
-                                      <h4 class="text-light">{$booking->getIdbooking()}</h4>
-                                      <h4 class="text-light">{$booking->getNumerocampo()}</h4>
-                                      <h4 class="text-light">{$booking->getPartecipanti()}</h4>
-                                      <h4 class="text-light">{$booking->getGiornobooking()}</h4>
+                                    <div class="border-light my-2 ml-2" style="">
+                                      <h4 class="ml-5 text-light">ID Partite:{$booking-&gt;getIdbooking()}</h4>
+                                      <h4 class="ml-5 text-light">Campetto Numero:{$booking-&gt;getNumerocampo()}</h4>
+                                      <h4 class="ml-5 text-light">Partecipanti:{$booking-&gt;getPartecipanti()}</h4>
+                                      <h4 class="ml-5 text-light">Fascia Oraria:{$booking-&gt;getGiornobooking()}</h4>
                                     </div>
                                   </div>
                                 </h3>
@@ -125,9 +111,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>{/foreach}
-                  {else}
-                  <p>Non sono presenti delle partite con tale parametro di ricerca</p> {/if}
+                  </div>{/foreach} {else} <p>Non sono presenti delle partite con tale parametro di ricerca</p> {/if}
                 </div>
               </div>
             </div>
@@ -136,22 +120,22 @@
       </div>
     </div>
   </div>
-  <div class="py-5" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+  <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 order-2 order-lg-1 p-0"></div>
       </div>
     </div>
   </div>
-  <div class="py-3 pt-5" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,255), rgba(0,0,0,255));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+  <div class="py-3 pt-5" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,255), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="index.html">Home</a> </li>
-            <li> <a href="partiteAttive.html">Partite Attive</a> </li>
-            <a href="informazioni.html">Informazioni</a>
+            <li> <a href="#">Home</a><span class="sr-only">(current)</span></a> </li>
+            <li> <a href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
+            <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">

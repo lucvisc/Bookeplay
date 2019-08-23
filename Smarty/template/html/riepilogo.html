@@ -12,21 +12,25 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="#">
-          <i class="fa d-inline fa-lg fa-circle"></i>
-          <b id="index.html"> BookAndPlay</b>
+      <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="/BookAndPlay/">
+          <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="index.html">Home</a> </li>
-          <li class="nav-item" style=""> <a class="nav-link" href="partiteAttive.html">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="informazioni.html" contenteditable="true">Informazioni</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
           {if $userlogged!='nouser'}
-          <li class="nav-item"> <a class="nav-link" href="profilo.html">Profilo</a> <li>
-        </ul>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Utente/ProfiloUtente">Profilo</a> <li>
+          </ul>
         <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link text-primary" href="index.html">Logout</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Logout">Logout</a> </li>
         </ul>
+        {else} 
+          <ul class="navbar-nav">
+          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/Utente/Login">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Registrati">Register</a> </li>
+        </ul>
+        {/if}
       </div>
     </div>
   </nav>
@@ -59,11 +63,13 @@
     </div>
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-3" style=""><a class="btn btn-block btn-info" href="profilo.html"><i class="fa fa-user fa-fw"></i>Profilo</a><a class="btn btn-block btn-info" href="partite.html"><i class="fa fa-calendar-plus-o">Crea/Partecipa</i></a><a class="btn btn-block btn-info" href="riepilogo.html">Riepilogo</a></div>
+        <div class="col-md-3" style="">
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Profilo">Profilo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Riepilogo">Riepilogo</a>
+        </div>
         <div class="col-md-8" style="">
-          <div class="tab-content">
-            <div class="tab-pane fade" id="tabtwo" role="tabpanel"><a class="btn btn-primary" href="#">Button</a></div>
-            <div class="tab-pane fade" id="tabthree" role="tabpanel">            
+          <div class="tab-content">          
             </div>
           </div>
           <div class="row">
@@ -86,10 +92,10 @@
                       <h3 class="text-light mx-2" style="">
                         <div class="row">
                           <div class="border-light my-2 ml-2" style="">
-                                <h4 class="text-light">ID Partite:{$booking-&gt;getIdbooking()}</h4>
-                                <h4 class="text-light">Campetto Numero:{$booking-&gt;getNumerocampo()}</h4>
-                                <h4 class="text-light">Partecipanti:{$booking-&gt;getPartecipanti()}</h4>
-                                <h4 class="text-light">Giorno - Fascia Oraria:{$booking-&gt;getGiornobooking()}</h4>
+                                <h4 class="text-light">ID Partite:{$booking->getIdbooking()}</h4>
+                                <h4 class="text-light">Campetto Numero:{$booking->getNumerocampo()}</h4>
+                                <h4 class="text-light">Partecipanti:{$booking->getPartecipanti()}</h4>
+                                <h4 class="text-light">Giorno - Fascia Oraria:{$booking->getGiornobooking()}</h4>
                           </div>
                         </div>
                       </h3>
@@ -110,9 +116,9 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="index.html">Home</a> </li>
-            <li> <a href="partiteAttive.html">Partite Attive</a> </li>
-            <li> <a href="informazioni.html">Informazioni</a> </li>
+            <li> <a href="#">Home</a><span class="sr-only">(current)</span></a> </li>
+            <li> <a href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
+            <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">

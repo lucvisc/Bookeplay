@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.33, created on 2019-08-23 19:22:40
+  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\index.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5d6020e04769f6_34615763',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '1531c2cffdb168def471fca9fb951b6e0dd775c3' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\index.tpl',
+      1 => 1566580913,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5d6020e04769f6_34615763 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html>
 
 <head>
@@ -9,7 +32,7 @@
   <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/template/img/favicon.png">
 </head>
 
-<body style="	background-image: url(../img/sfondo_2.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
@@ -19,22 +42,22 @@
         </a>
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/Utente/Login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Registrati">Register</a> </li>
+          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/Registrati">Register</a> </li>
         </ul>
       </div>
     </div>
   </nav>
   <div class="py-5 text-center align-items-center d-flex" style="">
     <div class="container py-5">
-      <div class="row" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+      <div class="row" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
         <div class="col-md-8 mx-auto">
           <h1 class="display-3 mb-4 text-light">The easiest way to play football</h1>
-          <p class="lead mb-5 text-light">Find games in your area, select the right on for you and get on the pich and play</p> <a class="btn btn-lg mx-1 btn-dark" href="login-support.html">LOG IN AND PLAY</a>
+          <p class="lead mb-5 text-light">Find games in your area, select the right on for you and get on the pich and play</p> <a class="btn btn-lg mx-1 btn-dark" href="/BookAndPlay/User/login">LOG IN AND PLAY</a>
         </div>
       </div>
     </div>
@@ -42,7 +65,7 @@
   <div class="py-5">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 p-md-5 p-3 d-flex flex-column justify-content-center" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+        <div class="col-lg-8 p-md-5 p-3 d-flex flex-column justify-content-center" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <h1 class="text-light">A thousand sliders</h1>
           <p class="mb-0 text-light">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.</p>
         </div>
@@ -63,7 +86,7 @@
       </div>
     </div>
   </div>
-  <div class="py-5" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,), rgba(0,0,0,0.8));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+  <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,), rgba(0,0,0,0.8));  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="text-center mx-auto col-md-12">
@@ -77,14 +100,14 @@
       </div>
     </div>
   </div>
-  <div class="py-3" style="	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 255), rgba(0, 0, 0, 255));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+  <div class="py-3" style=" background-image: linear-gradient(to bottom, rgba(0, 0, 0, 255), rgba(0, 0, 0, 255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
             <li> <a href="#">Home</a><span class="sr-only">(current)</span></a> </li>
-            <li> <a href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
+            <li> <a href="/BookAndPlay/GestionePartite/PartiteAttive">Partite Attive</a> </li>
             <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
           </ul>
         </div>
@@ -116,9 +139,16 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" style=""></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" style=""><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
 </body>
 
-</html>
+</html><?php }
+}

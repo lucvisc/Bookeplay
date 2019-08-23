@@ -4,7 +4,7 @@
 
 <head></head>
 
-<body style="	background-image: url(../img/sfondo_2.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -59,7 +59,7 @@
           <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Partite">Crea/Partecipa</a>
           <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Riepilogo">Riepilogo</a>
         </div>
-        <div class="col-9 col-md-8" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+        <div class="col-9 col-md-8" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <div class="tab-content">
             <div class="tab-pane fade" id="tabtwo" role="tabpanel"><a class="btn btn-primary" href="#">Button</a></div>
             <div class="tab-pane fade" id="tabthree" role="tabpanel">
@@ -139,13 +139,13 @@
       </div>
     </div>
   </div>
-  <div class="py-5" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+  <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
       </div>
     </div>
   </div>
-  <div class="py-3 pt-5" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,254), rgba(0,0,0,254));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+  <div class="py-3 pt-5" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,254), rgba(0,0,0,254)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-6 p-3">
