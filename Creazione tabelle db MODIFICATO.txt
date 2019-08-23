@@ -37,30 +37,24 @@ CREATE TABLE IF NOT EXISTS `Indirizzo` (
 )
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `FasceOrarie` (
-  `idFascia` int(2) not null,
-  `Fascia` char(60) not null,
-  PRIMARY KEY (`idFascia`)
-)
-ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Giorno` (
   `Giorno` varchar(10) not null,
-  `idFasciaOraria` int(2) not null,
-   PRIMARY KEY (`Giorno`, `idFasciaOraria`),
-   FOREIGN KEY (idFasciaOraria) REFERENCES FasceOrarie(`idFascia`) ON DELETE CASCADE ON UPDATE CASCADE
+  `FasciaOraria` varchar(5) not null,
+   PRIMARY KEY (`Giorno`, `FasciaOraria`),
+
+   CHECK (FasciaOraria in ('10:11','11:12','12:13','15:16','17:18','19:20','20:21','21:22'))
 )
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Prenotazione` (
   `idP` int(5) not null AUTO_INCREMENT,
   `Giorno` VARCHAR(45) not NULL,
-  `FasciaOraria` int(2) not NULL,
+  `FasciaOraria` varchar(5) not NULL,
   `Quota` int NULL,
-  
+ 
   PRIMARY KEY (`idP`),
-  FOREIGN KEY (Giorno) REFERENCES Giorno(`Giorno`),
-  FOREIGN KEY (FasciaOraria) REFERENCES FasceOrarie(`idFascia`)  ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (Giorno,FasciaOraria) REFERENCES Giorno(`Giorno`,`FasciaOraria`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
@@ -101,4 +95,3 @@ CREATE TABLE mediauser (
     PRIMARY KEY (id),
     FOREIGN KEY (emailutente) REFERENCES Account(email)  ON DELETE CASCADE ON UPDATE CASCADE
 );
-ENGINE=InnoDB;
