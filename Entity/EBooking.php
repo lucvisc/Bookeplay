@@ -1,9 +1,9 @@
 <?php
 /**
- * La classe EBooking contiene tutti gli attributi e metodi base riguardanti una prenotazione. 
+ * La classe EBooking contiene tutti gli attributi e metodi base riguardanti una prenotazione.
  * Contiene i seguenti attributi (e i relativi metodi):
  * -idbookin: identificativo incrementato riferito ad una prenotazione;
- * -giornoboking: identifica il giorno e la relativa fascia oraria 
+ * -giornoboking: identifica il giorno e la relativa fascia oraria
  * -quota: pagamento della prenotazione
  * -partecipanti: array di user partecipanti alla prenotazione
  * -conto: conto relativo ad un utente, per poter pagare le partite
@@ -16,19 +16,19 @@
 require_once 'include.php';
 
 class EBooking {
-	/**
-     * @AttributeType string 
+    /**
+     * @AttributeType string
      */
-	private $idbooking;
-	/**
+    private $idbooking;
+    /**
      * @AttributeType EGiorno
-     * Questo attributo è composto dal giorno della prenotazione e la relativa fascia oraria 
+     * Questo attributo è composto dal giorno della prenotazione e la relativa fascia oraria
      */
-	private $giornobooking;
-	/**
-     * @AttributeType float 
+    private $giornobooking;
+    /**
+     * @AttributeType float
      */
-	private $quota;
+    private $quota;
     /**
      * @AttributeType string
      */
@@ -38,39 +38,50 @@ class EBooking {
      */
     private $note;
 
-	//Dichiarazione del costruttore 
-	function __construct(string $id=null, string $liv=null, string $not){
-		$this->idbooking = $id;
+
+    //Dichiarazione del costruttore
+    function __construct(string $liv=null, string $g=null, string $fa=null, string $not)
+    {
+        $this->idbooking = null;
         $this->quota = 50;
         $this->livello = $liv;
+        $this->giornobooking=new EGiorno($g, $fa);
         $this->note= $not;
-	}
+    }
 
-	//Dichiarazione dei metodi Get
+    //Dichiarazione dei metodi Get
 
-	/**
+    /**
      * @access public
      * @return string
      */
-	public function getIdbooking(){
-		return $this->idbooking;
-	}
+    public function getIdbooking(){
+        return $this->idbooking;
+    }
 
- /*    /**
+    /**
      * @access public
-     * @return Egiorno 
+     * @return Egiorno
      */
-/*	public function getGiornobooking(){
-		return $this->giornobooking;
-	}*/
+    public function getGiornobooking(){
+        return $this->giornobooking;
+    }
 
-	/**
+    /**
      * @access public
-     * @return float 
+     * @return Egiorno
      */
-	public function getQuota(){
-		return $this->quota;
-	}
+    public function getFascia(){
+        return $this->giornobooking->getFasceOrarie();
+    }
+
+    /**
+     * @access public
+     * @return float
+     */
+    public function getQuota(){
+        return $this->quota;
+    }
     /**
      * @access public
      * @return float
@@ -87,16 +98,15 @@ class EBooking {
     }
 
 
-	//Dichiarazione dei metodi Set 
-	/**
+    //Dichiarazione dei metodi Set
+    /**
      * @access public
      * questo metodo viene utilizzato per identificare univocamente una prenotazione, è indentificata automaticamente
      * dal db con numeri incrementali
      */
-	/*public function setIdbooking(int $i){
-		$id = getGiorno()."-".getSingolaFasciaOraria($i);
-		$this->idbooking = $id;
-	}*/
+    public function setIdbooking(int $i){
+        $this->idbooking = $i;
+    }
     /**
      * @access public
      * @param $liv string
@@ -113,14 +123,14 @@ class EBooking {
         $this->note = $not;
     }
 
-	/**
+    /**
     // * @access public
     // * @param $quot float 
     // * Per difedrse fasce orarie c'è una diversa quota da pagare, impostare per alcune fasce orarie, per esempio
     // * quelle serali, impostare una tariffa aggiuntiva per la luce ed il riscaldamento !!!!!!!!!!!!!!!!!!!
     // */
-	public function setQuota(float $quot){
-		$this->quota = $quot;
-	}
+    public function setQuota(float $quot){
+        $this->quota = $quot;
+    }
 }
 ?>

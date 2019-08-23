@@ -2,6 +2,7 @@
 
 require_once 'include.php';
 
+
 /*$view = new VUser();
 $view->showFormLogin();
 $info= new VInfo();
@@ -18,6 +19,14 @@ FFasceorarie::update('08:00-09:00','Non Disponibile', 'giornoFascia', '19/09/201
 /*$acc=new EAccount("luca.visco@hotmail.com", "lucvisc", "lucvisc", "0123456789", 0, "Livello medio", "1");
 $adr=new EAddress("Popoli", "PE", "65026", "Viale dei tigli ", "26");
 $use=new EUser("Luca", "Visconti", "19/09/1997", "M", $adr, $acc);
+
+$booking=new EBooking("basso", "20/03/2001", "8.00-9.00","");
+FBooking::store($booking);
+
+/*$acc=new EAccount("bla", "blu", "bli", "0123456789", 0, "blu", "1");
+$adr=new EAddress("Pescara", "PE", "65120", "Via sela", "134");
+$use=new EUser("blabla", "blibli", "00/00/2000", "M", $adr, $acc);
+>>>>>>> eb42dd5f5e6d41b614a900c8744c7233d0534866
 FAccount::store($acc, $use, $adr);
 */
 //FAccount::update('conto', '50','conto','luca.visco@hotmail.com');
@@ -36,7 +45,6 @@ $acc=FAccount::LoadAccount("Zorro");
 print_r($acc);
 $bo=Faccount::delete("username", "Zorro");
 echo $bo;*/
-
 
 //FAccount::deleteAccount($var51);
 /*
@@ -82,12 +90,5 @@ echo $var->RicaricaAccount($var5);
 print_r($var);
 */
 
-/*
-$var40= "15/10/2019";
-echo $var40;
-//$var41= array('9.00-10.00', 'Disponibile');
-$var41=new EGiorno($var40);
-//$var42->setFasceOrarie();
-print_r($var41);
-*/
+
 ?>
