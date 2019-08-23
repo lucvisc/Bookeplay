@@ -40,7 +40,7 @@ ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Giorno` (
   `Giorno` varchar(10) not null,
-  `FasciaOraria` varchar(5) not null,
+  `FasciaOraria` varchar(10) not null,
    PRIMARY KEY (`Giorno`, `FasciaOraria`),
 
    CHECK (FasciaOraria in ('10:11','11:12','12:13','15:16','17:18','19:20','20:21','21:22'))
@@ -49,21 +49,15 @@ ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Prenotazione` (
   `idP` int(5) not null AUTO_INCREMENT,
+  `Quota` int not NULL,
+  `livello` varchar(45),
   `Giorno` VARCHAR(45) not NULL,
-  `FasciaOraria` varchar(5) not NULL,
-  `Quota` int NULL,
+  `FasciaOraria` varchar(10) not NULL,
+  `note` varchar(100),
+   
  
   PRIMARY KEY (`idP`),
   FOREIGN KEY (Giorno,FasciaOraria) REFERENCES Giorno(`Giorno`,`FasciaOraria`) ON DELETE CASCADE ON UPDATE CASCADE
-)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `Pren_creata` (
-  `idPren` int(5) not null,
-  `username` varchar(45) not null,
-   PRIMARY KEY (`idPren`, `username`),
-   FOREIGN KEY (idPren) REFERENCES Prenotazione(`idP`) ON DELETE CASCADE ON UPDATE CASCADE,
-   FOREIGN KEY (username) REFERENCES Account(`username`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
