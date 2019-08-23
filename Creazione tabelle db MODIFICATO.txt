@@ -38,57 +38,55 @@ CREATE TABLE IF NOT EXISTS `Indirizzo` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `FasceOrarie` (
-  `idFascia` int(2) not null,
-  `Fascia` char(60) not null,
-  PRIMARY KEY (`idFascia`)
+  `giornoFascia` varchar(10) not null,
+  `08:00-09:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `09:00-10:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `10:00-11:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `11:00-12:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `12:00-13:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `15:00-16:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `16:00-17:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `17:00-18:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `18:00-19:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `19:00-20:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `20:00-21:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  `21:00-22:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
+  PRIMARY KEY (`giornoFascia`)
 )
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Giorno` (
-  `Giorno` varchar(10) not null,
-  `idFasciaOraria` int(2) not null,
-   PRIMARY KEY (`Giorno`, `idFasciaOraria`),
-   FOREIGN KEY (idFasciaOraria) REFERENCES FasceOrarie(`idFascia`) ON DELETE CASCADE ON UPDATE CASCADE
+  `idP` int(5) not null AUTO_INCREMENT,
+  `giorno` varchar(10) not null,
+   PRIMARY KEY (`idP`),
+   FOREIGN KEY (`giorno`) REFERENCES fasceOrarie(`giornoFascia`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Prenotazione` (
+CREATE TABLE IF NOT EXISTS `prenotazione` (
   `idP` int(5) not null AUTO_INCREMENT,
-  `Giorno` VARCHAR(45) not NULL,
-  `FasciaOraria` int(2) not NULL,
-  `Quota` int NULL,
-  
-  PRIMARY KEY (`idP`),
-  FOREIGN KEY (Giorno) REFERENCES Giorno(`Giorno`),
-  FOREIGN KEY (FasciaOraria) REFERENCES FasceOrarie(`idFascia`)  ON DELETE CASCADE ON UPDATE CASCADE
+  `quota` int NULL,
+  `livello` enum('principiante','medio','avanzato','professionista') DEFAULT 'medio',
+  `note` varchar(255) NULL,
+   PRIMARY KEY (`idP`)
 )
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Pren_creata` (
   `idPren` int(5) not null,
-  `username` varchar(45) not null,
-   PRIMARY KEY (`idPren`, `username`),
+  `email` varchar(60) not null,
+   PRIMARY KEY (`idPren`, `email`),
    FOREIGN KEY (idPren) REFERENCES Prenotazione(`idP`) ON DELETE CASCADE ON UPDATE CASCADE,
-   FOREIGN KEY (username) REFERENCES Account(`username`) ON DELETE CASCADE ON UPDATE CASCADE
+   FOREIGN KEY (email) REFERENCES account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Pren_Partecipa` (
   `idPren` int(5) not null,
-  `username` varchar(45) not null,
-   PRIMARY KEY (`idPren`, `username`),
+  `email` varchar(60) not null,
+   PRIMARY KEY (`idPren`, `email`),
    FOREIGN KEY (idPren) REFERENCES Prenotazione(`idP`) ON DELETE CASCADE ON UPDATE CASCADE,
-   FOREIGN KEY (username) REFERENCES Account(`username`) ON DELETE CASCADE ON UPDATE CASCADE
-)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `Partita` (
-  `idPren` int(5) not null AUTO_INCREMENT,
-  `MaxNumGioc` int NULL,
-  `Livello` enum('principiante','medio','avanzato','professionista') DEFAULT 'medio',
-  `Note` varchar(255) NULL,
-  PRIMARY KEY (`idPren`),
-  FOREIGN KEY (idPren) REFERENCES Prenotazione(`idP`) ON DELETE CASCADE ON UPDATE CASCADE
+   FOREIGN KEY (email) REFERENCES Account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
@@ -100,5 +98,5 @@ CREATE TABLE mediauser (
     `immagine` blob NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (emailutente) REFERENCES Account(email)  ON DELETE CASCADE ON UPDATE CASCADE
-);
+)
 ENGINE=InnoDB;
