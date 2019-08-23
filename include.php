@@ -33,8 +33,6 @@
   require_once 'Foundation\FBooking.php';
   require_once 'Foundation\FGiorno.php';
   require_once 'Foundation\FPartita.php';
-  require_once 'Foundation\FPren_creata.php';
   require_once 'Foundation\FPren_partecipa.php';
-  require_once 'Foundation\FFasceorarie.php';
 
 ?>
