@@ -1,0 +1,29 @@
+﻿
+
+INSERT INTO `account` (`email`, `username`, `password`, `telnumb`,`conto`, `descrizione`, `activate`) VALUES 
+('admin@admin.com', 'admin', 'admin', '32646444', '1000', 'Livello medio','1'),
+('luca.visco@hotmail.com', 'lucvisc', 'lucvisc', '012564897', '50', 'Livello medio','1'),
+('catdeb@hotmail.com', 'catdeb', 'catbed', '356465655', '50', 'Livello medio','1');
+
+
+INSERT INTO `utente` (`email`, `name`, `surname`, `dataNascita`, `gender`, `tipo`) VALUES
+('admin@admin.com', 'admin', 'admin', '00-00-0000', 'M', 'admin'),
+('luca.visco@hotmail.com', 'Luca', 'Visconti', '19-09-1997', 'M', 'registrato'),
+('catdeb@hotmail.com', 'Catriel', 'De Biase', '00-00-0000', 'M', 'registrato');
+
+
+INSERT INTO `indirizzo` (`email`, `comune`, `provincia`,`CAP`,`Via`,`NumCivico`) VALUES
+('admin@admin.com', 'admin', 'admin', '00000', 'admin', '1'),
+('luca.visco@hotmail.com', 'Popoli', 'Pescara', '65026', 'Viale dei tigli', '26'),
+('catdeb@hotmail.com', 'Pescara', 'Pescara', '65000', 'viale delle rose', '14');
+
+INSERT INTO `prenotazione` (`quota`, `livello`, `note`) 
+VALUES
+('50', 'principiante', 'partita per diverimento'),
+('50', 'medio', 'partita riservata per camerieri'),
+('50', 'professionista', 'riservata per soli calciatori');
+
+INSERT INTO `fasceorarie` (`giornoFascia`,`08:00-09:00`,`09:00-10:00`,`10:00-11:00`,`11:00-12:00`,`12:00-13:00`,`15:00-16:00`,`16:00-17:00`,`17:00-18:00`,`18:00-19:00`,`19:00-20:00`,`20:00-21:00`,`21:00-22:00`)
+VALUES ('19/09/2019','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile'),
+('20/09/2019','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile'),
+('21/09/2019','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile','Disponibile');

@@ -26,6 +26,7 @@ class FBooking{
     /**
      * campi della tabella
      */
+
     private static $values = "(:idP,:quota,:livello,:note)";
 
 

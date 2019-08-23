@@ -37,38 +37,29 @@ CREATE TABLE IF NOT EXISTS `Indirizzo` (
 )
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `FasceOrarie` (
-  `giornoFascia` varchar(10) not null,
-  `08:00-09:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `09:00-10:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `10:00-11:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `11:00-12:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `12:00-13:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `15:00-16:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `16:00-17:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `17:00-18:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `18:00-19:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `19:00-20:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `20:00-21:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  `21:00-22:00` enum('Disponibile','Non Disponible') DEFAULT 'Disponibile',
-  PRIMARY KEY (`giornoFascia`)
-)
-ENGINE = InnoDB;
+
 
 CREATE TABLE IF NOT EXISTS `Giorno` (
-  `idP` int(5) not null AUTO_INCREMENT,
-  `giorno` varchar(10) not null,
-   PRIMARY KEY (`idP`),
-   FOREIGN KEY (`giorno`) REFERENCES fasceOrarie(`giornoFascia`) ON DELETE CASCADE ON UPDATE CASCADE
+  `Giorno` varchar(10) not null,
+  `FasciaOraria` varchar(5) not null,
+   PRIMARY KEY (`Giorno`, `FasciaOraria`),
+
+   CHECK (FasciaOraria in ('10:11','11:12','12:13','15:16','17:18','19:20','20:21','21:22'))
 )
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `prenotazione` (
   `idP` int(5) not null AUTO_INCREMENT,
-  `quota` int NULL,
   `livello` enum('principiante','medio','avanzato','professionista') DEFAULT 'medio',
   `note` varchar(255) NULL,
    PRIMARY KEY (`idP`)
+  `Giorno` VARCHAR(45) not NULL,
+  `FasciaOraria` varchar(5) not NULL,
+  `Quota` int NULL,
+ 
+  PRIMARY KEY (`idP`),
+  FOREIGN KEY (Giorno,FasciaOraria) REFERENCES Giorno(`Giorno`,`FasciaOraria`) ON DELETE CASCADE ON UPDATE CASCADE
+
 )
 ENGINE = InnoDB;
 
@@ -100,3 +91,4 @@ CREATE TABLE mediauser (
     FOREIGN KEY (emailutente) REFERENCES Account(email)  ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
+
