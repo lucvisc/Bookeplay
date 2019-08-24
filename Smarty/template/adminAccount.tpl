@@ -7,6 +7,7 @@
 <body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Luca Visconti, Catriel De Biase">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -17,13 +18,13 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/partiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Admin/homeAccount">Profilo</a> <li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Admin/homepage">Profilo</a> <li>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Logout">Logout</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/logout">Logout</a> </li>
         </ul>
       </div>
     </div>
@@ -49,10 +50,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3" style="">   <!--href="/BookAndPlay/GestionePartita/crea-cancella"--> 
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/homeAccount">Elenco Account</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/Partite">Crea/Cancella</i>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/Modifica">Modifica Partita</i></a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/RicaricaConto">Ricarica Conto</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/homepage">Elenco Account</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/partite">Crea/Cancella</i>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/modifica">Modifica Partita</i></a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/ricaricaConto">Ricarica Conto</a>
         </div>
         <div class="col-9 col-md-8" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
           <div class="tab-content">
@@ -170,10 +171,10 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="/BookAndPlay/Admin/homeAccount">Elenco Account</a></li>
-            <li> <a href="/BookAndPlay/Admin/Partite">Crea/Cancella</i></li>
-            <li> <a href="/BookAndPlay/Admin/Modifica">Modifica Partita</i></a></li>
-            <li> <a href="/BookAndPlay/Admin/RicaricaConto">Ricarica Conto</a></li>
+            <li> <a href="/BookAndPlay/Admin/homepage">Elenco Account</a></li>
+            <li> <a href="/BookAndPlay/Admin/partite">Crea/Cancella</i></li>
+            <li> <a href="/BookAndPlay/Admin/modifica">Modifica Partita</i></a></li>
+            <li> <a href="/BookAndPlay/Admin/ricaricaConto">Ricarica Conto</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">

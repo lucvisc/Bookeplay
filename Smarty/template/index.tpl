@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Luca Visconti, Catriel De Biase">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
   <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/template/img/favicon.png">
@@ -18,13 +19,13 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/Registrati">Register</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registratazioneUtente">Register</a> </li>
         </ul>
       </div>
     </div>
@@ -83,8 +84,8 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="#">Home</a><span class="sr-only">(current)</span></a> </li>
-            <li> <a href="/BookAndPlay/GestionePartite/PartiteAttive">Partite Attive</a> </li>
+            <li> <a href="/BookAndPlay/">Home</a> </li>
+            <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
             <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
           </ul>
         </div>

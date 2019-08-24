@@ -21,19 +21,19 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
           {if $userlogged!='nouser'}
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Utente/ProfiloUtente">Profilo</a> <li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> <li>
           </ul>
         <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Logout">Logout</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
         </ul>
         {else} 
           <ul class="navbar-nav">
-          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/Utente/Login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Registrati">Register</a> </li>
+          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
         </ul>
         {/if}
       </div>
@@ -48,9 +48,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3" style="">
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Profilo">Profilo</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Partite">Crea/Partecipa</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Utente/Riepilogo">Riepilogo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/User/profilo">Profilo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/User/partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/User/riepilogo">Riepilogo</a>
         </div>
           <div class="row">
             <div class="col-md-12"></div>
@@ -58,8 +58,6 @@
         </div>
         <div class="col-9 col-md-8" style="">
           <div class="tab-content">
-            <div class="tab-pane fade" id="tabtwo" role="tabpanel"><a class="btn btn-primary" href="#">Button</a></div>
-            <div class="tab-pane fade" id="tabthree" role="tabpanel">
             </div>
           </div>
           <div class="row">
@@ -78,14 +76,16 @@
                     <div class="form-group"> <label for="form21" class="text-light">Inserisci la vecchia password</label> <input type="password" name="old_password" required="required" class="form-control" id="form16" </div>
                     <div class="form-group"> <label for="form21" class="text-light">Inserisci la nuova password</label> <input type="password" name="new_password" required="required" class="form-control" id="form16" </div>
                    </div>
-                  </form> 
+                   
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12 shadow-none text-center " style=""><input type="submit" class="btn btn-primary" value="Modifica Profilo" style=""/>
+            <div class="col-md-12 shadow-none text-center " style="">
+              <input type="submit" class="btn btn-primary" value="Modifica Profilo" style=""/>
             </div>
+            </form>
           </div>
           
           {if $errorEmail!='ok'}
@@ -126,9 +126,9 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="#">Home</a><span class="sr-only">(current)</span></a> </li>
-            <li> <a href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
-            <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+            <li> <a href="/BookAndPlay/">Home</a></a> </li>
+            <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
+            <li> <a href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">

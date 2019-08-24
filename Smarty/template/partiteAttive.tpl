@@ -1,11 +1,13 @@
 <!DOCTYPE html>
+{assign var='userlogged' value=$userlogged|default:'nouser'}
 <html>
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">{assign var='userlogged' value=$userlogged|default:'nouser'}
+<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Luca Visconti, Catriel De Biase">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css" style="">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -16,13 +18,13 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/Utente/Login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Registrati">Register</a> </li>
+          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registratazioneUtente">Register</a> </li>
         </ul>
       </div>
     </div>
@@ -41,14 +43,18 @@
             <div class="col-md-12" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
               <div class="row" style="">
                 <div class="col-md-12">
-                  <h3 class="text-light mx-0 text-center">Partite Attive:&nbsp;</h3>
+                  <h3 class="text-light mx-0 text-center">Partite Attive:</h3>
                   <div class="col-md-12   " style="">
                     <div class="form-group row m-2" style="">
                       <div class="col-md-2 mt-1 text-body" style=""><label class="col-2 col-md-6 text-right text-light">Giorno:</label></div>
                       <div class="col-md-6" style="">
-                        <form class="form-inline" style="">
+                        <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttive" method="POST">
                           <div class="input-group">
-                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Search" style=""> &gt; <div class="input-group-append"><button class="btn btn-info" type="button"><i class="fa fa-search" aria-hidden="true"></i></button></div>
+                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="">
+                            <div class="input-group-append">
+                              <input type="submit" class="btnRegister" value="Cerca"/></i>
+                              </button>
+                            </div>
                           </div>
                         </form>
                       </div>
@@ -63,27 +69,20 @@
                 </div>
               </div>
               <div class="col-md-6 col-lg-12 rounded" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;"> {if $array} {foreach $array as $booking} <div class="row" style="">
-                  <div class="col-md-12 ">
-                    <div class="row" style="">
-                      <div class="col-md-12">
-                        <div class="row">
-                          <div class="col-md-11" style="">
-                            <div class="col-md-12 col-1 m-2" style="">
-                              <h3 class="m-0 text-light border border-light rounded" style="">
-                                <div class="row">
-                                  <div class="border-light my-2 ml-2" style="">
-                                    <h4 class="ml-5 text-light">ID Partite:{$booking-&gt;getIdbooking()}</h4>
-                                    <h4 class="ml-5 text-light">Campetto Numero:{$booking-&gt;getNumerocampo()}</h4>
-                                    <h4 class="ml-5 text-light">Partecipanti:{$booking-&gt;getPartecipanti()}</h4>
-                                    <h4 class="ml-5 text-light">Fascia Oraria:{$booking-&gt;getGiornobooking()}</h4>
+
+                            <div class="col-md-11" style="">
+                              <div class="col-md-12 col-1 m-2" style="">
+                                <h3 class="m-0 text-light border border-light rounded" style="">
+                                  <div class="row">
+                                    <div class="border-light my-2 ml-2" style="">
+                                      <h4 class="ml-5 text-light">ID Partite:{$booking->getIdbooking()}</h4>
+                                      <h4 class="ml-5 text-light">Campetto Numero:{$booking->getNumerocampo()}</h4>
+                                      <h4 class="ml-5 text-light">Partecipanti:{$booking->getPartecipanti()}</h4>
+                                      <h4 class="ml-5 text-light">Fascia Oraria:{$booking->getGiornobooking()}</h4>
+                                    </div>
                                   </div>
-                                </div>
-                              </h3>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                                </h3>
+                              </div>
                   </div>
                 </div>{/foreach} {else} <p>Non sono presenti delle partite con tale parametro di ricerca</p> {/if} </div>
             </div>
@@ -105,8 +104,8 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="#">Home</a><span class="sr-only">(current)</span></a> </li>
-            <li> <a href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
+            <li> <a href="/BookAndPlay/">Home</a> </li>
+            <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
             <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
           </ul>
         </div>

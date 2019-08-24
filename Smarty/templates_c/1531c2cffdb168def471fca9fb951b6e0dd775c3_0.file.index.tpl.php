@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-23 19:22:40
+/* Smarty version 3.1.33, created on 2019-08-24 11:28:38
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6020e04769f6_34615763',
+  'unifunc' => 'content_5d610346be4440_08092654',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1531c2cffdb168def471fca9fb951b6e0dd775c3' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\index.tpl',
-      1 => 1566580913,
+      1 => 1566636630,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6020e04769f6_34615763 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d610346be4440_08092654 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Luca Visconti, Catriel De Biase">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
   <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/template/img/favicon.png">
@@ -41,13 +42,13 @@ function content_5d6020e04769f6_34615763 (Smarty_Internal_Template $_smarty_tpl)
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/Registrati">Register</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registratazioneUtente">Register</a> </li>
         </ul>
       </div>
     </div>
@@ -106,8 +107,8 @@ function content_5d6020e04769f6_34615763 (Smarty_Internal_Template $_smarty_tpl)
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="#">Home</a><span class="sr-only">(current)</span></a> </li>
-            <li> <a href="/BookAndPlay/GestionePartite/PartiteAttive">Partite Attive</a> </li>
+            <li> <a href="/BookAndPlay/">Home</a> </li>
+            <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
             <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
           </ul>
         </div>

@@ -17,19 +17,19 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
           {if $userlogged!='nouser'}
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/ProfiloUtente">Profilo</a> <li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> <li>
           </ul>
         <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/Logout">Logout</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
         </ul>
         {else} 
           <ul class="navbar-nav">
-          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/Login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/Registrati">Register</a> </li>
+          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
         </ul>
         {/if}
       </div>
@@ -53,9 +53,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3" style="">
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/Profilo">Profilo</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/Partite">Crea/Partecipa</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/Riepilogo">Riepilogo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/User/profilo">Profilo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/User/partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/User/riepilogo">Riepilogo</a>
         </div>
         <div class="col-9 col-md-8" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <div class="tab-content">
@@ -66,9 +66,12 @@
               <div class="form-group row m-2" style="">
                 <div class="col-md-3 mt-1" style=""><label class="text-light col-2 col-md-6 text-right">Giorno:</label></div>
                 <div class="col-md-6" style="">
-                  <form class="form-inline" style="" action="/BookAndPlay/User/crea-partita" method="POST">
+                  <form class="form-inline" style="" action="/BookAndPlay/User/creaPartita" method="POST">
                     <div class="input-group">
-                      <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="" required="required"><div class="input-group-append"><button class="btn btn-info" type="button"><i class="fa fa-search" aria-hidden="true"></i></button></div>
+                      <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="" required="required">
+                      <div class="input-group-append">
+                        <input type="submit" class="btn btn-secondary" value="Cerca Giorno"/>
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -102,7 +105,7 @@
                   <h5 class="text-light text-left">Fascia Oraria:</h5>
                 </div>
                 <div class="col-md-5 offset-md-1" style="">
-                  <form class="form-inline" style="" action="/BookAndPlay/Utente/crea-partita" method="POST">
+                  <form class="form-inline" style="" action="/BookAndPlay/Utente/creaPartita" method="POST">
                     <div class="input-group">
                       <input type="number" name="fascia_oraria" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="" required="required"></div>
                 </div>
@@ -132,17 +135,14 @@
                 <div class="col-md-5 offset-md-1" style="">
                     <div class="input-group">
                       <input type="text" name="descrizione" class="form-control" id="inlineFormInputGroup" value="{note}" placeholder="Search" style=""></div>
-                  </form>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 mx-3">
                   <input type="submit" class="btn btn-secondary" value="Prenota partita"/>
-                  <!--
-                  <a class="btn btn-secondary" href="prenotazione-effettuata.html">Prenota partita</a>
-                  -->
                 </div>
               </div>
+              </form>
             </div>
           </div>
         </div>
@@ -161,9 +161,9 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="#">Home</a><span class="sr-only">(current)</span></a> </li>
-            <li> <a href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
-            <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+            <li> <a href="/BookAndPlay/">Home</a></a> </li>
+            <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
+            <li> <a href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">

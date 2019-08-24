@@ -17,13 +17,13 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/Utente/Login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Registrati">Register</a> </li>
+          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registratazioneUtente">Register</a> </li>
         </ul>
       </div>
     </div>
@@ -71,13 +71,13 @@
       <div class="row">
       </div>
       <div class="row mx-5" style="">
-        <div class="col-lg-4 col-md-1 p-4" style=""> <img class="img-fluid d-block mb-3 mx-auto rounded-circle" src="img/avatar_luca.jpg" alt="Card image cap" width="200" style="  background-image: url(../img/avatar_luca.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+        <div class="col-lg-4 col-md-1 p-4" style=""> <img class="img-fluid d-block mb-3 mx-auto rounded-circle" src="img/avatar_luca.jpg" alt="Card image cap" width="200" style="  background-image: url(img/avatar_luca.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <h4> <b>Luca Visconti</b></h4>
           <p class="mb-0">CEO and founder</p>
           <p class="mb-0">luca.visco@hotmail.com</p>
           <p class="mb-0">+39 1234567890</p>
         </div>
-        <div class="col-lg-4 col-md-8 p-4 offset-md-4" style=""> <img class="img-fluid d-block mb-3 mx-auto rounded-circle" src="img/avatar_catriel.jpg" alt="Card image cap" width="200" style=" background-image: url(../img/avatar_catriel.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+        <div class="col-lg-4 col-md-8 p-4 offset-md-4" style=""> <img class="img-fluid d-block mb-3 mx-auto rounded-circle" src="img/avatar_catriel.jpg" alt="Card image cap" width="200" style=" background-image: url(img/avatar_catriel.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <h4>Catriel De Biase</h4>
           <p class="mb-0">CEO and founder</p>
           <p class="mb-0">catriel.debiase@gmail.com</p>
@@ -92,8 +92,8 @@
         <div class="col-lg-3 col-6 p-3" style="">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="#">Home</a><span class="sr-only">(current)</span></a> </li>
-            <li> <a href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
+            <li> <a href="/BookAndPlay/">Home</a> </li>
+            <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
             <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
           </ul>
         </div>

@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Luca Visconti, Catriel De Biase">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
   <script> function ready(){
@@ -24,20 +25,20 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/Utente/Login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Registrati">Register</a> </li>
+          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registratazioneUtente">Register</a> </li>
         </ul>
       </div>
     </div>
   </nav>
   <div class="py-5 text-center h-100 shadow-lg" style="background-image: url(&quot;../../o_1cemks1p1qnq184a19vfgs33e2a.png&quot;); background-size: cover; background-position: left top; background-repeat: repeat;">
     <div class="container">
-      <form action="/BookAndPlay/Utente/login" method="POST">
+      <form action="/BookAndPlay/User/login" method="POST">
         <div class="row">
           <div class="mx-auto col-md-6 col-10 bg-white p-5 bg-info rounded" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
             <h1 class="mb-4">Log in</h1>
@@ -52,7 +53,7 @@
             <button class="btn login_btn btn-dark text-light">Log in</button>
             <div class="mt-1">
               <p align="center" class="text-dark">Non hai un account? <br>
-                <a href="register-support.html">Registrati</a> <br>
+                <a href="/BookAndPlay/User/registratazioneUtente">>Registrati</a> <br>
               </p>
             </div>
           </div>
