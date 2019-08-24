@@ -20,9 +20,7 @@ class VUser {
      * @throws SmartyException
      */
     public function showFormLogin(){
-        if (isset($_POST['conveyor']))  //Una matrice associativa di variabili passata allo script corrente tramite HTTP POST
-            $this->smarty->assign('email',$_POST['conveyor']);  // nel momento in cui clicco sul tasto di submit
-        $this->smarty->display('login-support.tpl');
+        $this->smarty->display('loginSupport.tpl');
     }
 
     /**
@@ -47,7 +45,7 @@ class VUser {
     public function loginError()
     {
         $this->smarty->assign('error', "errore");
-        $this->smarty->display('login-support.tpl');
+        $this->smarty->display('loginSupport.tpl');
     }
 
     /**
@@ -91,7 +89,7 @@ class VUser {
         $this->smarty->assign('nome', $user->getName());
         $this->smarty->assign('cognome', $user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
-        $this->smarty->display('profilo-utente.tpl');
+        $this->smarty->display('profiloUtente.tpl');
     }
 
     /**
@@ -99,7 +97,7 @@ class VUser {
      * @throws SmartyException
      */
     public function showFormRegistration() {
-        $this->smarty->display('register-support.tpl');
+        $this->smarty->display('registerSupport.tpl');
     }
 
     /**
@@ -119,7 +117,7 @@ class VUser {
                 $this->smarty->assign('errorSize',"errore");
                 break;
         }
-        $this->smarty->display('register-support.tpl');
+        $this->smarty->display('registerSupport.tpl');
     }
 
     /**

@@ -113,13 +113,13 @@ class CAdmin{
 		if($_SERVER['REQUEST_METHOD'] == "POST") {
 			$pm = new FPersistentManager();
 			$pm->delete("id", $id, "FBooking");
-			header('Location: /BookAndPlay/Admin/prenotazioni');
+			header('Location: /BookAndPlay/Admin/partite');
 		}
 		elseif($_SERVER['REQUEST_METHOD'] == "GET") {
 			if (CUser::isLogged()) {
 				$account = unserialize($_SESSION['account']);
 				if ($account->getEmail() == "admin@admin.com") {
-					header('Location: /BookAndPlay/Admin/prenotazioni');
+					header('Location: /BookAndPlay/Admin/partite');
 				}
 				else {
 					$view = new VError();

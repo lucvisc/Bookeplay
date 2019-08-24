@@ -112,7 +112,7 @@ class VGestionePartite {
             $this->smarty->assign('cognome', $utente->getSurname());
             $this->smarty->assign('conto', $acc->getConto());
             $this->smarty->assign('userlogged', "loggato");
-            $this->smarty->display('crea-partita.tpl');
+            $this->smarty->display('creaPartita.tpl');
     }
 
     /**
@@ -199,7 +199,7 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $idPren,$img) {
+    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $part ,$img) {
         //list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         //$this->smarty->assign('pic64', $pic64);
@@ -208,7 +208,7 @@ class VGestionePartite {
         $this->smarty->assign('cognome',$user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
         $this->smarty->assign('array',$part);
-        $this->smarty->display('prenotazione-effettuata.tpl');
+        $this->smarty->display('prenotazioneEffettuata.tpl');
     }
 
     /**

@@ -40,8 +40,11 @@ class CFrontController {
                         }
                         $num = (count($param));
                         print_r($num); echo "\n";
-                        if ($num == 0) {$controller::$function();
-                        print($controller::$function()); echo "\n"; }
+                        if ($num == 0) {print "ok";
+                                        print ($controller);  echo "\n";
+                                        print ($function);  echo "\n";
+                            $controller::$function();
+                        }
                         else if ($num == 1) $controller::$function($param[0]);
                         else if ($num == 2) $controller::$function($param[0], $param[1]);
                         //else if ($num == 3) $controller::$function($param[0], $param[1], $param[2]);
