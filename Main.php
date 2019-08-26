@@ -2,13 +2,27 @@
 
 require_once 'include.php';
 
+$result=FBooking::LoadBooking('20/03/2001');
+print_r($result);
+/*$result=FBooking::exist('Quota', 50);
+print("$result\n");
+$result=FBooking::update('Quota', 55, 'idP', 1);
+$pren=new EBooking(null,'medio', '18/03/2016', '10:00-11:00', '');
+//FBooking::store($pren);
+$result=FBooking::LoadBooking('20/03/2001');
+print_r($result);
+FBooking::delete('Quota', 55);
+
+/*$contr=new CFrontController();
+$path='/bookeplay/User/login';
+$contr->run($path);
 
 /*$view = new VUser();
 $view->showFormLogin();
 $info= new VInfo();
 $info->showInformazioni();
 */
-$index= new VIndex();
+/*$index= new VIndex();
 $index->showHomepage();
 
 /*$booking = new EBooking('','professionista','livello molto alto');
