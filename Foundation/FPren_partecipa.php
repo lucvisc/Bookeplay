@@ -14,11 +14,11 @@ class FPren_partecipa {
     /**
      * tabella di riferimento su database
      */
-    private static $table = "pren_partecipa";
+    private static $table = "pren_partecipa (`idPren`,`email`);";
     /**
      * valori della tabella
      */
-    private static $values = "(:idPren,:idAcc)";
+    private static $values = "(:idPren,:email)";
 
     /**
      * FPren_creata construct
@@ -49,15 +49,18 @@ class FPren_partecipa {
         return self::$values;
     }
 
+
+
+
     /**
      * Metodo che permette di inserire una nuova prenotazione nel database
      * @param $idPren, id della prenotazione
-     * @param $idAcc, id dell'account che sta partecipando alla prenotazione
+     * @param $email, id dell'account che sta partecipando alla prenotazione
      * @return false|PDOStatement|null
      */
-    static function insert ($idPren , $idAcc) {
+    static function insert ($idPren , $email) {
         $db = FDatabase::getInstance();
-        $id = $db->insertPren_creata($idPren, $idAcc);
+        $id = $db->insertPren_creata($idPren, $email);
         return $id;
     }
 
@@ -72,6 +75,19 @@ class FPren_partecipa {
         $result=$db->loadDB(static::getClass(), $field, $id);
         return ($result);
     }
+
+    /**
+     * Metodo che permette di ritornare tutte le prenotazioni da oggi
+     * @param $giorno
+     * @return object $username Account
+     */
+    public static function loadPrenPart($id){
+        $boo=null;
+        $db=FDatabase::getInstance();
+        $result=$db->getPrenotazionePartecipa($id);
+        return $result;
+    }
+
 
 }
 ?>
