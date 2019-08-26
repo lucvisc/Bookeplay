@@ -97,14 +97,14 @@ class FBooking{
         $db=FDatabase::getInstance();
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
-        if(($result!=null) && ($rows_number == 1)) {        //:idbooking,:quota,:giornobooking,:partita,:giornobooking
-            $boo=new EBooking($result['idP'],$result['quota'], $result['livello'], $result['note']);
+        if(($result!=null) && ($rows_number == 1)) {
+            $boo=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                    $boo=new EBooking($result['idP'],$result['quota'], $result['livello'], $result['note']);
+                    $boo=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note']);
                 }
             }
         }
@@ -156,18 +156,18 @@ class FBooking{
      * @param $giorno
      * @return object $username Account
      */
-    public static function LoadBooking(){
+    public static function LoadBooking( string $giorno){
         $boo=null;
         $db=FDatabase::getInstance();
-        list ($result, $rows_number)=$db->getbooking();
+        list ($result, $rows_number)=$db->getbooking($giorno);
         if(($result!=null) && ($rows_number == 1)) {        //:idbooking,:quota,:giornobooking,:partita,:giornobooking
-            $boo=new EBooking($result['idP'],$result['quota'], $result['livello'], $result['note']);
+            $boo=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']));
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                    $boo=new EBooking($result['idP'],$result['quota'], $result['livello'], $result['note']);
+                    $boo=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']));
                 }
             }
         }
