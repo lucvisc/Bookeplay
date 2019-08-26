@@ -433,36 +433,17 @@ class FDatabase {
         return $obj;
     }
 
-    /**
-     * Metodo che aggiunge una nuova possibile prenotazione creata nel db
-     * @param $idPren , id della prenotazione
-     * @param $idAcc , id dell'account che ha effettuato la prenotazione
-     * @return false|PDOStatement|null
-     */
-    public function insertPren_creata($idPren, $idAcc) {
-        try {
-            $this->db->beginTransaction();
-            $id = $this->db->query("INSERT INTO pren_creata (idPren, idAcc) VALUES('$idPren','$idAcc')");
-            $this->db->commit();
-            $this->closeDbConnection();
-            return $id;
 
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
-            return null;
-        }
-    }
     /**
      * Metodo che aggiunge una prenotazione nel db
      * @param $idPren , id della prenotazione
      * @param $idAcc , id dell'account che sta partecipando alla prenotazione
      * @return false|PDOStatement|null
      */
-    public function insertPren_partecipa($idPren, $idAcc) {
+    public function insertPren_partecipa($idPren, $email) {
         try {
             $this->db->beginTransaction();
-            $id = $this->db->query("INSERT INTO pren_partecipa (idPren, idAcc) VALUES('$idPren','$idAcc')");
+            $id = $this->db->query("INSERT INTO pren_partecipa VALUES($idPren,$email)");
             $this->db->commit();
             $this->closeDbConnection();
             return $id;
@@ -500,7 +481,7 @@ class FDatabase {
      * @param $id, fk booking
      * @return false|PDOStatement|null
      */
-    public function insertGiorno ($ad) {
+    public function insertGiorno ($id) {
         try {
             $this->db->beginTransaction();
             $id = $this->db->query("INSERT INTO giorno (id) VALUES($id);");
@@ -622,10 +603,46 @@ class FDatabase {
      */
     public function getBooking ($giorno) {
         try {
-            $query = "SELECT * FROM prenotazione where giorno=".$giorno."  ;";
+            $query = "SELECT * FROM prenotazione where Giorno="."'".$giorno."'"."  ;";
+            echo $query;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
+            print_r($stmt->errorInfo());
             $num = $stmt->rowCount();
+            echo $num;
+            if ($num == 0) {
+                $result = null;        //nessuna riga interessata. return null
+            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            } else {
+                $result = array();                         //nel caso in cui piu' righe fossero interessate
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
+                while ($row = $stmt->fetch())
+                    $result[] = $row;                    //ritorna un array di righe.
+            }
+            return array($result, $num);
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
+     * Funzione utilizzata per ritornare i partecipanti di una specifica prenotazione.
+     * Utilizzata nella pagina admin
+     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @return array|null
+     */
+    public function getPrenotazionePartecipa ($idPren) {
+        try {
+            $query = "SELECT * FROM pren_partecipa where idPren="."'".$idPren."'"."  ;";
+            echo $query;
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            print_r($stmt->errorInfo());
+            $num = $stmt->rowCount();
+            echo $num;
             if ($num == 0) {
                 $result = null;        //nessuna riga interessata. return null
             } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata

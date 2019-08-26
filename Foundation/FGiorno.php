@@ -15,11 +15,11 @@ class FGiorno {
     /**
      * tabella di riferimento
      */
-    private static $tables = "giorno";
+    private static $tables = "giorno (`Giorno`,`FasciaOraria`,);";
     /**
      * valori della tabella
      */
-    private static $values = "(:Giorno,:idFasciaOraria)";
+    private static $values = "(:Giorno,:FasciaOraria)";
 
     public function __construct(){}
 
@@ -31,7 +31,7 @@ class FGiorno {
     public static function bind($stmt, EGiorno $gg)
     {
         $stmt->bindValue(':Giorno', $gg->getGiorno(), PDO::PARAM_STR);
-        $stmt->bindValue(':idFasciaOraria', $gg->getFasceOrarie(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
+        $stmt->bindValue(':FasciaOraria', $gg->getFasceOrarie(), PDO::PARAM_STR); //ricorda di "collegare" la giusta variabile al bind
     }
 
     /**
@@ -85,12 +85,12 @@ class FGiorno {
         $result = $db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
         if (($result != null) && ($rows_number == 1)) {
-            $giorno = new EGiorno($result['giorno'], $result['idFasciaOraria']);
+            $giorno = new EGiorno($result['Giorno'], $result['FasciaOraria']);
         } else {
             if (($result != null) && ($rows_number > 1)) {
                 $giorno = array();
                 for ($i = 0; $i < count($result); $i++) {
-                    $giorno[] = new EGiorno($result[$i]['giorno'], $result[$i]['idFasciaOraria']);
+                    $giorno[] = new EGiorno($result[$i]['Giorno'], $result[$i]['FasciaOraria']);
                 }
             }
         }
@@ -155,13 +155,13 @@ class FGiorno {
         $db=FDatabase::getInstance();
         list ($result, $rows_number)=$db->getGiorni($giorno);
         if(($result!=null) && ($rows_number == 1)) {        //:Giorno,:idFasciaOraria
-            $giorno=new EGiorno($result['Giorno'],$result['idFasciaOraria']);
+            $giorno=new EGiorno($result['Giorno'],$result['FasciaOraria']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $giorno = array();
                 for($i=0; $i<count($result); $i++){
-                    $Giorno[]=new EGiorno($result[$i]['Giorno'],$result[$i]['idFasciaOraria']);
+                    $Giorno[]=new EGiorno($result[$i]['Giorno'],$result[$i]['FasciaOraria']);
                 }
             }
         }
