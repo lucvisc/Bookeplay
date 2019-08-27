@@ -37,16 +37,21 @@ class EBooking {
      * @AttributeType string
      */
     private $note;
+    /**
+     * @AttributeType Array di 10 elementi
+     */
+    private $partecipanti;
 
 
     //Dichiarazione del costruttore
-    function __construct(string $liv=null, string $g=null, string $fa=null, string $not)
+    function __construct(int $id=null,string $liv=null, string $g=null, string $fa=null, string $not=null, array $part=null)
     {
-        $this->idbooking = null;
+        $this->idbooking = $id;
         $this->quota = 50;
         $this->livello = $liv;
         $this->giornobooking=new EGiorno($g, $fa);
         $this->note= $not;
+        $this->partecipanti=$part;
     }
 
     //Dichiarazione dei metodi Get

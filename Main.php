@@ -2,8 +2,11 @@
 
 require_once 'include.php';
 
-$result=FBooking::LoadBooking('20/03/2001');
+//FPren_partecipa::insert(1, 'Cat@gmail.com');
+$result=FBooking::LoadBooking('24/04/2018');
 print_r($result);
+$result=FPren_partecipa::countPrenPart(1);
+echo $result;
 /*$result=FBooking::exist('Quota', 50);
 print("$result\n");
 $result=FBooking::update('Quota', 55, 'idP', 1);

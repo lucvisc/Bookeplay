@@ -53,14 +53,14 @@ class FPren_partecipa {
 
 
     /**
-     * Metodo che permette di inserire una nuova prenotazione nel database
+     * Metodo che permette di inserire un partecipante ad una prenotazione nel database
      * @param $idPren, id della prenotazione
      * @param $email, id dell'account che sta partecipando alla prenotazione
      * @return false|PDOStatement|null
      */
     static function insert ($idPren , $email) {
         $db = FDatabase::getInstance();
-        $id = $db->insertPren_creata($idPren, $email);
+        $id = $db->insertPren_partecipa($idPren, $email);
         return $id;
     }
 
@@ -77,16 +77,30 @@ class FPren_partecipa {
     }
 
     /**
-     * Metodo che permette di ritornare tutte le prenotazioni da oggi
+     * Metodo che permette di ritornare tutti partecipanti di una specifica prenotazione
      * @param $giorno
      * @return object $username Account
      */
     public static function loadPrenPart($id){
-        $boo=null;
         $db=FDatabase::getInstance();
         $result=$db->getPrenotazionePartecipa($id);
         return $result;
     }
+
+    /**
+     * Metodo che permette contare quanti partecipanti ci sono in una specifica prenotazione
+     * @param $giorno
+     * @return object $username Account
+     */
+    public static function countPrenPart($id){
+        $db=FDatabase::getInstance();
+        $result=$db->getCountPartecipa($id);
+        return $result;
+    }
+
+
+
+
 
 
 }

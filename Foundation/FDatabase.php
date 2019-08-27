@@ -435,18 +435,19 @@ class FDatabase {
 
 
     /**
-     * Metodo che aggiunge una prenotazione nel db
+     * Metodo che aggiunge un partecipante ad una prenotazione nel db
      * @param $idPren , id della prenotazione
-     * @param $idAcc , id dell'account che sta partecipando alla prenotazione
+     * @param $email , email dell'account che sta partecipando alla prenotazione
      * @return false|PDOStatement|null
      */
     public function insertPren_partecipa($idPren, $email) {
         try {
             $this->db->beginTransaction();
-            $id = $this->db->query("INSERT INTO pren_partecipa VALUES($idPren,$email)");
+            $query=("INSERT INTO pren_partecipa VALUES($idPren,'".$email."')");
+            $stmt=$this->db->prepare($query);
+            $stmt->execute();
             $this->db->commit();
             $this->closeDbConnection();
-            return $id;
 
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
@@ -644,16 +645,17 @@ class FDatabase {
             $num = $stmt->rowCount();
             echo $num;
             if ($num == 0) {
-                $result = null;        //nessuna riga interessata. return null
+                $comodo = null;        //nessuna riga interessata. return null
             } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+                $comodo = $stmt->fetch(PDO::FETCH_ASSOC);//ritorna una sola riga
+                $result=$comodo['email'];
             } else {
                 $result = array();                         //nel caso in cui piu' righe fossero interessate
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
                 while ($row = $stmt->fetch())
-                    $result[] = $row;                    //ritorna un array di righe.
+                    $result[] = $row['email'];                   //ritorna un array di righe.
             }
-            return array($result, $num);
+            return array($result);
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
@@ -738,6 +740,28 @@ class FDatabase {
             $this->db->rollBack();
             return null;
         }
+    }
+
+    /**
+     * Metodo he restituisce il numero dei partecipanti
+     * @param $id della prenotazione della quale si vogliono conoscere i patecipanti
+     * @return int|null
+     */
+    public function getCountPartecipa($id){
+        try{
+            $this->db->beginTransaction();
+            $query="SELECT * FROM pren_partecipa where idPren=$id";
+            $stmt=$this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            return $num;
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+
+
     }
 
 
