@@ -45,6 +45,7 @@
     require_once 'Foundation\FBooking.php';
     require_once 'Foundation\FGiorno.php';
     require_once 'Foundation\FPren_partecipa.php';
+    require_once 'Foundation\FPersistentManager.php';
     /**
     * Inclusione dei file contenuti nella cartella View
     */

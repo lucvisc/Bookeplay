@@ -279,16 +279,18 @@ class FDatabase {
         try {
             $query = null;
             $class = "FAccount";
-            $query = "SELECT * FROM " . $class::getTables() . " WHERE email ='" . $email . "' AND password ='" . $pass . "';";
+            $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE email ='" . $email . "' AND password ='" . $pass . "';";
+
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
             if ($num == 0) {
-                $result = null;                 //nessuna riga interessata. return null
+                $result = null;                  //nessuna riga interessata. return null
             } else {                             //nel caso in cui una sola riga fosse interessata
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
             }
             return $result;
+
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();

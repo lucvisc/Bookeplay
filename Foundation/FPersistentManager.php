@@ -91,9 +91,9 @@ class FPersistentManager {
      * Metodo che permette di ottenere tutte le partite presenti sul db
      * @return array|EBooking|null
      */
-    public static function loadPartiteAttive () {
+    public static function loadPartiteAttive ($giorno) {
         $ris = null;
-        $ris = FBooking::LoadBooking();
+        $ris = FBooking::LoadBooking($giorno);
         return $ris;
     }
 

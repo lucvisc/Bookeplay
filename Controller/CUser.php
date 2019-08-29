@@ -41,10 +41,22 @@ class CUser {
 	 * 4) se si verifica la presenza di particolari cookie avviene il reindirizzamento alla pagina specifica.
 	 */
 	static function verifica() {
-		$view = new VUtente();
-		$pm = new FPersistentManager();
-		$account = $pm->loadLogin($_POST['email'], md5($_POST['password']));
-		if ($account != null && $account->getActivate() != false) {
+		$view = new VUser();
+		//$pm = new FPersistentManager();
+		//$account = $pm->loadLogin($_POST['email'], md5($_POST['password']));
+
+        $db= FDatabase::getInstance();
+        $account = $db->loadVerificaAccesso($_POST['email'], md5($_POST['password']));
+
+        print($_POST['email']);
+        print($_POST['password']);
+        print_r($account);
+
+
+		if ($account != null ) {//&& $account->getActivate() != false
+
+		    print "ok";
+
 			if (session_status() == PHP_SESSION_NONE) {
                 session_set_cookie_params('3600'); // 1 ora dal login
 				session_start();
@@ -52,7 +64,8 @@ class CUser {
 				$_SESSION['account'] = $salvare;
 				if ($_POST['email'] != 'admin@admin.com') {
 					if (isset($_COOKIE['nome_visitato'])) {
-						header('Location: /BookAndPlay/User');
+						//header('Location: /BookAndPlay/User/profile');
+                        $view->showProfile();
 					}
 					else {
 					    header('Location: /BookAndPlay/homepage');
@@ -149,7 +162,6 @@ class CUser {
 	static function registrazioneUtente(){
 		if($_SERVER['REQUEST_METHOD']=="GET") {
 			$view = new VUser();
-			$pm = new FPersistentManager();
 			if (static::isLogged()) {
 			    $view->showProfileUser();
             }

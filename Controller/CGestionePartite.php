@@ -5,7 +5,7 @@
  * @author Luca, Catriel
  * @package Controller
  */
-//require_once 'include.php';
+require_once 'include.php';
 
 class CGestionePartite {
 
@@ -17,6 +17,7 @@ class CGestionePartite {
      * 2) se il metodo di richiesta HTTP è POST viene richiamata la funzione di Creazione().
      * 3) se il metodo di richiesta HTTP è diverso da uno dei precedenti viene vializzato l'errore.
      */
+
     static function creaPartita() {
         if (CUser::isLogged()) {
             $view = new VGestionePartite();
@@ -152,6 +153,30 @@ class CGestionePartite {
         else
             header('Location: /BookAndPlay/User/login');
     }
+
+    /**
+     * Funzione che si occupa di eliminare una prenotazione soltanto se l'utente è loggato ed è Admin
+     * se l'utente non è admin mostra il profilo
+     * se l'utente non è loggato mostra la schermata di login
+     * @param $id id dell'annuncio da eliminare
+     */
+    static function partiteAttive(){
+        $view = new VGestionePartite();
+        $view->showPartiteAttive();
+    }
+
+    /**
+     * Funzione che si occupa di eliminare una prenotazione soltanto se l'utente è loggato ed è Admin
+     * se l'utente non è admin mostra il profilo
+     * se l'utente non è loggato mostra la schermata di login
+     * @param $id id dell'annuncio da eliminare
+     */
+    static function partiteAttiveGiorno(){
+        $view = new VGestionePartite();
+        $view->CercaPartiteAttive();
+    }
+
+
 }
 ?>
 

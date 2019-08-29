@@ -193,14 +193,16 @@ class FUser {
     $utente = null;
     $db=FDatabase::getInstance();
     $result=$db->loadVerificaAccesso($email, $pass);
+
          if (isset($result)){
-            $tra = FUser::loadByField("emailUtente" , $result["email"]);
+            $tra = FUser::loadByField("email" , $result["email"]);
             $admin = static::loadByField("email", $result["email"]);
             if ($tra)
             $utente = $tra;
             elseif ($admin)
             $utente = $admin;
          }
+
     return $utente;
     }
 
