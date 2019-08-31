@@ -19,18 +19,20 @@
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
-          {if $userlogged!='nouser'}
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> <li>
-          </ul>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li> 
+          {if $userlogged!='nouser'} 
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
+          <li>
+          </li>
+        </ul>
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
-        </ul>
+        </ul> 
         {else} 
-          <ul class="navbar-nav">
+        <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
-        </ul>
+        </ul> 
         {/if}
       </div>
     </div>
@@ -38,15 +40,15 @@
   <div class="py-5 h-100" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}"  alt="profile picture"/></div>
+        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
         <div class="col-md-7  offset-md-1" style="">
-                      <div class="row">
-                        <div class="col-md-12" style="">
-                          <h3 class="text-light">Nome: {$nome}</h3>
-                          <h3 class="text-light">Cognome:{$cognome}</h3>
-                          <h3 class="text-light">Conto:{$conto}</h3>
-                        </div>
-                      </div>
+          <div class="row">
+            <div class="col-md-12" style="">
+              <h3 class="text-light">Nome: {$nome}</h3>
+              <h3 class="text-light">Cognome:{$cognome}</h3>
+              <h3 class="text-light">Conto:{$conto}</h3>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -59,27 +61,32 @@
         </div>
         <div class="col-9 col-md-8" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <div class="tab-content">
-            </div>
           </div>
           <div class="row">
-            <div class="col-md-12" style="">
-              <div class="row" style="">
-                <div class="col-md-12 border-left border-right border-top border-bottom border-light rounded " style="">
-                  <h4 class="ml-5 text-light">Username: {$username}</h4>
-                  <h4 class="ml-5 text-light" style="">Email: {$email}</h4>
-                  <h4 class="ml-5 text-light" style="">Telefono: {$telefono}</h4>
-                  <h4 class="ml-5 text-light" style="">Data di nascita: {$datanasc}</h4>
-                  <h4 class="ml-5 text-light" style="">Sesso: {$gender}</h4>
+            <div class="col-md-12 border-left border-right border-top border-bottom border-light rounded " style="">
+              <h4 class="ml-5 text-light">Username: {$username}</h4>
+              <h4 class="ml-5 text-light">Email: {$email}</h4>
+              <h4 class="ml-5 text-light">Telefono: {$telefono}</h4>
+              <h4 class="ml-5 text-light">Data di nascita: {$datanasc}</h4>
+              <h4 class="ml-5 text-light">Sesso: {$gender}</h4>
+              <div class="row">
+                <div class="col-md-12 shadow-none text-center ">
                 </div>
               </div>
+              <div class="col-md-12 pl-5"><a class="btn btn-primary active my-2" href="/BookAndPlay/User/modificaProfilo">Modifica profilo</a></div>
+              <div class="row"></div>
             </div>
           </div>
-              <div class="row">
-                <div class="col-md-12 shadow-none text-center " style="">
-                  <a class="btn btn-primary active my-2" href="/BookAndPlay/User/modificaProfilo">Modifica profilo</a></div>
-              </div>
+        </div>
+        <div class="row"></div>
+        <div class="row">
         </div>
       </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row"></div>
     </div>
   </div>
   <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
@@ -95,7 +102,7 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="/BookAndPlay/">Home</a></a> </li>
+            <li> <a href="/BookAndPlay/">Home</a> </li>
             <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
             <li> <a href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
           </ul>
@@ -126,6 +133,11 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row"></div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

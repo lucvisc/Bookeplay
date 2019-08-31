@@ -1,5 +1,28 @@
-<!DOCTYPE html>
-{assign var='userlogged' value=$userlogged|default:'nouser'}
+<?php
+/* Smarty version 3.1.33, created on 2019-08-30 15:30:14
+  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\partiteAttive.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5d6924e6a2d052_25002681',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'c747ad05541719358447bd1eccd14c9b38c36e30' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\partiteAttive.tpl',
+      1 => 1567159662,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5d6924e6a2d052_25002681 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
+<?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
 
 <head></head>
@@ -70,8 +93,12 @@
                 </div>
               </div>
               <div class="col-md-6 col-lg-12 rounded" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;"> 
-                {if $array} 
-                {foreach $array as $booking} 
+                <?php if ($_smarty_tpl->tpl_vars['array']->value) {?> 
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['array']->value, 'booking');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
+?> 
                 <div class="row" style="">
 
                             <div class="col-md-11" style="">
@@ -79,18 +106,25 @@
                                 <h3 class="m-0 text-light border border-light rounded" style="">
                                   <div class="row">
                                     <div class="border-light my-2 ml-2" style="">
-                                      <h4 class="ml-5 text-light">ID Partite:{$booking->getIdbooking()}</h4>
-                                      <h4 class="ml-5 text-light">Campetto Numero:{$booking->getNumerocampo()}</h4>
-                                      <h4 class="ml-5 text-light">Partecipanti:{$booking->getPartecipanti()}</h4>
-                                      <h4 class="ml-5 text-light">Fascia Oraria:{$booking->getGiornobooking()}</h4>
+                                      <h4 class="ml-5 text-light">ID Partite:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Campetto Numero:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getNumerocampo();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Partecipanti:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getPartecipanti();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Fascia Oraria:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking();?>
+</h4>
                                     </div>
                                   </div>
                                 </h3>
                               </div>
                   </div>
                 </div>
-                {/foreach} 
-                {else} <p class="text-light">Non sono presenti delle partite con tale parametro di ricerca</p> {/if} </div>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?> 
+                <?php } else { ?> <p class="text-light">Non sono presenti delle partite con tale parametro di ricerca</p> <?php }?> </div>
             </div>
           </div>
         </div>
@@ -150,9 +184,16 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
 </body>
 
-</html>
+</html><?php }
+}

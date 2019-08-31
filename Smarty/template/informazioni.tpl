@@ -9,11 +9,12 @@
   <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/template/img/favicon.png">
 </head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(BookAndPlay/Smarty/template/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0 collapsed" type="button" data-toggle="collapse" data-target="#navbar12" aria-expanded="false">
+    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
-       <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="/BookAndPlay/">
+      </button>
+      <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="/BookAndPlay/">
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
@@ -23,7 +24,7 @@
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registratazioneUtente">Register</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
         </ul>
       </div>
     </div>
@@ -43,7 +44,7 @@
       <div class="row" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
         <div class="col-md-10">
           <h2 class="mb-3 text-light">Come funziona:</h2>
-          <p class="text-light">Hai voglia di giocare una partita di calcetto ma non hai tempo di organizzarla?<br>Tranquillo, ci pensa BookAndPlay ad organizzarla, Registrati subito e crea o partecipa ad una partita&nbsp;</p>
+          <p class="text-light">Hai voglia di giocare una partita di calcetto ma non hai tempo di organizzarla?<br>Tranquillo, ci pensa BookAndPlay ad organizzarla, Registrati subito e crea o partecipa ad una partita</p>
         </div>
       </div>
     </div>
@@ -53,7 +54,7 @@
       <div class="row" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
         <div class="col-md-10" style="">
           <h2 class="mb-3 text-light">Perché sceglierci?</h2>
-          <p class="text-light">Da utente non registrato puoi solo visionare le partite che altri utenti registrati hanno creato.<br>Da utente registrato oltre a poter visionare le partire, puoi partecipare ad una partita creata da un altro utente, in più puoi creare una partita nel giorno e nell'orario che più ti è comodo.&nbsp;<br>Che cosa aspetti a registrarti?&nbsp;</p>
+          <p class="text-light">Da utente non registrato puoi solo visionare le partite che altri utenti registrati hanno creato.<br>Da utente registrato oltre a poter visionare le partire, puoi partecipare ad una partita creata da un altro utente, in più puoi creare una partita nel giorno e nell'orario che più ti è comodo.<br>Che cosa aspetti a registrarti?</p>
           <div class="row">
             <div class="col-md-12"><a class="btn btn-dark" href="register-support.html">Registrati</a></div>
           </div>

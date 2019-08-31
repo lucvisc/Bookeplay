@@ -1,7 +1,30 @@
-<!DOCTYPE html>
-{assign var='errorSize' value=$errorSize|default:'ok'} 
-{assign var='errorType' value=$errorType|default:'ok'} 
-{assign var='errorEmail' value=$errorEmail|default:'ok'}
+<?php
+/* Smarty version 3.1.33, created on 2019-08-30 17:42:49
+  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\registerSupport.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5d6943f964f289_50951694',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '37f1037436ce953a8eecf96db9b8db1e1145d840' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\registerSupport.tpl',
+      1 => 1567081181,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5d6943f964f289_50951694 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
+<?php $_smarty_tpl->_assignInScope('errorSize', (($tmp = @$_smarty_tpl->tpl_vars['errorSize']->value)===null||$tmp==='' ? 'ok' : $tmp));?> 
+<?php $_smarty_tpl->_assignInScope('errorType', (($tmp = @$_smarty_tpl->tpl_vars['errorType']->value)===null||$tmp==='' ? 'ok' : $tmp));?> 
+<?php $_smarty_tpl->_assignInScope('errorEmail', (($tmp = @$_smarty_tpl->tpl_vars['errorEmail']->value)===null||$tmp==='' ? 'ok' : $tmp));?>
 <html>
 
 <head></head>
@@ -79,20 +102,20 @@
                 </div>
                 </form>
                 <input type="submit" class="btnRegister" value="Registrati">
-                 {if $errorSize!='ok'} 
+                 <?php if ($_smarty_tpl->tpl_vars['errorSize']->value != 'ok') {?> 
                  <div style="color: red;">
                   <p align="center">Attenzione! Formato immagine troppo grande! </p>
                 </div> 
-                {/if} 
-                {if $errorType!='ok'} 
+                <?php }?> 
+                <?php if ($_smarty_tpl->tpl_vars['errorType']->value != 'ok') {?> 
                 <div style="color: red;">
                   <p align="center">Attenzione! Formato immagine non supportato (provare con .png o .jpg)! </p>
                 </div> 
-                {/if} 
-                {if $errorEmail!='ok'} <div style="color: red;">
+                <?php }?> 
+                <?php if ($_smarty_tpl->tpl_vars['errorEmail']->value != 'ok') {?> <div style="color: red;">
                   <p align="center">Attenzione! Email già esistente! </p>
                 </div> 
-                {/if}
+                <?php }?>
               </div>
             </div>
           
@@ -145,10 +168,17 @@
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
   </div>
 </body>
 
-</html>
+</html><?php }
+}
