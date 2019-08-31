@@ -66,7 +66,11 @@ class VUser {
         $this->smarty->assign('nome', $user->getName());
         $this->smarty->assign('cognome', $user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
+        $this->smarty->assign('username', $acc->getUsername());
         $this->smarty->assign('email', $acc->getEmail());
+        $this->smarty->assign('telefono', $acc->getTelnumber());
+        $this->smarty->assign('datanasc', $user->getDatanasc());
+        $this->smarty->assign('gender', $user->getGender());
         //$this->smarty->assign('array', $part);
         $this->smarty->display('profilo.tpl');
     }
@@ -80,11 +84,11 @@ class VUser {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showProfileUser(EUser $user, $img, EAccount $acc, EAddress $addr)
+    public function showProfileUser(EUser $user, EAccount $acc, EAddress $addr)
     {
-        list($type, $pic64) = $this->setImage($img, 'user');
-        $this->smarty->assign('type', $type);
-        $this->smarty->assign('pic64', $pic64);
+        //list($type, $pic64) = $this->setImage($img, 'user');
+        //$this->smarty->assign('type', $type);
+        //$this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged', "loggato");
         $this->smarty->assign('nome', $user->getName());
         $this->smarty->assign('cognome', $user->getSurname());

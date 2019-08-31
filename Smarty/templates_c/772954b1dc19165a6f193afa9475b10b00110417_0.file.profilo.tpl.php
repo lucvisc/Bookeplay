@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-29 18:40:27
+/* Smarty version 3.1.33, created on 2019-08-31 15:01:43
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\profilo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d67fffb1ad8f1_30266326',
+  'unifunc' => 'content_5d6a6fb71eb844_95491072',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '772954b1dc19165a6f193afa9475b10b00110417' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\profilo.tpl',
-      1 => 1567096782,
+      1 => 1567256499,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d67fffb1ad8f1_30266326 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6a6fb71eb844_95491072 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -66,14 +66,14 @@ function content_5d67fffb1ad8f1_30266326 (Smarty_Internal_Template $_smarty_tpl)
         <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,<?php echo $_smarty_tpl->tpl_vars['pic64']->value;?>
 " alt="profile picture"></div>
         <div class="col-md-7  offset-md-1" style="">
-          <div class="row">
+          <div class="row" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
             <div class="col-md-12" style="">
-              <h3 class="text-light">Nome: <?php echo $_smarty_tpl->tpl_vars['nome']->value;?>
+              <h3 class="text-light">Nome:  <?php echo $_smarty_tpl->tpl_vars['nome']->value;?>
 </h3>
-              <h3 class="text-light">Cognome:<?php echo $_smarty_tpl->tpl_vars['cognome']->value;?>
+              <h3 class="text-light">Cognome: <?php echo $_smarty_tpl->tpl_vars['cognome']->value;?>
 </h3>
-              <h3 class="text-light">Conto:<?php echo $_smarty_tpl->tpl_vars['conto']->value;?>
-</h3>
+              <h3 class="text-light">Conto: <?php echo $_smarty_tpl->tpl_vars['conto']->value;?>
+ €</h3>
             </div>
           </div>
         </div>
@@ -93,13 +93,13 @@ function content_5d67fffb1ad8f1_30266326 (Smarty_Internal_Template $_smarty_tpl)
             <div class="col-md-12 border-left border-right border-top border-bottom border-light rounded " style="">
               <h4 class="ml-5 text-light">Username: <?php echo $_smarty_tpl->tpl_vars['username']->value;?>
 </h4>
-              <h4 class="ml-5 text-light">Email: <?php echo $_smarty_tpl->tpl_vars['email']->value;?>
+              <h4 class="ml-5 text-light">Email:  <?php echo $_smarty_tpl->tpl_vars['email']->value;?>
 </h4>
               <h4 class="ml-5 text-light">Telefono: <?php echo $_smarty_tpl->tpl_vars['telefono']->value;?>
 </h4>
-              <h4 class="ml-5 text-light">Data di nascita: <?php echo $_smarty_tpl->tpl_vars['datanasc']->value;?>
+              <h4 class="ml-5 text-light">Data di nascita:  <?php echo $_smarty_tpl->tpl_vars['datanasc']->value;?>
 </h4>
-              <h4 class="ml-5 text-light">Sesso: <?php echo $_smarty_tpl->tpl_vars['gender']->value;?>
+              <h4 class="ml-5 text-light">Genere: <?php echo $_smarty_tpl->tpl_vars['gender']->value;?>
 </h4>
               <div class="row">
                 <div class="col-md-12 shadow-none text-center ">

@@ -50,7 +50,7 @@
                       <div class="col-md-6" style="">
                         <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
                           <div class="input-group">
-                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="">
+                            <input type="date" name='giorno' class="form-control" id="inlineFormInputGroup" placeholder="Search" style="">
                                 </form>
                             <div class="input-group-append">
                               <input type="submit" class="btnRegister" value="Cerca"/></i>
@@ -79,10 +79,14 @@
                                 <h3 class="m-0 text-light border border-light rounded" style="">
                                   <div class="row">
                                     <div class="border-light my-2 ml-2" style="">
-                                      <h4 class="ml-5 text-light">ID Partite:{$booking->getIdbooking()}</h4>
-                                      <h4 class="ml-5 text-light">Campetto Numero:{$booking->getNumerocampo()}</h4>
-                                      <h4 class="ml-5 text-light">Partecipanti:{$booking->getPartecipanti()}</h4>
-                                      <h4 class="ml-5 text-light">Fascia Oraria:{$booking->getGiornobooking()}</h4>
+                                      <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
+                                      <h4 class="ml-5 text-light">Organizzatore:  {$booking->getOrganizzatore()}</h4>
+                                      <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno}</h4>
+                                      <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getFasceOrarie}</h4>
+                                      <h4 class="ml-5 text-light">Quota:  {$booking->getQuota()}</h4>
+                                      <h4 class="ml-5 text-light">Livello:  {$booking->getlivello()}</h4>
+                                      <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>
+                                      <h4 class="ml-5 text-light">Giorno: {$booking->getPartecipanti}</h4>
                                     </div>
                                   </div>
                                 </h3>
@@ -90,7 +94,10 @@
                   </div>
                 </div>
                 {/foreach} 
-                {else} <p class="text-light">Non sono presenti delle partite con tale parametro di ricerca</p> {/if} </div>
+                {else} 
+                <p class="text-light">Non sono presenti delle partite con tale parametro di ricerca</p> 
+                {/if} 
+              </div>
             </div>
           </div>
         </div>

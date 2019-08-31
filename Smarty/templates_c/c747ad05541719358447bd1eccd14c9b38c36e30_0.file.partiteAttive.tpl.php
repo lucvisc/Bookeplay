@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-30 15:30:14
+/* Smarty version 3.1.33, created on 2019-08-31 17:04:51
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\partiteAttive.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6924e6a2d052_25002681',
+  'unifunc' => 'content_5d6a8c9310b468_70761003',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c747ad05541719358447bd1eccd14c9b38c36e30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\partiteAttive.tpl',
-      1 => 1567159662,
+      1 => 1567262692,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6924e6a2d052_25002681 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6a8c9310b468_70761003 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -73,7 +73,7 @@ function content_5d6924e6a2d052_25002681 (Smarty_Internal_Template $_smarty_tpl)
                       <div class="col-md-6" style="">
                         <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
                           <div class="input-group">
-                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="">
+                            <input type="date" name='giorno' class="form-control" id="inlineFormInputGroup" placeholder="Search" style="">
                                 </form>
                             <div class="input-group-append">
                               <input type="submit" class="btnRegister" value="Cerca"/></i>
@@ -106,13 +106,21 @@ foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
                                 <h3 class="m-0 text-light border border-light rounded" style="">
                                   <div class="row">
                                     <div class="border-light my-2 ml-2" style="">
-                                      <h4 class="ml-5 text-light">ID Partite:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+                                      <h4 class="ml-5 text-light">ID Partita: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
 </h4>
-                                      <h4 class="ml-5 text-light">Campetto Numero:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getNumerocampo();?>
+                                      <h4 class="ml-5 text-light">Organizzatore:  <?php echo $_smarty_tpl->tpl_vars['booking']->value->getOrganizzatore();?>
 </h4>
-                                      <h4 class="ml-5 text-light">Partecipanti:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getPartecipanti();?>
+                                      <h4 class="ml-5 text-light">Giorno: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getGiorno;?>
 </h4>
-                                      <h4 class="ml-5 text-light">Fascia Oraria:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking();?>
+                                      <h4 class="ml-5 text-light">Giorno: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getFasceOrarie;?>
+</h4>
+                                      <h4 class="ml-5 text-light">Quota:  <?php echo $_smarty_tpl->tpl_vars['booking']->value->getQuota();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Livello:  <?php echo $_smarty_tpl->tpl_vars['booking']->value->getlivello();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Note: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getNote();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Giorno: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getPartecipanti;?>
 </h4>
                                     </div>
                                   </div>
@@ -124,7 +132,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?> 
-                <?php } else { ?> <p class="text-light">Non sono presenti delle partite con tale parametro di ricerca</p> <?php }?> </div>
+                <?php } else { ?> 
+                <p class="text-light">Non sono presenti delle partite con tale parametro di ricerca</p> 
+                <?php }?> 
+              </div>
             </div>
           </div>
         </div>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-29 11:31:50
+/* Smarty version 3.1.33, created on 2019-08-31 15:01:43
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d679b86c4f732_14061200',
+  'unifunc' => 'content_5d6a6fb76fac73_80106963',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1531c2cffdb168def471fca9fb951b6e0dd775c3' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\index.tpl',
-      1 => 1567071096,
+      1 => 1567256459,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d679b86c4f732_14061200 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6a6fb76fac73_80106963 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
 
@@ -33,7 +33,7 @@ function content_5d679b86c4f732_14061200 (Smarty_Internal_Template $_smarty_tpl)
   <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/template/img/favicon.png">
 </head>
 
-<body style=" background-image: url(BookAndPlay/Smarty/template/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>

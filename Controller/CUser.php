@@ -65,11 +65,11 @@ class CUser {
 
                 if ($_POST['email'] != 'admin@admin.com') {
                     if (isset($_COOKIE['nome_visitato'])) {
-                        header('Location: /BookAndPlay/User/profilo');
+                        header('Location: /BookAndPlay/User/profiloUtente');
                         //$view->showProfile();
                     }
                     else {
-                        header('Location: /BookAndPlay/User/profilo');
+                        header('Location: /BookAndPlay/User/profiloUtente');
                         //CUser::profile();
                     }
                 }
@@ -124,11 +124,38 @@ class CUser {
     	$view->error('1');
 	}
 
+    /** Metodo che mostra il profilo dell'utente loggato o il profilo di un altro utente a seconda del tipo di URL:
+     *
+     */
+    static function profiloUtente() {
+        $view = new VUser();
+        $pm = new FPersistentManager();
+        if($_SERVER['REQUEST_METHOD'] == "GET") {
+            print "ok";
+            if (CUser::isLogged())
+                $account= unserialize($_SESSION['account']);
+
+            print "ok";
+            print_r($account);
+            print($account->getEmail());
+
+            if (get_class($account) == "EAccount") {
+                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                $user = $pm->load("email", $account->getEmail(), "FUser");
+                $addr= $pm->load("email", $account->getEmail(), "FAddress");
+                $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                $view->showProfileUser($user, $acc, $addr);
+            } else {
+                header('Location: /BookAndPlay/User/login');
+            }
+        } else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
 
     /** Metodo che mostra il profilo dell'utente loggato o il profilo di un altro utente a seconda del tipo di URL:
-     * 1) URL: /AppCrowdFunding/Utente/profile?username=nomeutente --> mostra il profilo dell'utente corrispondente all'username (se esiste);
-     * 2) URL: /AppCrowdFunding/Utente/profile --> mostra il profilo dell'utente loggato (se è loggato)
-     * 3) in tutti gli altri casi (utente non loggato o username inesistente) mostra la homepage.
+     *
      */
     static function profilo() {
         $view = new VUser();
