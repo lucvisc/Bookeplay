@@ -38,23 +38,18 @@ class EUser {
      */
  	private $gender;
  	/**
-     * @AttributeType EAddress
+     * @AttributeType string
      */
- 	private  $address;
- 	/**
-     * @AttributeType EAccount
-     */
- 	private $account;
+ 	private  $tipo;
 
  	//Dichiarazione del costruttore 
- 	function __construct(string $nam=null, string $surna=null, string $dat, string $gend=null, EAddress $addr=null, EAccount $acc=null){
- 	    $this->email=null;
+ 	function __construct(string $ema=null,string $nam=null, string $surna=null, string $dat, string $gend=null,string $tip=null){
+ 	    $this->email=$ema;
  	    $this->name = $nam;
  		$this->surname = $surna;
  		$this->datanasc = $dat;
  		$this->gender = $gend;
- 		$this->address = $addr; //gli vene già passato come oggetto
- 		$this->account = $acc;
+ 		$this->tipo=$tip;
  	}
 
  	public function setID (string $mail){

@@ -85,13 +85,13 @@ class FUser {
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
         if(($result!=null) && ($rows_number == 1)) {        //':idAcc',':name',':surname',':dataNascita',':gender',':tipo'
-            $us=new EUser($result['mail'], $result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
+            $us=new EUser($result['email'], $result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $us = array();
                 for($i=0; $i<count($result); $i++){
-                    $us=new EUser($result['mail'],$result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
+                    $us=new EUser($result['email'],$result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
                 }
             }
         }
