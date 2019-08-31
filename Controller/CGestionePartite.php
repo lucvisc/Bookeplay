@@ -165,6 +165,53 @@ class CGestionePartite {
     }
 
     /**
+     * Funzione che si occupa di mostrare le partite per un utenteloggato, con la possibiltà di poter partecipare o creare
+     * una partita
+     * @param
+     */
+    static function partite() {
+        if (CUser::isLogged()) {
+            $account = unserialize($_SESSION['account']);
+            if (get_class($account) == "EAccount") {
+                $view = new VGestionePartite();
+                $pm = new FPersistentManager();
+                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                $user = $pm->load("email", $account->getEmail(), "FUser");
+                $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                $view->showPartite($user, $acc);
+            } else {
+                header('Location: /BookAndPlay/User/login');
+            }
+        } else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
+    /**
+     * Funzione che si occupa di mostrare le partite per un utenteloggato, con la possibiltà di poter partecipare o creare
+     * una partita
+     * @param
+     */
+    static function riepilogo() {
+        if (CUser::isLogged()) {
+            $account = unserialize($_SESSION['account']);
+            if (get_class($account) == "EAccount") {
+                $view = new VGestionePartite();
+                $pm = new FPersistentManager();
+                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                $user = $pm->load("email", $account->getEmail(), "FUser");
+                $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                $view->showRiepilogo($user, $acc);
+            } else {
+                header('Location: /BookAndPlay/User/login');
+            }
+        } else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
+
+    /**
      * Funzione che si occupa di mostrare le partite attive anche per un utente non loggato, ma senza la possibilità di
      * poter partecipare con un parametro di ricerca
      * @param

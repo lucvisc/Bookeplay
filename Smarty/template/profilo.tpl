@@ -56,8 +56,8 @@
       <div class="row">
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/User/profilo">Profilo</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/partite">Crea/Partecipa</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/riepilogo">Riepilogo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a>
         </div>
         <div class="col-9 col-md-8" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <div class="tab-content">

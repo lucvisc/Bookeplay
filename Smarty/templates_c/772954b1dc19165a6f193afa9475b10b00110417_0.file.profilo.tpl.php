@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-31 15:01:43
+/* Smarty version 3.1.33, created on 2019-08-31 22:15:02
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\profilo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6a6fb71eb844_95491072',
+  'unifunc' => 'content_5d6ad546707393_83275218',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '772954b1dc19165a6f193afa9475b10b00110417' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\profilo.tpl',
-      1 => 1567256499,
+      1 => 1567282500,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6a6fb71eb844_95491072 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6ad546707393_83275218 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -83,8 +83,8 @@ function content_5d6a6fb71eb844_95491072 (Smarty_Internal_Template $_smarty_tpl)
       <div class="row">
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/User/profilo">Profilo</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/partite">Crea/Partecipa</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/riepilogo">Riepilogo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a>
         </div>
         <div class="col-9 col-md-8" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <div class="tab-content">

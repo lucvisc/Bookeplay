@@ -133,7 +133,7 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPartite(EUser $user, EAccount $acc, $part,$img) {
+    public function showPartite(EUser $user, EAccount $acc) {  //$part,$img
         //list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         //$this->smarty->assign('pic64', $pic64);
@@ -141,7 +141,7 @@ class VGestionePartite {
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
-        $this->smarty->assign('array',$part);
+        $this->smarty->assign('array',null);
         $this->smarty->display('partite.tpl');
     }
 
@@ -172,7 +172,7 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showRiepilogo(EUser $user, EAccount $acc, $part,$img) {
+    public function showRiepilogo(EUser $user, EAccount $acc) { //, $part,$img
         //list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         //$this->smarty->assign('pic64', $pic64);
@@ -180,7 +180,7 @@ class VGestionePartite {
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
-        $this->smarty->assign('array',$part);
+        //$this->smarty->assign('array',$part);
         $this->smarty->display('riepilogo.tpl');
     }
 

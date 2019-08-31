@@ -27,7 +27,7 @@
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
         </ul>
-        {else} 
+        {else}
           <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
@@ -41,12 +41,12 @@
       <div class="row" style="">
         <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}"  alt="profile picture" />
         </div>
-        <div class="col-md-7  offset-md-1" style="">
+        <div class="col-md-7  offset-md-1" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
                       <div class="row">
                         <div class="col-md-12" style="">
                           <h3 class="text-light">Nome: {$nome}</h3>
                           <h3 class="text-light">Cognome: {$cognome}</h3>
-                          <h3 class="text-light">Conto: {$conto}</h3>
+                          <h3 class="text-light">Conto: {$conto} €</h3>
                         </div>
                       </div>
         </div>
@@ -56,8 +56,8 @@
       <div class="row">
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/User/profilo">Profilo</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/partite">Crea/Partecipa</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/riepilogo">Riepilogo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a>
         </div>
         <div class="col-9 col-md-8" style="">
           <div class="tab-content">

@@ -4,7 +4,7 @@
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(../img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -12,24 +12,27 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="/BookAndPlay/">
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
-          {if $userlogged!='nouser'}
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> <li>
-          </ul>
+          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+          {if $userlogged!='nouser'} 
+           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Utente/ProfiloUtente">Profilo</a> </li>
+          <li>
+          </li>
+        </ul>
         <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
-        </ul>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Logout">Logout</a> </li>
+        </ul> 
         {else} 
-          <ul class="navbar-nav">
-          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
-        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/Utente/Login">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Registrati">Register</a> </li>
+        </ul> 
         {/if}
       </div>
     </div>
@@ -37,64 +40,69 @@
   <div class="py-5" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}"  alt="profile picture" /></div>
-        <div class="col-md-7  offset-md-1" style="">
-                      <div class="row">
-                        <div class="col-md-12" style="">
-                          <h3 class="text-light">Nome: {$nome}</h3>
-                          <h3 class="text-light">Cognome: {$cognome}</h3>
-                          <h3 class="text-light">Conto: {$conto}</h3>
-                        </div>
-                      </div>
+        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
+        <div class="offset-md-1 col-md-7" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+          <div class="row">
+            <div class="col-md-8" style="">
+              <h3 class="text-light">Nome:  {$nome}</h3>
+              <h3 class="text-light">Cognome: {$cognome}</h3>
+              <h3 class="text-light">Conto: {$conto} €</h3>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container mt-2">
       <div class="row" style="">
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/User/profilo">Profilo</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/partite">Crea/Partecipa</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/riepilogo">Riepilogo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a>
         </div>
         <div class="col-md-8" style="">
-          <div class="tab-content">          
-            </div>
+          <div class="tab-content">
           </div>
           <div class="row">
-            <div class="col-md-12" style="">
-              <div class="row" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+            <div class="col-md-12">
+              <div class="row" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
                 <div class="col-md-6 mx-4" style="">
-                  <h4 class="text-light">Numero di partite giocate:</h4>
+                  <h4 class="text-light">Numero di partite giocate: {$numero}</h4>
                 </div>
-                <div class="col-md-3" style="">
-                  <h4 class="text-light">{$numero}</h4>
+          {if $array} 
+          {foreach $array as $booking} 
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-11" style="">
+                      <div class="col-md-12 col-1 m-2 border border-light rounded" style="">
+                        <h3 class="text-light mx-2" style="">
+                          <div class="row">
+                            <div class="border-light my-2 ml-2" style="">
+                              <h4 class="text-light">ID Partite:{$booking->getIdbooking()}</h4>
+                              <h4 class="text-light">Campetto Numero:{$booking->getNumerocampo()}</h4>
+                              <h4 class="text-light">Partecipanti:{$booking->getPartecipanti()}</h4>
+                              <h4 class="text-light">Giorno - Fascia Oraria:{$booking->etGiornobooking()}</h4>
+                            </div>
+                          </div>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-12 col-lg-12 rounded" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;"> 
-            {if $array} {foreach $array as $booking} 
-                <div class="row">
-                  <div class="col-md-11" style="">
-                    <div class="col-md-12 col-1 m-2 border border-light rounded" style="">
-                      <h3 class="text-light mx-2" style="">
-                        <div class="row">
-                          <div class="border-light my-2 ml-2" style="">
-                                <h4 class="text-light">ID Partite:{$booking->getIdbooking()}</h4>
-                                <h4 class="text-light">Campetto Numero:{$booking->getNumerocampo()}</h4>
-                                <h4 class="text-light">Partecipanti:{$booking->getPartecipanti()}</h4>
-                                <h4 class="text-light">Giorno - Fascia Oraria:{$booking->getGiornobooking()}</h4>
-                          </div>
-                        </div>
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-            </div>{/foreach} {else} <p>Non sono presenti delle partite con tale parametro di ricerca</p> {/if} </div>
+         </div>
         </div>
-      </div>
+        {/foreach} 
+        {else} 
+        <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
+        {/if}
+    </div>
     </div>
   </div>
+</div>
+</div>
   <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container"></div>
   </div>
@@ -104,7 +112,7 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="/BookAndPlay/">Home</a></a> </li>
+            <li> <a href="#">Home</a><span class="sr-only">(current)</span> </li>
             <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
             <li> <a href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
           </ul>

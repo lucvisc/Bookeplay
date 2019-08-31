@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-31 14:56:38
+/* Smarty version 3.1.33, created on 2019-08-31 22:27:12
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\profiloUtente.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6a6e86026e43_94491894',
+  'unifunc' => 'content_5d6ad820e6b370_62415158',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'edfa95251ea25c14239e6d57fa113b22c608bde1' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\profiloUtente.tpl',
-      1 => 1566637604,
+      1 => 1567282743,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6a6e86026e43_94491894 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6ad820e6b370_62415158 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -50,7 +50,7 @@ function content_5d6a6e86026e43_94491894 (Smarty_Internal_Template $_smarty_tpl)
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
         </ul>
-        <?php } else { ?> 
+        <?php } else { ?>
           <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
@@ -65,7 +65,7 @@ function content_5d6a6e86026e43_94491894 (Smarty_Internal_Template $_smarty_tpl)
         <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,<?php echo $_smarty_tpl->tpl_vars['pic64']->value;?>
 "  alt="profile picture" />
         </div>
-        <div class="col-md-7  offset-md-1" style="">
+        <div class="col-md-7  offset-md-1" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
                       <div class="row">
                         <div class="col-md-12" style="">
                           <h3 class="text-light">Nome: <?php echo $_smarty_tpl->tpl_vars['nome']->value;?>
@@ -73,7 +73,7 @@ function content_5d6a6e86026e43_94491894 (Smarty_Internal_Template $_smarty_tpl)
                           <h3 class="text-light">Cognome: <?php echo $_smarty_tpl->tpl_vars['cognome']->value;?>
 </h3>
                           <h3 class="text-light">Conto: <?php echo $_smarty_tpl->tpl_vars['conto']->value;?>
-</h3>
+ €</h3>
                         </div>
                       </div>
         </div>
@@ -83,8 +83,8 @@ function content_5d6a6e86026e43_94491894 (Smarty_Internal_Template $_smarty_tpl)
       <div class="row">
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/User/profilo">Profilo</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/partite">Crea/Partecipa</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/riepilogo">Riepilogo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a>
         </div>
         <div class="col-9 col-md-8" style="">
           <div class="tab-content">

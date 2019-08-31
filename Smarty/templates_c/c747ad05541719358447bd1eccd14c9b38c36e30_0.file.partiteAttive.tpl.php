@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-31 17:04:51
+/* Smarty version 3.1.33, created on 2019-08-31 21:31:43
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\partiteAttive.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6a8c9310b468_70761003',
+  'unifunc' => 'content_5d6acb1f85d1e1_36081677',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c747ad05541719358447bd1eccd14c9b38c36e30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\partiteAttive.tpl',
-      1 => 1567262692,
+      1 => 1567279895,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6a8c9310b468_70761003 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6acb1f85d1e1_36081677 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>

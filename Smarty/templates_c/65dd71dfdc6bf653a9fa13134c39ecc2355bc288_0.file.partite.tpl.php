@@ -1,5 +1,28 @@
-<!DOCTYPE html>
-{assign var='userlogged' value=$userlogged|default:'nouser'}
+<?php
+/* Smarty version 3.1.33, created on 2019-08-31 22:06:29
+  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\partite.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5d6ad345ab11f3_03795922',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '65dd71dfdc6bf653a9fa13134c39ecc2355bc288' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\partite.tpl',
+      1 => 1567281887,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5d6ad345ab11f3_03795922 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
+<?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
 
 <head></head>
@@ -20,7 +43,7 @@
           <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
-          {if $userlogged!='nouser'} 
+          <?php if ($_smarty_tpl->tpl_vars['userlogged']->value != 'nouser') {?> 
            <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Utente/ProfiloUtente">Profilo</a> </li>
           <li>
           </li>
@@ -28,25 +51,29 @@
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Logout">Logout</a> </li>
         </ul> 
-        {else} 
+        <?php } else { ?> 
         <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/Utente/Login">Log in</a> </li>
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Registrati">Register</a> </li>
         </ul> 
-        {/if}
+        <?php }?>
       </div>
     </div>
   </nav>
   <div class="py-5" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
+        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,<?php echo $_smarty_tpl->tpl_vars['pic64']->value;?>
+" alt="profile picture"></div>
         <div class="offset-md-1 col-md-7" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
           <div class="row">
             <div class="col-md-8" style="">
-              <h3 class="text-light">Nome:  {$nome}</h3>
-              <h3 class="text-light">Cognome: {$cognome}</h3>
-              <h3 class="text-light">Conto: {$conto} €</h3>
+              <h3 class="text-light">Nome:  <?php echo $_smarty_tpl->tpl_vars['nome']->value;?>
+</h3>
+              <h3 class="text-light">Cognome: <?php echo $_smarty_tpl->tpl_vars['cognome']->value;?>
+</h3>
+              <h3 class="text-light">Conto: <?php echo $_smarty_tpl->tpl_vars['conto']->value;?>
+ €</h3>
             </div>
           </div>
         </div>
@@ -88,8 +115,12 @@
                     </div>
                   </div>
                 </div> 
-                {if $array} 
-                {foreach $array as $booking} 
+                <?php if ($_smarty_tpl->tpl_vars['array']->value) {?> 
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['array']->value, 'booking');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
+?> 
                 <div class="row" style="">
                   <div class="col-md-12 ">
                     <div class="row" style="">
@@ -100,10 +131,14 @@
                               <h3 class="m-0 text-light border border-light rounded" style="">
                                 <div class="row">
                                   <div class="border-light my-2 ml-2" style="">
-                                    <h4 class="ml-5 text-light">ID Partite:{$booking->getIdbooking()}</h4>
-                                    <h4 class="ml-5 text-light">Campetto Numero:{$booking->getNumerocampo()}</h4>
-                                    <h4 class="ml-5 text-light">Partecipanti:{$booking->getPartecipanti()}</h4>
-                                    <h4 class="ml-5 text-light">Fascia Oraria:{$booking->getGiornobooking()}</h4>
+                                    <h4 class="ml-5 text-light">ID Partite:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+</h4>
+                                    <h4 class="ml-5 text-light">Campetto Numero:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getNumerocampo();?>
+</h4>
+                                    <h4 class="ml-5 text-light">Partecipanti:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getPartecipanti();?>
+</h4>
+                                    <h4 class="ml-5 text-light">Fascia Oraria:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking();?>
+</h4>
                                   </div>
                                 </div>
                               </h3>
@@ -118,10 +153,13 @@
                     </div>
                   </div>
                 </div>
-                {/foreach} 
-                {else} 
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?> 
+                <?php } else { ?> 
                   <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
-                {/if}
+                <?php }?>
               </div>
             </div>
           </div>
@@ -189,9 +227,16 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
 </body>
 
-</html>
+</html><?php }
+}

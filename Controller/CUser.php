@@ -47,13 +47,7 @@ class CUser {
         $pm = new FPersistentManager();
         $account = $pm->loadLogin($_POST['email'], $_POST['password']);
 
-        print($_POST['email']);
-        print($_POST['password']);
-        var_dump($account);
-
         if ($account != null && $account->getActivate() != false ){ //&& $account->getActivate() != false
-
-            print "ok";
 
             if (session_status() == PHP_SESSION_NONE) {
                 session_set_cookie_params('3600'); // 1 ora dal login
@@ -135,10 +129,6 @@ class CUser {
             if (CUser::isLogged())
                 $account= unserialize($_SESSION['account']);
 
-            print "ok";
-            print_r($account);
-            print($account->getEmail());
-
             if (get_class($account) == "EAccount") {
                 //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
                 $user = $pm->load("email", $account->getEmail(), "FUser");
@@ -161,13 +151,11 @@ class CUser {
         $view = new VUser();
         $pm = new FPersistentManager();
         if($_SERVER['REQUEST_METHOD'] == "GET") {
-            print "ok";
             if (CUser::isLogged())
                 $account= unserialize($_SESSION['account']);
 
                 print "ok";
                 print_r($account);
-                print($account->getEmail());
 
                 if (get_class($account) == "EAccount") {
                     //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
@@ -193,7 +181,15 @@ class CUser {
 		if($_SERVER['REQUEST_METHOD']=="GET") {
 			$view = new VUser();
 			if (static::isLogged()) {
-			    $view->showProfileUser();
+                $account = unserialize($_SESSION['account']);
+                if (get_class($account) == "EAccount") {
+                    $pm = new FPersistentManager();
+                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                    $user = $pm->load("email", $account->getEmail(), "FUser");
+                    $addr = $pm->load("email", $account->getEmail(), "FAddress");
+                    $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                    $view->showProfileUser($user, $acc, $addr);
+                }
             }
 			else {
 				$view->showFormRegistration();
