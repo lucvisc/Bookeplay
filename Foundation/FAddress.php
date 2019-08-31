@@ -77,13 +77,13 @@ class FAddress {
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
         if(($result!=null) && ($rows_number == 1)) {        //:idAcc,:Comune,:Provincia,:CAP,:Via,:NumCivico
-            $address=new EAddress($result['idAcc'],$result['Comune'], $result['Provincia'], $result['CAP'],$result['Via'],$result['NumCivico']);
+            $address=new EAddress($result['email'],$result['Comune'], $result['Provincia'], $result['CAP'],$result['Via'],$result['NumCivico']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $address = array();
                 for($i=0; $i<count($result); $i++){
-                    $address[]=new EAddress($result[$i]['idAcc'],$result[$i]['Comune'], $result[$i]['Provincia'], $result[$i]['CAP'],$result[$i]['Via'],$result[$i]['NumCivico']);
+                    $address[]=new EAddress($result[$i]['email'],$result[$i]['Comune'], $result[$i]['Provincia'], $result[$i]['CAP'],$result[$i]['Via'],$result[$i]['NumCivico']);
                 }
             }
         }

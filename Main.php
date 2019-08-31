@@ -2,6 +2,17 @@
 
 require_once 'include.php';
 
+$address=FPersistentManager::load("email", "luca.visco@hotmail.com", "FAddress");
+print_r($address);
+
+
+
+/*
+$db=FDatabase::getInstance();
+$array=$db->loadVerificaAccesso("Cat@gmail.com", "A");
+var_dump($array);
+
+/*
 //FPren_partecipa::insert(1, 'Cat@gmail.com');
 $result=FBooking::LoadBooking('24/04/2018');
 print_r($result);

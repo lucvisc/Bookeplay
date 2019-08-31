@@ -45,13 +45,13 @@ class EAddress {
 
 
 	//Dichiarazione del costruttore 
-	function __construct(string $c=null, string $p=null, string $ca=null,  string $v=null, string $n=null){
-		$this->email=null;
+	function __construct(string $e=null, string $c=null, string $p=null,  string $ca=null, string $v=null,string $nc){
+		$this->email=$e;
 	    $this->comune = $c;
 		$this->provincia = $p;
 		$this->cap = $ca;
 		$this->via = $v;
-		$this->ncivico = $n;
+		$this->ncivico = $nc;
 	}
 
     public function setID (string $mail){
