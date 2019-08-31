@@ -16,7 +16,7 @@ class VGestionePartite {
      */
     public function __construct()
     {
-        $this->smarty = StartSmarty::configuration();
+        $this->smarty = ConfSmarty::configuration();
     }
     /**
      * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=giorno
@@ -150,7 +150,16 @@ class VGestionePartite {
      * @param $part elenco delle partite
      * @throws SmartyException
      */
-    public function showPartiteAttive($part) {
+    public function showPartiteAttive() {
+        $this->smarty->display('partiteAttive.tpl');
+    }
+
+    /**
+     * Funzione che si occupa di gestire la visualizzazione delle parite attive di un utente non loggato
+     * @param $part elenco delle partite
+     * @throws SmartyException
+     */
+    public function CercaPartiteAttive($part) {
         $this->smarty->assign('array',$part);
         $this->smarty->display('partiteAttive.tpl');
     }
