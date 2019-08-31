@@ -645,9 +645,8 @@ class FDatabase {
             $stmt->execute();
             print_r($stmt->errorInfo());
             $num = $stmt->rowCount();
-            echo $num;
             if ($num == 0) {
-                $comodo = null;        //nessuna riga interessata. return null
+                $result = null;        //nessuna riga interessata. return null
             } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
                 $comodo = $stmt->fetch(PDO::FETCH_ASSOC);//ritorna una sola riga
                 $result=$comodo['email'];
