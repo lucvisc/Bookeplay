@@ -15,10 +15,14 @@ class CAdmin{
 	 * 2) se il metodo di richiesta HTTP è GET e si è loggati ma non come amministratore, viene visualizzata una pagina di errore 401;
 	 * 3) altrimenti, reindirizza alla pagina di login.
      */
-	static function homepage () {
+	static function homeAccount () {
 		if($_SERVER['REQUEST_METHOD'] == "GET") {
 			if (CUser::isLogged()) {
 				$account = unserialize($_SESSION['account']);
+
+				print($account);
+                print($_SESSION['account']);
+
 				if ($account->getEmail() == "admin@admin.com") {
 					$view = new VAdmin();
 					$pm = new FPersistentManager();

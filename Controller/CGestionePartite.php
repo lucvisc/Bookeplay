@@ -155,10 +155,9 @@ class CGestionePartite {
     }
 
     /**
-     * Funzione che si occupa di eliminare una prenotazione soltanto se l'utente è loggato ed è Admin
-     * se l'utente non è admin mostra il profilo
-     * se l'utente non è loggato mostra la schermata di login
-     * @param $id id dell'annuncio da eliminare
+     * Funzione che si occupa di mostrare le partite attive anche per un utente non loggato, ma senza la possibilità di
+     * poter partecipare
+     * @param
      */
     static function partiteAttive(){
         $view = new VGestionePartite();
@@ -166,10 +165,9 @@ class CGestionePartite {
     }
 
     /**
-     * Funzione che si occupa di eliminare una prenotazione soltanto se l'utente è loggato ed è Admin
-     * se l'utente non è admin mostra il profilo
-     * se l'utente non è loggato mostra la schermata di login
-     * @param $id id dell'annuncio da eliminare
+     * Funzione che si occupa di mostrare le partite attive anche per un utente non loggato, ma senza la possibilità di
+     * poter partecipare con un parametro di ricerca
+     * @param
      */
     static function partiteAttiveGiorno(){
         $view = new VGestionePartite();

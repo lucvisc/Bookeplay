@@ -32,26 +32,103 @@ class CUser {
         }elseif ($_SERVER['REQUEST_METHOD']=="POST")
             static::verifica();
     }
-	/**
-	 * Funzione che si occupa di verifica l'esistenza di un utente con username e password inseriti nel form di login.
-	 * 1) se, dopo la ricerca nel db non si hanno risultati ($utente = null) oppure se l'utente si trova nel db ma ha lo stato false
-	 *    viene ricaricata la pagina con l'aggunta dell'errore nel login.
-	 * 2) se l'utente ed è attivo, avviene il reindirizzamaneto alla homepage degli annunci;
-	 * 3) se le credenziali inserite rispettano i vincoli per l'amministratore, avviene il reindirizamento alla homepage dell'amministratore;
-	 * 4) se si verifica la presenza di particolari cookie avviene il reindirizzamento alla pagina specifica.
-	 */
-	static function verifica() {
+
+    /**
+     * Funzione che si occupa di verifica l'esistenza di un utente con username e password inseriti nel form di login.
+     * 1) se, dopo la ricerca nel db non si hanno risultati ($utente = null) oppure se l'utente si trova nel db ma ha lo stato false
+     *    viene ricaricata la pagina con l'aggunta dell'errore nel login.
+     * 2) se l'utente ed è attivo, avviene il reindirizzamaneto alla homepage degli annunci;
+     * 3) se le credenziali inserite rispettano i vincoli per l'amministratore, avviene il reindirizamento alla homepage dell'amministratore;
+     * 4) se si verifica la presenza di particolari cookie avviene il reindirizzamento alla pagina specifica.
+     */
+
+ /*   static function verifica() {
+        $view = new VUser();
+        $pm = new FPersistentManager();
+
+        $account= new EAccount();
+        $account = $pm->loadLogin($_POST['email'], md5($_POST['password']));
+
+        print_r($account);
+
+        if (isset($account) ){ // && $account->getActivate() != 0
+            if (session_status() == PHP_SESSION_NONE) {
+                session_set_cookie_params('3600'); // 1 ora dal login
+                //session_name('BookAndPlay');
+                session_start();
+                setcookie("account", null, time()-900,  "/");
+                $salvare = serialize($account);
+                $_SESSION['account'] = $salvare;
+                if ($_POST['email'] != 'admin@admin.com') {
+                    if (isset($_COOKIE['account'])) {
+                        header('Location: /BookAndPlay/User/profile');
+                    }
+                    else {
+                            header('Location: /BookAndPlay/User/profile');
+                    }
+                }
+                else {
+                    header('Location: /BookAndPlay/Admin/homeAccount');
+                }
+            }
+        }
+        else {
+            $view->loginError();
+        }
+    }
+ */
+
+    static function verifica() {
+        $view = new VUser();
+        $pm = new FPersistentManager();
+        $account = $pm->loadLogin($_POST['email'], $_POST['password']);
+
+        print($_POST['email']);
+        print($_POST['password']);
+        var_dump($account);
+
+        if ($account != null && $account->getActivate() != false ){ //&& $account->getActivate() != false
+
+            print "ok";
+
+            if (session_status() == PHP_SESSION_NONE) {
+                session_set_cookie_params('3600'); // 1 ora dal login
+                session_start();
+                $salvare = serialize($account);
+                $_SESSION['account'] = $salvare;
+
+                print($_SESSION['account']);
+
+                if ($_POST['email'] != 'admin@admin.com') {
+                    if (isset($_COOKIE['nome_visitato'])) {
+                        header('Location: /BookAndPlay/User/profile');
+                        //$view->showProfile();
+                    }
+                    else {
+                        header('Location: /BookAndPlay/User/profile');
+                        //CUser::profile();
+                    }
+                }
+                else {
+                    header('Location: /BookAndPlay/Admin/homepage');
+                }
+            }
+        }
+        else {
+            $view->loginError();
+        }
+    }
+
+
+	/*static function verifica() {
 		$view = new VUser();
 		//$pm = new FPersistentManager();
 		//$account = $pm->loadLogin($_POST['email'], md5($_POST['password']));
-
-        $db= FDatabase::getInstance();
-        $account = $db->loadVerificaAccesso($_POST['email'], md5($_POST['password']));
+        $account=FUser::loadLogin($_POST['email'],hash('md5',$_POST['password']));
 
         print($_POST['email']);
         print($_POST['password']);
         print_r($account);
-
 
 		if ($account != null ) {//&& $account->getActivate() != false
 
@@ -64,11 +141,11 @@ class CUser {
 				$_SESSION['account'] = $salvare;
 				if ($_POST['email'] != 'admin@admin.com') {
 					if (isset($_COOKIE['nome_visitato'])) {
-						//header('Location: /BookAndPlay/User/profile');
-                        $view->showProfile();
+						header('Location: /BookAndPlay/User/profile');
+                        //$view->showProfile();
 					}
 					else {
-					    header('Location: /BookAndPlay/homepage');
+					    header('Location: /BookAndPlay/User/profile');
 					}
 				}
 				else {
@@ -79,17 +156,17 @@ class CUser {
 		else {
 			$view->loginError();
 		}
-	}
+	}*/
 
 	/**
 	 * Funzione che provvede alla rimozione delle variabili di sessione, alla sua distruzione e a rinviare alla homepage
 	 */
 	static function logout(){
-     //   session_name('FillSpace');
+     //   session_name('BookAndPlay');
 		session_start();
 		session_unset();
 		session_destroy();
-		header('Location: /BookAndPlay/User/login');
+		header('Location: /BookAndPlay/');
 	}
 
     /**
@@ -121,35 +198,46 @@ class CUser {
     	$view->error('1');
 	}
 
+	/*static function profiloUtente(){
+	    $view= new VUser();
+        //$account= unserialize($_COOKIE['PHPSESSID']);
+	    //print($account);
+
+        print();
+
+
+	    $view->profiloUtente();
+    }*/
+
 
     /** Metodo che mostra il profilo dell'utente loggato o il profilo di un altro utente a seconda del tipo di URL:
      * 1) URL: /AppCrowdFunding/Utente/profile?username=nomeutente --> mostra il profilo dell'utente corrispondente all'username (se esiste);
      * 2) URL: /AppCrowdFunding/Utente/profile --> mostra il profilo dell'utente loggato (se è loggato)
      * 3) in tutti gli altri casi (utente non loggato o username inesistente) mostra la homepage.
      */
-    static function profile($param=null){
-        $id=null;
-        if(isset($param)){
-            $acc=FAccount::loadByUsername($param);
-            if($acc!=null){
-                $id=$acc->getId();
-            }
-        }
-        else if(CUser::isLogged()){
-            $id=$_SESSION['account'];
-            $acc=FAccount::loadById($id);
-        }
-        else header('Location: /BookAndPlay/homepage');
-        if($id){
-            $img=FMediaUser::loadByIdAcc($id);
-            $address=FAddress::loadByIdAccount($id);
-            $user=FUser::loadByIdAccount($id);
-            $acc=FAccount::loadById($id);
+    static function profile() {
+        $view = new VUser();
+        $pm = new FPersistentManager();
+        if($_SERVER['REQUEST_METHOD'] == "GET") {
+            print "ok";
+            if (CUser::isLogged())
+                $account= unserialize($_SESSION['account']);
 
-            CUtente::isLogged();
-            if($_SESSION['id']==$id)
-            $view=new VUser();
-            $view->showProfileUser($user, $img, $acc, $address);
+                print "ok";
+                print_r($account);
+                print($account->getEmail());
+
+                if (get_class($account) == "EAccount") {
+                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                    $user = $pm->load("email", $account->getEmail(), "FUser");
+                    $addr= $pm->load("email", $account->getEmail(), "FAddress");
+                    $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                    $view->showProfile($user, $acc, $addr);
+                } else {
+                    header('Location: /BookAndPlay/User/login');
+                }
+            } else {
+                header('Location: /BookAndPlay/User/login');
         }
     }
 
