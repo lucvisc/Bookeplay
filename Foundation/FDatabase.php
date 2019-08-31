@@ -645,7 +645,6 @@ class FDatabase {
             $stmt->execute();
             print_r($stmt->errorInfo());
             $num = $stmt->rowCount();
-            echo $num;
             if ($num == 0) {
                 $result = null;        //nessuna riga interessata. return null
             } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
