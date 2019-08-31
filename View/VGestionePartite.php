@@ -151,15 +151,15 @@ class VGestionePartite {
      * @throws SmartyException
      */
     public function showPartiteAttive() {
-        $array= Null;
         $this->smarty->display('partiteAttive.tpl');
     }
 
-    public function CercaPartiteAttive() {
-        $giorno= VGestionePartite::getGiorno();
-        //Caricare tutte le prenotazioni per un determinato giorno
-        $pm= new FBooking();
-        $part= $pm::LoadBooking($giorno);
+    /**
+     * Funzione che si occupa di gestire la visualizzazione delle parite attive di un utente non loggato
+     * @param $part elenco delle partite
+     * @throws SmartyException
+     */
+    public function CercaPartiteAttive($part) {
         $this->smarty->assign('array',$part);
         $this->smarty->display('partiteAttive.tpl');
     }
