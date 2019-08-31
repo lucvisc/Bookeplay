@@ -16,7 +16,7 @@ class VGestionePartite {
      */
     public function __construct()
     {
-        $this->smarty = StartSmarty::configuration();
+        $this->smarty = ConfSmarty::configuration();
     }
     /**
      * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=giorno
@@ -150,7 +150,16 @@ class VGestionePartite {
      * @param $part elenco delle partite
      * @throws SmartyException
      */
-    public function showPartiteAttive($part) {
+    public function showPartiteAttive() {
+        $array= Null;
+        $this->smarty->display('partiteAttive.tpl');
+    }
+
+    public function CercaPartiteAttive() {
+        $giorno= VGestionePartite::getGiorno();
+        //Caricare tutte le prenotazioni per un determinato giorno
+        $pm= new FBooking();
+        $part= $pm::LoadBooking($giorno);
         $this->smarty->assign('array',$part);
         $this->smarty->display('partiteAttive.tpl');
     }
