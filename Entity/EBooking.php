@@ -102,6 +102,14 @@ class EBooking {
         return $this->note;
     }
 
+    /**
+     * @return array
+     */
+    public function getPartecipanti()
+    {
+        return $this->partecipanti;
+    }
+
 
     //Dichiarazione dei metodi Set
     /**
