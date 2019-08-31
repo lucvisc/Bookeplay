@@ -14,7 +14,7 @@ class FUser {
     /**
      * tabella su cui opera
      */
-    private static $tables="utente";
+    private static $tables="utente (:mail,:name,:surname,:dataNascita,:gender,:tipo)";
     /**
      * Valori della tabella
      */
@@ -85,13 +85,13 @@ class FUser {
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
         if(($result!=null) && ($rows_number == 1)) {        //':idAcc',':name',':surname',':dataNascita',':gender',':tipo'
-            $us=new EUser($result['idAcc'], $result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
+            $us=new EUser($result['mail'], $result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $us = array();
                 for($i=0; $i<count($result); $i++){
-                    $us=new EUser($result['idAcc'],$result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
+                    $us=new EUser($result['mail'],$result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
                 }
             }
         }
@@ -103,13 +103,12 @@ class FUser {
      * @param int l'id dell'oggetto indirizzo
      * @return object $address indirizzo
      */
-    public static function loadByIdAccount($id){
-        $sql="SELECT * FROM ".static::getTables()." WHERE idAcc=".$id.";";
+    public static function loadByEmail($id){
+        $sql="SELECT * FROM ".static::getTables()." WHERE mail=".$id.";";
         $db=FDatabase::getInstance();
         $result=$db->loadsingle($sql);
         if($result!=null){
-            $us=new EUser($result['idAcc'], $result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
-            $us->setId($result['id']);
+            $us=new EUser($result['email'], $result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
             return $us;
         }
         else return null;
@@ -181,30 +180,7 @@ class FUser {
         return $us;
     }
 
-    /**
-     * Funzione che permette di poter reperire dal database eventuali istanze di oggetti che soddisfano i dati immessi
-     * in input nella form di login. L'utente recuperato potrà essere utente e admin.
-     * Viene ritornato l'utente utente/admin
-     * @param $email valore dell'email immessa
-     * @param $pass valore della password immessa
-     * @return object|null utente/admin
-     */
-    public static function loadLogin ($email, $pass) {
-    $utente = null;
-    $db=FDatabase::getInstance();
-    $result=$db->loadVerificaAccesso($email, $pass);
 
-         if (isset($result)){
-            $tra = FUser::loadByField("email" , $result["email"]);
-            $admin = static::loadByField("email", $result["email"]);
-            if ($tra)
-            $utente = $tra;
-            elseif ($admin)
-            $utente = $admin;
-         }
-
-    return $utente;
-    }
 
 
     /**
