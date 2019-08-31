@@ -83,7 +83,7 @@ class FPersistentManager {
      */
     public static function loadLogin ($Email, $pass) {
         $ris = null;
-        $ris = FUser::loadLogin($Email, $pass);
+        $ris = FAccount::loadLogin($Email, $pass);
         return $ris;
     }
 

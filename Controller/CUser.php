@@ -42,42 +42,6 @@ class CUser {
      * 4) se si verifica la presenza di particolari cookie avviene il reindirizzamento alla pagina specifica.
      */
 
- /*   static function verifica() {
-        $view = new VUser();
-        $pm = new FPersistentManager();
-
-        $account= new EAccount();
-        $account = $pm->loadLogin($_POST['email'], md5($_POST['password']));
-
-        print_r($account);
-
-        if (isset($account) ){ // && $account->getActivate() != 0
-            if (session_status() == PHP_SESSION_NONE) {
-                session_set_cookie_params('3600'); // 1 ora dal login
-                //session_name('BookAndPlay');
-                session_start();
-                setcookie("account", null, time()-900,  "/");
-                $salvare = serialize($account);
-                $_SESSION['account'] = $salvare;
-                if ($_POST['email'] != 'admin@admin.com') {
-                    if (isset($_COOKIE['account'])) {
-                        header('Location: /BookAndPlay/User/profile');
-                    }
-                    else {
-                            header('Location: /BookAndPlay/User/profile');
-                    }
-                }
-                else {
-                    header('Location: /BookAndPlay/Admin/homeAccount');
-                }
-            }
-        }
-        else {
-            $view->loginError();
-        }
-    }
- */
-
     static function verifica() {
         $view = new VUser();
         $pm = new FPersistentManager();
@@ -120,44 +84,6 @@ class CUser {
     }
 
 
-	/*static function verifica() {
-		$view = new VUser();
-		//$pm = new FPersistentManager();
-		//$account = $pm->loadLogin($_POST['email'], md5($_POST['password']));
-        $account=FUser::loadLogin($_POST['email'],hash('md5',$_POST['password']));
-
-        print($_POST['email']);
-        print($_POST['password']);
-        print_r($account);
-
-		if ($account != null ) {//&& $account->getActivate() != false
-
-		    print "ok";
-
-			if (session_status() == PHP_SESSION_NONE) {
-                session_set_cookie_params('3600'); // 1 ora dal login
-				session_start();
-				$salvare = serialize($account);
-				$_SESSION['account'] = $salvare;
-				if ($_POST['email'] != 'admin@admin.com') {
-					if (isset($_COOKIE['nome_visitato'])) {
-						header('Location: /BookAndPlay/User/profile');
-                        //$view->showProfile();
-					}
-					else {
-					    header('Location: /BookAndPlay/User/profile');
-					}
-				}
-				else {
-					    header('Location: /BookAndPlay/Admin/homepage');
-				}
-			}
-        }
-		else {
-			$view->loginError();
-		}
-	}*/
-
 	/**
 	 * Funzione che provvede alla rimozione delle variabili di sessione, alla sua distruzione e a rinviare alla homepage
 	 */
@@ -197,17 +123,6 @@ class CUser {
     	$view = new VError();
     	$view->error('1');
 	}
-
-	/*static function profiloUtente(){
-	    $view= new VUser();
-        //$account= unserialize($_COOKIE['PHPSESSID']);
-	    //print($account);
-
-        print();
-
-
-	    $view->profiloUtente();
-    }*/
 
 
     /** Metodo che mostra il profilo dell'utente loggato o il profilo di un altro utente a seconda del tipo di URL:

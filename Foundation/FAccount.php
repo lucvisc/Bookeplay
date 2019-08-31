@@ -87,6 +87,29 @@ class FAccount {
     }
 
     /**
+     * Funzione che permette di poter reperire dal database eventuali istanze di oggetti che soddisfano i dati immessi
+     * in input nella form di login. L'utente recuperato potà essere trasportatore, cliente o admin.
+     * Viene ritornato l'utente utenteloggato/trasportatore/cliente
+     * @param $user valore dell'email immessa
+     * @param $pass valore della password immessa
+     * @return object|null utenteloggato/trasportatore/cliente
+     */
+    public static function loadLogin($email, $pass) {
+        $account = null;
+        $db=FDatabase::getInstance();
+        $result=$db->loadVerificaAccesso($email, $pass);
+        if (isset($result)){
+            $acc= FAccount::loadByField("email" , $result["email"]);
+            $admin = static::loadByField("email", $result["email"]);
+            if ($acc)
+                $account = $acc;
+            elseif ($admin)
+                $account = $admin;
+        }
+        return $account;
+    }
+
+    /**
      * Permette la load sul db
      * @param $id valore da confrontare per trovare l'oggetto
      * @param $field campo nel quale effettuare la ricerca
@@ -98,13 +121,13 @@ class FAccount {
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);//funzione richiamata,presente in FDatabase
         if(($result!=null) && ($rows_number == 1)) {        //:id,:username,:password,:email,:telnumb,:conto,:descrizione, :activate
-            $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+            $acc=new EAccount($result['email'],$result['username'], $result['password'],$result['telnumb'],$result['conto'], $result['descrizione'], $result['activate']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $acc = array();
                 for($i=0; $i<count($result); $i++){
-                    $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+                    $acc=new EAccount($result['email'],$result['username'], $result['password'],$result['telnumb'],$result['conto'], $result['descrizione'], $result['activate']);
                 }
             }
         }
