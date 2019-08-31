@@ -1,8 +1,8 @@
 <?php
 
-require_once 'Utility/autoload.php';
 require_once 'ConfSmarty.php';
 require_once 'Installation.php';
+require_once 'include.php';
 
  if(Installation::verificaInstallazione()){ //si verifica se l'installazione è stata già fatta
     $fcontroller=new CFrontController();
