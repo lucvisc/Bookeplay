@@ -44,9 +44,9 @@
         <div class="col-md-7  offset-md-1" style="">
           <div class="row">
             <div class="col-md-12" style="">
-              <h3 class="text-light">Nome: {$nome}</h3>
-              <h3 class="text-light">Cognome:{$cognome}</h3>
-              <h3 class="text-light">Conto:{$conto}</h3>
+              <h3 class="text-light">Nome:  {$nome}</h3>
+              <h3 class="text-light">Cognome: {$cognome}</h3>
+              <h3 class="text-light">Conto: {$conto} €</h3>
             </div>
           </div>
         </div>
@@ -65,10 +65,10 @@
           <div class="row">
             <div class="col-md-12 border-left border-right border-top border-bottom border-light rounded " style="">
               <h4 class="ml-5 text-light">Username: {$username}</h4>
-              <h4 class="ml-5 text-light">Email: {$email}</h4>
+              <h4 class="ml-5 text-light">Email:  {$email}</h4>
               <h4 class="ml-5 text-light">Telefono: {$telefono}</h4>
-              <h4 class="ml-5 text-light">Data di nascita: {$datanasc}</h4>
-              <h4 class="ml-5 text-light">Sesso: {$gender}</h4>
+              <h4 class="ml-5 text-light">Data di nascita:  {$datanasc}</h4>
+              <h4 class="ml-5 text-light">Genere: {$gender}</h4>
               <div class="row">
                 <div class="col-md-12 shadow-none text-center ">
                 </div>
