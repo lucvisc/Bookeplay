@@ -171,7 +171,13 @@ class CGestionePartite {
      */
     static function partiteAttiveGiorno(){
         $view = new VGestionePartite();
-        $view->CercaPartiteAttive();
+        $giorno=$_POST['giorno'];
+
+        print($giorno);
+
+        $pm = new FPersistentManager();
+        $partite = $pm->load("giorno", $giorno, "FBooking");
+        $view->CercaPartiteAttive($partite);
     }
 
 

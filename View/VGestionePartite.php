@@ -151,6 +151,7 @@ class VGestionePartite {
      * @throws SmartyException
      */
     public function showPartiteAttive() {
+        $this->smarty->assign('array', null);
         $this->smarty->display('partiteAttive.tpl');
     }
 
