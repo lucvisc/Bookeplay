@@ -65,11 +65,11 @@ class CUser {
 
                 if ($_POST['email'] != 'admin@admin.com') {
                     if (isset($_COOKIE['nome_visitato'])) {
-                        header('Location: /BookAndPlay/User/profile');
+                        header('Location: /BookAndPlay/User/profilo');
                         //$view->showProfile();
                     }
                     else {
-                        header('Location: /BookAndPlay/User/profile');
+                        header('Location: /BookAndPlay/User/profilo');
                         //CUser::profile();
                     }
                 }
@@ -130,7 +130,7 @@ class CUser {
      * 2) URL: /AppCrowdFunding/Utente/profile --> mostra il profilo dell'utente loggato (se è loggato)
      * 3) in tutti gli altri casi (utente non loggato o username inesistente) mostra la homepage.
      */
-    static function profile() {
+    static function profilo() {
         $view = new VUser();
         $pm = new FPersistentManager();
         if($_SERVER['REQUEST_METHOD'] == "GET") {
