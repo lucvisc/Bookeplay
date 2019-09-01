@@ -35,12 +35,23 @@ class VGestionePartite {
      */
     public function getFasciaOraria(){
         $value = null;
-        if (isset($_POST['facia_oraria']))
+        if (isset($_POST['fascia_oraria']))
             $value = $_POST['fascia_oraria'];
         return $value;
     }
 
     /**
+     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=livello
+     * @return mixed|null
+     */
+    public function getNote() {
+        $value = null;
+        if (isset($_POST['descrizione']))
+            $value = $_POST['descrizione'];
+        return $value;
+    }
+
+        /**
      * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=livello
      * @return mixed|null
      */
@@ -107,7 +118,7 @@ class VGestionePartite {
      * @throws SmartyException
      */
     public function showFormCreation(EUser $utente, EAccount $acc ,$error){
-            $this->stato_form($error);
+            $this->statoForm($error);
             $this->smarty->assign('nome', $utente->getName());
             $this->smarty->assign('cognome', $utente->getSurname());
             $this->smarty->assign('conto', $acc->getConto());

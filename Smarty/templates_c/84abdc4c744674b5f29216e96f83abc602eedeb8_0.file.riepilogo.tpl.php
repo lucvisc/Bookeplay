@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-31 22:21:11
+/* Smarty version 3.1.33, created on 2019-09-01 12:24:09
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\riepilogo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6ad6b7329686_90283230',
+  'unifunc' => 'content_5d6b9c4960c1b7_01747323',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '84abdc4c744674b5f29216e96f83abc602eedeb8' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\riepilogo.tpl',
-      1 => 1567282869,
+      1 => 1567282972,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6ad6b7329686_90283230 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6b9c4960c1b7_01747323 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -84,7 +84,7 @@ function content_5d6ad6b7329686_90283230 (Smarty_Internal_Template $_smarty_tpl)
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/User/profilo">Profilo</a>
           <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/partite">Crea/Partecipa</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/Riepilogo">Riepilogo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a>
         </div>
         <div class="col-md-8" style="">
           <div class="tab-content">
@@ -102,34 +102,34 @@ $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->t
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
 ?> 
-          <div class="row">
-            <div class="col-md-12">
               <div class="row">
-                <div class="col-md-11" style="">
-                  <div class="col-md-12 col-1 m-2 border border-light rounded" style="">
-                    <h3 class="text-light mx-2" style="">
-                      <div class="row">
-                        <div class="border-light my-2 ml-2" style="">
-                          <h4 class="text-light">ID Partite:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-11" style="">
+                      <div class="col-md-12 col-1 m-2 border border-light rounded" style="">
+                        <h3 class="text-light mx-2" style="">
+                          <div class="row">
+                            <div class="border-light my-2 ml-2" style="">
+                              <h4 class="text-light">ID Partite:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
 </h4>
-                          <h4 class="text-light">Campetto Numero:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getNumerocampo();?>
+                              <h4 class="text-light">Campetto Numero:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getNumerocampo();?>
 </h4>
-                          <h4 class="text-light">Partecipanti:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getPartecipanti();?>
+                              <h4 class="text-light">Partecipanti:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getPartecipanti();?>
 </h4>
-                          <h4 class="text-light">Giorno - Fascia Oraria:<?php echo $_smarty_tpl->tpl_vars['booking']->value->etGiornobooking();?>
+                              <h4 class="text-light">Giorno - Fascia Oraria:<?php echo $_smarty_tpl->tpl_vars['booking']->value->etGiornobooking();?>
 </h4>
-                        </div>
+                            </div>
+                          </div>
+                        </h3>
                       </div>
-                    </h3>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+         </div>
         </div>
-      </div>
-     </div>
-    </div>
         <?php
 }
 }

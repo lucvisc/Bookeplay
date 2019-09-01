@@ -236,6 +236,78 @@ class CUser {
 		}
 	}
 
+    /**
+     * Funzione che ha il compito di richiamare una nuova vista a partire da quella del profilo privato che permette la
+     * modifica di tutti i campi riguardanti un utente. Anche in questo caso, avviene la differenziazione tra i due tipi di utenti.
+     * 1) se il metodo della richiesta HTTP è GET e si è loggati, viene presentata la nuova vista per modificare i propri dati;
+     * 2) se il metodo della richiesta HTTP è GET ma non si è loggati, allora avviene il reindirizzamento verso la form di login;
+     * 3) se il metodo della richiesta HTTP è POST, vengono rilevati tutti i valori inseriti dall'utente per la modifica e dopo aver controllato
+     * 	  l'univocità dell'email (nel caso in cui venisse cambiata), la correttezza della password inserita e, se si è
+     *    trasportatore, l'univocità della nuova targa, si procede con l'update dei campi nel database per poi essere reindirizzati alla pagina del priprio profilo.
+     */
+    public function modificaProfilo() {
+        $pm = new FPersistentManager();
+        $view = new VUser();
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            if (CUser::isLogged()) {
+                $account = unserialize($_SESSION['account']);
+                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                $user = $pm->load("email", $account->getEmail(), "FUser");
+                $addr = $pm->load("email", $account->getEmail(), "FAddress");
+                $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                $view->formModificaProfilo($user, $acc,"ok"); // $img,
+
+            } else
+                header('Location: /BookAndPlay/User/login');
+        }
+        elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $account = unserialize($_SESSION['account']);  //Creates a PHP value from a stored representation
+            $img = $pm->load("emailutente", $account->getEmail(), "FMediaUser");
+            if (get_class($account) == "EAccount") {
+                if ($account->getPassword() == md5($_POST['old_password'])) {
+                    if ($account->getEmail() == $_POST['email']) {
+                        $statoimg = static::modificaprofiloimmagine($account);
+                        if ($statoimg) {
+                            static::updateCampi($account, "Faccount");
+                            $newAcc =FAccount::loadById($account);
+                            $salvare = serialize($newAcc);
+                            $_SESSION['account'] = $salvare;
+                            header('Location: /BookAndPlay/User/profile');
+                        }
+                    } else {
+                        $verificaEmail = $pm->exist("email", $_POST['email'], "FAccount");
+                        if ($verificaEmail) {
+                            //UTENTE GIA NEL DB
+                            $user=FUser::loadByIdAccount($account);
+                            $view->formMoficiaProfilo($user, $account, $img, "errorEmail");
+                        } else {
+                            $statoimg = static::modificaprofiloimmagine($account);
+                            if ($statoimg) {
+                                static::updateCampi($account, "FAccount");
+                                $pm->update("email", $_POST['email'], "email", $account->getEmail(), "FAccount");
+                                $newAcc=FAccount::loadById($account);
+                                $img =FMediaUser::loadByIdAcc($account);
+                                $addr =FAddress::loadByIdAccount($account);
+                                $user=FUser::loadByIdAccount($account);
+                                $salvare = serialize($newAcc);
+                                $_SESSION['account'] = $salvare;
+                                $view->showProfileUser($newAcc, $addr, $img);
+                            }
+                        }
+                    }
+                } else {
+                    //ERRORE PASSWORD
+                    $newAcc=FAccount::loadById($account);
+                    $img =FMediaUser::loadByIdAcc($account);
+                    $user=FUser::loadByIdAccount($account);
+                    $view->showModificaProfilo($user, $newAcc, $img, "errorPassw");
+                }
+
+            }
+        }
+    }
+
 	/**
 	 * Funzione di supporto che si occupa di verificare la correttezza dell'immagine inserita nella form di registrazione.
 	 * Nll caso in cui non ci sono errori di inserimento, avviene la store dell'utente e la corrispondente immagine nel database.
@@ -289,76 +361,7 @@ class CUser {
 		return $ris;
 	}
 
-	/**
-	 * Funzione che ha il compito di richiamare una nuova vista a partire da quella del profilo privato che permette la
-	 * modifica di tutti i campi riguardanti un utente. Anche in questo caso, avviene la differenziazione tra i due tipi di utenti.
-	 * 1) se il metodo della richiesta HTTP è GET e si è loggati, viene presentata la nuova vista per modificare i propri dati;
-	 * 2) se il metodo della richiesta HTTP è GET ma non si è loggati, allora avviene il reindirizzamento verso la form di login;
-	 * 3) se il metodo della richiesta HTTP è POST, vengono rilevati tutti i valori inseriti dall'utente per la modifica e dopo aver controllato
-	 * 	  l'univocità dell'email (nel caso in cui venisse cambiata), la correttezza della password inserita e, se si è
-	 *    trasportatore, l'univocità della nuova targa, si procede con l'update dei campi nel database per poi essere reindirizzati alla pagina del priprio profilo.
-	 */
-	public function modificaprofilo() {
-		$pm = new FPersistentManager();
-		$view = new VUser();
-		session_start();
-		if ($_SERVER['REQUEST_METHOD'] == "GET") {
-			if (CUser::isLogged()) {
-				$account = unserialize($_SESSION['account']);
-				$img =FMediaUser::loadByIdAcc($account);
-                $acc =FAccount::loadById($account);
-                $user = FUser::loadByIdAccount($account);
-				$view->formModificaProfilo($user, $acc, $img,"ok");
 
-			} else
-				header('Location: /BookAndPlay/User/login');
-		}
-		elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-				$account = unserialize($_SESSION['account']);  //Creates a PHP value from a stored representation
-				$img = $pm->load("emailutente", $account->getEmail(), "FMediaUser");
-				if (get_class($account) == "EAccount") {
-					if ($account->getPassword() == md5($_POST['old_password'])) {
-						if ($account->getEmail() == $_POST['email']) {
-							$statoimg = static::modificaprofiloimmagine($account);
-							if ($statoimg) {
-								static::updateCampi($account, "Faccount");
-								$newAcc =FAccount::loadById($account);
-								$salvare = serialize($newAcc);
-								$_SESSION['account'] = $salvare;
-								header('Location: /BookAndPlay/User/profile');
-							}
-						} else {
-							$verificaEmail = $pm->exist("email", $_POST['email'], "FAccount");
-							if ($verificaEmail) {
-								//UTENTE GIA NEL DB
-                                $user=FUser::loadByIdAccount($account);
-								$view->formMoficiaProfilo($user, $account, $img, "errorEmail");
-							} else {
-								$statoimg = static::modificaprofiloimmagine($account);
-								if ($statoimg) {
-									static::updateCampi($account, "FAccount");
-									$pm->update("email", $_POST['email'], "email", $account->getEmail(), "FAccount");
-									$newAcc=FAccount::loadById($account);
-									$img =FMediaUser::loadByIdAcc($account);
-									$addr =FAddress::loadByIdAccount($account);
-									$user=FUser::loadByIdAccount($account);
-									$salvare = serialize($newAcc);
-									$_SESSION['account'] = $salvare;
-									$view->showProfileUser($newAcc, $addr, $img);
-								}
-							}
-						}
-					} else {
-						//ERRORE PASSWORD
-                        $newAcc=FAccount::loadById($account);
-                        $img =FMediaUser::loadByIdAcc($account);
-                        $user=FUser::loadByIdAccount($account);
-						$view->showModificaProfilo($user, $newAcc, $img, "errorPassw");
-					}
-
-				}
-		}
-	}
 
 	/**
 	 * Funzione che si occupa di fare tutti i controlli necessari per aggiornare i campi che un utente desidera modificare

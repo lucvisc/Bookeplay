@@ -4,10 +4,10 @@
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" style="">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
@@ -17,20 +17,22 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
-          {if $userlogged!='nouser'}
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> <li>
-          </ul>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/info/informazioni">Informazioni</a> </li> 
+          {if $userlogged!='nouser'} 
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
+          <li>
+          </li>
+        </ul>
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
-        </ul>
+        </ul> 
         {else} 
-          <ul class="navbar-nav">
+        <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
-        </ul>
+        </ul> 
         {/if}
       </div>
     </div>
@@ -38,13 +40,13 @@
   <div class="py-5 h-100" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}"  alt="profile picture" /></div>
+        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
         <div class="col-md-7  offset-md-1" style="">
-          <div class="row">
+          <div class="row" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
             <div class="col-md-12" style="">
               <h3 class="text-light">Nome: {$nome}</h3>
-              <h3 class="text-light">Cognome: {cognome}</h3>
-              <h3 class="text-light">Conto: {$conto}</h3>
+              <h3 class="text-light">Cognome: {$cognome}</h3>
+              <h3 class="text-light">Conto: {$conto} €</h3>
             </div>
           </div>
         </div>
@@ -54,23 +56,22 @@
       <div class="row">
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/User/profilo">Profilo</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/partite">Crea/Partecipa</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/riepilogo">Riepilogo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a>
         </div>
         <div class="col-9 col-md-8" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <div class="tab-content">
-            </div>
           </div>
           <div class="row">
-            <div class="col-md-12" style="">
-              <div class="form-group row m-2" style="">
+            <div class="col-md-12">
+              <div class="form-group row m-2">
                 <div class="col-md-3 mt-1" style=""><label class="text-light col-2 col-md-6 text-right">Giorno:</label></div>
                 <div class="col-md-6" style="">
-                  <form class="form-inline" style="" action="/BookAndPlay/User/creaPartita" method="POST">
+                  <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
                     <div class="input-group">
-                      <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="" required="required">
+                      <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="Search">
                       <div class="input-group-append">
-                        <input type="submit" class="btn btn-secondary" value="Cerca Giorno"/>
+                        <input type="submit" class="btnRegister" value="Cerca">
                       </div>
                     </div>
                   </form>
@@ -78,9 +79,10 @@
               </div>
             </div>
           </div>
-          <div class="row" style="">
-            <div class="col-md-12 col-lg-12 text-center" style="">
+          <div class="row">
+            <div class="col-md-12 col-lg-12 text-center">
               <div class="table-responsive"> 
+                {if $array} 
                 {foreach $array as $giorno} 
                 <table class="table table-striped table-dark">
                   <thead>
@@ -94,59 +96,63 @@
                       <th scope="row">{$giorno->getFasceOrarie()}</th>
                     </tr>
                   </tbody>
-                </table>
-              </div>
+                </table> 
+                {/foreach} 
+                {else} <p class="text-light text-center mt-2">Tutte le fasce orarie sono disponibili</p> 
+                {/if}
+                 </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-10 shadow-none text-center  offset-md-1" style="">
-              <div class="form-group row m-2" style="">
-                <div class="col-md-4 mt-1" style="">
-                  <h5 class="text-light text-left">Fascia Oraria:</h5>
-                </div>
-                <div class="col-md-5 offset-md-1" style="">
-                  <form class="form-inline" style="" action="/BookAndPlay/Utente/creaPartita" method="POST">
-                    <div class="input-group">
-                      <input type="number" name="fascia_oraria" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="" required="required"></div>
-                </div>
-              </div>
-              <div class="form-group row m-2" style="">
-                <div class="col-md-4 mt-1" style="">
-                  <h5 class="text-light text-left" contenteditable="true">Livello di Gioco</h5>
-                </div>
-                <div class="col-md-7 offset-md-1" style="">
-                    <div class="input-group">
-                      <input type="text" name="livello" class="form-control" id="inlineFormInputGroup" style="" value="{livello}" placeholder="Medio" required="required"></div>
-                </div>
-              </div>
-              <div class="form-group row m-2" style="">
-                <div class="col-md-4 mt-1" style="">
-                  <h5 class="text-light text-left">Numero Giocatori:</h5>
-                </div>
-                <div class="col-md-5 offset-md-1" style="">
-                    <div class="input-group">
-                      <input type="number" name="num_gioc" class="form-control" id="inlineFormInputGroup" value="{numero_giocatori}" placeholder="Search" style="" required="required"></div>
-                </div>
-              </div>
-              <div class="form-group row m-2" style="">
-                <div class="col-md-4 mt-1" style="">
-                  <h5 class="text-light text-left">Note:</h5>
-                </div>
-                <div class="col-md-5 offset-md-1" style="">
-                    <div class="input-group">
-                      <input type="text" name="descrizione" class="form-control" id="inlineFormInputGroup" value="{note}" placeholder="Search" style=""></div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 mx-3">
-                  <input type="submit" class="btn btn-secondary" value="Prenota partita"/>
-                </div>
-              </div>
-              </form>
-            </div>
           </div>
+          <form action="/BookAndPlay/GestionePartitex/creaPartita" method="POST" >
+            <div class="row">
+              <div class="col-md-12 shadow-none text-center  " style="">
+                <div class="form-group row m-2" style="">
+                  <div class="col-md-4 mt-1" style="">
+                    <h5 class="text-light text-left" style="">Fascia Oraria</h5>
+                  </div>
+                  <div class="col-md-5 offset-md-1" style="">
+                    <div class="input-group">
+                      <input type="text" name="fascia_oraria" class="form-control" id="inlineFormInputGroup" placeholder="Search" required="required">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row m-2" style="">
+                  <div class="col-md-4 mt-1" style="">
+                    <h5 class="text-light text-left" contenteditable="true">Livello di Gioco</h5>
+                  </div>
+                  <div class="col-md-5 offset-md-1" style="">
+                    <div class="input-group">
+                      <input type="text" name="livello" class="form-control" id="inlineFormInputGroup" placeholder="Medio" required="required">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row m-2" style="">
+                  <div class="col-md-4 mt-1" style="">
+                    <h5 class="text-light text-left">Note:</h5>
+                  </div>
+                  <div class="col-md-5 offset-md-1" style="">
+                    <div class="input-group">
+                      <input type="text" name="descrizione" class="form-control" id="inlineFormInputGroup" placeholder="Search" required="required">
+                    </div>
+                  </div>
+                </div>
+                </form>
+                <div class="row">
+                  <div class="col-md-12 mx-3">
+                    <input type="submit" class="btn btn-secondary" value="Prenota partita">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
+    </div>
+    <div class="row" style="">
+    </div>
+    <div class="row">
     </div>
   </div>
   <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
@@ -161,9 +167,9 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="/BookAndPlay/">Home</a></a> </li>
+            <li> <a href="#">Home</a><span class="sr-only">(current)</span> </li>
             <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-            <li> <a href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
+            <li> <a href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">

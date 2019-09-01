@@ -75,12 +75,17 @@
                     <div class="col-md-2 mt-1 text-body" style=""><label class="col-2 col-md-6 text-right text-light">Giorno:</label></div>
                     <div class="col-md-6" style="">
                       <form class="form-inline" style="">
-                        <div class="input-group">
-                          <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Search" style=""><div class="input-group-append"><button class="btn btn-info" type="button"><i class="fa fa-search" aria-hidden="true"></i></button></div>
+                        <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
+                          <div class="input-group">
+                            <input type="date" name='giorno' class="form-control" id="inlineFormInputGroup" placeholder="Search" >
+                                </form>
+                            <div class="input-group-append">
+                              <input type="submit" class="btnRegister" value="Cerca"/></i>
+                          </button>
                         </div>
-                      </form>
+                      </div>
                     </div>
-                    <div class="col-md-3   offset-md-1" style=""><a class="btn btn-secondary rounded text-center m-0" style="" href="crea-partita.html">Crea Partita</a></div>
+                    <div class="col-md-3   offset-md-1" style=""><a class="btn btn-secondary rounded text-center m-0" style="" href="/BookAndPlay/GestionePartite/creaPartita">Crea Partita</a></div>
                   </div>
                   <div class="row" style="">
                     <div class="col-md-11 text-light" style="">

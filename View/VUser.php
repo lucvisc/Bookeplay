@@ -156,7 +156,7 @@ class VUser {
      * @param $error tipo di errore nel caso in cui le modifiche siano sbagliate
      * @throws SmartyException
      */
-    public function formModificaProfilo(EUser $user, EAccount $acc, $img,$error) {
+    public function formModificaProfilo(EUser $user, EAccount $acc,$error) { // $img,
         switch ($error) {
             case "errorEmail" :
                 $this->smarty->assign('errorEmail', "errore");
@@ -179,10 +179,10 @@ class VUser {
             $pic64 = base64_encode($data);
         }
         $this->smarty->assign('userlogged',"loggato");
-        $this->smarty->assign('pic64',$pic64);
+        //$this->smarty->assign('pic64',$pic64);
         $this->smarty->assign('username',$acc->getUsername());
         $this->smarty->assign('name',$user->getName());
-        $this->smarty->assign('conto',$acc->getConto());
+        //$this->smarty->assign('conto',$acc->getConto());
         $this->smarty->assign('surname',$user->getSurname());
         $this->smarty->assign('email',$acc->getEmail());
         $this->smarty->display('modificaProfilo.tpl');

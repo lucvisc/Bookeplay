@@ -21,16 +21,20 @@ class CGestionePartite {
     static function creaPartita() {
         if (CUser::isLogged()) {
             $view = new VGestionePartite();
+            $pm= new FPersistentManager();
             if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $account = unserialize($_SESSION['account']);
-                $user = FUser::loadByIdAccount($account);
+                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                $user = $pm->load("email", $account->getEmail(), "FUser");
+                $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $view->showFormCreation($user, $account, null);
-            } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
+            }
+            elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $pm = new FPersistentManager();
                 $account = unserialize($_SESSION['account']);
-                $user = FUser::loadByIdAccount($account);
-                $img=FMediaUser::loadByIdAccount($account);
-                $giorno = $pm->load("giorno", $_POST['giorno'], "FGiorno");
+                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                $user = $pm->load("email", $account->getEmail(), "FUser");
+                $giorno = $pm->load("giorno", $_POST['giorno'], "FBooking");
                 $array_id = null;
                 if (isset($array_id)) {
                     if (!in_array('0', $array_id)) {

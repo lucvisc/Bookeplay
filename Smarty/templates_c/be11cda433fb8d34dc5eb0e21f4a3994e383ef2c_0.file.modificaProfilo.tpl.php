@@ -1,9 +1,32 @@
-<!DOCTYPE html>
-{assign var='userlogged' value=$userlogged|default:'nouser'} 
-{assign var='errorEmail' value=$errorEmail|default:'ok'} 
-{assign var='errorPassw' value=$errorPassw|default:'ok'} 
-{assign var='errorSize' value=$errorSize|default:'ok'} 
-{assign var='errorType' value=$errorType|default:'ok'}
+<?php
+/* Smarty version 3.1.33, created on 2019-09-01 13:03:21
+  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\modificaProfilo.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5d6ba579761896_49029667',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'be11cda433fb8d34dc5eb0e21f4a3994e383ef2c' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\modificaProfilo.tpl',
+      1 => 1567335798,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5d6ba579761896_49029667 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
+<?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?> 
+<?php $_smarty_tpl->_assignInScope('errorEmail', (($tmp = @$_smarty_tpl->tpl_vars['errorEmail']->value)===null||$tmp==='' ? 'ok' : $tmp));?> 
+<?php $_smarty_tpl->_assignInScope('errorPassw', (($tmp = @$_smarty_tpl->tpl_vars['errorPassw']->value)===null||$tmp==='' ? 'ok' : $tmp));?> 
+<?php $_smarty_tpl->_assignInScope('errorSize', (($tmp = @$_smarty_tpl->tpl_vars['errorSize']->value)===null||$tmp==='' ? 'ok' : $tmp));?> 
+<?php $_smarty_tpl->_assignInScope('errorType', (($tmp = @$_smarty_tpl->tpl_vars['errorType']->value)===null||$tmp==='' ? 'ok' : $tmp));?>
 <html>
 
 <head></head>
@@ -24,7 +47,7 @@
           <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li> 
-          {if $userlogged!='nouser'} 
+          <?php if ($_smarty_tpl->tpl_vars['userlogged']->value != 'nouser') {?> 
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
           <li>
           </li>
@@ -32,19 +55,20 @@
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
         </ul> 
-        {else} 
+        <?php } else { ?> 
         <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrati">Register</a> </li>
         </ul> 
-        {/if}
+        <?php }?>
       </div>
     </div>
   </nav>
   <div class="py-5 h-100" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
+        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,<?php echo $_smarty_tpl->tpl_vars['pic64']->value;?>
+" alt="profile picture"></div>
       </div>
     </div>
     <div class="container">
@@ -64,10 +88,14 @@
               <form action="/BookAndPlay/User/modoficaProfilo" method="POST">
               <div class="row h-100">
                 <div class="col-10 col-lg-12">
-                    <div class="form-group"> <label for="form20" class="text-light">Username</label> <input type="text" value="{$username}" name="username" required="required" class="form-control" id="form16" placeholder="----------"></div>
-                    <div class="form-group"> <label for="form20" class="text-light">Nome</label> <input type="text" value="{$name}" name="nome" required="required" class="form-control" id="form16" placeholder="----------"></div>
-                    <div class="form-group"> <label for="form20" class="text-light">Cognome</label> <input type="text" value="{$surname}" name="surname" required="required" class="form-control" id="form16" placeholder="----------"></div>
-                    <div class="form-group"> <label for="form21" class="text-light">Email</label> <input type="email" value="{$email}" name="email" required="required" class="form-control" id="form16" placeholder="----------"> </div>
+                    <div class="form-group"> <label for="form20" class="text-light">Username</label> <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['username']->value;?>
+" name="username" required="required" class="form-control" id="form16" placeholder="----------"></div>
+                    <div class="form-group"> <label for="form20" class="text-light">Nome</label> <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+" name="nome" required="required" class="form-control" id="form16" placeholder="----------"></div>
+                    <div class="form-group"> <label for="form20" class="text-light">Cognome</label> <input type="text" value="<?php echo $_smarty_tpl->tpl_vars['surname']->value;?>
+" name="surname" required="required" class="form-control" id="form16" placeholder="----------"></div>
+                    <div class="form-group"> <label for="form21" class="text-light">Email</label> <input type="email" value="<?php echo $_smarty_tpl->tpl_vars['email']->value;?>
+" name="email" required="required" class="form-control" id="form16" placeholder="----------"> </div>
                     <div class="form-group"> <label for="form21" class="text-light">Cambia immagine del profilo</label> <input name="file" type="file" size"40"="" class="form-control" id="form16" <="" div=""></div>
                     <div class="form-group"> <label for="form21" class="text-light">Inserisci la vecchia password</label> <input type="password" name="old_password" required="required" class="form-control" id="form16" <="" div=""></div>
                     <div class="form-group"> <label for="form21" class="text-light">Inserisci la nuova password</label> <input type="password" name="new_password" required="required" class="form-control" id="form16" <="" div=""> </div>
@@ -78,26 +106,24 @@
                     </div>
                     <div class="row">
                   </div> 
-                  {if $errorEmail!='ok'} 
-                  <div style="color: red;"> 
-                    <p align="center">Cambiare Email poichè già assegnata!</p>
+                  <?php if ($_smarty_tpl->tpl_vars['errorEmail']->value != 'ok') {?> 
+                  <div style="color: red;"> <p align="center">Cambiare Email poichè già assegnata!</p>
                   </div> 
-                  {/if}
-                  {if $errorPassw!='ok'} 
-                  <div style="color: red;"> 
-                    <p align="center">Password errata!</p>
+                  <?php }?>
+                  <?php if ($_smarty_tpl->tpl_vars['errorPassw']->value != 'ok') {?> 
+                  <div style="color: red;"> <p align="center">Password errata!</p>
                   </div> 
-                  {/if} 
-                  {if $errorSize!='ok'} 
+                  <?php }?> 
+                  <?php if ($_smarty_tpl->tpl_vars['errorSize']->value != 'ok') {?> 
                   <div style="color: red;">
                     <p align="center">Attenzione! Formato immagine troppo grande! </p>
                   </div> 
-                  {/if} 
-                  {if $errorType!='ok'} 
+                  <?php }?> 
+                  <?php if ($_smarty_tpl->tpl_vars['errorType']->value != 'ok') {?> 
                   <div style="color: red;">
                     <p align="center">Attenzione! Formato immagine non supportato (provare con .png o .jpg)! </p>
                   </div>
-                  {/if}
+                  <?php }?>
                   </div>
                 </div>
               </div>
@@ -130,8 +156,8 @@
             <h5> <b>Main</b> </h5>
             <ul class="list-unstyled">
               <li> <a href="#">Home</a><span class="sr-only">(current)</span> </li>
-              <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-              <li> <a href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
+              <li> <a href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
+              <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
             </ul>
           </div>
           <div class="col-lg-3 col-6 p-3">
@@ -162,10 +188,17 @@
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
   </div>
 </body>
 
-</html>
+</html><?php }
+}

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-31 22:06:29
+/* Smarty version 3.1.33, created on 2019-09-01 11:58:14
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\partite.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6ad345ab11f3_03795922',
+  'unifunc' => 'content_5d6b9636346230_52805849',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '65dd71dfdc6bf653a9fa13134c39ecc2355bc288' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\partite.tpl',
-      1 => 1567281887,
+      1 => 1567328717,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6ad345ab11f3_03795922 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6b9636346230_52805849 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -102,12 +102,17 @@ function content_5d6ad345ab11f3_03795922 (Smarty_Internal_Template $_smarty_tpl)
                     <div class="col-md-2 mt-1 text-body" style=""><label class="col-2 col-md-6 text-right text-light">Giorno:</label></div>
                     <div class="col-md-6" style="">
                       <form class="form-inline" style="">
-                        <div class="input-group">
-                          <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Search" style=""><div class="input-group-append"><button class="btn btn-info" type="button"><i class="fa fa-search" aria-hidden="true"></i></button></div>
+                        <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
+                          <div class="input-group">
+                            <input type="date" name='giorno' class="form-control" id="inlineFormInputGroup" placeholder="Search" >
+                                </form>
+                            <div class="input-group-append">
+                              <input type="submit" class="btnRegister" value="Cerca"/></i>
+                          </button>
                         </div>
-                      </form>
+                      </div>
                     </div>
-                    <div class="col-md-3   offset-md-1" style=""><a class="btn btn-secondary rounded text-center m-0" style="" href="crea-partita.html">Crea Partita</a></div>
+                    <div class="col-md-3   offset-md-1" style=""><a class="btn btn-secondary rounded text-center m-0" style="" href="/BookAndPlay/GestionePartite/creaPartita">Crea Partita</a></div>
                   </div>
                   <div class="row" style="">
                     <div class="col-md-11 text-light" style="">
