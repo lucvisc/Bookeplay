@@ -263,11 +263,11 @@ class CUser {
         }
         elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
             $account = unserialize($_SESSION['account']);  //Creates a PHP value from a stored representation
-            $img = $pm->load("emailutente", $account->getEmail(), "FMediaUser");
+            //$img = $pm->load("emailutente", $account->getEmail(), "FMediaUser");
             if (get_class($account) == "EAccount") {
-                if ($account->getPassword() == md5($_POST['old_password'])) {
+                if ($account->getPassword() == $_POST['old_password']) {
                     if ($account->getEmail() == $_POST['email']) {
-                        $statoimg = static::modificaprofiloimmagine($account);
+                        //$statoimg = static::modificaprofiloimmagine($account);
                         if ($statoimg) {
                             static::updateCampi($account, "Faccount");
                             $newAcc =FAccount::loadById($account);
@@ -279,29 +279,31 @@ class CUser {
                         $verificaEmail = $pm->exist("email", $_POST['email'], "FAccount");
                         if ($verificaEmail) {
                             //UTENTE GIA NEL DB
-                            $user=FUser::loadByIdAccount($account);
-                            $view->formMoficiaProfilo($user, $account, $img, "errorEmail");
+                            $user = $pm->load("email", $account->getEmail(), "FUser");
+                            $view->formModificaProfilo($user, $account, "errorEmail"); // $img,
                         } else {
                             $statoimg = static::modificaprofiloimmagine($account);
                             if ($statoimg) {
                                 static::updateCampi($account, "FAccount");
                                 $pm->update("email", $_POST['email'], "email", $account->getEmail(), "FAccount");
-                                $newAcc=FAccount::loadById($account);
-                                $img =FMediaUser::loadByIdAcc($account);
-                                $addr =FAddress::loadByIdAccount($account);
-                                $user=FUser::loadByIdAccount($account);
+                                $newAcc=$pm->load("email", $account->getEmail(), "FAccount");
+                                //$img =$pm->load("email", $account->getEmail(), "FMediaUser");
+                                $user = $pm->load("email", $account->getEmail(), "FUser");
+                                $addr = $pm->load("email", $account->getEmail(), "FAddress");
+
                                 $salvare = serialize($newAcc);
                                 $_SESSION['account'] = $salvare;
-                                $view->showProfileUser($newAcc, $addr, $img);
+                                $view->showProfileUser($user, $newAcc, $addr); //,$img
                             }
                         }
                     }
                 } else {
                     //ERRORE PASSWORD
-                    $newAcc=FAccount::loadById($account);
-                    $img =FMediaUser::loadByIdAcc($account);
-                    $user=FUser::loadByIdAccount($account);
-                    $view->showModificaProfilo($user, $newAcc, $img, "errorPassw");
+                    $newAcc=$pm->load("email", $account->getEmail(), "FAccount");
+                    //$img =$pm->load("email", $account->getEmail(), "FMediaUser");
+                    $user = $pm->load("email", $account->getEmail(), "FUser");
+                    $addr = $pm->load("email", $account->getEmail(), "FAddress");
+                    $view->showModificaProfilo($user, $newAcc, "errorPassw"); //, $img
                 }
 
             }

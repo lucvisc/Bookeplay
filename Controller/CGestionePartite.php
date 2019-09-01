@@ -79,34 +79,6 @@ class CGestionePartite {
         }
     }
 
-/*
-    /**
-     * Funzione che provvede alla creazione della campagna a partire dai dati inseriti nel form. Si possono avere diversi casi:
-     * - se il form compilato dall'utente è corretto (viene verificato tramite il richiamo della funzione valFormCreaCampagna())
-     *   si procede alla creazione della campagna i cui dati vengono quindi memorizzati nel database.
-     * - se il form compilato non è corretto viene mostrato nuovamente con la segnalazione degli errori.
-     */
- /*   static function CreationPartita(){
-        if (CUser::isLogged()) {
-             $view = new VGestionePartite();
-                if ($_SERVER['REQUEST_METHOD'] == "GET") {
-                    $account = unserialize($_SESSION['account']);
-                    $user=FUser::loadByIdAccount($account);
-                    $img=FMediaUser::loadByIdAccount($account);
-                    $val=true;
-                    if($val){
-                        $pren= new EBooking(" ",$_POST[''],$_POST[''],$_POST[''],$_POST[''],$_POST['']);
-                        $idPren=FBooking::store($pren);
-                        $up=new Upload();
-
-                        $view->showPrenotazioneEffettuata($user, $account, $idPren, $img);
-        }
-        else{
-            header('Location: /BookAndPlay/Utente/login');
-        }
-    }
-*/
-
     /**
      * Funzione che serve per indirizzare ad una form che permette la modifica dei campi della prenotazione .
      * 1) se il metodo di richiesta HTTP è GET e si è loggati, viene visualizzata la form;
