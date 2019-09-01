@@ -35,13 +35,13 @@ class CGestionePartite {
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
-                $giorno= new EGiorno($_POST['giorno'], $_POST['fasce_orarie']);
-                $gg=$pm->loadGiorno($_POST['giorno'], $_POST['fasce_orarie']);
+                $giorno= new EGiorno($_POST['giorno'], $_POST['fascia_oraria']);
+                $gg=$pm->loadGiorno($_POST['giorno'], $_POST['fascia_oraria']);
 
                 if (!isset($gg)) {
                     $pren= new EBooking(null,$_POST['livello'],$giorno->getGiorno(),$giorno->getFasceOrarie(),$_POST['descrizione'],null);
-                    FPren_partecipa::insert(null, $account->getEmail());
                     FBooking::store($pren);
+                    FPren_partecipa::insert(null, $account->getEmail());
 
                     $view->showPrenotazioneEffettuata($user, $acc, $pren); //, $img
                 }
