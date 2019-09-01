@@ -275,6 +275,35 @@ class FDatabase {
      * @param $pass, password dell'account dell'utente
      * @return mixed|null a seconda se l'account dell'utente è presente o meno della tabella
      */
+    public function loadVerificaGiorno ($giorno, $fasciaoraria) {
+        try {
+            $query = null;
+            $class = "FGiorno";
+            $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE Giorno ='" . $giorno . "' AND FasciaOraria ='" . $fasciaoraria . "';";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;                  //nessuna riga interessata. return null
+            } else {                             //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            }
+            return $result;
+
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
+     * Metodo che verifica l'accesso di un utente , controllando che le credenziali (email e password) siano presenti nel db
+     * @param $email ,email dell'account dell' utente
+     * @param $pass, password dell'account dell'utente
+     * @return mixed|null a seconda se l'account dell'utente è presente o meno della tabella
+     */
     public function loadVerificaAccesso ($email, $pass) {
         try {
             $query = null;
@@ -643,7 +672,7 @@ class FDatabase {
             echo $query;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-            print_r($stmt->errorInfo());
+            //print_r($stmt->errorInfo());
             $num = $stmt->rowCount();
             if ($num == 0) {
                 $result = null;        //nessuna riga interessata. return null

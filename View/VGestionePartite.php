@@ -117,11 +117,12 @@ class VGestionePartite {
      * di errore nella pagina di creazione della partita
      * @throws SmartyException
      */
-    public function showFormCreation(EUser $utente, EAccount $acc ,$error){
+    public function showFormCreation(EUser $utente, EAccount $acc, $part ,$error){
             $this->statoForm($error);
             $this->smarty->assign('nome', $utente->getName());
             $this->smarty->assign('cognome', $utente->getSurname());
             $this->smarty->assign('conto', $acc->getConto());
+            $this->smarty->assign('array', $part);
             $this->smarty->assign('userlogged', "loggato");
             $this->smarty->display('creaPartita.tpl');
     }
@@ -220,7 +221,7 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $part ,$img) {
+    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $part) {  //,$img
         //list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         //$this->smarty->assign('pic64', $pic64);

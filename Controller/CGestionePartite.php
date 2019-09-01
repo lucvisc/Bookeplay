@@ -27,33 +27,55 @@ class CGestionePartite {
                 //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                $view->showFormCreation($user, $account, null);
+                $view->showFormCreation($user, $account, null, 'no');
             }
             elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $pm = new FPersistentManager();
                 $account = unserialize($_SESSION['account']);
+                $user = $pm->load("email", $account->getEmail(), "FUser");
+                $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                $giorno= new EGiorno($_POST['giorno'], $_POST['fasce_orarie']);
+                $gg=$pm->loadGiorno($_POST['giorno'], $_POST['fasce_orarie']);
+
+                if (!isset($gg)) {
+                    $pren= new EBooking(null,$_POST['livello'],$giorno->getGiorno(),$giorno->getFasceOrarie(),$_POST['descrizione'],null);
+                    FPren_partecipa::insert(null, $account->getEmail());
+                    FBooking::store($pren);
+
+                    $view->showPrenotazioneEffettuata($user, $acc, $pren); //, $img
+                }
+                else {
+                    $view->showFormCreation($user, $account, "no_giorno");
+                    }
+                }
+            }
+        else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
+    /**
+     * Funzione che si occupa di mostrare le partite per un utenteloggato, con la possibiltà di poter partecipare o creare
+     * una partita
+     * @param
+     */
+    static function cercaGiorno() {
+        if (CUser::isLogged()) {
+            $account = unserialize($_SESSION['account']);
+            if (get_class($account) == "EAccount") {
+                $view = new VGestionePartite();
+                $pm = new FPersistentManager();
                 //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
                 $user = $pm->load("email", $account->getEmail(), "FUser");
-                $giorno = $pm->load("giorno", $_POST['giorno'], "FBooking");
-                $array_id = null;
-                if (isset($array_id)) {
-                    if (!in_array('0', $array_id)) {
-                        if ($giorno == true) {
-                            $giorno= new EGiorno($_POST['giorno'], $_POST['fasce_orarie']);
-                            $partita=new EPartita($_POST['num_gioc'], $_POST['livello'], $_POST['descrizione']);
-                            $pren= new EBooking(null,$giorno ,'',null,$partita);
-                            $idPren=FBooking::store($pren);
-
-                            $view->showPrenotazioneEffettuata($user, $account, $idPren, $img);
-                        }
-                    else {
-                            $view->showFormCreation($user, $account, "no_giorno");
-                        }
-                    }
-
-                }
-            } else
+                $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                $part = $pm->load("giorno", $_POST['giorno'], "FGiorno");
+                $view->showFormCreation($user, $acc, $part,'no');
+            } else {
                 header('Location: /BookAndPlay/User/login');
+            }
+        } else {
+            header('Location: /BookAndPlay/User/login');
         }
     }
 

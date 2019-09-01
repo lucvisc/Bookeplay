@@ -74,6 +74,22 @@ class FGiorno {
     }
 
     /**
+     * Funzione che permette di poter reperire dal database eventuali istanze di oggetti che soddisfano i dati immessi
+     * in input nella form di login. L'utente recuperato potà essere trasportatore, cliente o admin.
+     * Viene ritornato l'utente utenteloggato/trasportatore/cliente
+     * @param $user valore dell'email immessa
+     * @param $pass valore della password immessa
+     * @return object|null utenteloggato/trasportatore/cliente
+     */
+    public static function loadGiorno($giorno, $fasciaoraria) {
+        $gg = null;
+        $db=FDatabase::getInstance();
+        $result=$db->loadVerificaGiorno($giorno, $fasciaoraria);
+
+        return $result;
+    }
+
+    /**
      * Funzione che permette la load del giorno in base al paramentro giorno
      * @param string $gg del giorno di riferimento
      * @return object $gior
