@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-01 12:23:58
+/* Smarty version 3.1.33, created on 2019-09-01 15:20:39
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\creaPartita.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6b9c3ee70365_57839183',
+  'unifunc' => 'content_5d6bc5a75064c3_10067868',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fbfc3cbb7421bc315369f59443ceca867dc8f3a2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\creaPartita.tpl',
-      1 => 1567333425,
+      1 => 1567343922,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6b9c3ee70365_57839183 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6bc5a75064c3_10067868 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -94,14 +94,15 @@ function content_5d6b9c3ee70365_57839183 (Smarty_Internal_Template $_smarty_tpl)
               <div class="form-group row m-2">
                 <div class="col-md-3 mt-1" style=""><label class="text-light col-2 col-md-6 text-right">Giorno:</label></div>
                 <div class="col-md-6" style="">
-                  <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
+                  <form class="form-inline" action="/BookAndPlay/GestionePartite/cercaGiorno" method="POST">
                     <div class="input-group">
                       <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="Search">
+                    </form>
                       <div class="input-group-append">
                         <input type="submit" class="btnRegister" value="Cerca">
                       </div>
                     </div>
-                  </form>
+                  
                 </div>
               </div>
             </div>
@@ -140,16 +141,26 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
           </div>
           <div class="row">
           </div>
-          <form action="/BookAndPlay/GestionePartitex/creaPartita" method="POST" >
+          <form action="/BookAndPlay/GestionePartite/creaPartita" method="POST" >
             <div class="row">
               <div class="col-md-12 shadow-none text-center  " style="">
+                <div class="form-group row m-2" style="">
+                  <div class="col-md-4 mt-1" style="">
+                    <h5 class="text-light text-left" style="">Giorno</h5>
+                  </div>
+                  <div class="col-md-5 offset-md-1" style="">
+                    <div class="input-group">
+                      <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="gg/mm/aaaa" required="required">
+                    </div>
+                  </div>
+                </div>
                 <div class="form-group row m-2" style="">
                   <div class="col-md-4 mt-1" style="">
                     <h5 class="text-light text-left" style="">Fascia Oraria</h5>
                   </div>
                   <div class="col-md-5 offset-md-1" style="">
                     <div class="input-group">
-                      <input type="text" name="fascia_oraria" class="form-control" id="inlineFormInputGroup" placeholder="Search" required="required">
+                      <input type="text" name="fascia_oraria" class="form-control" id="inlineFormInputGroup" placeholder="es 09:00-10-00" required="required">
                     </div>
                   </div>
                 </div>

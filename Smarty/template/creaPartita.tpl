@@ -67,14 +67,15 @@
               <div class="form-group row m-2">
                 <div class="col-md-3 mt-1" style=""><label class="text-light col-2 col-md-6 text-right">Giorno:</label></div>
                 <div class="col-md-6" style="">
-                  <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
+                  <form class="form-inline" action="/BookAndPlay/GestionePartite/cercaGiorno" method="POST">
                     <div class="input-group">
                       <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="Search">
+                    </form>
                       <div class="input-group-append">
                         <input type="submit" class="btnRegister" value="Cerca">
                       </div>
                     </div>
-                  </form>
+                  
                 </div>
               </div>
             </div>
@@ -105,16 +106,26 @@
           </div>
           <div class="row">
           </div>
-          <form action="/BookAndPlay/GestionePartitex/creaPartita" method="POST" >
+          <form action="/BookAndPlay/GestionePartite/creaPartita" method="POST" >
             <div class="row">
               <div class="col-md-12 shadow-none text-center  " style="">
+                <div class="form-group row m-2" style="">
+                  <div class="col-md-4 mt-1" style="">
+                    <h5 class="text-light text-left" style="">Giorno</h5>
+                  </div>
+                  <div class="col-md-5 offset-md-1" style="">
+                    <div class="input-group">
+                      <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="gg/mm/aaaa" required="required">
+                    </div>
+                  </div>
+                </div>
                 <div class="form-group row m-2" style="">
                   <div class="col-md-4 mt-1" style="">
                     <h5 class="text-light text-left" style="">Fascia Oraria</h5>
                   </div>
                   <div class="col-md-5 offset-md-1" style="">
                     <div class="input-group">
-                      <input type="text" name="fascia_oraria" class="form-control" id="inlineFormInputGroup" placeholder="Search" required="required">
+                      <input type="text" name="fascia_oraria" class="form-control" id="inlineFormInputGroup" placeholder="es 09:00-10-00" required="required">
                     </div>
                   </div>
                 </div>
