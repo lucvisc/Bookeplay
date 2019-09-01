@@ -37,7 +37,7 @@ class FPren_partecipa {
      * questo metodo restituisce il nome della tabella per la costruzione delle Query
      * @return string $table nome della tabella
      */
-    public static function getTable(){
+    public static function getTables(){
         return self::$table;
     }
 
@@ -75,6 +75,18 @@ class FPren_partecipa {
         $result=$db->loadDB(static::getClass(), $field, $id);
         return ($result);
     }
+
+    /**
+     * Metodo che permette di ritornare il numero di partecipanti per una prenotazione
+     * @param $giorno
+     * @return object $username Account
+     */
+    public static function CountPartecipanti($id){
+        $db=FDatabase::getInstance();
+        $result=$db->CountPartecipanti($id);
+        return $result;
+    }
+
 
     /**
      * Metodo che permette di ritornare tutti partecipanti di una specifica prenotazione

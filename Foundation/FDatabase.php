@@ -270,10 +270,10 @@ class FDatabase {
     }
 
     /**
-     * Metodo che verifica l'accesso di un utente , controllando che le credenziali (email e password) siano presenti nel db
-     * @param $email ,email dell'account dell' utente
-     * @param $pass, password dell'account dell'utente
-     * @return mixed|null a seconda se l'account dell'utente è presente o meno della tabella
+     * Metodo che verifica se il giorno è la fascia oraria è gia presente nel db
+     * @param $giorno giorno della prenotazione
+     * @param $fasciaoraria della prenotazione
+     * @return mixed|null a seconda se è presente o meno della tabella
      */
     public function loadVerificaGiorno ($giorno, $fasciaoraria) {
         try {
@@ -290,6 +290,29 @@ class FDatabase {
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
             }
             return $result;
+
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+    /**
+     * Metodo che conta quanti partecipanti ci sono per una prenotazione
+     * @param $idPre id della prenotazione
+     * @return numero di partecipanti
+     */
+    public function CountPartecipanti ($idPre) {
+        try {
+            $query = null;
+            $class = "FPren_partecipa";
+            $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE idPren ='" . $idPre ."';";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+
+            return $num;
 
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();

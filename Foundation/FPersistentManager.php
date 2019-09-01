@@ -101,12 +101,22 @@ class FPersistentManager {
     }
 
     /**
-     * Metodo che permette di ottenere tutte le partite presenti sul db
-     * @return array|EBooking|null
-     */
+ * Metodo che permette di ottenere tutte le partite presenti sul db
+ * @return array|EBooking|null
+ */
     public static function loadPartiteAttive ($giorno) {
         $ris = null;
         $ris = FBooking::LoadBooking($giorno);
+        return $ris;
+    }
+
+    /**
+     * Metodo che permette di ottenere il numero di partecipanti per una prenotazione
+     * @return array|EBooking|null
+     */
+    public static function CountPartecipanti ($id) {
+        $ris = null;
+        $ris = FPren_partecipa::CountPartecipanti($id);
         return $ris;
     }
 

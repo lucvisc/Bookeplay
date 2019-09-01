@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-01 14:58:04
+/* Smarty version 3.1.33, created on 2019-09-01 15:48:02
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\prenotazioneEffettuata.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6bc05cb11b06_54290558',
+  'unifunc' => 'content_5d6bcc12872938_04480146',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '971d587691d0fdbc5faf6137f1f20543100809fb' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\prenotazioneEffettuata.tpl',
-      1 => 1566638318,
+      1 => 1567343860,
       2 => 'file',
     ),
   ),
@@ -20,18 +20,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6bc05cb11b06_54290558 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6bcc12872938_04480146 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" style="">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css" >
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
@@ -40,20 +40,23 @@ function content_5d6bc05cb11b06_54290558 (Smarty_Internal_Template $_smarty_tpl)
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
-          <?php if ($_smarty_tpl->tpl_vars['userlogged']->value != 'nouser') {?>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> <li>
-          </ul>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/info/informazioni">Informazioni</a> </li> 
+          <?php if ($_smarty_tpl->tpl_vars['userlogged']->value != 'nouser') {?> 
+          <li class="nav-item"> 
+            <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
+          <li>
+          </li>
+        </ul>
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
-        </ul>
+        </ul> 
         <?php } else { ?> 
-          <ul class="navbar-nav">
+        <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
-        </ul>
+        </ul> 
         <?php }?>
       </div>
     </div>
@@ -62,32 +65,30 @@ function content_5d6bc05cb11b06_54290558 (Smarty_Internal_Template $_smarty_tpl)
     <div class="container">
       <div class="row" style="">
         <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,<?php echo $_smarty_tpl->tpl_vars['pic64']->value;?>
-"  alt="profile picture" /></div>
-        <div class="col-md-7  offset-md-1" style="">         
-            <div class="row">
-              <div class="col-md-12" style="">
-                <h3 class="text-light">Nome: <?php echo $_smarty_tpl->tpl_vars['nome']->value;?>
+" alt="profile picture"></div>
+        <div class="col-md-7  offset-md-1" style="">
+          <div class="row" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+            <div class="col-md-12" style="">
+              <h3 class="text-light">Nome: <?php echo $_smarty_tpl->tpl_vars['nome']->value;?>
 </h3>
-                <h3 class="text-light">Cognome: <?php echo $_smarty_tpl->tpl_vars['cognome']->value;?>
+              <h3 class="text-light">Cognome: <?php echo $_smarty_tpl->tpl_vars['cognome']->value;?>
 </h3>
-                <h3 class="text-light">Conto: <?php echo $_smarty_tpl->tpl_vars['conto']->value;?>
-</h3>
-              </div>
+              <h3 class="text-light">Conto: <?php echo $_smarty_tpl->tpl_vars['conto']->value;?>
+ €</h3>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="container">
-      <div class="row" style="">
+      <div class="row">
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/User/profilo">Profilo</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/partite">Crea/Partecipa</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/User/riepilogo">Riepilogo</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/partite">Crea/Partecipa</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a>
         </div>
-        <div class="col-md-8 col-8 border border-light rounded" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+        <div class="col-9 col-md-8" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <div class="tab-content">
-            </div>
           </div>
           <h2 class="ml-5 text-light border-dark border border-bottom" style="">Prenotazione Effettuata:</h2>
           <div class="row">
@@ -112,14 +113,18 @@ function content_5d6bc05cb11b06_54290558 (Smarty_Internal_Template $_smarty_tpl)
               </div>
             </div>
           </div>
+          </form>
         </div>
       </div>
+    </div>
+    <div class="row" style="">
+    </div>
+    <div class="row">
     </div>
   </div>
   <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 order-2 order-lg-1 p-0"></div>
       </div>
     </div>
   </div>
@@ -129,9 +134,9 @@ function content_5d6bc05cb11b06_54290558 (Smarty_Internal_Template $_smarty_tpl)
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="/BookAndPlay/">Home</a></a> </li>
+            <li> <a href="#">Home</a><span class="sr-only">(current)</span> </li>
             <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-            <li> <a href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
+            <li> <a href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">

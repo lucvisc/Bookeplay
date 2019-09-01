@@ -50,14 +50,13 @@
                       <div class="col-md-6" style="">
                         <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
                           <div class="input-group">
-                            <input type="date" name='giorno' class="form-control" id="inlineFormInputGroup" placeholder="Search" style="">
+                            <input type="date" name='giorno' class="form-control" id="inlineFormInputGroup" placeholder="Search" >
                                 </form>
                             <div class="input-group-append">
                               <input type="submit" class="btnRegister" value="Cerca"/></i>
                               </button>
                             </div>
                           </div>
-                        </form>
                       </div>
                     </div>
                   </div>
@@ -70,33 +69,38 @@
                 </div>
               </div>
               <div class="col-md-6 col-lg-12 rounded" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;"> 
-                {if $array} 
-                {foreach $array as $booking} 
                 <div class="row" style="">
-
                             <div class="col-md-11" style="">
                               <div class="col-md-12 col-1 m-2" style="">
+                              {if $array } 
+                              {foreach $array as $booking} 
                                 <h3 class="m-0 text-light border border-light rounded" style="">
                                   <div class="row">
                                     <div class="border-light my-2 ml-2" style="">
                                       <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
+                                      <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
+                                      <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
+                                      <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
+                                      <h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
+                                      <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
+                                      <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>
+
+
+                                      <!--<h4 class="ml-5 text-light">Partecipanti: {$booking->getPartecipanti()}</h4>
                                       <h4 class="ml-5 text-light">Organizzatore:  {$booking->getOrganizzatore()}</h4>
                                       <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno}</h4>
-                                      <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getFasceOrarie}</h4>
-                                      <h4 class="ml-5 text-light">Quota:  {$booking->getQuota()}</h4>
-                                      <h4 class="ml-5 text-light">Livello:  {$booking->getlivello()}</h4>
-                                      <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>
-                                      <h4 class="ml-5 text-light">Giorno: {$booking->getPartecipanti}</h4>
+                                      <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie}</h4>-->
                                     </div>
                                   </div>
                                 </h3>
+                                {/foreach}
+                                {else} 
+                                <p class="text-light">Non sono presenti delle partite con tale parametro di ricerca</p> 
+                                {/if}
                               </div>
                   </div>
                 </div>
-                {/foreach} 
-                {else} 
-                <p class="text-light">Non sono presenti delle partite con tale parametro di ricerca</p> 
-                {/if} 
+                
               </div>
             </div>
           </div>

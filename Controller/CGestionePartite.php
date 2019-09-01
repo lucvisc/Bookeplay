@@ -216,13 +216,22 @@ class CGestionePartite {
      */
     static function partiteAttiveGiorno(){
         $view = new VGestionePartite();
-        $giorno=$_POST['giorno'];
+        $giorno=str_split($_POST['giorno'],1);
+        $gg=$giorno[8].$giorno[9]."/".$giorno[5].$giorno[6]."/".$giorno[0].$giorno[1].$giorno[2].$giorno[3];
 
-        print($giorno);
+        print_r($giorno);
+        print($gg);
 
         $pm = new FPersistentManager();
-        $partite = $pm->load("giorno", $giorno, "FBooking");
-        $view->CercaPartiteAttive($partite);
+        $partite = $pm->load("giorno", $gg, "FBooking");
+        /*for($i=0; $i<count($partite); $i++){
+            $idP[$i]=$partite[$i]->getIdbooking();
+            $num[]= $pm->CountPartecipanti($idP[$i]);
+        }
+        print_r($num);*/
+        print_r($partite);
+
+        $view->CercaPartiteAttive($partite,$num);
     }
 
 
