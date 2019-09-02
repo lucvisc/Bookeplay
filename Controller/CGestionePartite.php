@@ -69,8 +69,9 @@ class CGestionePartite {
                 //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                $part = $pm->load("giorno", $_POST['giorno'], "FGiorno");
-                $view->showFormCreation($user, $acc, $part,'no');
+                $giorno=self::splitGiorno($_POST['giorno']);
+                $part = $pm->load("giorno", $giorno, "FGiorno");
+                $view->showFormCreation($user, $acc, $part, $giorno,'no');
             } else {
                 header('Location: /BookAndPlay/User/login');
             }
@@ -143,7 +144,7 @@ class CGestionePartite {
             $account= unserialize($_SESSION['account']);
             if ($account->getEmail() == "admin@admin.com"){
                     $pm = new FPersistentManager();
-                    $pm->delete("idPren", $id, "FBooking");
+                    $pm->delete("idP", $id, "FBooking");
             } else {
                 header('Location: /BookAndPlay/User/profile');
             }
@@ -169,17 +170,57 @@ class CGestionePartite {
      */
     static function partite() {
         if (CUser::isLogged()) {
-            $account = unserialize($_SESSION['account']);
-            if (get_class($account) == "EAccount") {
-                $view = new VGestionePartite();
-                $pm = new FPersistentManager();
-                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+            $view = new VGestionePartite();
+            $pm = new FPersistentManager();
+            if ($_SERVER['REQUEST_METHOD'] == "GET"){
+                $account = unserialize($_SESSION['account']);
+                if (get_class($account) == "EAccount") {
+                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                $view->showPartite($user, $acc);
-            } else {
+                $view->showPartite($user, $acc, null);
+                }
+            }
+            elseif ($_SERVER['REQUEST_METHOD'] == "POST"){
+                $account = unserialize($_SESSION['account']);
+                if (get_class($account) == "EAccount") {
+                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                    $user = $pm->load("email", $account->getEmail(), "FUser");
+                    $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                    $giorno=self::splitGiorno($_POST['giorno']);
+                    $part = $pm->load("giorno", $giorno, "FBooking");
+                    $view->showPartite($user, $acc,$part);
+                }
+
+            }
+            else {
                 header('Location: /BookAndPlay/User/login');
             }
+        } else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
+    /**
+     * Funzione che si occupa di mostrare le informazioni per una determinata partita che ha selezionato
+     */
+    static function vaiAllaPartita($id) {
+        if (CUser::isLogged()) {
+            $account = unserialize($_SESSION['account']);
+            $view = new VGestionePartite();
+            $pm = new FPersistentManager();
+            if ($_SERVER['REQUEST_METHOD'] == "GET") {
+                $user = $pm->load("email", $account->getEmail(), "FUser");
+                $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                $part = $pm->load('idP', $id, "FBooking");
+
+                print_r($part);
+
+                $view->showVaiAllaPartita($user, $acc, $part);
+
+            }
+
+
         } else {
             header('Location: /BookAndPlay/User/login');
         }
@@ -208,7 +249,6 @@ class CGestionePartite {
         }
     }
 
-
     /**
      * Funzione che si occupa di mostrare le partite attive anche per un utente non loggato, ma senza la possibilità di
      * poter partecipare con un parametro di ricerca
@@ -216,10 +256,7 @@ class CGestionePartite {
      */
     static function partiteAttiveGiorno(){
         $view = new VGestionePartite();
-        $giorno=str_split($_POST['giorno'],1);
-        $gg=$giorno[8].$giorno[9]."/".$giorno[5].$giorno[6]."/".$giorno[0].$giorno[1].$giorno[2].$giorno[3];
-
-        print_r($giorno);
+        $gg= self::splitGiorno($_POST['giorno']);
         print($gg);
 
         $pm = new FPersistentManager();
@@ -231,9 +268,19 @@ class CGestionePartite {
         print_r($num);*/
         print_r($partite);
 
-        $view->CercaPartiteAttive($partite,$num);
+        $view->CercaPartiteAttive($partite);
     }
 
+    /**
+     *Funzione che si occupa di riscrivere il giorno in maniera corretta per eseguire la query sul db, il giorno nel
+     * momento in cui viene passato dal $_POST è scritto aaaa/mm/gg mentre quello corretto per eseguire la query è
+     * gg/mm/aaaa.
+     */
+    static function splitGiorno($giorno){
+        $giorno=str_split($giorno,1);
+        $gg=$giorno[8].$giorno[9]."/".$giorno[5].$giorno[6]."/".$giorno[0].$giorno[1].$giorno[2].$giorno[3];
+        return $gg;
+    }
 
 }
 ?>

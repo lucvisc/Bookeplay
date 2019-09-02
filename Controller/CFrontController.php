@@ -26,7 +26,13 @@ class CFrontController {
                 for ($i = 4; $i < count($request); $i++) {
                     $param[] = $request[$i];
                 }
-                if (count($param) == 1) $controller::$function($param[0]);
+                if (count($param) == 1) {
+                    $controller::$function($param[0]);
+
+                    print($controller);
+                    print($function);
+                    print_r($param);
+                }
                 else if (count($param) == 2) $controller::$function($param[0], $param[1]);
                 else if (count($param) == 3) $controller::$function($param[0], $param[1], $param[2]);
                 else {
