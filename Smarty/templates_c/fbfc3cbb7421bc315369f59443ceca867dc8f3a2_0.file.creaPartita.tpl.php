@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-01 15:20:39
+/* Smarty version 3.1.33, created on 2019-09-02 10:52:03
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\creaPartita.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6bc5a75064c3_10067868',
+  'unifunc' => 'content_5d6cd833a27d04_43475822',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fbfc3cbb7421bc315369f59443ceca867dc8f3a2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\creaPartita.tpl',
-      1 => 1567343922,
+      1 => 1567414320,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6bc5a75064c3_10067868 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6cd833a27d04_43475822 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -110,32 +110,36 @@ function content_5d6bc5a75064c3_10067868 (Smarty_Internal_Template $_smarty_tpl)
           <div class="row">
             <div class="col-md-12 col-lg-12 text-center">
               <div class="table-responsive"> 
-                <?php if ($_smarty_tpl->tpl_vars['array']->value) {?> 
-                <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['array']->value, 'giorno');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['giorno']->value) {
-?> 
+                 
                 <table class="table table-striped table-dark">
                   <thead>
                     <tr>
-                      <th scope="col" class="">Id, Fascia Oraria, Disponibile/Non disponibile</th>
+                      <th scope="col" class="">Fasce Orarie occupate per il giorno <?php echo $_smarty_tpl->tpl_vars['gg']->value;?>
+</th>
                     </tr>
                   </thead>
+                  
                   <tbody>
                     <!--Tabella che mostra le fasce orarie-->
+                    <?php if ($_smarty_tpl->tpl_vars['array']->value) {?> 
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['array']->value, 'giorno');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['giorno']->value) {
+?>
                     <tr>
                       <th scope="row"><?php echo $_smarty_tpl->tpl_vars['giorno']->value->getFasceOrarie();?>
 </th>
-                    </tr>
-                  </tbody>
-                </table> 
-                <?php
+                    </tr> 
+                    </tbody>
+                    <?php
 }
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?> 
-                <?php } else { ?> <p class="text-light text-center mt-2">Tutte le fasce orarie sono disponibili</p> 
-                <?php }?>
+                    <?php } else { ?> <p class="text-light text-center mt-2">Tutte le fasce orarie sono disponibili</p> 
+                    <?php }?>
+                </table> 
+               
                  </div>
             </div>
           </div>
