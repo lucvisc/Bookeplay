@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-02 10:34:52
+/* Smarty version 3.1.33, created on 2019-09-03 11:12:24
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\partiteAttive.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6cd42ccf24f7_13338774',
+  'unifunc' => 'content_5d6e2e786bc014_21468767',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c747ad05541719358447bd1eccd14c9b38c36e30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\partiteAttive.tpl',
-      1 => 1567413268,
+      1 => 1567415243,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6cd42ccf24f7_13338774 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6e2e786bc014_21468767 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
 
@@ -93,7 +93,8 @@ function content_5d6cd42ccf24f7_13338774 (Smarty_Internal_Template $_smarty_tpl)
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['array']->value, 'booking');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
-?> <div class="row" style="">
+?> 
+                <div class="row" style="">
                   <div class="col-md-12 ">
                     <div class="row" style="">
                       <div class="col-md-12">
@@ -110,12 +111,6 @@ foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
                                     <h4 class="ml-5 text-light">Fascia Oraria: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getFasceOrarie();?>
 </h4>
                                     <h4 class="ml-5 text-light">Partecipanti: /10</h4>
-                                    <h4 class="ml-5 text-light">Quota: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getQuota();?>
- €</h4>
-                                    <h4 class="ml-5 text-light">Livello: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getLivello();?>
-</h4>
-                                    <h4 class="ml-5 text-light">Note: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getNote();?>
-</h4>
                                   </div>
                                 </div>
                               </h3>

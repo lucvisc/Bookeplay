@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-02 10:52:03
+/* Smarty version 3.1.33, created on 2019-09-03 11:50:18
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\creaPartita.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6cd833a27d04_43475822',
+  'unifunc' => 'content_5d6e375a9c1c25_87414126',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fbfc3cbb7421bc315369f59443ceca867dc8f3a2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\creaPartita.tpl',
-      1 => 1567414320,
+      1 => 1567504215,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6cd833a27d04_43475822 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6e375a9c1c25_87414126 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -154,7 +154,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                   </div>
                   <div class="col-md-5 offset-md-1" style="">
                     <div class="input-group">
-                      <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="gg/mm/aaaa" required="required">
+                      <input type="text" name="giorno" value="<?php echo $_smarty_tpl->tpl_vars['gg']->value;?>
+" class="form-control" id="inlineFormInputGroup" placeholder="gg/mm/aaaa" required="required">
                     </div>
                   </div>
                 </div>

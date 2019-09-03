@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-01 13:03:21
+/* Smarty version 3.1.33, created on 2019-09-03 11:20:53
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\modificaProfilo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6ba579761896_49029667',
+  'unifunc' => 'content_5d6e307598e032_60780566',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'be11cda433fb8d34dc5eb0e21f4a3994e383ef2c' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\modificaProfilo.tpl',
-      1 => 1567335798,
+      1 => 1567335868,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6ba579761896_49029667 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6e307598e032_60780566 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?> 
 <?php $_smarty_tpl->_assignInScope('errorEmail', (($tmp = @$_smarty_tpl->tpl_vars['errorEmail']->value)===null||$tmp==='' ? 'ok' : $tmp));?> 
@@ -107,11 +107,13 @@ function content_5d6ba579761896_49029667 (Smarty_Internal_Template $_smarty_tpl)
                     <div class="row">
                   </div> 
                   <?php if ($_smarty_tpl->tpl_vars['errorEmail']->value != 'ok') {?> 
-                  <div style="color: red;"> <p align="center">Cambiare Email poichè già assegnata!</p>
+                  <div style="color: red;"> 
+                    <p align="center">Cambiare Email poichè già assegnata!</p>
                   </div> 
                   <?php }?>
                   <?php if ($_smarty_tpl->tpl_vars['errorPassw']->value != 'ok') {?> 
-                  <div style="color: red;"> <p align="center">Password errata!</p>
+                  <div style="color: red;"> 
+                    <p align="center">Password errata!</p>
                   </div> 
                   <?php }?> 
                   <?php if ($_smarty_tpl->tpl_vars['errorSize']->value != 'ok') {?> 
@@ -156,8 +158,8 @@ function content_5d6ba579761896_49029667 (Smarty_Internal_Template $_smarty_tpl)
             <h5> <b>Main</b> </h5>
             <ul class="list-unstyled">
               <li> <a href="#">Home</a><span class="sr-only">(current)</span> </li>
-              <li> <a href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
-              <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+              <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
+              <li> <a href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
             </ul>
           </div>
           <div class="col-lg-3 col-6 p-3">
