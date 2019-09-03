@@ -83,24 +83,27 @@
           <div class="row">
             <div class="col-md-12 col-lg-12 text-center">
               <div class="table-responsive"> 
-                {if $array} 
-                {foreach $array as $giorno} 
+                 
                 <table class="table table-striped table-dark">
                   <thead>
                     <tr>
-                      <th scope="col" class="">Id, Fascia Oraria, Disponibile/Non disponibile</th>
+                      <th scope="col" class="">Fasce Orarie occupate per il giorno {$gg}</th>
                     </tr>
                   </thead>
+                  
                   <tbody>
                     <!--Tabella che mostra le fasce orarie-->
+                    {if $array} 
+                    {foreach $array as $giorno}
                     <tr>
                       <th scope="row">{$giorno->getFasceOrarie()}</th>
-                    </tr>
-                  </tbody>
+                    </tr> 
+                    </tbody>
+                    {/foreach} 
+                    {else} <p class="text-light text-center mt-2">Tutte le fasce orarie sono disponibili</p> 
+                    {/if}
                 </table> 
-                {/foreach} 
-                {else} <p class="text-light text-center mt-2">Tutte le fasce orarie sono disponibili</p> 
-                {/if}
+               
                  </div>
             </div>
           </div>

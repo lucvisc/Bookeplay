@@ -18,20 +18,20 @@
         </a>
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/PartiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
           {if $userlogged!='nouser'} 
-           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Utente/ProfiloUtente">Profilo</a> </li>
+           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
           <li>
           </li>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Logout">Logout</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
         </ul> 
         {else} 
         <ul class="navbar-nav">
-          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/Utente/Login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Registrati">Register</a> </li>
+          <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
         </ul> 
         {/if}
       </div>
@@ -73,15 +73,14 @@
                 <div class="col-md-12   " style="">
                   <div class="form-group row m-2" style="">
                     <div class="col-md-2 mt-1 text-body" style=""><label class="col-2 col-md-6 text-right text-light">Giorno:</label></div>
-                    <div class="col-md-6" style="">
-                      <form class="form-inline" style="">
-                        <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
+                      <div class="col-md-6" style="">
+                        <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partite" method="POST">
                           <div class="input-group">
                             <input type="date" name='giorno' class="form-control" id="inlineFormInputGroup" placeholder="Search" >
                                 </form>
                             <div class="input-group-append">
                               <input type="submit" class="btnRegister" value="Cerca"/></i>
-                          </button>
+                              </button>
                         </div>
                       </div>
                     </div>
@@ -105,16 +104,19 @@
                               <h3 class="m-0 text-light border border-light rounded" style="">
                                 <div class="row">
                                   <div class="border-light my-2 ml-2" style="">
-                                    <h4 class="ml-5 text-light">ID Partite:{$booking->getIdbooking()}</h4>
-                                    <h4 class="ml-5 text-light">Campetto Numero:{$booking->getNumerocampo()}</h4>
-                                    <h4 class="ml-5 text-light">Partecipanti:{$booking->getPartecipanti()}</h4>
-                                    <h4 class="ml-5 text-light">Fascia Oraria:{$booking->getGiornobooking()}</h4>
+                                      <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
+                                      <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
+                                      <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
+                                      <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
+                                      <!--<h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
+                                      <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
+                                      <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>-->
                                   </div>
                                 </div>
                               </h3>
                               <div class="row">
                                 <div class="col-md-6" style=""></div>
-                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/vaiAllaPartita">Vai alla partita</a></div>
+                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/vaiAllaPartita/{$booking->getIdbooking()}">Vai alla partita</a></div>
                               </div>
                             </div>
                           </div>

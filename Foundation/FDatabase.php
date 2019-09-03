@@ -77,10 +77,14 @@ class FDatabase {
             $stmt = $this->db->prepare($query);                         // prepara la query restituendo l'oggetto query
             $class::bind($stmt, $obj);//fa il matching tra i parametri ed i valori delle variabili
             $stmt->execute();//esecuzione dell'oggetto stmt
+
             print_r($stmt->errorInfo());
-            $id = $this->db->lastInsertId();                // Returns the ID of the last inserted row or sequence value
-            $this->db->commit();                            // rende definitiva la transazione
+
+            $id = $this->db->lastInsertId();// Returns the ID of the last inserted row or sequence value
+            $this->db->commit();// rende definitiva la transazione
+
             print_r($this->db->errorInfo());
+
             $this->closeDbConnection();                     //chiudiamo la connessione al db
             return $id;                                     //Ritorna l'id del record appena inserito nel db
         } catch (PDOException $e) {
@@ -129,7 +133,9 @@ class FDatabase {
             $query = "SELECT * FROM " . self::tabella($class::getTables()). " WHERE " . $field . "='" . $id . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
+
             print_r($stmt->errorInfo());
+
             $num = $stmt->rowCount();
             if ($num == 0) {
                 $result = null;                             //nessuna riga interessata. return null
@@ -594,7 +600,9 @@ class FDatabase {
             $query = "SELECT * FROM account WHERE  username = '" . $acc . " ';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
+
             print_r($this->db->errorInfo());
+
             $num = $stmt->rowCount();
             print ("$num\n") ;
             if ($num == 0) {
@@ -692,7 +700,7 @@ class FDatabase {
     public function getPrenotazionePartecipa ($idPren) {
         try {
             $query = "SELECT * FROM pren_partecipa where idPren="."'".$idPren."'"."  ;";
-            echo $query;
+            //echo $query;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             //print_r($stmt->errorInfo());

@@ -117,11 +117,12 @@ class VGestionePartite {
      * di errore nella pagina di creazione della partita
      * @throws SmartyException
      */
-    public function showFormCreation(EUser $utente, EAccount $acc, $part ,$error){
+    public function showFormCreation(EUser $utente, EAccount $acc, $part, $giorno, $error){
             $this->statoForm($error);
             $this->smarty->assign('nome', $utente->getName());
             $this->smarty->assign('cognome', $utente->getSurname());
             $this->smarty->assign('conto', $acc->getConto());
+            $this->smarty->assign('gg',$giorno);
             $this->smarty->assign('array', $part);
             $this->smarty->assign('userlogged', "loggato");
             $this->smarty->display('creaPartita.tpl');
@@ -145,7 +146,7 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPartite(EUser $user, EAccount $acc) {  //$part,$img
+    public function showPartite(EUser $user, EAccount $acc,$part) {  //$part,$img
         //list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         //$this->smarty->assign('pic64', $pic64);
@@ -153,7 +154,7 @@ class VGestionePartite {
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
-        $this->smarty->assign('array',null);
+        $this->smarty->assign('array',$part);
         $this->smarty->display('partite.tpl');
     }
 
@@ -203,7 +204,7 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showVaiAllaParita(EUser $user, EAccount $acc, $part,$img) {
+    public function showVaiAllaPartita(EUser $user, EAccount $acc, $part) { //,$img
         //list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         //$this->smarty->assign('pic64', $pic64);

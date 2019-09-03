@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-01 18:38:15
+/* Smarty version 3.1.33, created on 2019-09-02 10:34:52
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\partiteAttive.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6bf3f7aca318_12174731',
+  'unifunc' => 'content_5d6cd42ccf24f7_13338774',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c747ad05541719358447bd1eccd14c9b38c36e30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\partiteAttive.tpl',
-      1 => 1567355861,
+      1 => 1567413268,
       2 => 'file',
     ),
   ),
@@ -20,34 +20,32 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6bf3f7aca318_12174731 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6cd42ccf24f7_13338774 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
-<?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(../img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;"><?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Luca Visconti, Catriel De Biase">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css" style="">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
       </button>
-       <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="/BookAndPlay/">
+      <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="/BookAndPlay/">
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registratazioneUtente">Register</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Uuser/registrati">Register</a> </li>
         </ul>
       </div>
     </div>
@@ -59,7 +57,6 @@ function content_5d6bf3f7aca318_12174731 (Smarty_Internal_Template $_smarty_tpl)
           <div class="tab-content">
             <div class="tab-pane fade" id="tabtwo" role="tabpanel"><a class="btn btn-primary" href="#">Button</a></div>
             <div class="tab-pane fade" id="tabthree" role="tabpanel">
-              
             </div>
           </div>
           <div class="row">
@@ -67,22 +64,6 @@ function content_5d6bf3f7aca318_12174731 (Smarty_Internal_Template $_smarty_tpl)
               <div class="row" style="">
                 <div class="col-md-12">
                   <h3 class="text-light mx-0 text-center">Partite Attive:</h3>
-                  <div class="col-md-12   " style="">
-                    <div class="form-group row m-2" style="">
-                      <div class="col-md-2 mt-1 text-body" style=""><label class="col-2 col-md-6 text-right text-light">Giorno:</label></div>
-                      <div class="col-md-6" style="">
-                        <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
-                          <div class="input-group">
-                            <input type="date" name='giorno' class="form-control" id="inlineFormInputGroup" placeholder="Search" >
-                                </form>
-                            <div class="input-group-append">
-                              <input type="submit" class="btnRegister" value="Cerca"/></i>
-                              </button>
-                            </div>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="col-md-6   " style="">
@@ -91,56 +72,66 @@ function content_5d6bf3f7aca318_12174731 (Smarty_Internal_Template $_smarty_tpl)
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-12 rounded" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;"> 
-                <div class="row" style="">
-                            <div class="col-md-11" style="">
-                              <div class="col-md-12 col-1 m-2" style="">
-                              <?php if ($_smarty_tpl->tpl_vars['array']->value) {?> 
-                              <?php
+              <div class="col-md-6 col-lg-12 rounded" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+                <div class="col-md-12   " style="">
+                  <div class="form-group row m-2" style="">
+                    <div class="col-md-2 mt-1 text-body" style=""><label class="col-2 col-md-6 text-right text-light">Giorno:</label></div>
+                    <div class="col-md-6" style="">
+                      <form class="form-inline" style="" action="/BookAndPlay/GestionePartite/partiteAttiveGiorno" method="POST">
+                        <div class="input-group">
+                          <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Search" name="giorno">
+                          <div class="input-group-append">
+                            <input type="submit" class="btnRegister" value="Cerca">
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div> 
+                <?php if ($_smarty_tpl->tpl_vars['array']->value) {?> 
+                <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['array']->value, 'booking');
 if ($_from !== null) {
 foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
-?> 
-                                <h3 class="m-0 text-light border border-light rounded" style="">
-                                  <div class="row">
-                                    <div class="border-light my-2 ml-2" style="">
-                                      <h4 class="ml-5 text-light">ID Partita: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+?> <div class="row" style="">
+                  <div class="col-md-12 ">
+                    <div class="row" style="">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-11" style="">
+                            <div class="col-md-12 col-1 m-2" style="">
+                              <h3 class="m-0 text-light border border-light rounded" style="" >
+                                <div class="row">
+                                  <div class="border-light my-2 ml-2" style="">
+                                    <h4 class="ml-5 text-light">ID Partita: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
 </h4>
-                                      <h4 class="ml-5 text-light">Giorno: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getGiorno();?>
+                                    <h4 class="ml-5 text-light">Giorno: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getGiorno();?>
 </h4>
-                                      <h4 class="ml-5 text-light">Fascia Oraria: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getFasceOrarie();?>
+                                    <h4 class="ml-5 text-light">Fascia Oraria: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getFasceOrarie();?>
 </h4>
-                                      <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
-                                      <h4 class="ml-5 text-light">Quota: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getQuota();?>
+                                    <h4 class="ml-5 text-light">Partecipanti: /10</h4>
+                                    <h4 class="ml-5 text-light">Quota: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getQuota();?>
  €</h4>
-                                      <h4 class="ml-5 text-light">Livello: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getLivello();?>
+                                    <h4 class="ml-5 text-light">Livello: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getLivello();?>
 </h4>
-                                      <h4 class="ml-5 text-light">Note: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getNote();?>
+                                    <h4 class="ml-5 text-light">Note: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getNote();?>
 </h4>
-
-
-                                      <!--<h4 class="ml-5 text-light">Partecipanti: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getPartecipanti();?>
-</h4>
-                                      <h4 class="ml-5 text-light">Organizzatore:  <?php echo $_smarty_tpl->tpl_vars['booking']->value->getOrganizzatore();?>
-</h4>
-                                      <h4 class="ml-5 text-light">Giorno: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getGiorno;?>
-</h4>
-                                      <h4 class="ml-5 text-light">Fascia Oraria: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getFasceOrarie;?>
-</h4>-->
-                                    </div>
                                   </div>
-                                </h3>
-                                <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-                                <?php } else { ?> 
-                                <p class="text-light">Non sono presenti delle partite con tale parametro di ricerca</p> 
-                                <?php }?>
-                              </div>
+                                </div>
+                              </h3>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                
+                </div> 
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?> 
+                <?php } else { ?> <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
+                <?php }?>
               </div>
             </div>
           </div>
@@ -155,22 +146,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
       </div>
     </div>
   </div>
-  <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,255), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 order-2 order-lg-1 p-0"></div>
-        </div>
-      </div>
-    </div>
   <div class="py-3 pt-5" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,255), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="/BookAndPlay/">Home</a> </li>
+            <li> <a href="#">Home</a><span class="sr-only">(current)</span> </li>
             <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-            <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
+            <li> <a href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">
