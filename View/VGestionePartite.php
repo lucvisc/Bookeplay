@@ -117,7 +117,7 @@ class VGestionePartite {
      * di errore nella pagina di creazione della partita
      * @throws SmartyException
      */
-    public function showFormCreation(EUser $utente, EAccount $acc, $part, $giorno ,$error){
+    public function showFormCreation(EUser $utente, EAccount $acc, $part, $giorno, $error){
             $this->statoForm($error);
             $this->smarty->assign('nome', $utente->getName());
             $this->smarty->assign('cognome', $utente->getSurname());

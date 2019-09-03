@@ -27,7 +27,7 @@ class CGestionePartite {
                 //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                $view->showFormCreation($user, $account, null, 'no');
+                $view->showFormCreation($user, $account, null, null ,'no');
             }
             elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $pm = new FPersistentManager();
