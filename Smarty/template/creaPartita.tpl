@@ -118,7 +118,7 @@
                   </div>
                   <div class="col-md-5 offset-md-1" style="">
                     <div class="input-group">
-                      <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="gg/mm/aaaa" required="required">
+                      <input type="text" name="giorno" value="{$gg}" class="form-control" id="inlineFormInputGroup" placeholder="gg/mm/aaaa" required="required">
                     </div>
                   </div>
                 </div>
@@ -128,7 +128,7 @@
                   </div>
                   <div class="col-md-5 offset-md-1" style="">
                     <div class="input-group">
-                      <input type="text" name="fascia_oraria" class="form-control" id="inlineFormInputGroup" placeholder="es 09:00-10-00" required="required">
+                      <input type="text" name="fascia_oraria" class="form-control" id="inlineFormInputGroup" placeholder="es 09:00-10:00" required="required">
                     </div>
                   </div>
                 </div>

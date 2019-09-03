@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-31 22:23:16
+/* Smarty version 3.1.33, created on 2019-09-03 11:13:47
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6ad73455cce5_92898905',
+  'unifunc' => 'content_5d6e2ecb536425_00643597',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1531c2cffdb168def471fca9fb951b6e0dd775c3' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\index.tpl',
-      1 => 1567282994,
+      1 => 1567502021,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6ad73455cce5_92898905 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6e2ecb536425_00643597 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
 
