@@ -97,12 +97,12 @@ class FDatabase {
      * @param $nome_file nome della chiave dell'array superglobale $_FILE
      * @return string|null
      */
-    public function storeMedia ($class , $obj, $nome_file) {
+    public function storeMedia ($class , $obj) {
         try {
             $this->db->beginTransaction();
-            $query = "INSERT INTO ".$class::getTable()." VALUES ".$class::getValues();
+            $query = "INSERT INTO ".$class::getTables()." VALUES ".$class::getValues();
             $stmt = $this->db->prepare($query);
-            $class::bind($stmt,$obj,$nome_file);
+            $class::bind($stmt,$obj);
             $stmt->execute();
             $id=$this->db->lastInsertId();
             $this->db->commit();
