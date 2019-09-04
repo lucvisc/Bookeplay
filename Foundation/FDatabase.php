@@ -756,6 +756,39 @@ class FDatabase {
         }
     }
 
+
+    /**
+     * Funzione utilizzata per ritornare i partecipanti di una specifica prenotazione.
+     * Utilizzata nella pagina admin
+     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @return array|null
+     */
+    public function Riepilogo ($email) {
+        try {
+            $query = "SELECT idP, Quota, livello, Giorno, FasciaOraria, note FROM prenotazione, pren_partecipa  where idP=idPren AND email='".$email."';";
+            //echo $query;
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            //print_r($stmt->errorInfo());
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;                             //nessuna riga interessata. return null
+            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            } else {
+                $result = array();                         //nel caso in cui piu' righe fossero interessate
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
+                while ($row = $stmt->fetch())
+                    $result[] = $row;                       //ritorna un array di righe.
+            }
+            return $result;
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
     /**
      * Funzione utilizzata per ritornare solamente le partite attive
      * @return array|mixed|null

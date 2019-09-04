@@ -174,6 +174,31 @@ class FBooking{
         return $boo;
     }
 
+    /**
+     * Metodo per restituire tutte le prenotazione a cui ha partecipato un determinato utente
+     * @param $email di riferimento
+     * @return array|EBooking|null
+     */
+    public static function riepilogoPrenotazione($email){
+        $boo = null;
+        $db=FDatabase::getInstance();
+        $result=$db->Riepilogo($email);
+        $rows_number = $db->interestedRows('FPren_partecipa', 'email', $email);//funzione richiamata,presente in FDatabase
+
+        if(($result!=null) && ($rows_number == 1)) {
+            $boo=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note']);
+        }
+        else {
+            if(($result!=null) && ($rows_number > 1)){
+                $boo = array();
+                for($i=0; $i<count($result); $i++){
+                    $boo[]=new EBooking($result[$i]['idP'], $result[$i]['livello'], $result[$i]['Giorno'],  $result[$i]['FasciaOraria'], $result[$i]['note']);
+                }
+            }
+        }
+        return $boo;
+    }
+
 }
 ?>
 

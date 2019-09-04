@@ -173,7 +173,15 @@ class FPersistentManager {
         return $ris;
     }
 
-
+    /**
+     * Metodo per restituire tutte le prenotazione a cui ha partecipato un determinato utente
+     * @param $input valore da ricercare all'interno del campo email della prenotazione
+     */
+    public static function loadRiepilogo ($input) {
+        $ris = null;
+        $ris = FBooking::riepilogoPrenotazione($input);
+        return $ris;
+    }
 
     /**
      * Metodo che permette di ottenere istanze EGiorno dal database che rispettino un parametro passato in input
