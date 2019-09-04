@@ -87,7 +87,7 @@
                 <table class="table table-striped table-dark">
                   <thead>
                     <tr>
-                      <th scope="col" class="">Fasce Orarie occupate per il giorno {$gg}</th>
+                      <th scope="col" class="">Fasce Orarie disponibili per il giorno {$gg}</th>
                     </tr>
                   </thead>
                   
