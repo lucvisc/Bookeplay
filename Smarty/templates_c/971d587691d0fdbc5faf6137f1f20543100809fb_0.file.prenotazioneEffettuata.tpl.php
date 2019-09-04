@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-01 15:48:02
+/* Smarty version 3.1.33, created on 2019-09-04 10:37:07
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\prenotazioneEffettuata.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6bcc12872938_04480146',
+  'unifunc' => 'content_5d6f77b3e66577_74413263',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '971d587691d0fdbc5faf6137f1f20543100809fb' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\prenotazioneEffettuata.tpl',
-      1 => 1567343860,
+      1 => 1567586176,
       2 => 'file',
     ),
   ),
@@ -20,14 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6bcc12872938_04480146 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6f77b3e66577_74413263 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" style="">
@@ -96,18 +96,25 @@ function content_5d6bcc12872938_04480146 (Smarty_Internal_Template $_smarty_tpl)
               <div class="col-md-12 col-1 m-2" style="">
                 <h3 class="text-light m-0 border border-light rounded" style="">
                   <div class="row">
-                    <div class="border-light my-2 ml-2" style="">
-                      <h4 class="ml-5 text-light">ID Partite: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdBooking();?>
+                    <?php if ('booking') {?>
+                        <div class="border-light my-2 ml-2" style="">
+                            <h4 class="ml-5 text-light">ID Partita: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
 </h4>
-                      <h4 class="ml-5 text-light">Campetto Numero: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getNumerocampetto();?>
+                            <h4 class="ml-5 text-light">Giorno: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getGiorno();?>
 </h4>
-                      <h4 class="ml-5 text-light">Partecipanti:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getPartecipanti();?>
+                            <h4 class="ml-5 text-light">Fascia Oraria: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getFasceOrarie();?>
 </h4>
-                      <h4 class="ml-5 text-light">Giorno -Fascia Oraria:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking();?>
+                            <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
+                            <h4 class="ml-5 text-light">Quota: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getQuota();?>
+ €</h4>
+                            <h4 class="ml-5 text-light">Livello: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getLivello();?>
 </h4>
-                      <h4 class="ml-5 text-light">Quota:<?php echo $_smarty_tpl->tpl_vars['booking']->value->getQuota();?>
+                            <h4 class="ml-5 text-light">Note: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getNote();?>
 </h4>
-                    </div>
+                        </div>
+                      <?php } else { ?> 
+                      <p class="text-light text-center mt-2">sei già presente in questa prenotazione</p> 
+                    <?php }?>
                   </div>
                 </h3>
               </div>

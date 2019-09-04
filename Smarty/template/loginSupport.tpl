@@ -18,7 +18,7 @@
   </script>
 </head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@
       </div>
     </div>
   </nav>
-  <div class="py-5 text-center h-100 shadow-lg" style="background-image: url(&quot;../../o_1cemks1p1qnq184a19vfgs33e2a.png&quot;); background-size: cover; background-position: left top; background-repeat: repeat;">
+  <div class="py-5 text-center h-100 shadow-lg" style="background-image: url(../../o_1cemks1p1qnq184a19vfgs33e2a.png); background-size: cover; background-position: left top; background-repeat: repeat;">
     <div class="container">
       <form action="/BookAndPlay/User/login" method="POST">
         <div class="row">
@@ -46,7 +46,7 @@
             <h1 class="mb-4">Log in</h1>
             <div class="form-group"> <input type="email" class="form-control" placeholder="email" name="email" required="required"> </div>
             <div class="form-group mb-3"> <input type="password" class="form-control" placeholder="Password" name="password" required="required"> <small class="form-text text-muted text-right">
-                <a href="#"> Recover password</a>
+                
               {if $error!='ok'}
               <div style="color: red;">
                   <p align="center">Attenzione! Username e/o password errati! </p>

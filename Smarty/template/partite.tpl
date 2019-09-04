@@ -4,7 +4,7 @@
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -116,7 +116,7 @@
                               </h3>
                               <div class="row">
                                 <div class="col-md-6" style=""></div>
-                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/vaiAllaPartita/{$booking->getIdbooking()}">Vai alla partita</a></div>
+                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/partita/{$booking->getIdbooking()}">Vai alla partita</a></div>
                               </div>
                             </div>
                           </div>

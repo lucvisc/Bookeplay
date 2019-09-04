@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-02 12:12:36
+/* Smarty version 3.1.33, created on 2019-09-04 09:58:17
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\partite.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6ceb14315b53_59910379',
+  'unifunc' => 'content_5d6f6e991d72b5_98620395',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '65dd71dfdc6bf653a9fa13134c39ecc2355bc288' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\partite.tpl',
-      1 => 1567418724,
+      1 => 1567583893,
       2 => 'file',
     ),
   ),
@@ -20,14 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6ceb14315b53_59910379 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6f6e991d72b5_98620395 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -153,7 +153,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
                               </h3>
                               <div class="row">
                                 <div class="col-md-6" style=""></div>
-                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/vaiAllaPartita/<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/partita/<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
 ">Vai alla partita</a></div>
                               </div>
                             </div>

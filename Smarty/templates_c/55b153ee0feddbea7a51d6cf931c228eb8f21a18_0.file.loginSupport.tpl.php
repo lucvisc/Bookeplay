@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-29 17:15:22
+/* Smarty version 3.1.33, created on 2019-09-04 09:52:39
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\loginSupport.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d67ec0ac94862_78164444',
+  'unifunc' => 'content_5d6f6d47280ff4_25587421',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '55b153ee0feddbea7a51d6cf931c228eb8f21a18' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\loginSupport.tpl',
-      1 => 1567091413,
+      1 => 1567583556,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d67ec0ac94862_78164444 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6f6d47280ff4_25587421 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('error', (($tmp = @$_smarty_tpl->tpl_vars['error']->value)===null||$tmp==='' ? 'ok' : $tmp));?>
 <html>
@@ -43,7 +43,7 @@ function content_5d67ec0ac94862_78164444 (Smarty_Internal_Template $_smarty_tpl)
 >
 </head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
@@ -63,7 +63,7 @@ function content_5d67ec0ac94862_78164444 (Smarty_Internal_Template $_smarty_tpl)
       </div>
     </div>
   </nav>
-  <div class="py-5 text-center h-100 shadow-lg" style="background-image: url(&quot;../../o_1cemks1p1qnq184a19vfgs33e2a.png&quot;); background-size: cover; background-position: left top; background-repeat: repeat;">
+  <div class="py-5 text-center h-100 shadow-lg" style="background-image: url(../../o_1cemks1p1qnq184a19vfgs33e2a.png); background-size: cover; background-position: left top; background-repeat: repeat;">
     <div class="container">
       <form action="/BookAndPlay/User/login" method="POST">
         <div class="row">
@@ -71,7 +71,7 @@ function content_5d67ec0ac94862_78164444 (Smarty_Internal_Template $_smarty_tpl)
             <h1 class="mb-4">Log in</h1>
             <div class="form-group"> <input type="email" class="form-control" placeholder="email" name="email" required="required"> </div>
             <div class="form-group mb-3"> <input type="password" class="form-control" placeholder="Password" name="password" required="required"> <small class="form-text text-muted text-right">
-                <a href="#"> Recover password</a>
+                
               <?php if ($_smarty_tpl->tpl_vars['error']->value != 'ok') {?>
               <div style="color: red;">
                   <p align="center">Attenzione! Username e/o password errati! </p>

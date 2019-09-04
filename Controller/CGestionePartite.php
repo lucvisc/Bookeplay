@@ -30,7 +30,6 @@ class CGestionePartite {
                 $view->showFormCreation($user, $account, null, null ,'no');
             }
             elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-                $pm = new FPersistentManager();
                 $account = unserialize($_SESSION['account']);
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
@@ -55,6 +54,38 @@ class CGestionePartite {
         }
     }
 
+    /**Form utilizzata per un utente loggato, questa funzione da la possibilità di partecipare e di essere aggiunto come
+     * partecipante ad una specifica prenotazione
+     */
+    public function partecipa($id){
+        if (CUser::isLogged()){
+            $view = new VGestionePartite();
+            $pm= new FPersistentManager();
+            $account = unserialize($_SESSION['account']);
+            //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+            $user = $pm->load("email", $account->getEmail(), "FUser");
+            $acc = $pm->load("email", $account->getEmail(), "FAccount");
+            $pren= $pm->VerificaPrenotazione($id, $account->getEmail());
+
+            print_r($pren);
+
+            if (isset($pren)){
+                print "esiste";
+                $view->showPrenotazioneErrata($user, $acc);
+            }
+            else {
+                print "non esiste";
+                $pren_partecipa= $pm->insertPren_partecipa($id,$account->getEmail());
+                $part = $pm->load('idP', $id, "FBooking");
+
+                $view->showPrenotazioneEffettuata($user, $acc, $part);
+            }
+        }
+        else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
     /**
      * Funzione che si occupa di mostrare le partite per un utenteloggato, con la possibiltà di poter partecipare o creare
      * una partita
@@ -71,6 +102,7 @@ class CGestionePartite {
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $giorno=self::splitGiorno($_POST['giorno']);
                 $part = $pm->load("giorno", $giorno, "FGiorno");
+                //$partDisp= $pm->loadGiornoDisp($part);
                 $view->showFormCreation($user, $acc, $part, $giorno,'no');
             } else {
                 header('Location: /BookAndPlay/User/login');
@@ -204,7 +236,7 @@ class CGestionePartite {
     /**
      * Funzione che si occupa di mostrare le informazioni per una determinata partita che ha selezionato
      */
-    static function vaiAllaPartita($id) {
+    static function partita($id) {
         if (CUser::isLogged()) {
             $account = unserialize($_SESSION['account']);
             $view = new VGestionePartite();
@@ -213,8 +245,6 @@ class CGestionePartite {
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $part = $pm->load('idP', $id, "FBooking");
-
-                print_r($part);
 
                 $view->showVaiAllaPartita($user, $acc, $part);
 
@@ -261,14 +291,15 @@ class CGestionePartite {
 
         $pm = new FPersistentManager();
         $partite = $pm->load("giorno", $gg, "FBooking");
-        /*for($i=0; $i<count($partite); $i++){
-            $idP[$i]=$partite[$i]->getIdbooking();
-            $num[]= $pm->CountPartecipanti($idP[$i]);
+        for($i=0; $i<count($partite); $i++) {
+            $idP[$i] = $partite[$i]->getIdbooking();
+            $num[] = $pm->CountPartecipanti($idP[$i]);
         }
-        print_r($num);*/
+
+        print_r($num);
         print_r($partite);
 
-        $view->CercaPartiteAttive($partite);
+        $view->CercaPartiteAttive($partite, $num);
     }
 
     /**

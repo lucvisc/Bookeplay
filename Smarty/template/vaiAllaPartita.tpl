@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{assign var='userlogged' value=$userlogged|default:'nouser'}
 <html>
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">{assign var='userlogged' value=$userlogged|default:'nouser'}
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" style="">
@@ -18,16 +19,21 @@
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li> {if $userlogged!='nouser'} <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li> 
+          {if $userlogged!='nouser'} 
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
           <li>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
-        </ul> {else} <ul class="navbar-nav">
+        </ul> 
+        {else} 
+        <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
-        </ul> {/if}
+        </ul> 
+        {/if}
       </div>
     </div>
   </nav>
@@ -70,8 +76,7 @@
                         <div class="row">
                           <div class="col-md-11" style="">
                             <div class="col-md-12 col-1 m-2" style="">
-                              {if $array} 
-                              {foreach $array as $booking}
+                              {if $booking!='null'} 
                               <h3 class="m-0 text-light border border-light rounded" style="">
                                 <div class="row">
                                   <div class="border-light my-2 ml-2" style="">
@@ -85,13 +90,12 @@
                                   </div>
                                 </div>
                               </h3>
-                              {/foreach} 
                               {else} 
                               <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
                               {/if}
                               <div class="row">
                                 <div class="col-md-6" style=""></div>
-                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/partecipaPartita">Partecipa</a></div>
+                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/partecipa/{$booking->getIdbooking()}">Partecipa</a></div>
                               </div>
                             </div>
                           </div>

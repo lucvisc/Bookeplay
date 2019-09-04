@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-03 11:13:47
+/* Smarty version 3.1.33, created on 2019-09-04 09:58:02
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6e2ecb536425_00643597',
+  'unifunc' => 'content_5d6f6e8a9019e9_11340963',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1531c2cffdb168def471fca9fb951b6e0dd775c3' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\index.tpl',
-      1 => 1567502021,
+      1 => 1567583336,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6e2ecb536425_00643597 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6f6e8a9019e9_11340963 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
 
@@ -30,10 +30,26 @@ function content_5d6e2ecb536425_00643597 (Smarty_Internal_Template $_smarty_tpl)
   <meta name="author" content="Luca Visconti, Catriel De Biase">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-  <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/template/img/favicon.png">
+  <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/img/favicon.png">
+
+    <?php echo '<script'; ?>
+>
+        function ready(){
+            if (!navigator.cookieEnabled) {
+                alert('Attenzione! Attivare i cookie per proseguire correttamente la navigazione');
+            }
+        }
+        document.addEventListener("DOMContentLoaded", ready);
+    <?php echo '</script'; ?>
+>
+
+    <!-- stile della barra superiore -->
+    <link rel="stylesheet" href="/BookAndPly/Smarty/css/general.css">
+
+    <title>BookAndPlay</title>
 </head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>

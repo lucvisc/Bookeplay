@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-02 12:12:45
+/* Smarty version 3.1.33, created on 2019-09-04 10:54:38
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\vaiAllaPartita.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6ceb1d807248_53506652',
+  'unifunc' => 'content_5d6f7bce7db6b4_76155693',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa9c3d0e1ac611218ccf7444a0a7e0a17c39f4ad' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\vaiAllaPartita.tpl',
-      1 => 1567418679,
+      1 => 1567587236,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6ceb1d807248_53506652 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6f7bce7db6b4_76155693 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
+<?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;"><?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" style="">
@@ -41,16 +42,21 @@ function content_5d6ceb1d807248_53506652 (Smarty_Internal_Template $_smarty_tpl)
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li> <?php if ($_smarty_tpl->tpl_vars['userlogged']->value != 'nouser') {?> <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li> 
+          <?php if ($_smarty_tpl->tpl_vars['userlogged']->value != 'nouser') {?> 
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
           <li>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/logout">Logout</a> </li>
-        </ul> <?php } else { ?> <ul class="navbar-nav">
+        </ul> 
+        <?php } else { ?> 
+        <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
-        </ul> <?php }?>
+        </ul> 
+        <?php }?>
       </div>
     </div>
   </nav>
@@ -97,12 +103,7 @@ function content_5d6ceb1d807248_53506652 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="row">
                           <div class="col-md-11" style="">
                             <div class="col-md-12 col-1 m-2" style="">
-                              <?php if ($_smarty_tpl->tpl_vars['array']->value) {?> 
-                              <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['array']->value, 'booking');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
-?>
+                              <?php if ($_smarty_tpl->tpl_vars['booking']->value != 'null') {?> 
                               <h3 class="m-0 text-light border border-light rounded" style="">
                                 <div class="row">
                                   <div class="border-light my-2 ml-2" style="">
@@ -122,16 +123,13 @@ foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
                                   </div>
                                 </div>
                               </h3>
-                              <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?> 
                               <?php } else { ?> 
                               <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
                               <?php }?>
                               <div class="row">
                                 <div class="col-md-6" style=""></div>
-                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/partecipaPartita">Partecipa</a></div>
+                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/partecipa/<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+">Partecipa</a></div>
                               </div>
                             </div>
                           </div>

@@ -78,12 +78,12 @@ class FDatabase {
             $class::bind($stmt, $obj);//fa il matching tra i parametri ed i valori delle variabili
             $stmt->execute();//esecuzione dell'oggetto stmt
 
-            print_r($stmt->errorInfo());
+            //print_r($stmt->errorInfo());
 
             $id = $this->db->lastInsertId();// Returns the ID of the last inserted row or sequence value
             $this->db->commit();// rende definitiva la transazione
 
-            print_r($this->db->errorInfo());
+            //print_r($this->db->errorInfo());
 
             $this->closeDbConnection();                     //chiudiamo la connessione al db
             return $id;                                     //Ritorna l'id del record appena inserito nel db
@@ -134,7 +134,7 @@ class FDatabase {
             $stmt = $this->db->prepare($query);
             $stmt->execute();
 
-            print_r($stmt->errorInfo());
+            //print_r($stmt->errorInfo());
 
             $num = $stmt->rowCount();
             if ($num == 0) {
@@ -357,6 +357,35 @@ class FDatabase {
     }
 
     /**
+     * Metodo che verifica l'accesso di un utente , controllando che le credenziali (email e password) siano presenti nel db
+     * @param $email ,email dell'account dell' utente
+     * @param $pass, password dell'account dell'utente
+     * @return mixed|null a seconda se l'account dell'utente è presente o meno della tabella
+     */
+    public function loadVerificaPrenotazione ($idPren, $email) {
+        try {
+            $query = null;
+            $class = "FPren_partecipa";
+            $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE idPren ='" . $idPren . "' AND email ='" . $email . "';";
+
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;                  //nessuna riga interessata. return null
+            } else {                             //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            }
+            return $result;
+
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
      * Funzione utilizzata per ritornare i giorni.
      * Utilizzata nella pagina admin
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
@@ -506,6 +535,9 @@ class FDatabase {
             $query=("INSERT INTO pren_partecipa VALUES($idPren,'".$email."')");
             $stmt=$this->db->prepare($query);
             $stmt->execute();
+
+            print_r($stmt->errorInfo());
+
             $this->db->commit();
             $this->closeDbConnection();
 

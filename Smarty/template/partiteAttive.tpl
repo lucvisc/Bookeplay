@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{assign var='userlogged' value=$userlogged|default:'nouser'}
 <html>
 
 <head></head>
 
-<body style=" background-image: url(../img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">{assign var='userlogged' value=$userlogged|default:'nouser'}
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -79,8 +80,8 @@
                                   <div class="border-light my-2 ml-2" style="">
                                     <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
                                     <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
-                                    <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
-                                    <h4 class="ml-5 text-light">Partecipanti: /10</h4>
+                                    <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>           
+                                    <h4 class="ml-5 text-light">Partecipanti: 0/10</h4> 
                                   </div>
                                 </div>
                               </h3>

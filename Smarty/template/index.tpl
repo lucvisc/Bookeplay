@@ -7,10 +7,24 @@
   <meta name="author" content="Luca Visconti, Catriel De Biase">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-  <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/template/img/favicon.png">
+  <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/img/favicon.png">
+
+    <script>
+        function ready(){
+            if (!navigator.cookieEnabled) {
+                alert('Attenzione! Attivare i cookie per proseguire correttamente la navigazione');
+            }
+        }
+        document.addEventListener("DOMContentLoaded", ready);
+    </script>
+
+    <!-- stile della barra superiore -->
+    <link rel="stylesheet" href="/BookAndPly/Smarty/css/general.css">
+
+    <title>BookAndPlay</title>
 </head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>

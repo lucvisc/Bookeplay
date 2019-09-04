@@ -4,11 +4,11 @@
 
 <head></head>
 
-<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" style="">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css" >
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
@@ -17,11 +17,12 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
+          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li> 
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/info/informazioni">Informazioni</a> </li> 
           {if $userlogged!='nouser'} 
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
           <li>
           </li>
         </ul>
@@ -44,7 +45,7 @@
         <div class="col-md-7  offset-md-1" style="">
           <div class="row" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
             <div class="col-md-12" style="">
-              <h3 class="text-light">Nome:  {$nome}</h3>
+              <h3 class="text-light">Nome: {$nome}</h3>
               <h3 class="text-light">Cognome: {$cognome}</h3>
               <h3 class="text-light">Conto: {$conto} €</h3>
             </div>
@@ -63,36 +64,34 @@
           <div class="tab-content">
           </div>
           <div class="row">
-            <div class="col-md-12 border-left border-right border-top border-bottom border-light rounded " style="">
-              <h4 class="ml-5 text-light">Username: {$username}</h4>
-              <h4 class="ml-5 text-light">Email:  {$email}</h4>
-              <h4 class="ml-5 text-light">Telefono: {$telefono}</h4>
-              <h4 class="ml-5 text-light">Data di nascita:  {$datanasc}</h4>
-              <h4 class="ml-5 text-light">Genere: {$gender}</h4>
-              <div class="row">
-                <div class="col-md-12 shadow-none text-center ">
-                </div>
+            <div class="col-md-12" style="">
+              <div class="col-md-12 col-1 m-2" style="">
+                <h3 class="text-light m-0 border border-light rounded" style="">
+                  <div class="row">
+                        <div class="border-light my-2 ml-2" style="">
+                            <h4 class="ml-5 text-light">Sei già presente in questa prenotazione</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" style=""></div>
+                            <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a></div>
+                        </div>
+                  </div>
+                </h3>
               </div>
-              <div class="col-md-12 pl-5"><a class="btn btn-primary active my-2" href="/BookAndPlay/User/modificaProfilo">Modifica profilo</a></div>
-              <div class="row"></div>
             </div>
           </div>
-        </div>
-        <div class="row"></div>
-        <div class="row">
+          </form>
         </div>
       </div>
     </div>
-  </div>
-  <div class="py-5">
-    <div class="container">
-      <div class="row"></div>
+    <div class="row" style="">
+    </div>
+    <div class="row">
     </div>
   </div>
   <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 order-2 order-lg-1 p-0"></div>
       </div>
     </div>
   </div>
@@ -102,13 +101,14 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="/BookAndPlay/">Home</a> </li>
+            <li> <a href="#">Home</a><span class="sr-only">(current)</span> </li>
             <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-            <li> <a href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
+            <li> <a href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Others</b> </h5>
+          <ul class="list-unstyled"></ul>
         </div>
         <div class="col-lg-3 col-md-6 p-3">
           <h5> <b>About</b> </h5>
@@ -133,11 +133,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="py-5">
-    <div class="container">
-      <div class="row"></div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

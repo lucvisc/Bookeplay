@@ -101,12 +101,22 @@ class FPersistentManager {
     }
 
     /**
- * Metodo che permette di ottenere tutte le partite presenti sul db
- * @return array|EBooking|null
- */
+    * Metodo che permette di ottenere tutte le partite presenti sul db
+    * @return array|EBooking|null
+     */
     public static function loadPartiteAttive ($giorno) {
         $ris = null;
         $ris = FBooking::LoadBooking($giorno);
+        return $ris;
+    }
+
+    /**
+     * Metodo che permette di ottenere tutte le partite presenti sul db
+     * @return array|EBooking|null
+     */
+    public static function loadGiornoDisp ($giorno) {
+        $ris = null;
+        $ris = FGiorno::loadGiorLib($giorno);
         return $ris;
     }
 
@@ -139,6 +149,30 @@ class FPersistentManager {
             print ("METODO NON SUPPORTATO DALLA CLASSE");
         return $ris;
     }
+
+    /**
+     * Metodo che permette di inserire una riga nella tabella Pren_partecipa nel momento in cui un utente loggato
+     * vuole partecipare ad una partita
+     * @param $idPren
+     * @param $email
+     */
+    public static function insertPren_partecipa ($idPren, $email) {
+        $ris = null;
+        $ris = FPren_partecipa::insert($idPren, $email);
+        return $ris;
+    }
+
+    /**
+     * Metodo che permette di verificare se un utente è gia presente in una prenotazione
+     * @param $idPren
+     * @param $email
+     */
+    public static function VerificaPrenotazione ($idPren, $email) {
+        $ris = null;
+        $ris = FPren_partecipa::loadVerificaPrenotazione($idPren, $email);
+        return $ris;
+    }
+
 
 
     /**

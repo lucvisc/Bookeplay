@@ -65,6 +65,19 @@ class FPren_partecipa {
     }
 
     /**
+     * Metodo che permette di reperire un istanza di FPren_partecipa per testare se un utente puo o meno prenotarsi
+     * se gia presente non può, altrimenti si può procedere
+     * @param $idPren, id della prenotazione
+     * @param $email, id dell'account che sta partecipando alla prenotazione
+     * @return false|PDOStatement|null
+     */
+    static function loadVerificaPrenotazione ($idPren , $email) {
+        $db = FDatabase::getInstance();
+        $id = $db->loadVerificaPrenotazione($idPren, $email);
+        return $id;
+    }
+
+    /**
      * Metodo che permette di poter reperire istanze dal database
      * @param $field nome del campo sul quale effettuare la ricerca
      * @param $id valore del campo che si vuole ricercare

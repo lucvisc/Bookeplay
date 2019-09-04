@@ -173,8 +173,9 @@ class VGestionePartite {
      * @param $part elenco delle partite
      * @throws SmartyException
      */
-    public function CercaPartiteAttive($part) {
+    public function CercaPartiteAttive($part, $num) {
         $this->smarty->assign('array',$part);
+        $this->smarty->assign('num', $num);
         $this->smarty->display('partiteAttive.tpl');
     }
 
@@ -204,19 +205,22 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showVaiAllaPartita(EUser $user, EAccount $acc, $part) { //,$img
+    public function showVaiAllaPartita(EUser $user, EAccount $acc, $part)
+    { //,$img
         //list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         //$this->smarty->assign('pic64', $pic64);
-        $this->smarty->assign('userlogged',"loggato");
-        $this->smarty->assign('nome',$user->getName());
-        $this->smarty->assign('cognome',$user->getSurname());
-        $this->smarty->assign('conto',$acc->getConto());
-        $this->smarty->assign('array',$part);
+        $this->smarty->assign('userlogged', "loggato");
+        $this->smarty->assign('nome', $user->getName());
+        $this->smarty->assign('cognome', $user->getSurname());
+        $this->smarty->assign('conto', $acc->getConto());
+        $this->smarty->assign('booking', $part);
         $this->smarty->display('vaiAllaPartita.tpl');
     }
+
+
     /**
-     * Funzione che si occupa di gestire la visualizzazione delle parite per un utente loggato
+     * Funzione che si occupa di gestire la prenotazione delle parite per un utente loggato
      * @param $user informazioni sull' utente da visualizzare
      * @param $part elenco delle partite
      * @param $img immagine dell'utente
@@ -230,8 +234,26 @@ class VGestionePartite {
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
-        $this->smarty->assign('array',$part);
+        $this->smarty->assign('booking',$part);
         $this->smarty->display('prenotazioneEffettuata.tpl');
+    }
+
+    /**
+     * Funzione che si occupa di gestire la prenotazione di una partita
+     * @param $user informazioni sull' utente da visualizzare
+     * @param $part elenco delle partite
+     * @param $img immagine dell'utente
+     * @throws SmartyException
+     */
+    public function showPrenotazioneErrata(EUser $user, EAccount $acc) {  //,$img
+        //list($type,$pic64) = $this->setImage($img, 'user');
+        //$this->smarty->assign('type', $type);
+        //$this->smarty->assign('pic64', $pic64);
+        $this->smarty->assign('userlogged',"loggato");
+        $this->smarty->assign('nome',$user->getName());
+        $this->smarty->assign('cognome',$user->getSurname());
+        $this->smarty->assign('conto',$acc->getConto());
+        $this->smarty->display('prenotazioneErrata.tpl');
     }
 
     /**

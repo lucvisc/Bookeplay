@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-08-31 22:27:12
+/* Smarty version 3.1.33, created on 2019-09-04 09:55:32
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\profiloUtente.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6ad820e6b370_62415158',
+  'unifunc' => 'content_5d6f6df422ac68_29746062',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'edfa95251ea25c14239e6d57fa113b22c608bde1' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\profiloUtente.tpl',
-      1 => 1567282743,
+      1 => 1567583729,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6ad820e6b370_62415158 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6f6df422ac68_29746062 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -32,7 +32,7 @@ function content_5d6ad820e6b370_62415158 (Smarty_Internal_Template $_smarty_tpl)
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 </head>
 
-<body style=" background-image: url(img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
@@ -65,7 +65,7 @@ function content_5d6ad820e6b370_62415158 (Smarty_Internal_Template $_smarty_tpl)
         <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,<?php echo $_smarty_tpl->tpl_vars['pic64']->value;?>
 "  alt="profile picture" />
         </div>
-        <div class="col-md-7  offset-md-1" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+        <div class="col-md-7  offset-md-1" >
                       <div class="row">
                         <div class="col-md-12" style="">
                           <h3 class="text-light">Nome: <?php echo $_smarty_tpl->tpl_vars['nome']->value;?>

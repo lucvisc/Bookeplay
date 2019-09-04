@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-03 11:50:18
-  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\creaPartita.tpl' */
+/* Smarty version 3.1.33, created on 2019-09-04 11:05:34
+  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\prenotazioneErrata.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6e375a9c1c25_87414126',
+  'unifunc' => 'content_5d6f7e5e1897a3_97191948',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'fbfc3cbb7421bc315369f59443ceca867dc8f3a2' => 
+    '51e194a49f45d408e793dedca2ecb2bda18cf94b' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\creaPartita.tpl',
-      1 => 1567504215,
+      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\prenotazioneErrata.tpl',
+      1 => 1567587932,
       2 => 'file',
     ),
   ),
@@ -20,18 +20,18 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6e375a9c1c25_87414126 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6f7e5e1897a3_97191948 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
 
 <head></head>
 
-<body style=" background-image: url(img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" style="">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css" >
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
@@ -44,7 +44,8 @@ function content_5d6e375a9c1c25_87414126 (Smarty_Internal_Template $_smarty_tpl)
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/info/informazioni">Informazioni</a> </li> 
           <?php if ($_smarty_tpl->tpl_vars['userlogged']->value != 'nouser') {?> 
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
           <li>
           </li>
         </ul>
@@ -90,113 +91,22 @@ function content_5d6e375a9c1c25_87414126 (Smarty_Internal_Template $_smarty_tpl)
           <div class="tab-content">
           </div>
           <div class="row">
-            <div class="col-md-12">
-              <div class="form-group row m-2">
-                <div class="col-md-3 mt-1" style=""><label class="text-light col-2 col-md-6 text-right">Giorno:</label></div>
-                <div class="col-md-6" style="">
-                  <form class="form-inline" action="/BookAndPlay/GestionePartite/cercaGiorno" method="POST">
-                    <div class="input-group">
-                      <input type="date" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="Search">
-                    </form>
-                      <div class="input-group-append">
-                        <input type="submit" class="btnRegister" value="Cerca">
-                      </div>
-                    </div>
-                  
-                </div>
+            <div class="col-md-12" style="">
+              <div class="col-md-12 col-1 m-2" style="">
+                <h3 class="text-light m-0 border border-light rounded" style="">
+                  <div class="row">
+                        <div class="border-light my-2 ml-2" style="">
+                            <h4 class="ml-5 text-light">Sei già presente in questa prenotazione</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" style=""></div>
+                            <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a></div>
+                        </div>
+                  </div>
+                </h3>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12 col-lg-12 text-center">
-              <div class="table-responsive"> 
-                 
-                <table class="table table-striped table-dark">
-                  <thead>
-                    <tr>
-                      <th scope="col" class="">Fasce Orarie occupate per il giorno <?php echo $_smarty_tpl->tpl_vars['gg']->value;?>
-</th>
-                    </tr>
-                  </thead>
-                  
-                  <tbody>
-                    <!--Tabella che mostra le fasce orarie-->
-                    <?php if ($_smarty_tpl->tpl_vars['array']->value) {?> 
-                    <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['array']->value, 'giorno');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['giorno']->value) {
-?>
-                    <tr>
-                      <th scope="row"><?php echo $_smarty_tpl->tpl_vars['giorno']->value->getFasceOrarie();?>
-</th>
-                    </tr> 
-                    </tbody>
-                    <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?> 
-                    <?php } else { ?> <p class="text-light text-center mt-2">Tutte le fasce orarie sono disponibili</p> 
-                    <?php }?>
-                </table> 
-               
-                 </div>
-            </div>
-          </div>
-          <div class="row">
-          </div>
-          <form action="/BookAndPlay/GestionePartite/creaPartita" method="POST" >
-            <div class="row">
-              <div class="col-md-12 shadow-none text-center  " style="">
-                <div class="form-group row m-2" style="">
-                  <div class="col-md-4 mt-1" style="">
-                    <h5 class="text-light text-left" style="">Giorno</h5>
-                  </div>
-                  <div class="col-md-5 offset-md-1" style="">
-                    <div class="input-group">
-                      <input type="text" name="giorno" value="<?php echo $_smarty_tpl->tpl_vars['gg']->value;?>
-" class="form-control" id="inlineFormInputGroup" placeholder="gg/mm/aaaa" required="required">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row m-2" style="">
-                  <div class="col-md-4 mt-1" style="">
-                    <h5 class="text-light text-left" style="">Fascia Oraria</h5>
-                  </div>
-                  <div class="col-md-5 offset-md-1" style="">
-                    <div class="input-group">
-                      <input type="text" name="fascia_oraria" class="form-control" id="inlineFormInputGroup" placeholder="es 09:00-10-00" required="required">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row m-2" style="">
-                  <div class="col-md-4 mt-1" style="">
-                    <h5 class="text-light text-left" contenteditable="true">Livello di Gioco</h5>
-                  </div>
-                  <div class="col-md-5 offset-md-1" style="">
-                    <div class="input-group">
-                      <input type="text" name="livello" class="form-control" id="inlineFormInputGroup" placeholder="Medio" required="required">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row m-2" style="">
-                  <div class="col-md-4 mt-1" style="">
-                    <h5 class="text-light text-left">Note:</h5>
-                  </div>
-                  <div class="col-md-5 offset-md-1" style="">
-                    <div class="input-group">
-                      <input type="text" name="descrizione" class="form-control" id="inlineFormInputGroup" placeholder="Search" required="required">
-                    </div>
-                  </div>
-                </div>
-                </form>
-                <div class="row">
-                  <div class="col-md-12 mx-3">
-                    <input type="submit" class="btn btn-secondary" value="Prenota partita">
-                  </div>
-                </div>
-              </div>
-            </div>
           </form>
         </div>
       </div>
