@@ -205,8 +205,7 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showVaiAllaPartita(EUser $user, EAccount $acc, $part)
-    { //,$img
+    public function showVaiAllaPartita(EUser $user, EAccount $acc, $part) { //,$img
         //list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         //$this->smarty->assign('pic64', $pic64);
@@ -217,7 +216,6 @@ class VGestionePartite {
         $this->smarty->assign('partita', $part);
         $this->smarty->display('vaiAllaPartita.tpl');
     }
-
 
     /**
      * Funzione che si occupa di gestire la prenotazione delle parite per un utente loggato

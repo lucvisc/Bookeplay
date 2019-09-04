@@ -102,8 +102,11 @@ class CGestionePartite {
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $giorno=self::splitGiorno($_POST['giorno']);
                 $part = $pm->load("giorno", $giorno, "FGiorno");
-                //$partDisp= $pm->loadGiornoDisp($part);
-                $view->showFormCreation($user, $acc, $part, $giorno,'no');
+                $partDisp= $pm->loadGiornoDisp($part);
+
+                print_r($partDisp);
+
+                $view->showFormCreation($user, $acc, $partDisp, $giorno,'no');
             } else {
                 header('Location: /BookAndPlay/User/login');
             }
