@@ -96,7 +96,7 @@
                     {if $array} 
                     {foreach $array as $giorno}
                     <tr>
-                      <th scope="row">{$giorno->getFasceOrarie()}</th>
+                      <th scope="row">{$giorno}</th>
                     </tr> 
                     </tbody>
                     {/foreach} 

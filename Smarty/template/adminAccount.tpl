@@ -49,7 +49,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-3" style="">   <!--href="/BookAndPlay/GestionePartita/crea-cancella"--> 
+        <div class="col-md-3" style="">   
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/homepage">Elenco Account</a>
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/partite">Crea/Cancella</i>
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/modifica">Modifica Partita</i></a>

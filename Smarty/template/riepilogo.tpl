@@ -84,31 +84,35 @@
             </div>
           </div>  
           <div class="row" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
-            {if $partita} 
-            {foreach $partita as $booking}
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-11" style="" >
-                  <div class="col-md-12 col-1 m-2 border border-light rounded" style="">
-                    <h3 class="text-light mx-2" style="">
-                      <div class="row">
-                        <div class="border-light my-2 ml-2" style="">
-                                <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
-                                <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
-                                <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
-                                <h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
-                                <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
-                                <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>
+                {if $array} 
+                {foreach $array as $booking} 
+                <div class="row" style="">
+                  <div class="col-md-12 ">
+                    <div class="row" style="">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-11" style="">
+                            <div class="col-md-12 col-1 m-2" style="">
+                              <h3 class="m-0 text-light border border-light rounded" style="" >
+                                <div class="row">
+                                  <div class="border-light my-2 ml-2" style="">
+                                    <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
+                                    <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
+                                    <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>           
+                                    <h4 class="ml-5 text-light">Partecipanti: 0/10</h4> 
+                                  </div>
+                                </div>
+                              </h3>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </h3>
+                    </div>
                   </div>
                 </div> 
-              </div>
-            </div> 
-            {/foreach} 
-            {else} <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
-            {/if}
+                {/foreach} 
+                {else} <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
+                {/if}
           </div>
         </div>
       </div>
