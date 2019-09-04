@@ -113,6 +113,11 @@ class FGiorno {
         return $giorno;
     }
 
+    /**
+     * Questo metodo restistuisce un array contenente solo le fascie orarie disponibili di un determinato giorno
+     * @param $giorno da analizzare
+     * @return mixed
+     */
     public static function loadGiorLib($giorno){
         $array=array(
             '09:00-10:00'=>'Disponibile',
@@ -135,7 +140,6 @@ class FGiorno {
                 }
             }
         }
-        print_r($array);
         $chiavi=array_keys($array);
         $i=0;
         $j=0;
