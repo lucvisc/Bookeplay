@@ -69,19 +69,25 @@
               <div class="col-md-12 col-1 m-2" style="">
                 <h3 class="text-light m-0 border border-light rounded" style="">
                   <div class="row">
-                    {if booking}
-                        <div class="border-light my-2 ml-2" style="">
-                            <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
-                            <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
-                            <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
-                            <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
-                            <h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
-                            <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
-                            <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>
+                    {if $partita}
+                      {foreach $partita as $booking} 
+                      <h3 class="m-0 text-light border border-light rounded" style="">
+                        <div class="row">
+                          <div class="border-light my-2 ml-2" style="">
+                              <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
+                              <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
+                              <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
+                              <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
+                              <h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
+                              <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
+                              <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>
+                          </div>
                         </div>
+                     </h3>
+                      {/foreach}
                       {else} 
-                      <p class="text-light text-center mt-2">sei già presente in questa prenotazione</p> 
-                    {/if}
+                        <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
+                      {/if}
                   </div>
                 </h3>
               </div>

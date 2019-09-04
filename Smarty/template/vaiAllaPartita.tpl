@@ -76,7 +76,8 @@
                         <div class="row">
                           <div class="col-md-11" style="">
                             <div class="col-md-12 col-1 m-2" style="">
-                              {if $booking!='null'} 
+                              {if $partita}
+                              {foreach $partita as $booking} 
                               <h3 class="m-0 text-light border border-light rounded" style="">
                                 <div class="row">
                                   <div class="border-light my-2 ml-2" style="">
@@ -90,6 +91,7 @@
                                   </div>
                                 </div>
                               </h3>
+                              {/foreach}
                               {else} 
                               <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
                               {/if}

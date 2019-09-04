@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-04 11:05:34
+/* Smarty version 3.1.33, created on 2019-09-04 14:55:06
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\prenotazioneErrata.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6f7e5e1897a3_97191948',
+  'unifunc' => 'content_5d6fb42a3c4793_04934669',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6f7e5e1897a3_97191948 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6fb42a3c4793_04934669 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>

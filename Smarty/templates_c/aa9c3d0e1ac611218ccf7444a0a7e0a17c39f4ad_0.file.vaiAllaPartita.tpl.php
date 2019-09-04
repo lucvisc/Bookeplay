@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-04 10:54:38
+/* Smarty version 3.1.33, created on 2019-09-04 14:53:56
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\vaiAllaPartita.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d6f7bce7db6b4_76155693',
+  'unifunc' => 'content_5d6fb3e40e0cd6_64379891',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'aa9c3d0e1ac611218ccf7444a0a7e0a17c39f4ad' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\vaiAllaPartita.tpl',
-      1 => 1567587236,
+      1 => 1567601634,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d6f7bce7db6b4_76155693 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d6fb3e40e0cd6_64379891 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -103,7 +103,12 @@ function content_5d6f7bce7db6b4_76155693 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="row">
                           <div class="col-md-11" style="">
                             <div class="col-md-12 col-1 m-2" style="">
-                              <?php if ($_smarty_tpl->tpl_vars['booking']->value != 'null') {?> 
+                              <?php if ($_smarty_tpl->tpl_vars['partita']->value) {?>
+                              <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['partita']->value, 'booking');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
+?> 
                               <h3 class="m-0 text-light border border-light rounded" style="">
                                 <div class="row">
                                   <div class="border-light my-2 ml-2" style="">
@@ -123,6 +128,10 @@ function content_5d6f7bce7db6b4_76155693 (Smarty_Internal_Template $_smarty_tpl)
                                   </div>
                                 </div>
                               </h3>
+                              <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                               <?php } else { ?> 
                               <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
                               <?php }?>

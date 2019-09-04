@@ -98,7 +98,7 @@ class FBooking{
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
         if(($result!=null) && ($rows_number == 1)) {
-            $boo=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note'],  FPren_partecipa::loadPrenPart($result['idP']));
+            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note'],  FPren_partecipa::loadPrenPart($result['idP']));
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
@@ -161,13 +161,13 @@ class FBooking{
         $db=FDatabase::getInstance();
         list ($result, $rows_number)=$db->getbooking($giorno);
         if(($result!=null) && ($rows_number == 1)) {        //:idbooking,:quota,:giornobooking,:partita,:giornobooking
-            $boo=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']));
+            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']));
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                    $boo=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']));
+                    $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']));
                 }
             }
         }
@@ -186,7 +186,7 @@ class FBooking{
         $rows_number = $db->interestedRows('FPren_partecipa', 'email', $email);//funzione richiamata,presente in FDatabase
 
         if(($result!=null) && ($rows_number == 1)) {
-            $boo=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note']);
+            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){

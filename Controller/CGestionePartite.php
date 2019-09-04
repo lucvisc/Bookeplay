@@ -270,7 +270,11 @@ class CGestionePartite {
                 //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                $view->showRiepilogo($user, $acc);
+                $part=$pm->loadRiepilogo($account->getEmail());
+
+                print_r($part);
+
+                $view->showRiepilogo($user, $acc, $part); //, $num
             } else {
                 header('Location: /BookAndPlay/User/login');
             }
@@ -291,15 +295,15 @@ class CGestionePartite {
 
         $pm = new FPersistentManager();
         $partite = $pm->load("giorno", $gg, "FBooking");
-        for($i=0; $i<count($partite); $i++) {
+        /*for($i=0; $i<count($partite); $i++) {
             $idP[$i] = $partite[$i]->getIdbooking();
             $num[] = $pm->CountPartecipanti($idP[$i]);
         }
 
-        print_r($num);
+        print_r($num);*/
         print_r($partite);
 
-        $view->CercaPartiteAttive($partite, $num);
+        $view->CercaPartiteAttive($partite);
     }
 
     /**
