@@ -114,27 +114,31 @@ class FGiorno {
     }
 
     /**
+<<<<<<< HEAD
      * Funzione che permette di caricare le fasce orarie disponibili
      * @param string $gg del giorno di riferimento con fasce occupate
      * @return object $gior
+=======
+     * Questo metodo restistuisce un array contenente solo le fascie orarie disponibili di un determinato giorno
+     * @param $giorno da analizzare
+     * @return mixed
+>>>>>>> 4dcc9fe48fca0550d102549c98dde42f261a1229
      */
     public static function loadGiorLib($giorno){
         $array=array(
-            '9:00-10:00'=>'Disponibile',
+            '09:00-10:00'=>'Disponibile',
             '10:00-11:00'=>'Disponibile',
             '11:00-12:00'=>'Disponibile',
             '12:00-13:00'=>'Disponibile',
             '14:00-15:00'=>'Disponibile',
             '15:00-16:00'=>'Disponibile',
-            '16:00-17:0'=>'Disponibile',
+            '16:00-17:00'=>'Disponibile',
             '17:00-18:00'=>'Disponibile',
             '18:00-19:00'=>'Disponibile',
             '20:00-21:00'=>'Disponibile',
             '21:00-22:00'=>'Disponibile');
         $fascia=self::loadByField('Giorno', $giorno);
         $index=array_keys($array);
-        $numF=sizeof($fascia);
-        $numa=sizeof($array);
         foreach($fascia as $val){
             for($i=0; $i<=(count($array)-1); $i++){
                 if($index[$i]==$val->getFasceOrarie()){
@@ -142,7 +146,20 @@ class FGiorno {
                 }
             }
         }
-        return $array;
+        $chiavi=array_keys($array);
+        $i=0;
+        $j=0;
+        foreach ($array as $val){
+            if ($val=='Disponibile'){
+                $result[$j]=$chiavi[$i];
+                $i++;
+                $j++;
+            }else
+                {
+                $i++;
+            }
+        }
+        return $result;
     }
 
     /**
