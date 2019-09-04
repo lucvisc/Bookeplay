@@ -15,7 +15,8 @@ if (file_exists('config.inc.php')) require_once 'config.inc.php';
  * @author Luca, Catriel
  * @package Foundation
  */
-class FDatabase {
+class FDatabase
+{
 
     /** l'unica istanza della classe */
     private static $instance;
@@ -23,10 +24,11 @@ class FDatabase {
     private $db;
 
     /** costruttore privato, l'unico accesso è dato dal metodo getInstance() */
-    private function __construct () {
+    private function __construct()
+    {
         try {
             //$this->db = new PDO ("mysql:host=".$GLOBALS['hostname'].";dbname=".$GLOBALS['database'], $GLOBALS['username'], $GLOBALS['password']);
-          $this->db = new PDO ("mysql:dbname=".$GLOBALS['database'].";host=localhost; charset=utf8;", $GLOBALS['username'], $GLOBALS['password']);
+            $this->db = new PDO ("mysql:dbname=" . $GLOBALS['database'] . ";host=localhost; charset=utf8;", $GLOBALS['username'], $GLOBALS['password']);
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             die;
@@ -39,9 +41,10 @@ class FDatabase {
      * @param $Par la stringa del $values della classe da elaborare
      * @return nome della tabella di riferimento
      */
-    public static function tabella ($Par){
-        $pattern="/^(\w*)\s(\S*)$/"; //espressione regolare che separa le due substringhe
-        preg_match($pattern , $Par, $result);
+    public static function tabella($Par)
+    {
+        $pattern = "/^(\w*)\s(\S*)$/"; //espressione regolare che separa le due substringhe
+        preg_match($pattern, $Par, $result);
         return $result[1];
     }
 
@@ -49,7 +52,7 @@ class FDatabase {
      * Metodo che restituisce l'unica istanza dell'oggetto.
      * @return FDataBase l'istanza dell'oggetto.
      */
-    public static function getInstance ()
+    public static function getInstance()
     { //restituisce l'unica istanza (creandola se non esiste gia')
         if (self::$instance == null) {
             self::$instance = new FDatabase();
@@ -68,7 +71,8 @@ class FDatabase {
      * @param obj oggetto da salvare
      * @return $id id dell'oggetto inserito
      */
-    public function storeDB ($class, $obj) {
+    public function storeDB($class, $obj)
+    {
         //viene passato il nome della classe che ermetterà di richiamare tutti i metodi di classe
         try {
             print_r($obj);
@@ -88,7 +92,7 @@ class FDatabase {
             $this->closeDbConnection();                     //chiudiamo la connessione al db
             return $id;                                     //Ritorna l'id del record appena inserito nel db
         } catch (PDOException $e) {
-            echo "Attenzione errore: ". $e->getMessage();
+            echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
             return null;
         }
@@ -101,20 +105,20 @@ class FDatabase {
      * @param $nome_file nome della chiave dell'array superglobale $_FILE
      * @return string|null
      */
-    public function storeMedia ($class , $obj) {
+    public function storeMedia($class, $obj)
+    {
         try {
             $this->db->beginTransaction();
-            $query = "INSERT INTO ".$class::getTables()." VALUES ".$class::getValues();
+            $query = "INSERT INTO " . $class::getTables() . " VALUES " . $class::getValues();
             $stmt = $this->db->prepare($query);
-            $class::bind($stmt,$obj);
+            $class::bind($stmt, $obj);
             $stmt->execute();
-            $id=$this->db->lastInsertId();
+            $id = $this->db->lastInsertId();
             $this->db->commit();
             $this->closeDbConnection();
             return $id;
-        }
-        catch(PDOException $e) {
-            echo "Attenzione errore: ".$e->getMessage();
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
             return null;
         }
@@ -127,10 +131,10 @@ class FDatabase {
      * @param $id valore da usare per la ricerca
      * @return array|mixed|null valore che cambia a seconda che il risultato sia zero, uono o più oggetti
      */
-    public function loadDB ($class, $field, $id)
+    public function loadDB($class, $field, $id)
     {
         try {
-            $query = "SELECT * FROM " . self::tabella($class::getTables()). " WHERE " . $field . "='" . $id . "';";
+            $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE " . $field . "='" . $id . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
 
@@ -159,17 +163,17 @@ class FDatabase {
      * Funzione che viene utilizzata per la load quando ci si aspetta che la query produca un solo risultato (esempio load per id).
      * @param $sql query da eseguire
      */
-    public function loadSingle($sql){
-        try{
+    public function loadSingle($sql)
+    {
+        try {
             $this->db->beginTransaction();
-            $stmt=$this->db->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute();
-            $row=$stmt->fetch(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $this->closeDbConnection();
             return $row;
-        }
-        catch(PDOException $e){
-            echo "Attenzione errore: ".$e->getMessage();
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
             die;
             return null;
         }
@@ -182,7 +186,7 @@ class FDatabase {
      * @param $id valore da usare per la ricerca
      * @return int|null
      */
-    public function interestedRows ($class, $field, $id)
+    public function interestedRows($class, $field, $id)
     {
         try {
             $this->db->beginTransaction();
@@ -206,13 +210,14 @@ class FDatabase {
      * @param $id ,id usato per la cancellazione
      * @return bool|null a seconda se la cancellazione è avvenuta o meno
      */
-    public function deleteDB ($class, $field, $id) {
+    public function deleteDB($class, $field, $id)
+    {
         try {
             $result = null;
             $this->db->beginTransaction();
             $esiste = $this->existDB($class, $field, $id);
             if ($esiste) {
-                $query = "DELETE FROM " . self::tabella($class::getTables()). " WHERE " . $field . "='" . $id . "';";
+                $query = "DELETE FROM " . self::tabella($class::getTables()) . " WHERE " . $field . "='" . $id . "';";
                 $stmt = $this->db->prepare($query);
                 $stmt->execute();
                 $this->db->commit();
@@ -235,7 +240,8 @@ class FDatabase {
      * @param $pk chiave primaria della classe interessata
      * @return bool|null a seconda se la modifica è avvenuta o meno
      */
-    public function updateDB ($class, $field, $newvalue, $pk, $id) {
+    public function updateDB($class, $field, $newvalue, $pk, $id)
+    {
         try {
             $this->db->beginTransaction();
             $query = "UPDATE " . self::tabella($class::getTables()) . " SET " . $field . "='" . $newvalue . "' WHERE " . $pk . "='" . $id . "';";
@@ -258,7 +264,8 @@ class FDatabase {
      * @param $id valore da usare come parametro di ricerca
      * @return array|null a seeconda se l'oggetto esiste o meno nella tabella presa in esame
      */
-    public function existDB ($class, $field, $id) {
+    public function existDB($class, $field, $id)
+    {
         try {
             $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE " . $field . "='" . $id . "'";
             $stmt = $this->db->prepare($query);
@@ -281,7 +288,8 @@ class FDatabase {
      * @param $fasciaoraria della prenotazione
      * @return mixed|null a seconda se è presente o meno della tabella
      */
-    public function loadVerificaGiorno ($giorno, $fasciaoraria) {
+    public function loadVerificaGiorno($giorno, $fasciaoraria)
+    {
         try {
             $query = null;
             $class = "FGiorno";
@@ -303,16 +311,18 @@ class FDatabase {
             return null;
         }
     }
+
     /**
      * Metodo che conta quanti partecipanti ci sono per una prenotazione
      * @param $idPre id della prenotazione
      * @return numero di partecipanti
      */
-    public function CountPartecipanti ($idPre) {
+    public function CountPartecipanti($idPre)
+    {
         try {
             $query = null;
             $class = "FPren_partecipa";
-            $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE idPren ='" . $idPre ."';";
+            $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE idPren ='" . $idPre . "';";
 
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -330,10 +340,11 @@ class FDatabase {
     /**
      * Metodo che verifica l'accesso di un utente , controllando che le credenziali (email e password) siano presenti nel db
      * @param $email ,email dell'account dell' utente
-     * @param $pass, password dell'account dell'utente
+     * @param $pass , password dell'account dell'utente
      * @return mixed|null a seconda se l'account dell'utente è presente o meno della tabella
      */
-    public function loadVerificaAccesso ($email, $pass) {
+    public function loadVerificaAccesso($email, $pass)
+    {
         try {
             $query = null;
             $class = "FAccount";
@@ -359,10 +370,11 @@ class FDatabase {
     /**
      * Metodo che verifica l'accesso di un utente , controllando che le credenziali (email e password) siano presenti nel db
      * @param $email ,email dell'account dell' utente
-     * @param $pass, password dell'account dell'utente
+     * @param $pass , password dell'account dell'utente
      * @return mixed|null a seconda se l'account dell'utente è presente o meno della tabella
      */
-    public function loadVerificaPrenotazione ($idPren, $email) {
+    public function loadVerificaPrenotazione($idPren, $email)
+    {
         try {
             $query = null;
             $class = "FPren_partecipa";
@@ -391,7 +403,8 @@ class FDatabase {
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
      * @return array|null
      */
-    public function getGiorni ($giorno) {
+    public function getGiorni($giorno)
+    {
         try {
             $query = "SELECT * FROM giorno WHERE  Giorno = " . $giorno . " ;";
             $stmt = $this->db->prepare($query);
@@ -422,7 +435,8 @@ class FDatabase {
      * @param $livello che defisce il livello di una partita
      * @return array|null
      */
-    public function getLivello ($livello) {
+    public function getLivello($livello)
+    {
         try {
             $query = "SELECT * FROM partita WHERE  Livello = " . $livello . " ;";
             $stmt = $this->db->prepare($query);
@@ -452,7 +466,8 @@ class FDatabase {
      * @param $giorno definisce tutte le partire che possono essere giocate in un giorno
      * @return array|null
      */
-    public function getPartite($giorno) {
+    public function getPartite($giorno)
+    {
         try {
             $query = "SELECT giorno,fascia FROM giorno, fasceorarie WHERE idFasciaOraria=idFascia AND giorno = " . $giorno . " ;";
             $stmt = $this->db->prepare($query);
@@ -482,7 +497,8 @@ class FDatabase {
      * @param $giorno definisce tutte le partire disponibili che sono presenti per un determinato giorno
      * @return array|null
      */
-    public function getPartiteDisp($giorno) {
+    public function getPartiteDisp($giorno)
+    {
         try {
             $query = "SELECT giorno,fascia FROM giorno, fasceorarie WHERE idFasciaOraria=idFascia AND disp='Disponibile' AND giorno = " . $giorno . " ;";
             $stmt = $this->db->prepare($query);
@@ -529,11 +545,12 @@ class FDatabase {
      * @param $email , email dell'account che sta partecipando alla prenotazione
      * @return false|PDOStatement|null
      */
-    public function insertPren_partecipa($idPren, $email) {
+    public function insertPren_partecipa($idPren, $email)
+    {
         try {
             $this->db->beginTransaction();
-            $query=("INSERT INTO pren_partecipa VALUES($idPren,'".$email."')");
-            $stmt=$this->db->prepare($query);
+            $query = ("INSERT INTO pren_partecipa VALUES($idPren,'" . $email . "')");
+            $stmt = $this->db->prepare($query);
             $stmt->execute();
 
             print_r($stmt->errorInfo());
@@ -547,14 +564,16 @@ class FDatabase {
             return null;
         }
     }
+
     /**
      * Metodo che aggiunge una possibile fascia oraria
-     * @param $idFascia, id della fascia oraria su cui effettuare una prenotazione
-     * @param $fasce, orario a disposizione
-     * @param $disp, per verificare se una fascia oraria è disponibile o meno
+     * @param $idFascia , id della fascia oraria su cui effettuare una prenotazione
+     * @param $fasce , orario a disposizione
+     * @param $disp , per verificare se una fascia oraria è disponibile o meno
      * @return false|PDOStatement|null
      */
-    public function insertFasceorarie ($idFascia, $Fascia, $disp) {
+    public function insertFasceorarie($idFascia, $Fascia, $disp)
+    {
         try {
             $this->db->beginTransaction();
             $id = $this->db->query("INSERT INTO fasceorarie (idFascia, Fascia, disp) VALUES('$idFascia','$Fascia','$disp')");
@@ -571,10 +590,11 @@ class FDatabase {
 
     /**
      * Metodo che aggiunge un nuovo possibile giorno nel db
-     * @param $id, fk booking
+     * @param $id , fk booking
      * @return false|PDOStatement|null
      */
-    public function insertGiorno ($id) {
+    public function insertGiorno($id)
+    {
         try {
             $this->db->beginTransaction();
             $id = $this->db->query("INSERT INTO giorno (id) VALUES($id);");
@@ -595,9 +615,9 @@ class FDatabase {
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
      * @return array|null
      */
-    public function loadAcc () {
+    public function loadAcc($input) {
         try {
-            $query = "SELECT * FROM account ;";
+            $query = "SELECT * FROM account WHERE  active = " . $input . " ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
@@ -626,7 +646,8 @@ class FDatabase {
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
      * @return array|null
      */
-    public function getAccount ($acc) {
+    public function getAccount($acc)
+    {
         try {
             echo $acc;
             $query = "SELECT * FROM account WHERE  username = '" . $acc . " ';";
@@ -636,7 +657,7 @@ class FDatabase {
             print_r($this->db->errorInfo());
 
             $num = $stmt->rowCount();
-            print ("$num\n") ;
+            print ("$num\n");
             if ($num == 0) {
                 $result = null;        //nessuna riga interessata. return null
             } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
@@ -662,7 +683,7 @@ class FDatabase {
     public function ContaUtenti()
     {
         try {
-            $query=("SELECT COUNT(*) FROM account");
+            $query = ("SELECT COUNT(*) FROM account");
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             return $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -677,17 +698,18 @@ class FDatabase {
     /**
      * @return la somma di tutti i conti di tutti gli utenti oppure |null in caso di errore
      */
-    public function ContoTot(){
-            try {
-                $query=("SELECT SUM(conto) as totale FROM account GROUP BY (id)");
-                $stmt = $this->db->prepare($query);
-                $stmt->execute();
-                return $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {
-                echo "Attenzione errore: " . $e->getMessage();
-                $this->db->rollBack();
-                return null;
-            }
+    public function ContoTot()
+    {
+        try {
+            $query = ("SELECT SUM(conto) as totale FROM account GROUP BY (id)");
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
     }
 
     /**
@@ -696,9 +718,10 @@ class FDatabase {
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
      * @return array|null
      */
-    public function getBooking ($giorno) {
+    public function getBooking($giorno)
+    {
         try {
-            $query = "SELECT * FROM prenotazione where Giorno="."'".$giorno."'"."  ;";
+            $query = "SELECT * FROM prenotazione where Giorno=" . "'" . $giorno . "'" . "  ;";
             echo $query;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -729,9 +752,10 @@ class FDatabase {
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
      * @return array|null
      */
-    public function getPrenotazionePartecipa ($idPren) {
+    public function getPrenotazionePartecipa($idPren)
+    {
         try {
-            $query = "SELECT * FROM pren_partecipa where idPren="."'".$idPren."'"."  ;";
+            $query = "SELECT * FROM pren_partecipa where idPren=" . "'" . $idPren . "'" . "  ;";
             //echo $query;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -741,7 +765,7 @@ class FDatabase {
                 $result = null;        //nessuna riga interessata. return null
             } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
                 $comodo = $stmt->fetch(PDO::FETCH_ASSOC);//ritorna una sola riga
-                $result=$comodo['email'];
+                $result = $comodo['email'];
             } else {
                 $result = array();                         //nel caso in cui piu' righe fossero interessate
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
@@ -763,9 +787,10 @@ class FDatabase {
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
      * @return array|null
      */
-    public function Riepilogo ($email) {
+    public function Riepilogo($email)
+    {
         try {
-            $query = "SELECT idP, Quota, livello, Giorno, FasciaOraria, note FROM prenotazione, pren_partecipa  where idP=idPren AND email='".$email."';";
+            $query = "SELECT idP, Quota, livello, Giorno, FasciaOraria, note FROM prenotazione, pren_partecipa  where idP=idPren AND email='" . $email . "';";
             //echo $query;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
@@ -793,7 +818,8 @@ class FDatabase {
      * Funzione utilizzata per ritornare solamente le partite attive
      * @return array|mixed|null
      */
-    public function loadBooking () {
+    public function loadBooking()
+    {
         try {
             $query = "SELECT * FROM prenotazione ;";
             $stmt = $this->db->prepare($query);
@@ -823,7 +849,8 @@ class FDatabase {
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
      * @return array|null
      */
-    public function getUser ($us) {
+    public function getUser($us)
+    {
         try {
             $query = "SELECT * FROM user WHERE  idacc = " . $us . " ;";
             $stmt = $this->db->prepare($query);
@@ -851,7 +878,7 @@ class FDatabase {
      * Metodo che restituisce il numero di righe interessate dalla query
      * @return int|null
      */
-    public function rowsPrenotazione ()
+    public function rowsPrenotazione()
     {
         try {
             $this->db->beginTransaction();
@@ -873,11 +900,12 @@ class FDatabase {
      * @param $id della prenotazione della quale si vogliono conoscere i patecipanti
      * @return int|null
      */
-    public function getCountPartecipa($id){
-        try{
+    public function getCountPartecipa($id)
+    {
+        try {
             $this->db->beginTransaction();
-            $query="SELECT * FROM pren_partecipa where idPren=$id";
-            $stmt=$this->db->prepare($query);
+            $query = "SELECT * FROM pren_partecipa where idPren=$id";
+            $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
             return $num;
@@ -890,49 +918,14 @@ class FDatabase {
 
     }
 
-
-
-
-
-
-    /******************RICERCA*******************/
-
-    /**
-     * Funzione utilizzata per ritornare tutti gli utenti che verificano determinate caratteristiche date in input
-     * Utilizzata nella pagina admin
-     * @param $array di valori da cercare (massimo 2 : nome e cognome)
-     * @param $toSearch se 'nome' ho in input un solo valore, altrimenti ne ho due
-     * @return array $num numero di righe che rispettano la ricerca, $result oggetti che rispettano la ricerca
-     */
-    public function utentiByString ($array, $toSearch)
-    {
-        if ($toSearch == 'nome')
-            $query = "SELECT * FROM account where name = '" . $array[0] . "' OR surname = '" . $array[0] . "';";
-        else
-            $query = "SELECT * FROM account where name = '" . $array[0] . "' AND surname = '" . $array[1] . "' OR name = '" . $array[1] . "' AND surname = '" . $array[0] . "';";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-        $num = $stmt->rowCount();
-        if ($num == 0)
-            $result = null;
-        elseif ($num == 1)
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        else {
-            $result = array();
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            while ($row = $stmt->fetch())
-                $result[] = $row;
-        }
-        return array($result, $num);
-    }
-
     /**
      * Funzione utilizzata per ritornare gli utenti attivi e bannati.
      * Utilizzata nella pagina admin
      * @param $state  valore booleano che definisce lo stato degli utenti desiderati
      * @return array|null
      */
-    public function getUtenti ($tipo) {
+    public function getUtenti($tipo)
+    {
         try {
             $query = "SELECT * FROM user WHERE  tipo = " . $tipo . " AND email <> 'admin@admin.com';";
             $stmt = $this->db->prepare($query);
@@ -954,66 +947,6 @@ class FDatabase {
             $this->db->rollBack();
             return null;
         }
-    }
-
-    /**
-     * Funzione utilizzata per garantire una ricerca mirata da parte dell'admin.
-     * @param $input stringa inserita nel campo ricerca dall'admin
-     * @param $class classe interessata nella ricerca
-     * @param $campo campo dove cercare la parola
-     * @return array|null a seconda se la parola è presente eo meno nel database
-     */
-    public function ricercaParola ($input, $class, $campo) {
-        try {
-            $query = "SELECT * FROM " . $class::getTable() . " WHERE " . $campo . " LIKE '%" . $input . "%';";
-            $stmt = $this->db->prepare($query);
-            $stmt->execute();
-            $num = $stmt->rowCount();
-            if ($num == 0) {
-                $result = null;                             //nessuna riga interessata. return null
-            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
-            } else {
-                $result = array();                         //nel caso in cui piu' righe fossero interessate
-                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
-                while ($row = $stmt->fetch())
-                    $result[] = $row;                       //ritorna un array di righe.
-            }
-            return array($result, $num);
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
-            return null;
-        }
-    }
-
-    /**
-     * @param $cont
-     * @param string $str
-     * @return |null
-     */
-    function cerca($cont, string $str)
-    {
-        $sql = '';
-        if ($cont == 0) {
-            $method = 'cercaUtenteByUsername';
-            $sql = FUser::$method();
-            $className = 'Utente';
-            $value = 'Username';
-        } else if ($cont == 1) {
-            $method = 'cercaPrenotazioneByGiorno';
-            $sql = FBooking::$method();
-            $className = 'Prenotazione';
-            $value = 'Giorno';
-        } else if ($cont == 2) {
-            $method = 'cercaPrenotazioneByFascia';
-            $sql = FBooking::$method();
-            $className = 'Prenotazione';
-            $value = 'Fascia';
-        }
-        if ($sql)
-            return $this->exeCerca('F' . $className, $value, $str, $sql);
-        else return NULL;
     }
 }
 ?>

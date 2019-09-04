@@ -224,7 +224,7 @@ class FPersistentManager {
      */
     public static function loadAccount ($input) {
         $ris = null;
-        $ris = FAccount::loadAcc($input);
+        $ris = FAccount::loadAccActive($input);
         return $ris;
     }
 
