@@ -114,10 +114,36 @@ class FDatabase
     {
         try {
             $this->db->beginTransaction();
-            //$query = "INSERT INTO ".$class::getTables()." VALUES ".$class::getValues();
-            $query = "INSERT INTO " . $class::getTables() . " VALUES ". $class::getValues()."LOAD_FILE('".$class::getImmagine()."'));";
+            $query = 'INSERT INTO ' . $class::getTables() . ' VALUES ' . $class::getValues();
+            //$query = "INSERT INTO " . $class::getTables() . " VALUES ". $class::getValues()."LOAD_FILE('".$class::getImmagine()."'));";
 
-            print_r($query);
+            print ("$query\n");
+
+            $stmt = $this->db->prepare($query);
+            $class::bind($stmt, $obj);
+            $stmt->execute();
+
+            print_r($stmt->errorInfo());
+
+            $id = $this->db->lastInsertId();
+            $this->db->commit();
+            $this->closeDbConnection();
+            return $id;
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    public function storeImg($class, $obj)
+    {
+        try {
+            $this->db->beginTransaction();
+            $query = "UPDATE ".$class::getTables()." SET immagine=LOAD_FILE('".$class::getImmagine()."');";
+            //$query = "INSERT INTO " . $class::getTables() . " VALUES ". $class::getValues()."LOAD_FILE('".$class::getImmagine()."'));";
+
+            print ("$query\n");
 
             $stmt = $this->db->prepare($query);
             $class::bind($stmt, $obj);

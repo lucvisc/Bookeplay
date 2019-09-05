@@ -13,10 +13,10 @@ class FMediaUser {
     private static $class = "FMediaUser";
 
     /** tabella con la quale opera */
-    private static $tables="`mediauser` (`filename`,`type`,`emailutente`,`immagine`)";
+    private static $tables="mediauser (`emailutente`,`filename`,`type`)";
 
     /** valori della tabella */
-    private static $values="(:filename,:type,:emailutente,";    /**il primo id è quello di Emedia,il secondo di EMediaUtente**/
+    private static $values="(:emailutente,:filename,:type)";    /**il primo id è quello di Emedia,il secondo di EMediaUtente**/
     /**
      *
      */
@@ -35,9 +35,16 @@ class FMediaUser {
 
     public static function bind($stmt, EMediaUser $media){
 
-        $stmt->bindValue(':emailutente', $media->getEmailUser(), PDO::PARAM_STR);
-        $stmt->bindValue(':filename',$media->getFileName(), PDO::PARAM_STR);
-        $stmt->bindValue(':type',$media->getType(), PDO::PARAM_STR);
+        $si=$stmt->bindValue(':emailutente', $media->getEmailUser(), PDO::PARAM_STR);
+        print ("$si\n");
+        $si=$stmt->bindValue(':filename',$media->getFileName(), PDO::PARAM_STR);
+        print ("$si\n");
+        $si=$stmt->bindValue(':type',$media->getType(), PDO::PARAM_STR);
+        print ("$si\n");
+
+    }
+
+    public static function bindImg($stmt, EMediaUser $media){
         $stmt->bindValue(':immagine', $media->getData() , PDO::PARAM_LOB);
     }
 
@@ -80,6 +87,12 @@ class FMediaUser {
     public static function store(EMediaUser $media){
         $db = FDatabase::getInstance();
         $ris=$db->storeMedia(static::getClass(), $media);
+        return $ris;
+    }
+
+    public static function storeImg(EMediaUser $media){
+        $db = FDatabase::getInstance();
+        $ris=$db->storeImg(static::getClass(), $media);
         return $ris;
     }
 
@@ -141,6 +154,7 @@ class FMediaUser {
         $db=FDatabase::getInstance();
         $db->deleteDB(static::getClass(), $field, $id);
     }
+
 
 }
 
