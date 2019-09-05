@@ -29,25 +29,29 @@ class CGestionePartite {
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $view->showFormCreation($user, $account, null, null ,'no');
             }
-            elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-                $account = unserialize($_SESSION['account']);
-                $user = $pm->load("email", $account->getEmail(), "FUser");
-                $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
-                $giorno= new EGiorno($_POST['giorno'], $_POST['fascia_oraria']);
-                $gg=$pm->loadGiorno($_POST['giorno'], $_POST['fascia_oraria']);
+            else {
+                if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                    $account = unserialize($_SESSION['account']);
+                    $user = $pm->load("email", $account->getEmail(), "FUser");
+                    $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                    $giorno = new EGiorno($_POST['giorno'], $_POST['fascia_oraria']);
+                    $gg=$pm->loadGiorno($_POST['giorno'], $_POST['fascia_oraria']);
 
-                if (!isset($gg)) {
-                    $pren= new EBooking(null,$_POST['livello'],$giorno->getGiorno(),$giorno->getFasceOrarie(),$_POST['descrizione'],null);
-                    FBooking::store($pren);
-                    FPren_partecipa::insert(null, $account->getEmail());
+                    print_r($gg);
 
-                    $view->showPrenotazioneEffettuata($user, $acc, $pren); //, $img
-                }
-                else {
-                    $view->showFormCreation($user, $account, "no_giorno");
+                    if (!isset($gg)) {
+                        $pm->insertGiorno($giorno);
+                        $pren = new EBooking(null, $_POST['livello'], $giorno->getGiorno(), $giorno->getFasceOrarie(), $_POST['descrizione'], null, $account->getEmail());
+                        FBooking::store($pren);
+                        FPren_partecipa::insert(null, $account->getEmail());
+                        $prenotazione=$pm->loadPrenotazioneEff($_POST['giorno'], $_POST['fascia_oraria']);
+                        $view->showPrenotazioneEffettuata($user, $acc, $prenotazione); //, $img
+                    } else {
+                        $view->showFormCreation($user, $account, null, null, "no_giorno");
                     }
                 }
+            }
             }
         else {
             header('Location: /BookAndPlay/User/login');

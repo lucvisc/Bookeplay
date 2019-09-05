@@ -220,11 +220,11 @@ class VGestionePartite {
     /**
      * Funzione che si occupa di gestire la prenotazione delle parite per un utente loggato
      * @param $user informazioni sull' utente da visualizzare
-     * @param $part elenco delle partite
+     * @param $pren elenco delle partite
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $part) {  //,$img
+    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $pren) {  //,$img
         //list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         //$this->smarty->assign('pic64', $pic64);
@@ -232,7 +232,7 @@ class VGestionePartite {
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
-        $this->smarty->assign('booking',$part);
+        $this->smarty->assign('partita',$pren);
         $this->smarty->display('prenotazioneEffettuata.tpl');
     }
 

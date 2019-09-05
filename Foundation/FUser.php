@@ -14,7 +14,7 @@ class FUser {
     /**
      * tabella su cui opera
      */
-    private static $tables="utente (:mail,:name,:surname,:dataNascita,:gender,:tipo)";
+    private static $tables="utente (`mail`,`name`,`surname`,`dataNascita`,`gender`,`tipo`)";
     /**
      * Valori della tabella
      */

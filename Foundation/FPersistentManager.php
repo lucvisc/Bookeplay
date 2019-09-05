@@ -90,8 +90,8 @@ class FPersistentManager {
     /**
      * Metodo che permette di verificare se esiste un giorno con la relativa fascia oraria.
      * Viene ritornato l'utente utenteloggato
-     * @param $user
-     * @param $pass
+     * @param $giorno
+     * @param $fasciaoraria
      * @return object|null
      */
     public static function loadGiorno ($giorno, $fasciaoraria) {
@@ -117,6 +117,19 @@ class FPersistentManager {
     public static function loadGiornoDisp ($giorno) {
         $ris = null;
         $ris = FGiorno::loadGiorLib($giorno);
+        return $ris;
+    }
+
+    /**
+     * Metodo che permette di verificare se esiste un giorno con la relativa fascia oraria.
+     * Viene ritornato l'utente utenteloggato
+     * @param $giorno
+     * @param $fasciaoraria
+     * @return object|null
+     */
+    public static function loadPrenotazioneEff ($giorno, $fasciaoraria) {
+        $ris = null;
+        $ris = FBooking::loadPrenotazioneEff($giorno, $fasciaoraria);
         return $ris;
     }
 
