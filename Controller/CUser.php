@@ -53,7 +53,7 @@ class CUser {
         $pm = new FPersistentManager();
         $account = $pm->loadLogin($_POST['email'], $_POST['password']);
 
-        if ($account != null && $account->getActivate() != false ){ //&& $account->getActivate() != false
+        if ($account != null && $account->getActivate() != 0 ){ //&& $account->getActivate() != false
 
             if (session_status() == PHP_SESSION_NONE) {
                 session_set_cookie_params('3600'); // 1 ora dal login
