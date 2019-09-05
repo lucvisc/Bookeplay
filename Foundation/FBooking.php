@@ -107,7 +107,7 @@ class FBooking{
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                    $boo[]=new EBooking($result[$i]['idP'], $result[$i]['livello'], $result[$i]['Giorno'],  $result[$i]['FasciaOraria'], $result[$i]['note'], FPren_partecipa::loadPrenPart($result[$i]['idP']), $result['organizzatore']);
+                    $boo[]=new EBooking($result[$i]['idP'], $result[$i]['livello'], $result[$i]['Giorno'],  $result[$i]['FasciaOraria'], $result[$i]['note'], FPren_partecipa::loadPrenPart($result[$i]['idP']), $result[$i]['organizzatore']);
                 }
             }
         }
@@ -170,7 +170,7 @@ class FBooking{
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                    $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']), $result['organizzatore']);
+                    $boo[]=new EBooking($result[$i]['idP'], $result[$i]['livello'], $result[$i]['Giorno'], $result[$i]['FasciaOraria'],  $result[$i]['note'], FPren_partecipa::loadPrenPart($result[$i]['idP']), $result[$i]['organizzatore']);
                 }
             }
         }
