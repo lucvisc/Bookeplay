@@ -14,7 +14,7 @@ class FPren_partecipa {
     /**
      * tabella di riferimento su database
      */
-    private static $table = "pren_partecipa (`idPren`,`email`);";
+    private static $table = "pren_partecipa (`idPren`,`email`)";
     /**
      * valori della tabella
      */
