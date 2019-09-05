@@ -263,35 +263,38 @@ class CUser {
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $addr = $pm->load("email", $account->getEmail(), "FAddress");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                $view->formModificaProfilo($user, $acc,"ok"); // $img,
+                $view->showModificaProfilo($user, $acc,"ok"); // $img,
 
             } else
                 header('Location: /BookAndPlay/User/login');
         }
         elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
             $account = unserialize($_SESSION['account']);  //Creates a PHP value from a stored representation
+            $pm = new FPersistentManager();
             //$img = $pm->load("emailutente", $account->getEmail(), "FMediaUser");
             if (get_class($account) == "EAccount") {
                 if ($account->getPassword() == $_POST['old_password']) {
                     if ($account->getEmail() == $_POST['email']) {
                         //$statoimg = static::modificaprofiloimmagine($account);
-                        if ($statoimg) {
-                            static::updateCampi($account, "Faccount");
-                            $newAcc =FAccount::loadById($account);
+                        //if ($statoimg) {
+                            static::updateCampi($account, "FAccount", $_POST['username'], $_POST['new_password']);
+                            $newAcc =FAccount::loadByField('email',$account->getEmail());
                             $salvare = serialize($newAcc);
                             $_SESSION['account'] = $salvare;
-                            header('Location: /BookAndPlay/User/profile');
-                        }
-                    } else {
+                            header('Location: /BookAndPlay/User/profilo');
+                        //}
+                    }
+                    else {
                         $verificaEmail = $pm->exist("email", $_POST['email'], "FAccount");
                         if ($verificaEmail) {
                             //UTENTE GIA NEL DB
                             $user = $pm->load("email", $account->getEmail(), "FUser");
-                            $view->formModificaProfilo($user, $account, "errorEmail"); // $img,
-                        } else {
-                            $statoimg = static::modificaprofiloimmagine($account);
-                            if ($statoimg) {
-                                static::updateCampi($account, "FAccount");
+                            $view->showModificaProfilo($user, $account, "errorEmail"); // $img,
+                        }
+                        else {
+                            //$statoimg = static::modificaprofiloimmagine($account);
+                            //if ($statoimg) {
+                                static::updateCampi($account, "FAccount", $_POST['username'], $_POST['new_password']);
                                 $pm->update("email", $_POST['email'], "email", $account->getEmail(), "FAccount");
                                 $newAcc=$pm->load("email", $account->getEmail(), "FAccount");
                                 //$img =$pm->load("email", $account->getEmail(), "FMediaUser");
@@ -301,7 +304,7 @@ class CUser {
                                 $salvare = serialize($newAcc);
                                 $_SESSION['account'] = $salvare;
                                 $view->showProfileUser($user, $newAcc, $addr); //,$img
-                            }
+                            //}
                         }
                     }
                 } else {
@@ -310,11 +313,28 @@ class CUser {
                     //$img =$pm->load("email", $account->getEmail(), "FMediaUser");
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $addr = $pm->load("email", $account->getEmail(), "FAddress");
-                    $view->showModificaProfilo($user, $newAcc, "errorPassw"); //, $img
+                    $view->showModificaProfilo($user, $newAcc, 'errorPassw'); //, $img
                 }
 
             }
+            else {
+                header('Location: /BookAndPlay/User/login');
+            }
         }
+    }
+
+    /**
+     * Funzione che si occupa di fare tutti i controlli necessari per aggiornare i campi che un utente desidera modificare
+     * nella sua form di modifica profilo
+     * @param $account obj rappresentante l'account di un user
+     * @param $class classe del account che richiede le modifiche
+     */
+    static function updateCampi($account,$class, $username, $pass) {
+        $pm = new FPersistentManager();
+        if ($account->getUsername() != $username)
+            $pm->update("username", $username, "email", $account->getEmail(), $class);
+        if ($_POST['new_password'] != "")
+            $pm->update("password", $pass, "email", $account->getEmail(), $class);
     }
 
 	/**
@@ -369,22 +389,6 @@ class CUser {
 		}
 		return $ris;
 	}
-
-
-
-	/**
-	 * Funzione che si occupa di fare tutti i controlli necessari per aggiornare i campi che un utente desidera modificare
-	 * nella sua form di modifica profilo
-	 * @param $account obj rappresentante l'account di un user
-	 * @param $class classe del account che richiede le modifiche
-	 */
-	static function updateCampi($account,$class) {
-    	$pm = new FPersistentManager();
-    	if ($account->getUsername() != $_POST['username'])
-    		$pm->update("username", $_POST['username'], "email", $account->getEmail(), $class);
-    	if ($_POST['new_password'] != "")
-    		$pm->update("password", md5($_POST['new_password']), "email", $account->getEmail(), $class);
-    }
 
 	/**
 	 * Funzione di supporto per le altre. Questa funzione, grazie alla chiamata della funzione upload(), si occupa di gestire

@@ -189,13 +189,13 @@ class FBooking{
         $rows_number = $db->interestedRows('FPren_partecipa', 'email', $email);//funzione richiamata,presente in FDatabase
 
         if(($result!=null) && ($rows_number == 1)) {
-            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note'],null, $result['organizzatore']);
+            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note'],null, null);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                    $boo[]=new EBooking($result[$i]['idP'], $result[$i]['livello'], $result[$i]['Giorno'],  $result[$i]['FasciaOraria'], $result[$i]['note'], null, $result['organizzatore']);
+                    $boo[]=new EBooking($result[$i]['idP'], $result[$i]['livello'], $result[$i]['Giorno'],  $result[$i]['FasciaOraria'], $result[$i]['note'], null, null);
                 }
             }
         }

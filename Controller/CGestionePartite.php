@@ -100,18 +100,23 @@ class CGestionePartite {
             $acc = $pm->load("email", $account->getEmail(), "FAccount");
             $pren= $pm->VerificaPrenotazione($id, $account->getEmail());
 
-            print_r($pren);
-
             if (isset($pren)){
-                print "esiste";
-                $view->showPrenotazioneErrata($user, $acc);
+
             }
             else {
-                print "non esiste";
-                $pren_partecipa= $pm->insertPren_partecipa($id,$account->getEmail());
-                $part = $pm->load('idP', $id, "FBooking");
+                if ($account->getConto >= 5) {
+                    $pren_partecipa = $pm->insertPren_partecipa($id, $account->getEmail());
+                    $account = EAccount::PagaPartita($account);
+                    $conto = $account->getConto();
+                    $pm::update('conto', $conto, 'email', $account->getEmail(), "FAccount");
+                    $acc = $pm->load('email', $account->getEmail(), "FAccount");
+                    $part = $pm->load('idP', $id, "FBooking");
 
-                $view->showPrenotazioneEffettuata($user, $acc, $part);
+                    $view->showPrenotazioneEffettuata($user, $acc, $part);
+                }
+                else {
+                    $view->showPrenotazioneErrata($user, $acc);
+                }
             }
         }
         else {
@@ -201,27 +206,6 @@ class CGestionePartite {
     }
 
     /**
-     * Funzione che si occupa di eliminare una prenotazione soltanto se l'utente è loggato ed è Admin
-     * se l'utente non è admin mostra il profilo
-     * se l'utente non è loggato mostra la schermata di login
-     * @param $id id dell'annuncio da eliminare
-     */
-    static function deleteannuncio($id) {
-        if (CUser::isLogged()) {
-            $account= unserialize($_SESSION['account']);
-            if ($account->getEmail() == "admin@admin.com"){
-                    $pm = new FPersistentManager();
-                    $pm->delete("idP", $id, "FBooking");
-            } else {
-                header('Location: /BookAndPlay/User/profile');
-            }
-        }
-        else
-            header('Location: /BookAndPlay/User/login');
-    }
-
-
-    /**
      * Funzione che si occupa di mostrare le partite per un utenteloggato, con la possibiltà di poter partecipare o creare
      * una partita
      * @param
@@ -275,9 +259,8 @@ class CGestionePartite {
                 $view->showVaiAllaPartita($user, $acc, $part);
 
             }
-
-
-        } else {
+        }
+        else {
             header('Location: /BookAndPlay/User/login');
         }
     }
@@ -297,8 +280,6 @@ class CGestionePartite {
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $part=$pm->loadRiepilogo($account->getEmail());
-
-                print_r($part);
 
                 $view->showRiepilogo($user, $acc, $part); //, $num
             } else {

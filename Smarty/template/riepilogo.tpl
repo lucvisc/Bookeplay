@@ -71,21 +71,16 @@
           <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/partite">Crea/Partecipa</a>
           <a class="btn btn-block btn-info" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a>
         </div>
-        <div class="col-md-8" style="">
-          <div class="tab-content">
-          </div>
+       <div class="col-md-9" style="">
           <div class="row">
-            <div class="col-md-12">
-              <div class="row" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
-                <div class="col-md-6 mx-4" style="">
-                  <h4 class="text-light">Riepilogo Prenotazioni</h4>
+            <div class="col-md-12" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">                
+ 
+              <div class="row" style="">
+                <div class="col-md-12">
+                  <h3 class="text-light ml-3 mx-0">Riepilogo Prenotazioni:</h3>
                 </div>
-              </div>
-            </div>
-          </div>  
-          <div class="row" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
-                {if $array} 
-                {foreach $array as $booking} 
+              </div> 
+ 
                 <div class="row" style="">
                   <div class="col-md-12 ">
                     <div class="row" style="">
@@ -93,33 +88,38 @@
                         <div class="row">
                           <div class="col-md-11" style="">
                             <div class="col-md-12 col-1 m-2" style="">
-                              <h3 class="m-0 text-light border border-light rounded" style="" >
+                              {if $partita}
+                              {foreach $partita as $booking} 
+                              <h3 class="m-0 text-light border border-light rounded" style="">
                                 <div class="row">
                                   <div class="border-light my-2 ml-2" style="">
-                                    <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
-                                    <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
-                                    <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>           
-                                    <h4 class="ml-5 text-light">Partecipanti: 0/10</h4> 
+                                      <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
+                                      <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
+                                      <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
+                                      <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
                                   </div>
                                 </div>
                               </h3>
+                              {/foreach}
+                              {else} 
+                              <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
+                              {/if}
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div> 
-                {/foreach} 
-                {else} <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
-                {/if}
+                </div>
+               
+              </div>
+            </div>
           </div>
+        <div class="row" style="">
         </div>
       </div>
     </div>
-    <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
-      <div class="container"></div>
-    </div>
+  </div>
     <div class="py-3 pt-5" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,254), rgba(0,0,0,254)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
       <div class="container">
         <div class="row">

@@ -61,43 +61,43 @@
             <div class="col-md-12" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;" >
               <p style="">
               </p>
-              <form action="/BookAndPlay/User/modoficaProfilo" method="POST">
+              <form action="/BookAndPlay/User/modificaProfilo" method="POST">
               <div class="row h-100">
                 <div class="col-10 col-lg-12">
                     <div class="form-group"> <label for="form20" class="text-light">Username</label> <input type="text" value="{$username}" name="username" required="required" class="form-control" id="form16" placeholder="----------"></div>
-                    <div class="form-group"> <label for="form20" class="text-light">Nome</label> <input type="text" value="{$name}" name="nome" required="required" class="form-control" id="form16" placeholder="----------"></div>
-                    <div class="form-group"> <label for="form20" class="text-light">Cognome</label> <input type="text" value="{$surname}" name="surname" required="required" class="form-control" id="form16" placeholder="----------"></div>
                     <div class="form-group"> <label for="form21" class="text-light">Email</label> <input type="email" value="{$email}" name="email" required="required" class="form-control" id="form16" placeholder="----------"> </div>
                     <div class="form-group"> <label for="form21" class="text-light">Cambia immagine del profilo</label> <input name="file" type="file" size"40"="" class="form-control" id="form16" <="" div=""></div>
                     <div class="form-group"> <label for="form21" class="text-light">Inserisci la vecchia password</label> <input type="password" name="old_password" required="required" class="form-control" id="form16" <="" div=""></div>
-                    <div class="form-group"> <label for="form21" class="text-light">Inserisci la nuova password</label> <input type="password" name="new_password" required="required" class="form-control" id="form16" <="" div=""> </div>
-                   </form>
+                    <div class="form-group"> <label for="form21" class="text-light">Inserisci la nuova password</label> <input type="password" name="new_password" class="form-control" id="form16" <="" div=""> </div>
+                    <div class="text-center">
+                      {if $errorEmail!='ok'} 
+                        <div style="color: red;"> 
+                          <p align="center">L'email è già assegnata ad un altro utente!</p>
+                        </div> 
+                      {/if}
+                      {if $errorPassw!='ok'} 
+                        <div style="color: red;"> 
+                          <p align="center">Password errata!</p>
+                        </div> 
+                      {/if} 
+                      {if $errorSize!='ok'} 
+                        <div style="color: red;">
+                          <p align="center">Attenzione! Formato immagine troppo grande! </p>
+                        </div> 
+                      {/if} 
+                      {if $errorType!='ok'} 
+                        <div style="color: red;">
+                          <p align="center">Attenzione! Formato immagine non supportato (provare con .png o .jpg)! </p>
+                        </div>
+                      {/if}
+                    </div>
+                   
                   <div class="row">
                     <div class="col-md-12 shadow-none text-center ">
                       <input type="submit" class="btn btn-primary" value="Modifica Profilo"/></i>
                     </div>
-                    <div class="row">
                   </div> 
-                  {if $errorEmail!='ok'} 
-                  <div style="color: red;"> 
-                    <p align="center">Cambiare Email poichè già assegnata!</p>
-                  </div> 
-                  {/if}
-                  {if $errorPassw!='ok'} 
-                  <div style="color: red;"> 
-                    <p align="center">Password errata!</p>
-                  </div> 
-                  {/if} 
-                  {if $errorSize!='ok'} 
-                  <div style="color: red;">
-                    <p align="center">Attenzione! Formato immagine troppo grande! </p>
-                  </div> 
-                  {/if} 
-                  {if $errorType!='ok'} 
-                  <div style="color: red;">
-                    <p align="center">Attenzione! Formato immagine non supportato (provare con .png o .jpg)! </p>
-                  </div>
-                  {/if}
+                  </form>
                   </div>
                 </div>
               </div>

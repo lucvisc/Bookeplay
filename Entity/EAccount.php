@@ -188,11 +188,12 @@ class EAccount {
      * Questo metodo viene richiamato per poter pagare una partita tramite il conto account relativo ad un
      * utente registrato
      */
-	public function PagaPartita(){ 
-		$cont= $this->getConto();
+	public static function PagaPartita($account){
+		$cont=$account->getConto();
         (int) $quota=50;
 		$cont -= $quota / 10 ;
-		$this->setConto($cont);
+		$account->setConto($cont);
+		return $account;
 	}
 
     /**
