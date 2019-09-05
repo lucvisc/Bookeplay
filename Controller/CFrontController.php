@@ -14,12 +14,9 @@ class CFrontController {
         $controller="C".$request[2];
 
         print_r($path); echo "\n";
-        print_r($controller); echo "\n";
 
         if(class_exists($controller)){
             $function=$request[3];
-
-            print_r($function); echo "\n";
 
             if(method_exists($controller,$function)) {
                 $param = array();
@@ -27,20 +24,19 @@ class CFrontController {
                     $param[] = $request[$i];
                 }
                 if (count($param) == 1) {
-                    $controller::$function($param[0]);
 
-                    print($controller);
-                    print($function);
-                    print_r($param);
+                    print($controller); echo "\n";
+                    print($function); echo "\n";
+                    print($param[0]); echo "\n";
+                    $controller::$function($param[0]);
                 }
                 else if (count($param) == 2) $controller::$function($param[0], $param[1]);
                 else if (count($param) == 3) $controller::$function($param[0], $param[1], $param[2]);
                 else {
-                    print "ok";
-                    print_r($controller);
-                    echo "\n";
-                    print_r($function);
-                    echo "\n";
+
+                    print_r($controller); echo "\n";
+                    print_r($function); echo "\n";
+
                     $controller::$function();
                 }
 
