@@ -143,7 +143,7 @@ class FPersistentManager {
      */
     public static function update($field, $newvalue, $pk, $val, $Fclass) {
         $ris = null;
-        if ($Fclass == "FBooking" || $Fclass == "FPartita" || $Fclass == "FGiorno" || $Fclass == "FUser" || $Fclass == "FAddress" || $Fclass == "FFasceorarie")
+        if ($Fclass == "FBooking" || $Fclass == "FAccount" || $Fclass == "FGiorno" || $Fclass == "FUser" || $Fclass == "FAddress")
             $ris = $Fclass::update($field, $newvalue, $pk, $val);
         else
             print ("METODO NON SUPPORTATO DALLA CLASSE");

@@ -87,6 +87,21 @@ class FAccount {
     }
 
     /**
+     * Metodo che aggiorna i campi di un Account
+     * @param $field campo nel quale si vuole modificare il valore
+     * @param $newvalue nuovo valore da assegnare
+     * @param $pk nome della colonna utilizzata per l'espressione "where" della query
+     * @param $id valore della primary key da usare come riferimento
+     * @return true se esiste il mezzo, altrimenti false
+     */
+    public static function update($field, $newvalue, $pk, $id){
+        $db=FDatabase::getInstance();
+        $result = $db->updateDB(static::getClass(), $field, $newvalue, $pk, $id);
+        if($result) return true;
+        else return false;
+    }
+
+    /**
      * Funzione che permette di poter reperire dal database eventuali istanze di oggetti che soddisfano i dati immessi
      * in input nella form di login. L'utente recuperato potà essere trasportatore, cliente o admin.
      * Viene ritornato l'utente utenteloggato/trasportatore/cliente
@@ -127,7 +142,7 @@ class FAccount {
             if(($result!=null) && ($rows_number > 1)){
                 $acc = array();
                 for($i=0; $i<count($result); $i++){
-                    $acc=new EAccount($result['email'],$result['username'], $result['password'],$result['telnumb'],$result['conto'], $result['descrizione'], $result['activate']);
+                    $acc[]=new EAccount($result['email'],$result['username'], $result['password'],$result['telnumb'],$result['conto'], $result['descrizione'], $result['activate']);
                 }
             }
         }
@@ -186,21 +201,6 @@ class FAccount {
     }
 
     /**
-     * Metodo che aggiorna i campi di un Address
-     * @param $field campo nel quale si vuole modificare il valore
-     * @param $newvalue nuovo valore da assegnare
-     * @param $pk nome della colonna utilizzata per l'espressione "where" della query
-     * @param $id valore della primary key da usare come riferimento
-     * @return true se esiste il mezzo, altrimenti false
-     */
-    public static function update($field, $newvalue, $pk, $id){
-        $db=FDatabase::getInstance();
-        $result = $db->updateDB(static::getClass(), $field, $newvalue, $pk, $id);
-        if($result) return true;
-        else return false;
-    }
-
-    /**
      * Permette la delete sul db in base all'id
      * @param $field nome del campo della tabella nel quale ricercare il valore immesso
      * @param $id valore del campo
@@ -218,18 +218,41 @@ class FAccount {
      * @param $giorno
      * @return object $username Account
      */
-    public static function LoadAccount($username){
+    public static function loadAccActive($input){
         $acc=null;
         $db=FDatabase::getInstance();
-        list ($result, $rows_number)=$db->getAccount($username);
+        list ($result, $rows_number)=$db->loadAcc($input);
         if(($result!=null) && ($rows_number == 1)) {        //:id,:username,:password,:email,:telnumb,:conto,:descrizione, :activate
-            $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+            $acc[]=new EAccount($result['email'],$result['username'], $result['password'],$result['telnumb'],$result['conto'], $result['descrizione'], $result['activate']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $acc = array();
                 for($i=0; $i<count($result); $i++){
-                    $acc=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+                    $acc[]=new EAccount($result[$i]['email'],$result[$i]['username'], $result[$i]['password'],$result[$i]['telnumb'],$result[$i]['conto'], $result[$i]['descrizione'], $result[$i]['activate']);
+                }
+            }
+        }
+        return $acc;
+    }
+
+    /**
+     * Metodo che permette di ritornare tutti gli account con quel username presenti sul db
+     * @param $giorno
+     * @return object $username Account
+     */
+    public static function LoadAccount($username){
+        $acc=null;
+        $db=FDatabase::getInstance();
+        list ($result, $rows_number)=$db->getAccount($username);
+        if(($result!=null) && ($rows_number == 1)) {        //:id,:username,:password,:email,:telnumb,:conto,:descrizione, :activate
+            $acc[]=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
+        }
+        else {
+            if(($result!=null) && ($rows_number > 1)){
+                $acc = array();
+                for($i=0; $i<count($result); $i++){
+                    $acc[]=new EAccount($result['id'],$result['username'], $result['password'], $result['email'],$result['conto'],$result['telnumb'], $result['descrizione'], $result['activate']);
                 }
             }
         }

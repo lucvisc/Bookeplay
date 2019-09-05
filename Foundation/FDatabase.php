@@ -619,9 +619,12 @@ class FDatabase
      */
     public function loadAcc($input) {
         try {
-            $query = "SELECT * FROM account WHERE  active = " . $input . " ;";
+            $query = "SELECT * FROM account WHERE  activate = " . $input . " ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
+
+            print_r($stmt->errorInfo());
+
             $num = $stmt->rowCount();
             if ($num == 0) {
                 $result = null;        //nessuna riga interessata. return null
