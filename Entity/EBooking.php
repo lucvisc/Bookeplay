@@ -41,10 +41,14 @@ class EBooking {
      * @AttributeType Array di 10 elementi
      */
     private $partecipanti;
+    /**
+     * @var
+     */
+    private $organizzatore;
 
 
     //Dichiarazione del costruttore
-    function __construct(int $id=null,string $liv=null, string $g=null, string $fa=null, string $not=null, array $part=null)
+    function __construct(int $id=null,string $liv=null, string $g=null, string $fa=null, string $not=null, array $part=null, string $org)
     {
         $this->idbooking = $id;
         $this->quota = 50;
@@ -52,10 +56,14 @@ class EBooking {
         $this->giornobooking=new EGiorno($g, $fa);
         $this->note= $not;
         $this->partecipanti=$part;
+        $this->organizzatore=$org;
     }
 
     //Dichiarazione dei metodi Get
 
+    public function getOrganizzatore() {
+        return $this->organizzatore;
+    }
     /**
      * @access public
      * @return string
@@ -112,6 +120,14 @@ class EBooking {
 
 
     //Dichiarazione dei metodi Set
+
+    /**
+     * Vien utilizzato per identificare l'organizzatore della prenotazione
+     * @param $org
+     */
+    public function setOrganizzatore($org){
+        $this->organizzatore=$org;
+    }
     /**
      * @access public
      * questo metodo viene utilizzato per identificare univocamente una prenotazione, è indentificata automaticamente
