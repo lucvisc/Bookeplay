@@ -13,10 +13,14 @@ class FMediaUser {
     private static $class = "FMediaUser";
 
     /** tabella con la quale opera */
-    private static $tables="mediauser (`filename`,`type`,`emailutente`,`immagine`)";
+    private static $tables="`mediauser` (`filename`,`type`,`emailutente`,`immagine`)";
 
     /** valori della tabella */
-    private static $values="(:filename,:type,:emailutente,:immagine)";    /**il primo id è quello di Emedia,il secondo di EMediaUtente**/
+    private static $values="(:filename,:type,:emailutente,";    /**il primo id è quello di Emedia,il secondo di EMediaUtente**/
+    /**
+     *
+     */
+    private static $immagine=":immagine";
 
     /** costruttore */
     public function __construct(){}
@@ -32,7 +36,7 @@ class FMediaUser {
     public static function bind($stmt, EMediaUser $media){
 
         $stmt->bindValue(':emailutente', $media->getEmailUser(), PDO::PARAM_STR);
-        $stmt->bindValue(':nome',$media->getFileName(), PDO::PARAM_STR);
+        $stmt->bindValue(':filename',$media->getFileName(), PDO::PARAM_STR);
         $stmt->bindValue(':type',$media->getType(), PDO::PARAM_STR);
         $stmt->bindValue(':immagine', $media->getData() , PDO::PARAM_LOB);
     }
@@ -43,6 +47,10 @@ class FMediaUser {
      */
     public static function getClass(){
         return self::$class;
+    }
+
+    public static function getImmagine (){
+        return static::$immagine;
     }
 
     /**
@@ -69,10 +77,10 @@ class FMediaUser {
      * @param $nome_file nome della chiave dell'array superglobale $_FILE
      */
 
-    public static function store(EMediaUser $media, $nome_file){
+    public static function store(EMediaUser $media){
         $db = FDatabase::getInstance();
-        $media->setData($nome_file);
-        $db->storeMedia(static::getClass(), $media, $nome_file);
+        $ris=$db->storeMedia(static::getClass(), $media);
+        return $ris;
     }
 
 
@@ -89,8 +97,7 @@ class FMediaUser {
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);
         if(($result!=null) && ($rows_number == 1)) {
-            $user=new EMediaUser($result['filename'],$result['emailutente']);
-            $user->setType($result['type']);
+            $user=new EMediaUser($result['filename'],$result['emailutente'],$result['type']);
             $user->setData($result['immagine']);
             print_r($user);
         }

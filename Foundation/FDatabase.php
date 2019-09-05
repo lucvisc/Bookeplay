@@ -105,14 +105,26 @@ class FDatabase
      * @param $nome_file nome della chiave dell'array superglobale $_FILE
      * @return string|null
      */
+
+    /*
+     * INSERT INTO `mediauser` ( `filename`, `type`, `emailutente`, `immagine`)
+     * VALUES('catriel.jpg', 'image/jpg', 'catdeb@hotmail.com', LOAD_FILE ('/xampp/htdocs/BookAndPlay/Smarty/img/avatar_catriel.jpg'));
+     */
     public function storeMedia($class, $obj)
     {
         try {
             $this->db->beginTransaction();
-            $query = "INSERT INTO " . $class::getTables() . " VALUES (LOAD_FILE('" . $class::getValues()."'))";
+            //$query = "INSERT INTO ".$class::getTables()." VALUES ".$class::getValues();
+            $query = "INSERT INTO " . $class::getTables() . " VALUES ". $class::getValues()."LOAD_FILE('".$class::getImmagine()."'));";
+
+            print_r($query);
+
             $stmt = $this->db->prepare($query);
             $class::bind($stmt, $obj);
             $stmt->execute();
+
+            print_r($stmt->errorInfo());
+
             $id = $this->db->lastInsertId();
             $this->db->commit();
             $this->closeDbConnection();
