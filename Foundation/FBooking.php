@@ -22,12 +22,12 @@ class FBooking{
     /**
      * @Tabella di riferimento
      */
-    private static $tables = "prenotazione (`Quota`,`livello`,`Giorno`,`FasciaOraria`,`note`)";
+    private static $tables = "prenotazione (`Quota`,`livello`,`Giorno`,`FasciaOraria`,`note`,`organizzatore`)";
     /**
      * campi della tabella
      */
 
-    private static $values = "(:quota,:livello,:giorno,:fasciaOraria,:note)";
+    private static $values = "(:quota,:livello,:giorno,:fasciaOraria,:note, :organizzatore)";
 
 
     public function __construct(){}
@@ -46,6 +46,8 @@ class FBooking{
         $stmt->bindValue(':giorno', $booking->getGiornobooking()->getGiorno(), PDO::PARAM_STR);
         $stmt->bindValue(':fasciaOraria', $booking->getFascia(), PDO::PARAM_STR);
         $stmt->bindValue(':note', $booking->getNote(), PDO::PARAM_STR);
+        $stmt->bindValue(':organizzatore', $booking->getOrganizzatore(), PDO::PARAM_STR);
+
     }
 
     /**
@@ -80,6 +82,7 @@ class FBooking{
      */
     public static function store(EBooking $boo) // viene storizzato prima L'oggetto giorno perchè sarà poi foreign key di prenotazione
     {
+        print_r($boo);
         $db=FDatabase::getInstance();
         FGiorno::store($boo->getGiornobooking());
         $id=$db->storeDB(static::getClass() ,$boo);
@@ -98,13 +101,13 @@ class FBooking{
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
         if(($result!=null) && ($rows_number == 1)) {
-            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note'],  FPren_partecipa::loadPrenPart($result['idP']));
+            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note'],  FPren_partecipa::loadPrenPart($result['idP']), $result['organizzatore']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                    $boo[]=new EBooking($result[$i]['idP'], $result[$i]['livello'], $result[$i]['Giorno'],  $result[$i]['FasciaOraria'], $result[$i]['note'], FPren_partecipa::loadPrenPart($result[$i]['idP']));
+                    $boo[]=new EBooking($result[$i]['idP'], $result[$i]['livello'], $result[$i]['Giorno'],  $result[$i]['FasciaOraria'], $result[$i]['note'], FPren_partecipa::loadPrenPart($result[$i]['idP']), $result['organizzatore']);
                 }
             }
         }
@@ -161,13 +164,13 @@ class FBooking{
         $db=FDatabase::getInstance();
         list ($result, $rows_number)=$db->getbooking($giorno);
         if(($result!=null) && ($rows_number == 1)) {        //:idbooking,:quota,:giornobooking,:partita,:giornobooking
-            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']));
+            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']), $result['organizzatore']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                    $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']));
+                    $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']), $result['organizzatore']);
                 }
             }
         }
@@ -186,17 +189,32 @@ class FBooking{
         $rows_number = $db->interestedRows('FPren_partecipa', 'email', $email);//funzione richiamata,presente in FDatabase
 
         if(($result!=null) && ($rows_number == 1)) {
-            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note']);
+            $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note'],null, $result['organizzatore']);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
                 $boo = array();
                 for($i=0; $i<count($result); $i++){
-                    $boo[]=new EBooking($result[$i]['idP'], $result[$i]['livello'], $result[$i]['Giorno'],  $result[$i]['FasciaOraria'], $result[$i]['note']);
+                    $boo[]=new EBooking($result[$i]['idP'], $result[$i]['livello'], $result[$i]['Giorno'],  $result[$i]['FasciaOraria'], $result[$i]['note'], null, $result['organizzatore']);
                 }
             }
         }
         return $boo;
+    }
+
+    /**
+     * Funzione che permette di poter reperire dal database eventuali istanze di oggetti che soddisfano i dati immessi
+     * in input nella form di login. L'utente recuperato potà essere trasportatore, cliente o admin.
+     * Viene ritornato l'utente utenteloggato/trasportatore/cliente
+     * @param $giorno
+     * @param $fasciaoraria
+     * @return object|null
+     */
+    public static function loadPrenotazioneEff($giorno, $fasciaoraria) {
+        $gg = null;
+        $db=FDatabase::getInstance();
+        $result=$db->loadPrenotazioneEff($giorno, $fasciaoraria);
+        return $result;
     }
 
 }

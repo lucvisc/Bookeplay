@@ -15,7 +15,7 @@ class FGiorno {
     /**
      * tabella di riferimento
      */
-    private static $tables = "giorno (`Giorno`,`FasciaOraria`,);";
+    private static $tables = "giorno (`Giorno`,`FasciaOraria`)";
     /**
      * valori della tabella
      */
@@ -67,19 +67,20 @@ class FGiorno {
      * @param string $giorno del giorno di riferimento
      * @return object $gg
      */
-    public static function store($giorno)
+    public static function store( EGiorno $giorno)
     {
         $db = FDatabase::getInstance();
         $id = $db->storeDB(static::getClass(), $giorno);
+        return $id;
     }
 
     /**
      * Funzione che permette di poter reperire dal database eventuali istanze di oggetti che soddisfano i dati immessi
      * in input nella form di login. L'utente recuperato potà essere trasportatore, cliente o admin.
      * Viene ritornato l'utente utenteloggato/trasportatore/cliente
-     * @param $user valore dell'email immessa
-     * @param $pass valore della password immessa
-     * @return object|null utenteloggato/trasportatore/cliente
+     * @param $giorno
+     * @param $fasciaoraria
+     * @return object|null
      */
     public static function loadGiorno($giorno, $fasciaoraria) {
         $gg = null;
@@ -114,12 +115,12 @@ class FGiorno {
     }
 
     /**
-
      * Questo metodo restistuisce un array contenente solo le fascie orarie disponibili di un determinato giorno
      * @param $giorno da analizzare
      * @return mixed
      */
     public static function loadGiorLib($giorno){
+        $db=FDatabase::getInstance();
         $array=array(
             '09:00-10:00'=>'Disponibile',
             '10:00-11:00'=>'Disponibile',
@@ -134,26 +135,31 @@ class FGiorno {
             '21:00-22:00'=>'Disponibile');
         $fascia=self::loadByField('Giorno', $giorno);
         $index=array_keys($array);
-        foreach($fascia as $val){
-            for($i=0; $i<=(count($array)-1); $i++){
-                if($index[$i]==$val->getFasceOrarie()){
-                    $array[$index[$i]]='Non Disponibile';
+        $num=$db->interestedRows(self::getTables(), 'Giorno', $giorno);
+        if($num) {
+            foreach ($fascia as $val) {
+                for ($i = 0; $i <= (count($array) - 1); $i++) {
+                    if ($index[$i] == $val->getFasceOrarie()) {
+                        $array[$index[$i]] = 'Non Disponibile';
+                    }
                 }
             }
-        }
-        $chiavi=array_keys($array);
-        $i=0;
-        $j=0;
-        foreach ($array as $val){
-            if ($val=='Disponibile'){
-                $result[$j]=$chiavi[$i];
-                $i++;
-                $j++;
-            }else
-                {
-                $i++;
+            $chiavi = array_keys($array);
+            $i = 0;
+            $j = 0;
+            foreach ($array as $val) {
+                if ($val == 'Disponibile') {
+                    $result[$j] = $chiavi[$i];
+                    $i++;
+                    $j++;
+                } else {
+                    $i++;
+                }
             }
-        }
+        }else
+            {
+                $result=array_keys($array);
+            }
         return $result;
     }
 

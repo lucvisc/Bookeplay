@@ -45,8 +45,6 @@ class FDatabase
     {
         $pattern = "/^(\w*)\s(\S*)$/"; //espressione regolare che separa le due substringhe
         preg_match($pattern, $Par, $result);
-        print_r($result);
-        print ("$result[1]\n");
         return $result[1];
     }
 
@@ -296,7 +294,35 @@ class FDatabase
             $query = null;
             $class = "FGiorno";
             $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE Giorno ='" . $giorno . "' AND FasciaOraria ='" . $fasciaoraria . "';";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;                  //nessuna riga interessata. return null
+            } else {                             //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            }
+            return $result;
 
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
+     * Metodo che restituisce una prenotazione effettuata dati una specifica fasciaoraria e un giorno
+     * @param $giorno giorno della prenotazione
+     * @param $fasciaoraria della prenotazione
+     * @return mixed|null a seconda se è presente o meno della tabella
+     */
+    public function loadPrenotazioneEff($giorno, $fasciaoraria)
+    {
+        try {
+            $query = null;
+            $class = "FBooking";
+            $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE Giorno ='" . $giorno . "' AND FasciaOraria ='" . $fasciaoraria . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
