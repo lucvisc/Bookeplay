@@ -45,6 +45,8 @@ class FDatabase
     {
         $pattern = "/^(\w*)\s(\S*)$/"; //espressione regolare che separa le due substringhe
         preg_match($pattern, $Par, $result);
+        print_r($result);
+        print ("$result[1]\n");
         return $result[1];
     }
 
@@ -549,7 +551,7 @@ class FDatabase
     {
         try {
             $this->db->beginTransaction();
-            $query = ("INSERT INTO pren_partecipa VALUES($idPren,'" . $email . "')");
+            $query = ("INSERT INTO pren_partecipa VALUES('".$idPren."'".",'". $email."')");
             $stmt = $this->db->prepare($query);
             $stmt->execute();
 
