@@ -28,10 +28,12 @@ class VUser {
      * @param $array elenco delle partite da visualizzare
      * @throws SmartyException
      */
-    public function loginOk()
-    {
+    public function loginOk($acc, $user){
         $this->smarty->assign('userlogged', "loggato");
-        $this->smarty->display('profilo.tpl');
+        $this->smarty->assign('nome', $user->getName());
+        $this->smarty->assign('cognome', $user->getSurname());
+        $this->smarty->assign('conto',$acc->getConto());
+        $this->smarty->display('profiloUtente.tpl');
     }
 
     public function Homepage(){
@@ -79,12 +81,11 @@ class VUser {
      * Funzione che si occupa di gestire la visualizzazione del profilo cliente
      * @param $user informazioni sull' utente da visualizzare
      * @param $acc informazioni dell'utente da visualizzare
-     * @param $addr informazioni dell'utente da visualizzare
      * @param $part elenco di partite attive per l'utente
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showProfileUser(EUser $user, EAccount $acc, EAddress $addr)
+    public function showProfileUser(EUser $user, EAccount $acc)
     {
         //list($type, $pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);

@@ -23,7 +23,7 @@ class CUser {
         if($_SERVER['REQUEST_METHOD']=="GET"){
             if(static::isLogged()) {
                 $view = new VUser();
-                $view->loginOk();
+                header('Location: /BookAndPlay/User/profiloUtente');
             }
             else{
                 $view=new VUser();
@@ -124,22 +124,21 @@ class CUser {
     static function profiloUtente() {
         $view = new VUser();
         $pm = new FPersistentManager();
-        if($_SERVER['REQUEST_METHOD'] == "GET") {
-            print "ok";
-            if (CUser::isLogged())
-                $account= unserialize($_SESSION['account']);
+        if (CUser::isLogged()) {
+                $account = unserialize($_SESSION['account']);
 
-            if (get_class($account) == "EAccount") {
-                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
-                $user = $pm->load("email", $account->getEmail(), "FUser");
-                $addr= $pm->load("email", $account->getEmail(), "FAddress");
-                $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                $view->showProfileUser($user, $acc, $addr);
-            } else {
+                if (get_class($account) == "EAccount") {
+                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                    $user = $pm->load("email", $account->getEmail(), "FUser");
+                    $addr = $pm->load("email", $account->getEmail(), "FAddress");
+                    $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                    $view->showProfileUser($user, $acc, $addr);
+                } else {
+                    header('Location: /BookAndPlay/User/login');
+                }
+        }
+        else {
                 header('Location: /BookAndPlay/User/login');
-            }
-        } else {
-            header('Location: /BookAndPlay/User/login');
         }
     }
 
@@ -153,10 +152,6 @@ class CUser {
         if($_SERVER['REQUEST_METHOD'] == "GET") {
             if (CUser::isLogged())
                 $account= unserialize($_SESSION['account']);
-
-                print "ok";
-                print_r($account);
-
                 if (get_class($account) == "EAccount") {
                     //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
                     $user = $pm->load("email", $account->getEmail(), "FUser");
@@ -166,7 +161,8 @@ class CUser {
                 } else {
                     header('Location: /BookAndPlay/User/login');
                 }
-            } else {
+            }
+        else {
                 header('Location: /BookAndPlay/User/login');
         }
     }
