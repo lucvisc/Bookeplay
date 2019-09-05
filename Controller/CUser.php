@@ -22,8 +22,14 @@ class CUser {
     static function login (){
         if($_SERVER['REQUEST_METHOD']=="GET"){
             if(static::isLogged()) {
-                $view = new VUser();
-                header('Location: /BookAndPlay/User/profiloUtente');
+                $account= unserialize($_SESSION['account']);
+                if($account->getEmail()!= 'admin@admin.com') {
+                    $view = new VUser();
+                    header('Location: /BookAndPlay/User/profiloUtente');
+                }
+                else {
+                    header('Location: /BookAndPlay/Admin/homepage');
+                }
             }
             else{
                 $view=new VUser();
