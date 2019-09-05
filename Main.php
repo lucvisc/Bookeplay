@@ -2,6 +2,19 @@
 
 require_once 'include.php';
 
+$immagine="/xampp/htdocs/BookAndPlay/Smarty/img/avatar_catriel.jpg";
+$file=new EMediaUser( "luca.visco@hotmail.com","catriel.jpg", "image/jpg");
+//$file->setData($immagine);
+
+print_r($file);
+
+FMediaUser::store($file);
+
+/*$ris=FMediaUser::loadByField('emailutente', 'catdeb@hotmail.com');
+print_r($ris);
+var_dump($ris);
+
+/*
 $address=FPersistentManager::load("email", "luca.visco@hotmail.com", "FAddress");
 print_r($address);
 
@@ -39,7 +52,7 @@ $info->showInformazioni();
 /*$index= new VIndex();
 $index->showHomepage();
 
-/*$booking = new EBooking('','professionista','livello molto alto');
+$booking = new EBooking('','professionista','livello molto alto');
 FBooking::store($booking);
 FPren_creata::insert('1','luca.visco@hotmail.com');
 FFasceorarie::update('08:00-09:00','Non Disponibile', 'giornoFascia', '19/09/2019');
