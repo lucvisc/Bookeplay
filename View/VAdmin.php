@@ -39,6 +39,17 @@ class VAdmin {
             $value = $_POST['email'];
         return $value;
     }
+    /**
+     * Restituisce l'email dell'utente da bloccare/sbloccare dal campodi input
+     * Inviato con metodo post
+     * @return string contenente l'email dell'utente
+     */
+    function getGiorno(){
+        $value = null;
+        if (isset($_POST['giorno']))
+            $value = $_POST['giorno'];
+        return $value;
+    }
 
     /**
      * Funzione che permette di visualizzare la pagina home dell'admin (contenente tutti gli utenti della piattaforma),divisi in attivi e bannati.
@@ -79,8 +90,9 @@ class VAdmin {
      * @param $partiteAttive array di partite attive
      * @throws SmartyException
      */
-    public function showCreaCancella(EBooking $partiteAttive) {
+    public function showCreaCancella($partiteAttive, $vaiPartita) {
         $this->smarty->assign('partite',$partiteAttive);
+        $this->smarty->assign('vaiPartita', $vaiPartita);
         $this->smarty->display('adminPartite.tpl');
     }
 
@@ -89,7 +101,7 @@ class VAdmin {
      * @param $giorno associazione tra giorno e tutte le fasce orarie
      * @throws SmartyException
      */
-    public function showCrea(EGioeno $giorno) {
+    public function showCrea(EGiorno $giorno) {
         $this->smarty->assign('giorno',$giorno);
         $this->smarty->display('adminCrea.tpl');
     }

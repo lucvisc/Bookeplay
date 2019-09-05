@@ -48,7 +48,7 @@ class EBooking {
 
 
     //Dichiarazione del costruttore
-    function __construct(int $id=null,string $liv=null, string $g=null, string $fa=null, string $not=null, array $part=null, string $org)
+    function __construct(int $id=null,string $liv=null, string $g=null, string $fa=null, string $not=null, array $part=null, string $org=null)
     {
         $this->idbooking = $id;
         $this->quota = 50;

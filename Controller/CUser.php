@@ -131,17 +131,22 @@ class CUser {
         $view = new VUser();
         $pm = new FPersistentManager();
         if (CUser::isLogged()) {
-                $account = unserialize($_SESSION['account']);
-
-                if (get_class($account) == "EAccount") {
+            $account = unserialize($_SESSION['account']);
+            if (get_class($account) == "EAccount") {
+                if($account->getEmail() != 'admin@admin.com'){
                     //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $addr = $pm->load("email", $account->getEmail(), "FAddress");
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
                     $view->showProfileUser($user, $acc, $addr);
-                } else {
-                    header('Location: /BookAndPlay/User/login');
                 }
+                else {
+                    header('Location: /BookAndPlay/Admin/homepage');
+                }
+            }
+            else {
+                header('Location: /BookAndPlay/User/login');
+            }
         }
         else {
                 header('Location: /BookAndPlay/User/login');

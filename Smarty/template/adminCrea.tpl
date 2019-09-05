@@ -73,7 +73,7 @@
           <div class="row" style="">
             <div class="col-md-12 col-lg-12 text-center" style="">
               <div class="table-responsive"> 
-                {foreach $array as $giorno} 
+                {foreach $gg as $giorno} 
                 <table class="table table-striped table-dark">
                   <thead>
                     <tr>

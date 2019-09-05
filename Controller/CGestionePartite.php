@@ -10,6 +10,36 @@ require_once 'include.php';
 class CGestionePartite {
 
     /**
+     * Funzione che si occupa di mostrare le partite attive anche per un utente non loggato, ma senza la possibilità di
+     * poter partecipare con un parametro di ricerca
+     * @param
+     */
+    static function partiteAttive(){
+        if(CUser::isLogged()){
+            if ($_SERVER['REQUEST_METHOD'] == "GET"){
+                $view = new VGestionePartite();
+                $view->showPartiteAttive(null,'logged');
+            }
+            elseif($_SERVER['REQUEST_METHOD'] == "POST"){
+                $view = new VGestionePartite();
+                $gg= self::splitGiorno($view->getGiorno());
+
+                $pm = new FPersistentManager();
+                $partite = $pm->load("giorno", $gg, "FBooking");
+                /*for($i=0; $i<count($partite); $i++) {
+                    $idP[$i] = $partite[$i]->getIdbooking();
+                    $num[] = $pm->CountPartecipanti($idP[$i]);
+                }*/
+                $view->showPartiteAttive($partite, 'logged');
+            }
+        }
+        else {
+            header('Location: /BookAndPlay/User/login');
+        }
+
+    }
+
+    /**
      * Funzione che viene richiamata per la creazione di una partita. Si possono avere diverse situazioni:
      * se l'utente non è loggato viene reindirizzato alla pagina di login perchè solo gli utenti registrati possono creare partite
      * se l'utente è loggato e ha attivato l'account:
@@ -17,7 +47,6 @@ class CGestionePartite {
      * 2) se il metodo di richiesta HTTP è POST viene richiamata la funzione di Creazione().
      * 3) se il metodo di richiesta HTTP è diverso da uno dei precedenti viene vializzato l'errore.
      */
-
     static function creaPartita() {
         if (CUser::isLogged()) {
             $view = new VGestionePartite();
@@ -191,15 +220,6 @@ class CGestionePartite {
             header('Location: /BookAndPlay/User/login');
     }
 
-    /**
-     * Funzione che si occupa di mostrare le partite attive anche per un utente non loggato, ma senza la possibilità di
-     * poter partecipare
-     * @param
-     */
-    static function partiteAttive(){
-        $view = new VGestionePartite();
-        $view->showPartiteAttive();
-    }
 
     /**
      * Funzione che si occupa di mostrare le partite per un utenteloggato, con la possibiltà di poter partecipare o creare
@@ -287,29 +307,6 @@ class CGestionePartite {
         } else {
             header('Location: /BookAndPlay/User/login');
         }
-    }
-
-    /**
-     * Funzione che si occupa di mostrare le partite attive anche per un utente non loggato, ma senza la possibilità di
-     * poter partecipare con un parametro di ricerca
-     * @param
-     */
-    static function partiteAttiveGiorno(){
-        $view = new VGestionePartite();
-        $gg= self::splitGiorno($_POST['giorno']);
-        print($gg);
-
-        $pm = new FPersistentManager();
-        $partite = $pm->load("giorno", $gg, "FBooking");
-        /*for($i=0; $i<count($partite); $i++) {
-            $idP[$i] = $partite[$i]->getIdbooking();
-            $num[] = $pm->CountPartecipanti($idP[$i]);
-        }
-
-        print_r($num);*/
-        print_r($partite);
-
-        $view->CercaPartiteAttive($partite);
     }
 
     /**

@@ -163,8 +163,9 @@ class VGestionePartite {
      * @param $part elenco delle partite
      * @throws SmartyException
      */
-    public function showPartiteAttive() {
-        $this->smarty->assign('array', null);
+    public function showPartiteAttive($part,$logged) {
+        $this->smarty->assign('partite', $part);
+        $this->smarty->assign('userlogged', $logged);
         $this->smarty->display('partiteAttive.tpl');
     }
 

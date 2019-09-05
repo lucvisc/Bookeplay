@@ -9,8 +9,14 @@ require_once 'include.php';
 class CInfo {
 
 	public function informazioni(){
-		$view = new VInfo();
-		$view->showInformazioni();
+	    if (CUser::isLogged()) {
+            $view = new VInfo();
+            $view->showInformazioni('loggato');
+        }
+	    else {
+            $view = new VInfo();
+            $view->showInformazioni('nouser');
+        }
 	}
 }
 ?>

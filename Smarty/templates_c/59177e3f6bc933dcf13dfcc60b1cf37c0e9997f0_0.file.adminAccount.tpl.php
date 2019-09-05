@@ -1,5 +1,28 @@
-<!DOCTYPE html>
-{assign var='userlogged' value=$userlogged|default:'nouser'}
+<?php
+/* Smarty version 3.1.33, created on 2019-09-05 16:16:42
+  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\adminAccount.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5d7118ca9e4dd1_33202867',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '59177e3f6bc933dcf13dfcc60b1cf37c0e9997f0' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\adminAccount.tpl',
+      1 => 1567693000,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5d7118ca9e4dd1_33202867 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
+<?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
 
 <head></head>
@@ -70,40 +93,46 @@
                   </form>
                 </div>
               </div> 
-              {if $acc} 
+              <?php if ($_smarty_tpl->tpl_vars['acc']->value) {?> 
               <div class="" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
                 <div class="row border-bottom border rounded ml-1 mr-1">
                   <div class="col-md-9 " style="">
                     <p class="mt-1">
-                      <strong class="d-block text-light mt-4">{$acc->getUsername()} {$acc->getEmail()} </strong>
+                      <strong class="d-block text-light mt-4"><?php echo $_smarty_tpl->tpl_vars['acc']->value->getUsername();?>
+ <?php echo $_smarty_tpl->tpl_vars['acc']->value->getEmail();?>
+ </strong>
                     </p>
                   </div>
                   <div class="col-md-3" style="">
                     <form action="/BookAndPlay/Admin/bannaUtente" method="POST">
-                      <input type="text" hidden="" name="email" value="{$acc->getEmail()}">
+                      <input type="text" hidden="" name="email" value="<?php echo $_smarty_tpl->tpl_vars['acc']->value->getEmail();?>
+">
                       <button class="btn btn-danger mt-3">Blocca utente</button>
                     </form>
                   </div>
                 </div>
               </div> 
-              {/if} 
-              {if $ban} 
+              <?php }?> 
+              <?php if ($_smarty_tpl->tpl_vars['ban']->value) {?> 
               <div class="" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
                 <div class="row border-bottom border rounded ml-1 mr-1">
                   <div class="col-md-9 " style="">
                     <p class="mt-1">
-                      <strong class="d-block text-light mt-4">{$ban->getUsername()} {$ban->getEmail()} </strong>
+                      <strong class="d-block text-light mt-4"><?php echo $_smarty_tpl->tpl_vars['ban']->value->getUsername();?>
+ <?php echo $_smarty_tpl->tpl_vars['ban']->value->getEmail();?>
+ </strong>
                     </p>
                   </div>
                   <div class="col-md-3" style="">
                     <form action="/BookAndPlay/Admin/attivaUtente" method="POST">
-                      <input type="text" hidden="" name="email" value="{$ban[$i]->getEmail()}">
+                      <input type="text" hidden="" name="email" value="<?php echo $_smarty_tpl->tpl_vars['ban']->value[$_smarty_tpl->tpl_vars['i']->value]->getEmail();?>
+">
                       <button class="btn btn-success mt-3">Sblocca utente</button>
                     </form>
                   </div>
                 </div>
               </div> 
-              {/if} 
+              <?php }?> 
               <div class="form-group row m-2" style="">
                 <div class="col-md-6" style="">
                   <h3 class="text-light text-left">Elenco Utenti </h3>
@@ -117,80 +146,104 @@
                   <div class="my-3 p-3" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
                     <h6 class="border-bottom text-light border-gray pb-2 mb-0">UTENTI ATTIVI (Username, Email)</h6>
                     <div class=" text-muted pt-3 "> 
-                      {if $account} 
-                        {if is_array($account)} 
-                          {for $i=0 to $n_attivi} 
+                      <?php if ($_smarty_tpl->tpl_vars['account']->value) {?> 
+                        <?php if (is_array($_smarty_tpl->tpl_vars['account']->value)) {?> 
+                          <?php
+$_smarty_tpl->tpl_vars['i'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? $_smarty_tpl->tpl_vars['n_attivi']->value+1 - (0) : 0-($_smarty_tpl->tpl_vars['n_attivi']->value)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = 0, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration === 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration === $_smarty_tpl->tpl_vars['i']->total;?> 
                             <div class="row border-bottom border rounded">
                               <div class="col-md-9 " style="">
                                 <p class="mt-1">
-                                  <strong class="d-block text-light mt-3">{$account[$i]->getUsername()} {$account[$i]->getEmail()} </strong>
+                                  <strong class="d-block text-light mt-3"><?php echo $_smarty_tpl->tpl_vars['account']->value[$_smarty_tpl->tpl_vars['i']->value]->getUsername();?>
+ <?php echo $_smarty_tpl->tpl_vars['account']->value[$_smarty_tpl->tpl_vars['i']->value]->getEmail();?>
+ </strong>
                                 </p>
                               </div>
                               <div class="col-md-3" style="">
                                 <form action="/BookAndPlay/Admin/bannaUtente" method="POST">
-                                  <input type="text" hidden="" name="email" value="{$account[$i]->getEmail()}">
+                                  <input type="text" hidden="" name="email" value="<?php echo $_smarty_tpl->tpl_vars['account']->value[$_smarty_tpl->tpl_vars['i']->value]->getEmail();?>
+">
                                   <button class="btn btn-danger mt-2">Blocca Utente</button>
                                 </form>
                               </div>
                             </div> 
-                      {/for} 
-                        {else} 
+                      <?php }
+}
+?> 
+                        <?php } else { ?> 
                           <div class="row border-bottom border rounded">
                             <div class="col-md-9 " style="">
                               <p class="mt-1">
-                                <strong class="d-block textlight mt-3">{$account->getUsername()} {$account->getEmail()} </strong>
+                                <strong class="d-block textlight mt-3"><?php echo $_smarty_tpl->tpl_vars['account']->value->getUsername();?>
+ <?php echo $_smarty_tpl->tpl_vars['account']->value->getEmail();?>
+ </strong>
                               </p>
                             </div>
                             <div class="col-md-3" style="">
                               <form action="/BookAndPlay/Admin/bannaUtente" method="POST">
-                                <input type="text" hidden="" name="email" value="{$account->getEmail()}">
+                                <input type="text" hidden="" name="email" value="<?php echo $_smarty_tpl->tpl_vars['account']->value->getEmail();?>
+">
                                 <button class="btn btn-danger mt-2">Sblocca Utente</button>
                               </form>
                             </div>
                           </div> 
-                        {/if} 
-                      {else} Non ci sono utenti attivi al momento 
-                      {/if} 
+                        <?php }?> 
+                      <?php } else { ?> Non ci sono utenti attivi al momento 
+                      <?php }?> 
                     </div>
                   </div>
                   <!-- UTENTI BANNATI -->
                   <div class="my-3 p-3" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
                     <h6 class="border-bottom text-light border-gray pb-2 mb-0">UTENTI BANNATI (Username, Email)</h6>
                     <div class=" text-muted pt-3 "> 
-                      {if $accountBan} 
-                        {if is_array($accountBan)} 
-                          {for $i=0 to $n_bannati} 
+                      <?php if ($_smarty_tpl->tpl_vars['accountBan']->value) {?> 
+                        <?php if (is_array($_smarty_tpl->tpl_vars['accountBan']->value)) {?> 
+                          <?php
+$_smarty_tpl->tpl_vars['i'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? $_smarty_tpl->tpl_vars['n_bannati']->value+1 - (0) : 0-($_smarty_tpl->tpl_vars['n_bannati']->value)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = 0, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration === 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration === $_smarty_tpl->tpl_vars['i']->total;?> 
                             <div class="row border-bottom border rounded">
                               <div class="col-md-9 " style="">
                                 <p class="mt-1">
-                                  <strong class="d-block text-light mt-3">{$accountBan[$i]->getUsername()} {$accountBan[$i]->getEmail()} </strong>
+                                  <strong class="d-block text-light mt-3"><?php echo $_smarty_tpl->tpl_vars['accountBan']->value[$_smarty_tpl->tpl_vars['i']->value]->getUsername();?>
+ <?php echo $_smarty_tpl->tpl_vars['accountBan']->value[$_smarty_tpl->tpl_vars['i']->value]->getEmail();?>
+ </strong>
                                 </p>
                               </div>
                               <div class="col-md-3" style="">
                                 <form action="/BookAndPlay/Admin/attivaUtente" method="POST">
-                                  <input type="text" hidden="" name="email" value="{$accountBan[$i]->getEmail()}">
+                                  <input type="text" hidden="" name="email" value="<?php echo $_smarty_tpl->tpl_vars['accountBan']->value[$_smarty_tpl->tpl_vars['i']->value]->getEmail();?>
+">
                                   <button class="btn btn-success mt-2">Sblocca Utente</button>
                                 </form>
                               </div>
                             </div> 
-                        {/for} 
-                        {else} 
+                        <?php }
+}
+?> 
+                        <?php } else { ?> 
                           <div class="row border-bottom border rounded">
                             <div class="col-md-9 " style="">
                               <p class="mt-1">
-                                <strong class="d-block textlight mt-3">{$accountBan[$i]->getUsername()} {$accountBan[$i]->getEmail()} </strong>
+                                <strong class="d-block textlight mt-3"><?php echo $_smarty_tpl->tpl_vars['accountBan']->value[$_smarty_tpl->tpl_vars['i']->value]->getUsername();?>
+ <?php echo $_smarty_tpl->tpl_vars['accountBan']->value[$_smarty_tpl->tpl_vars['i']->value]->getEmail();?>
+ </strong>
                               </p>
                             </div>
                             <div class="col-md-3" style="">
                               <form action="/BookAndPlay/Admin/attivaUtente" method="POST">
-                                <input type="text" hidden="" name="email" value="{$AccountBan->getEmail()}">
+                                <input type="text" hidden="" name="email" value="<?php echo $_smarty_tpl->tpl_vars['AccountBan']->value->getEmail();?>
+">
                                 <button class="btn btn-success mt-2">Sblocca Utente</button>
                               </form>
                             </div>
                           </div> 
-                      {/if} 
-                      {else} Non ci sono utenti bannati al momento 
-                      {/if} 
+                      <?php }?> 
+                      <?php } else { ?> Non ci sono utenti bannati al momento 
+                      <?php }?> 
                     </div>
                   </div>
                 </main>
@@ -248,9 +301,16 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
 </body>
 
-</html>
+</html><?php }
+}
