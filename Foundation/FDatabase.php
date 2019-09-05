@@ -109,7 +109,7 @@ class FDatabase
     {
         try {
             $this->db->beginTransaction();
-            $query = "INSERT INTO " . $class::getTables() . " VALUES " . $class::getValues();
+            $query = "INSERT INTO " . $class::getTables() . " VALUES (LOAD_FILE('" . $class::getValues()."'))";
             $stmt = $this->db->prepare($query);
             $class::bind($stmt, $obj);
             $stmt->execute();

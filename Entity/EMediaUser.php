@@ -14,11 +14,7 @@
 require_once "include.php";
 
 class EMediaUser {
-    /**
-     * id identificativo del media
-     * @AttributeType int
-     */
-    private $id;
+
     /**
      * email dell'utente
      * @AttributeType string
@@ -41,10 +37,11 @@ class EMediaUser {
     private $type;
 
     //Dichiarazione del costruttore
-    public function __construct($fname, $emailUser)
+    public function __construct($fname, $emailUser, $tipo)
     {
         $this->filename = $fname;
         $this->emailUser = $emailUser;
+        $this->type=$tipo;
         $this->data = NULL;
     }
 
@@ -61,13 +58,13 @@ class EMediaUser {
      */
     public function getEmailUser()
     {
-        return $this->emailute;
+        return $this->emailUser;
     }
 
     /**
      * @return string nome media
      */
-    public function getFname()
+    public function getFileName()
     {
         return $this->filename;
     }

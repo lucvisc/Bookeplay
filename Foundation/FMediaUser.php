@@ -13,10 +13,10 @@ class FMediaUser {
     private static $class = "FMediaUser";
 
     /** tabella con la quale opera */
-    private static $table="mediauser";
+    private static $tables="mediauser (`filename`,`type`,`emailutente`,`immagine`)";
 
     /** valori della tabella */
-    private static $values="(:id,:filename,:type,:emailutente,:immagine)";    /**il primo id è quello di Emedia,il secondo di EMediaUtente**/
+    private static $values="(:filename,:type,:emailutente,:immagine)";    /**il primo id è quello di Emedia,il secondo di EMediaUtente**/
 
     /** costruttore */
     public function __construct(){}
@@ -29,11 +29,10 @@ class FMediaUser {
      */
 
 
-    public static function bind($stmt, EMediaUtente $media,$nome_file){
+    public static function bind($stmt, EMediaUser $media){
 
-        $stmt->bindValue(':id',NULL, PDO::PARAM_INT); //l'id � posto a NULL poichè viene dato automaticamente dal DBMS (AUTOINCREMENT_ID)
         $stmt->bindValue(':emailutente', $media->getEmailUser(), PDO::PARAM_STR);
-        $stmt->bindValue(':nome',$media->getFilename(), PDO::PARAM_STR);
+        $stmt->bindValue(':nome',$media->getFileName(), PDO::PARAM_STR);
         $stmt->bindValue(':type',$media->getType(), PDO::PARAM_STR);
         $stmt->bindValue(':immagine', $media->getData() , PDO::PARAM_LOB);
     }
@@ -51,8 +50,8 @@ class FMediaUser {
      * questo metodo restituisce il nome della tabella
      * @return string $tables nome della tabella
      */
-    public static function getTable(){
-        return static::$table;
+    public static function getTables(){
+        return static::$tables;
     }
 
     /**
@@ -70,8 +69,9 @@ class FMediaUser {
      * @param $nome_file nome della chiave dell'array superglobale $_FILE
      */
 
-    public static function store(EMediaUtente $media, $nome_file){
+    public static function store(EMediaUser $media, $nome_file){
         $db = FDatabase::getInstance();
+        $media->setData($nome_file);
         $db->storeMedia(static::getClass(), $media, $nome_file);
     }
 
@@ -89,10 +89,10 @@ class FMediaUser {
         $result=$db->loadDB(static::getClass(), $field, $id);
         $rows_number = $db->interestedRows(static::getClass(), $field, $id);
         if(($result!=null) && ($rows_number == 1)) {
-            $user=new EMediaUtente($result['filename'],$result['emailutente']);
+            $user=new EMediaUser($result['filename'],$result['emailutente']);
             $user->setType($result['type']);
             $user->setData($result['immagine']);
-            $user->setId($result['id']);
+            print_r($user);
         }
         else {
             if(($result!=null) && ($rows_number > 1)){
@@ -101,7 +101,7 @@ class FMediaUser {
                     $user[]=new EMediaUtente($result[$i]['filename'],$result[$i]['emailutente']);
                     $user[$i]->setType($result[$i]['type']);
                     $user[$i]->setData($result[$i]['immagine']);
-                    $usser[$i]->setId($result[$i]['id']);
+                    $user[$i]->setId($result[$i]['id']);
                 }
             }
         }
