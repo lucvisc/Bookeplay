@@ -70,6 +70,7 @@ class Installation{
 			fwrite($file, $script);
 			fclose($file);
 			$db=null;
+            $db->closeDbConnection();
 			//return true;
 		}
 		catch (PDOException $e)

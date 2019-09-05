@@ -580,9 +580,6 @@ class FDatabase
             $query = ("INSERT INTO pren_partecipa VALUES('".$idPren."'".",'". $email."')");
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-
-            print_r($stmt->errorInfo());
-
             $this->db->commit();
             $this->closeDbConnection();
 
@@ -939,6 +936,7 @@ class FDatabase
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
+            $this->closeDbConnection();
             return $num;
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();

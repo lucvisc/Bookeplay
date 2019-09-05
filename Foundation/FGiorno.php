@@ -120,7 +120,6 @@ class FGiorno {
      * @return mixed
      */
     public static function loadGiorLib($giorno){
-        $db=FDatabase::getInstance();
         $array=array(
             '09:00-10:00'=>'Disponibile',
             '10:00-11:00'=>'Disponibile',
@@ -135,8 +134,7 @@ class FGiorno {
             '21:00-22:00'=>'Disponibile');
         $fascia=self::loadByField('Giorno', $giorno);
         $index=array_keys($array);
-        $num=$db->interestedRows(self::getTables(), 'Giorno', $giorno);
-        if($num) {
+        if(isset($fascia)) {
             foreach ($fascia as $val) {
                 for ($i = 0; $i <= (count($array) - 1); $i++) {
                     if ($index[$i] == $val->getFasceOrarie()) {
@@ -152,12 +150,13 @@ class FGiorno {
                     $result[$j] = $chiavi[$i];
                     $i++;
                     $j++;
-                } else {
+                }
+                else {
                     $i++;
                 }
             }
-        }   else
-            {
+        }
+        else{
                 $result=array_keys($array);
             }
         return $result;
