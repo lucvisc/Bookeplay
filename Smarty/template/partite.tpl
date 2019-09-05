@@ -81,9 +81,9 @@
                             <div class="input-group-append">
                               <input type="submit" class="btnRegister" value="Cerca"/></i>
                               </button>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
                     <div class="col-md-3   offset-md-1" style=""><a class="btn btn-secondary rounded text-center m-0" style="" href="/BookAndPlay/GestionePartite/creaPartita">Crea Partita</a></div>
                   </div>
                   <div class="row" style="">

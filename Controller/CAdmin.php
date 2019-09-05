@@ -40,7 +40,7 @@ class CAdmin{
                     $view->showUtenti($utentiAttivi, $utentiBannati, $n_attivi, $n_bannati, null, null);
                 }
             }
-            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $account = unserialize($_SESSION['account']);
                 if ($account->getEmail() == "admin@admin.com") {
                     $acc = $pm->load("email", $_POST['email'], "FAccount");
@@ -59,8 +59,10 @@ class CAdmin{
                     $view = new VError();
                     $view->error('1');
                 }
-            } else
+            }
+            else {
                 header('Location: /BookAndPlay/User/login');
+            }
         } else {
             header('Location: /BookAndPlay/User/login');
         }
@@ -142,6 +144,80 @@ class CAdmin{
 		}
     }
 
+    /**
+     * Funzione che si occupa di mostrare le partite per l'admin con la possibilità di creare o cancellare una partita
+     */
+    static function partite(){
+        if (CUser::isLogged()) {
+            $view = new VAdmin();
+            $pm = new FPersistentManager();
+            $account = unserialize($_SESSION['account']);
+            if ($account->getEmail() == "admin@admin.com") {
+                $view->showCreaCancella(null, null);
+            } else {
+                $view = new VError();
+                $view->error('1');
+            }
+        }
+        else{
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
+    /**
+     * Funzione che si occupa di mostrare le partite per l'admin per un determinato giorno
+     * una partita
+     * @param
+     */
+    static function cercaGiorno() {
+        if (CUser::isLogged()) {
+                $view = new VAdmin();
+                $pm = new FPersistentManager();
+                $giorno=self::splitGiorno($view->getGiorno());
+                $part= $pm->load('Giorno', $giorno,"FBooking");
+
+                print_r($part);
+
+                $view->showCreaCancella($part, true);
+            }
+        else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
+    /**
+     * Funzione che visualizza una specifica prenotazione per poter essere semplicemente visualizzata oppure eliminata
+     * con l'accesso come amministratore
+     * Se il metodo di richiesta HTTP è GET, l'admin sta chiedendo di vedere più informazioni riguardanti la partita presa in considerazione
+     * Se il metodo di richiesta HTTP è POST, l'admin sta eliminando la prenotazione cliccando sull'apposito bottone
+     * Se si prova ad accedere con un utente loggato (e non con l'admin) ti reindirizza all'errore 401
+     * Se si prova ad accedere con un utente non loggato, reindirizza alla pagina di login
+     */
+    static function partita($id){
+        if (CUser::isLogged()){
+            $view= new VAdmin();
+            $pm = new FPersistentManager();
+            $account=unserialize($_SESSION['account']);
+            if ($account->getEmail() == 'admin@admin.com') {
+                if ($_SERVER['REQUEST_METHOD'] == "GET") {
+                    $partita = $pm->load('idP', $id, "FBooking");
+                    $view->showCreaCancella($partita, null);
+                }
+                elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
+                    $pm->delete('idP',$id,"FBooking");
+                    $view->showCreaCancella(null, null);
+                }
+            }
+            else {
+                    $view = new VError();
+                    $view->error('1');
+            }
+        }
+        else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
 	/**
 	 * Funzione utile per eliminare una prenotazione.
 	 * 1) se il metodo di richiesta HTTP è GET e si è loggati come amministratore, avviene il reindirizzamento alla pagina contenenti le partite;
@@ -151,26 +227,26 @@ class CAdmin{
 	 * @param $id
 	 * @throws SmartyException
 	 */
-	static function eliminaPrenotazione($id){
-		if($_SERVER['REQUEST_METHOD'] == "POST") {
-			$pm = new FPersistentManager();
-			$pm->delete("id", $id, "FBooking");
-			header('Location: /BookAndPlay/Admin/partite');
-		}
-		elseif($_SERVER['REQUEST_METHOD'] == "GET") {
-			if (CUser::isLogged()) {
-				$account = unserialize($_SESSION['account']);
-				if ($account->getEmail() == "admin@admin.com") {
-					header('Location: /BookAndPlay/Admin/partite');
-				}
-				else {
-					$view = new VError();
-					$view->error('1');
-				}
-			}
-			else
-				header('Location: /BookAndPlay/User/login');
-		}
+	static function cancellaPrenotazione($id){
+	    if (CUser::isLogged()){
+            if($_SERVER['REQUEST_METHOD'] == "POST") {
+                $pm = new FPersistentManager();
+                $pm->delete("id", $id, "FBooking");
+                header('Location: /BookAndPlay/Admin/partite');
+            }
+            elseif($_SERVER['REQUEST_METHOD'] == "GET") {
+                    $account = unserialize($_SESSION['account']);
+                    if ($account->getEmail() == "admin@admin.com") {
+                        header('Location: /BookAndPlay/Admin/partite');
+                    }
+                    else {
+                        $view = new VError();
+                        $view->error('1');
+                    }
+                }
+            }
+	    else
+	        header('Location: /BookAndPlay/User/login');
     }
 
 	/**
@@ -235,6 +311,17 @@ class CAdmin{
             else
                 header('Location: /BookAndPlay/User/login');
         }
+    }
+
+    /**
+     *Funzione che si occupa di riscrivere il giorno in maniera corretta per eseguire la query sul db, il giorno nel
+     * momento in cui viene passato dal $_POST è scritto aaaa/mm/gg mentre quello corretto per eseguire la query è
+     * gg/mm/aaaa.
+     */
+    static function splitGiorno($giorno){
+        $giorno=str_split($giorno,1);
+        $gg=$giorno[8].$giorno[9]."/".$giorno[5].$giorno[6]."/".$giorno[0].$giorno[1].$giorno[2].$giorno[3];
+        return $gg;
     }
 
 }

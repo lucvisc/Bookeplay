@@ -22,8 +22,8 @@ class VInfo
     /**
      * Mostra la pagina di informazioni dell'applicazione
      */
-    public function showInformazioni(){
-        //if(//CUtente::isLogged())
+    public function showInformazioni($logged){
+        $this->smarty->assign('userlogged',$logged);
         $this->smarty->display('informazioni.tpl');
     }
 
