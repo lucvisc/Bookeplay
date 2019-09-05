@@ -101,8 +101,7 @@ class CGestionePartite {
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $giorno=self::splitGiorno($_POST['giorno']);
-                $part = $pm->load("giorno", $giorno, "FGiorno");
-                $partDisp= $pm->loadGiornoDisp($part);
+                $partDisp= $pm->loadGiornoDisp($giorno);
 
                 print_r($partDisp);
 

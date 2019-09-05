@@ -114,15 +114,10 @@ class FGiorno {
     }
 
     /**
-<<<<<<< HEAD
-     * Funzione che permette di caricare le fasce orarie disponibili
-     * @param string $gg del giorno di riferimento con fasce occupate
-     * @return object $gior
-=======
+
      * Questo metodo restistuisce un array contenente solo le fascie orarie disponibili di un determinato giorno
      * @param $giorno da analizzare
      * @return mixed
->>>>>>> 4dcc9fe48fca0550d102549c98dde42f261a1229
      */
     public static function loadGiorLib($giorno){
         $array=array(
