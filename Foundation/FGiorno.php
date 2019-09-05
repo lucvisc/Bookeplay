@@ -156,7 +156,7 @@ class FGiorno {
                     $i++;
                 }
             }
-        }else
+        }   else
             {
                 $result=array_keys($array);
             }
