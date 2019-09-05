@@ -53,7 +53,7 @@
                 </div> 
                 {/if}
             </small> 
-          </div>
+            </div>
             <button class="btn login_btn btn-dark text-light">Login</button>
             <div class="mt-1">
               <p align="center" class="text-dark">Non hai un account? <br>
@@ -64,7 +64,7 @@
         </div>
       </form>
     </div>
-    <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+    <div class="py-5">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 order-2 order-lg-1 p-0"></div>
