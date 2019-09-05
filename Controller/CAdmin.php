@@ -15,30 +15,57 @@ class CAdmin{
 	 * 2) se il metodo di richiesta HTTP è GET e si è loggati ma non come amministratore, viene visualizzata una pagina di errore 401;
 	 * 3) altrimenti, reindirizza alla pagina di login.
      */
-	static function homeAccount () {
-		if($_SERVER['REQUEST_METHOD'] == "GET") {
-			if (CUser::isLogged()) {
-				$account = unserialize($_SESSION['account']);
+	static function homepage () {
+        if (CUser::isLogged()) {
+            $view = new VAdmin();
+            $pm = new FPersistentManager();
 
-				print($account);
-                print($_SESSION['account']);
+            $utentiAttivi = $pm->loadAccount(1);
+            $utentiBannati = $pm->loadAccount(0);
+            $n_attivi = count($utentiAttivi) - 1;
 
-				if ($account->getEmail() == "admin@admin.com") {
-					$view = new VAdmin();
-					$pm = new FPersistentManager();
-					$utentiAttivi = $pm->loadUtenti(1);
-                    $utentiBannati = $pm->loadUtenti(0);
-					$view->showUtenti($utentiAttivi, $utentiBannati);
-				}
-				else {
-					$view = new VError();
-					$view->error('1');
-				}
-			}
-			else
-				header('Location: /BookAndPlay/User/login');
-		}
+            if(isset($utentiBannati)) {
+                $n_bannati = count($utentiBannati);
+                if ($n_bannati > 0) {
+                    $n_bannati = count($utentiBannati) - 1;
+                }
+                else $n_bannati = 0;
+            }
+            else $n_bannati = 0;
+
+            if ($_SERVER['REQUEST_METHOD'] == "GET") {
+                $account = unserialize($_SESSION['account']);
+                if ($account->getEmail() == "admin@admin.com") {
+
+                    $view->showUtenti($utentiAttivi, $utentiBannati, $n_attivi, $n_bannati, null, null);
+                }
+            }
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $account = unserialize($_SESSION['account']);
+                if ($account->getEmail() == "admin@admin.com") {
+                    $acc = $pm->load("email", $_POST['email'], "FAccount");
+
+                    if (isset($acc)) {
+                        if ($acc->getActivate() == 1) {
+                            $view->showUtenti($utentiAttivi, $utentiBannati, $n_attivi, $n_bannati, $acc, null);
+                        } else {
+                            $view->showUtenti($utentiAttivi, $utentiBannati, $n_attivi, $n_bannati, null, $acc);
+                        }
+
+                    } else {
+                        $view->showUtenti($utentiAttivi, $utentiBannati, $n_attivi, $n_bannati, null, $acc);
+                    }
+                } else {
+                    $view = new VError();
+                    $view->error('1');
+                }
+            } else
+                header('Location: /BookAndPlay/User/login');
+        } else {
+            header('Location: /BookAndPlay/User/login');
+        }
     }
+
 
 	/**
 	 * Funzione utile per cambiare lo stato di un utente
@@ -48,19 +75,30 @@ class CAdmin{
 	 * 3) se il metodo di richiesta HTTP è GET e non si è loggati, avviene il reindirizzamento verso la pagina di login;
 	 * 4) se il metodo di richiesta HTTP è GET e si è loggati come utente compare una pagina di errore 401.
 	 */
-	static function bloccaUtente(){
-		if($_SERVER['REQUEST_METHOD'] == "POST") {
-			$view = new VAdmin();
-			$pm = new FPersistentManager();
-			$email = $view->getEmail();
-			$account = $pm->load("email", $email, "FAccount");
-            $pm->update("activate", 0, "email", $email, "FAccount");
-			header('Location: /BookAndPlay/Admin/homepage');
+	static function bannaUtente(){
+        if (CUser::isLogged()) {
+		    if($_SERVER['REQUEST_METHOD'] == "POST") {
+                $view = new VAdmin();
+                $pm = new FPersistentManager();
+                $email = $view->getEmail();
+
+                print "okBAN";
+                print_r($email);
+                print_r($_POST['email']);
+
+                $account = $pm->load("email", $email, "FAccount");
+                print_r($account);
+                $pm->update("activate", 0, "email", $email, "FAccount");
+                print_r($pm);
+
+                header('Location: /BookAndPlay/Admin/homepage');
 		}
 		elseif($_SERVER['REQUEST_METHOD'] == "GET") {
-			if (CUser::isLogged()) {
-				$account = unserialize($_SESSION['account']);
+		        $account = unserialize($_SESSION['account']);
 				if ($account->getEmail() == "admin@admin.com") {
+
+				    print "okNON ENtra";
+
 					header('Location: /BookAndPlay/Admin/homepage');
 				}
 				else {
@@ -68,9 +106,9 @@ class CAdmin{
 					$view->error('1');
 				}
 			}
-			else
-				header('Location: /BookAndPlay/User/login');
 		}
+        else
+            header('Location: /BookAndPlay/User/login');
     }
 
 	/**

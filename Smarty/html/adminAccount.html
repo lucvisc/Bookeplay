@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html>
 
 <head></head>
 
-<body style="	background-image: url(../img/sfondo_2.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+<body style="	background-image: url(../img/sfondo_2.jpg);	background-position: top left;	background-size: 100%;	background-repeat: repeat;" class="bg-light">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -20,7 +19,9 @@
           <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Partite/partiteAttive">Partite Attive</a> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Admin/homeAccount">Profilo</a> <li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Admin/homeAccount">Profilo</a> </li>
+          <li>
+          </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/Utente/Logout">Logout</a> </li>
@@ -28,11 +29,11 @@
       </div>
     </div>
   </nav>
-  <div class="py-5 h-100" style="">
+  <div class="py-5" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""> 
-          <img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}"  alt="profile picture"/>
+        <div class="col-md-2 mx-4 mb-4" style="">
+          <img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}" alt="profile picture">
         </div>
         <div class="col-md-7  offset-md-1" style="">
           <div class="col-md-12">
@@ -48,10 +49,10 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-3" style="">   <!--href="/BookAndPlay/GestionePartita/crea-cancella"--> 
+        <div class="col-md-3" style="">
+          <!--href="/BookAndPlay/GestionePartita/crea-cancella"-->
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/homeAccount">Elenco Account</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/Partite">Crea/Cancella</i>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/Modifica">Modifica Partita</i></a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/Partite">Crea/Cancella </a><a class="btn btn-block btn-info" href="/BookAndPlay/Admin/Modifica">Modifica Partita</a>
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/RicaricaConto">Ricarica Conto</a>
         </div>
         <div class="col-9 col-md-8" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
@@ -65,94 +66,67 @@
               <h3 class="text-light text-left">Elenco Utenti </h3>
             </div>
           </div>
-          <div class="row"><body class="bg-light">
-
-                <main role="main" class="container" >
-                    <!-- UTENTI ATTIVI -->
-                    <div class="my-3 p-3" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
-                        <h6 class="border-bottom text-light border-gray pb-2 mb-0">UTENTI ATTIVI</h6>
-                        <div class=" text-muted pt-3 ">
-                            {if $account}
-                                {if is_array($account)}
-                                    {for $i=0 to $n_attivi}
-                                        <div class="row border-bottom border rounded">
-                                            <div class="col-md-9 ">
-                                                <p class="mt-1">
-                                                    <strong class="d-block text-light mt-4">{$account[$i]->getUsername()} {$account[$i]->getEmail()} </strong>
-                                                </p>
-                                           </div>
-                                           <div class="col-md-2">
-                                                <form action="/BookAndPlay/Admin/bannaUtente" method="POST">
-                                                    <input type="text" hidden name="email" value="{$account[$i]->getEmail()}">
-                                                <button class="btn btn-danger mt-3">Blocca utente</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    {/for}
-                                {else}
-                                    <div class="row border-bottom border rounded">
-                                        <div class="col-md-9 ">
-                                            <p class="mt-1">
-                                                <strong class="d-block text-light mt-4">{$account->getUsername()} {$utenti->getEmail()}</strong>
-                                            </p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <form action="/FillSpaceWEB/Admin/bannaUtente" method="POST">
-                                                <input type="text" hidden name="email" value="{$utenti->getEmail()}">
-                                                <button class="btn btn-danger mt-3">Blocca utente</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                {/if}
-                            {else}
-                                Non ci sono utenti attivi al momento
-                            {/if}
-                        </div>
+          <div class="row">
+            <main role="main" class="container">
+              <!-- UTENTI ATTIVI -->
+              <div class="my-3 p-3" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+                <h6 class="border-bottom text-light border-gray pb-2 mb-0">UTENTI ATTIVI</h6>
+                <div class=" text-muted pt-3 "> {if $account} {if is_array($account)} {for $i=0 to $n_attivi} <div class="row border-bottom border rounded">
+                    <div class="col-md-9 ">
+                      <p class="mt-1">
+                        <strong class="d-block text-light mt-4">{$account[$i]-&gt;getUsername()} {$account[$i]-&gt;getEmail()} </strong>
+                      </p>
                     </div>
-
-                    <!-- UTENTI BANNATI -->
-                    <div class="my-3 p-3" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
-                        <h6 class="border-bottom text-light border-gray pb-2 mb-0">UTENTI BANNATI</h6>
-                        <div class=" text-muted pt-3 ">
-                            {if $accountBan}
-                                {if is_array($accountBan)}
-                                    {for $i=0 to $n_bannati}
-                                        <div class="row border-bottom border rounded">
-                                            <div class="col-md-9 ">
-                                                <p class="mt-1">
-                                                    <strong class="d-block text-light mt-4">{$accountBan[$i]->getUsername()} {$accountBan[$i]->getEmail()} </strong>
-                                                </p>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <form action="/BookAndPlay/Admin/attivaUtente" method="POST">
-                                                    <input type="text" hidden name="email" value="{$accountBan[$i]->getEmail()}">
-                                                    <button class="btn btn-success mt-3">Sblocca utente</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    {/for}
-                                {else}
-                                    <div class="row border-bottom border rounded">
-                                        <div class="col-md-9 ">
-                                            <p class="mt-1">
-                                              <strong class="d-block textlight mt-4">{$accountBan[$i]->getUsername()} {$accountBan[$i]->getEmail()} </strong>
-                                            </p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <form action="/BookAndPlay/Admin/attivaUtente" method="POST">
-                                                <input type="text" hidden name="email" value="{$AccountBan->getEmail()}">
-                                                <button class="btn btn-success mt-3">Sblocca utente</button>
-                                             </form>
-                                        </div>
-                                    </div>
-                                {/if}
-                            {else}
-                                Non ci sono utenti bannati al momento
-                            {/if}
-                        </div>
+                    <div class="col-md-2">
+                      <form action="/BookAndPlay/Admin/bannaUtente" method="POST">
+                        <input type="text" hidden="" name="email" value="{$account[$i]->getEmail()}">
+                        <button class="btn btn-danger mt-3">Blocca utente</button>
+                      </form>
                     </div>
-                </main>
-                
+                  </div> {/for} {else} <div class="row border-bottom border rounded">
+                    <div class="col-md-9 ">
+                      <p class="mt-1">
+                        <strong class="d-block text-light mt-4">{$account-&gt;getUsername()} {$utenti-&gt;getEmail()}</strong>
+                      </p>
+                    </div>
+                    <div class="col-md-2">
+                      <form action="/FillSpaceWEB/Admin/bannaUtente" method="POST">
+                        <input type="text" hidden="" name="email" value="{$utenti->getEmail()}">
+                        <button class="btn btn-danger mt-3">Blocca utente</button>
+                      </form>
+                    </div>
+                  </div> {/if} {else} Non ci sono utenti attivi al momento {/if} </div>
+              </div>
+              <!-- UTENTI BANNATI -->
+              <div class="my-3 p-3" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+                <h6 class="border-bottom text-light border-gray pb-2 mb-0">UTENTI BANNATI</h6>
+                <div class=" text-muted pt-3 "> {if $accountBan} {if is_array($accountBan)} {for $i=0 to $n_bannati} <div class="row border-bottom border rounded">
+                    <div class="col-md-9 ">
+                      <p class="mt-1">
+                        <strong class="d-block text-light mt-4">{$accountBan[$i]-&gt;getUsername()} {$accountBan[$i]-&gt;getEmail()} </strong>
+                      </p>
+                    </div>
+                    <div class="col-md-2">
+                      <form action="/BookAndPlay/Admin/attivaUtente" method="POST">
+                        <input type="text" hidden="" name="email" value="{$accountBan[$i]->getEmail()}">
+                        <button class="btn btn-success mt-3">Sblocca utente</button>
+                      </form>
+                    </div>
+                  </div> {/for} {else} <div class="row border-bottom border rounded">
+                    <div class="col-md-9 ">
+                      <p class="mt-1">
+                        <strong class="d-block textlight mt-4">{$accountBan[$i]-&gt;getUsername()} {$accountBan[$i]-&gt;getEmail()} </strong>
+                      </p>
+                    </div>
+                    <div class="col-md-2">
+                      <form action="/BookAndPlay/Admin/attivaUtente" method="POST">
+                        <input type="text" hidden="" name="email" value="{$AccountBan->getEmail()}">
+                        <button class="btn btn-success mt-3">Sblocca utente</button>
+                      </form>
+                    </div>
+                  </div> {/if} {else} Non ci sono utenti bannati al momento {/if} </div>
+              </div>
+            </main>
           </div>
         </div>
       </div>
@@ -171,8 +145,9 @@
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
             <li> <a href="/BookAndPlay/Admin/homeAccount">Elenco Account</a></li>
-            <li> <a href="/BookAndPlay/Admin/Partite">Crea/Cancella</i></li>
-            <li> <a href="/BookAndPlay/Admin/Modifica">Modifica Partita</i></a></li>
+            <li> <a href="/BookAndPlay/Admin/Partite">Crea/Cancella</a></li><a href="/BookAndPlay/Admin/Partite">
+            </a>
+            <li><a href="/BookAndPlay/Admin/Partite"> </a><a href="/BookAndPlay/Admin/Modifica">Modifica Partita</a></li>
             <li> <a href="/BookAndPlay/Admin/RicaricaConto">Ricarica Conto</a></li>
           </ul>
         </div>
@@ -208,6 +183,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
 </body>
 
 </html>

@@ -13,7 +13,7 @@ class VAdmin {
      * Funzione che inizializza e configura smarty.
      */
     function __construct() {
-        $this->smarty = StartSmarty::configuration();
+        $this->smarty = ConfSmarty::configuration();
     }
 
     /**
@@ -46,9 +46,13 @@ class VAdmin {
      * @param $utentiBannati array di utenti bannati
      * @throws SmartyException
      */
-    public function showUtenti($utentiAttivi, $utentiBannati) {
-        $this->smarty->assign('utenti',$utentiAttivi);
-        $this->smarty->assign('utentiBan',$utentiBannati);
+    public function showUtenti($utentiAttivi, $utentiBannati, $n_attivi, $n_bannati, $acc, $ban) {
+        $this->smarty->assign('acc',$acc);
+        $this->smarty->assign('ban',$ban);
+        $this->smarty->assign('account',$utentiAttivi);
+        $this->smarty->assign('n_attivi',$n_attivi);
+        $this->smarty->assign('accountBan',$utentiBannati);
+        $this->smarty->assign('n_bannati',$n_bannati);
         $this->smarty->display('adminAccount.tpl');
     }
 
