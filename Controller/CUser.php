@@ -158,11 +158,11 @@ class CUser {
                 print_r($account);
 
                 if (get_class($account) == "EAccount") {
-                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                    $img = $pm->load("emailUtente", $account->getEmail(), "FMediaUser");
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $addr= $pm->load("email", $account->getEmail(), "FAddress");
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                    $view->showProfile($user, $acc, $addr);
+                    $view->showProfile($user, $acc, $addr, $img);
                 } else {
                     header('Location: /BookAndPlay/User/login');
                 }

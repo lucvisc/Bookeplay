@@ -57,11 +57,11 @@ class VUser {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showProfile(EUser $user, EAccount $acc, EAddress $addr)
+    public function showProfile(EUser $user, EAccount $acc, EAddress $addr, $pic64)
     {
         //list($type, $pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
-        //$this->smarty->assign('pic64', $pic64);
+        $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged', "loggato");
         $this->smarty->assign('nome', $user->getName());
         $this->smarty->assign('cognome', $user->getSurname());
