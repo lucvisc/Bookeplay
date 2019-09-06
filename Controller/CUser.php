@@ -225,9 +225,8 @@ class CUser {
 			print_r($account);
 			print_r($addr);
 			print_r($user);
-            //$pm::storeReg($account,$user, $addr);
-            FAccount::store($account,$user, $addr);
-
+            $pm::storeReg($account,$user, $addr);
+            //FAccount::store($account,$user, $addr);
             if ($account!= null) {
 				if (isset($_FILES['file'])) {
 					$nome_file = 'file';
