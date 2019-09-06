@@ -136,7 +136,7 @@ class FDatabase
         }
     }
 
-    public function storeImg($class, $obj)
+    public function UpdateImg($class, $obj)
     {
         try {
             $this->db->beginTransaction();

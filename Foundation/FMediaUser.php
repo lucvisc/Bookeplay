@@ -84,46 +84,35 @@ class FMediaUser {
      * @param $nome_file nome della chiave dell'array superglobale $_FILE
      */
 
-    public static function store(EMediaUser $media){
+    public static function storeMedia(EMediaUser $media){
         $db = FDatabase::getInstance();
         $ris=$db->storeMedia(static::getClass(), $media);
         return $ris;
     }
 
-    public static function storeImg(EMediaUser $media){
+    public static function UpdateImg(EMediaUser $media){
         $db = FDatabase::getInstance();
-        $ris=$db->storeImg(static::getClass(), $media);
+        $ris=$db->UpdateImg(static::getClass(), $media);
         return $ris;
     }
 
 
     /**
      * Metodo che consente la load del media di un utente
-     * @param field campo usato per la ricerca
-     * @param $id valore usato per la ricerca
+     * @param $mail corrisponde all'email dell'utente d'interesse
      * @return object media associato a quel utente
      */
-    public static function loadByField($field ,$id)
+    public static function loadImg($mail)
     {
         $user = null;
         $db=FDatabase::getInstance();
-        $result=$db->loadDB(static::getClass(), $field, $id);
-        $rows_number = $db->interestedRows(static::getClass(), $field, $id);
-        if(($result!=null) && ($rows_number == 1)) {
-            $user=new EMediaUser($result['filename'],$result['emailutente'],$result['type']);
-            $user->setData($result['immagine']);
+        $result=$db->loadDB(static::getClass(), 'emailutente', $mail);
+        $rows_number = $db->interestedRows(static::getClass(),'emailutente', $mail);
+        if($result!=null) {
+            $user=new EMediaUser($result['filename'],$result['emailutente'],$result['type'],$result['immagine']);
             print_r($user);
-        }
-        else {
-            if(($result!=null) && ($rows_number > 1)){
-                $user = array();
-                for($i=0; $i<count($result); $i++){
-                    $user[]=new EMediaUtente($result[$i]['filename'],$result[$i]['emailutente']);
-                    $user[$i]->setType($result[$i]['type']);
-                    $user[$i]->setData($result[$i]['immagine']);
-                    $user[$i]->setId($result[$i]['id']);
-                }
-            }
+        }else{
+            $user=$result;
         }
         return $user;
     }

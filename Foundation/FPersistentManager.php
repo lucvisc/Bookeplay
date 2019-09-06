@@ -42,14 +42,33 @@ class FPersistentManager {
 
     /**
      * Metodo che permette di effettuare la store dei media sul db.
-     * @param $obj comprensivo di nome e della foreign key (email utente/partita)
+     * @param $obj è un oggetto di tipo EMediaUser
      * @param $nome_file chiave dell'array $_FILE
      */
     public static function storeMedia($obj) {
         $Eclass = get_class($obj);
         $Fclass = str_replace("E", "F", $Eclass);
-        $Fclass::store($obj);
+        $Fclass::storeMedia($obj);
     }
+
+    /**
+     * Metodo che permette di effettuare la store dei media sul db.
+     * @param $obj è un oggetto di tipo EMediaUser
+     */
+    public static function UpdateImg($obj) {
+        FMediaUser::UpdateImg($obj);
+    }
+
+    /**
+     * Metodo che permette di caricare il media dell'utente corrispondente
+     * @param $mail è l'email dell'utente di interesse
+     */
+    public static function loadImg($mail) {
+        $immagine=FMediaUser::loadImg($mail);
+        return $immagine;
+    }
+
+
 
     /**
      * Metodo che effettua la cancellazione di istanze nel database
