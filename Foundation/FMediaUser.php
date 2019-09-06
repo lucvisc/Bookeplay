@@ -110,7 +110,6 @@ class FMediaUser {
         $rows_number = $db->interestedRows(static::getClass(),'emailutente', $mail);
         if($result!=null) {
             $user=new EMediaUser($result['filename'],$result['emailutente'],$result['type'],$result['immagine']);
-            print_r($user);
         }else{
             $user=$result;
         }
