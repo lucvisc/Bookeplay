@@ -75,19 +75,19 @@ class FDatabase
     {
         //viene passato il nome della classe che ermetterà di richiamare tutti i metodi di classe
         try {
-            print_r($obj);
+            //print_r($obj);
             $this->db->beginTransaction();// inizio di una transazione
             $query = 'INSERT INTO ' . $class::getTables() . ' VALUES ' . $class::getValues();//costruzione della query
             $stmt = $this->db->prepare($query);                         // prepara la query restituendo l'oggetto query
             $class::bind($stmt, $obj);//fa il matching tra i parametri ed i valori delle variabili
             $stmt->execute();//esecuzione dell'oggetto stmt
 
-            //print_r($stmt->errorInfo());
+            print_r($stmt->errorInfo());
 
             $id = $this->db->lastInsertId();// Returns the ID of the last inserted row or sequence value
             $this->db->commit();// rende definitiva la transazione
 
-            //print_r($this->db->errorInfo());
+            print_r($this->db->errorInfo());
 
             $this->closeDbConnection();                     //chiudiamo la connessione al db
             return $id;                                     //Ritorna l'id del record appena inserito nel db
@@ -140,19 +140,26 @@ class FDatabase
     {
         try {
             $this->db->beginTransaction();
-            $query = "UPDATE ".$class::getTables()." SET immagine=LOAD_FILE('".$class::getImmagine()."');";
+            $query = "UPDATE ".self::tabella($class::getTables())." SET `immagine`= ".$class::getImmagine()." where emailutente='".$obj->getEmailUser()."';";
             //$query = "INSERT INTO " . $class::getTables() . " VALUES ". $class::getValues()."LOAD_FILE('".$class::getImmagine()."'));";
 
+
             print ("$query\n");
+            print $class::getImmagine();
+            print("\n");
+            print $obj->getData();
 
             $stmt = $this->db->prepare($query);
-            $class::bind($stmt, $obj);
+            $class::bindImg($stmt, $obj);
             $stmt->execute();
 
             print_r($stmt->errorInfo());
 
             $id = $this->db->lastInsertId();
             $this->db->commit();
+
+            print_r($this->db->errorInfo());
+
             $this->closeDbConnection();
             return $id;
         } catch (PDOException $e) {
