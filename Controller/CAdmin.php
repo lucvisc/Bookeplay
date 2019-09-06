@@ -228,7 +228,7 @@ class CAdmin{
 	        $account= unserialize($_SESSION['account']);
 	        if ($account->getEmail()== 'admin@admin.com'){
 	            if ($_SERVER['REQUEST_METHOD'] == "GET"){
-	                $view->show
+	                //$view->show
 
                 }
 

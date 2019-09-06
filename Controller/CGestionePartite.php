@@ -157,7 +157,7 @@ class CGestionePartite {
 
                 print_r($partDisp);
 
-                $view->showFormCreation($user, $acc, $img, $partDisp, $giorno,'no');
+                $view->showFormCreation($user, $acc, $img, $partDisp,  $giorno,'no');
             } else {
                 header('Location: /BookAndPlay/User/login');
             }

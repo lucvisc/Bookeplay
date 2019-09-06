@@ -117,8 +117,11 @@ class VGestionePartite {
      * di errore nella pagina di creazione della partita
      * @throws SmartyException
      */
-    public function showFormCreation(EUser $utente, EAccount $acc, $part, $giorno, $error){
+    public function showFormCreation(EUser $utente, EAccount $acc, $img, $part,  $giorno, $error){
             $this->statoForm($error);
+            list($type,$pic64) = $this->setImage($img, 'user');
+            //$this->smarty->assign('type', $type);
+            $this->smarty->assign('pic64', $pic64);
             $this->smarty->assign('nome', $utente->getName());
             $this->smarty->assign('cognome', $utente->getSurname());
             $this->smarty->assign('conto', $acc->getConto());
@@ -271,6 +274,30 @@ class VGestionePartite {
                 $this->smarty->assign('giorno', "errore");
                 break;
         }
+    }
+
+    /**
+     * Funzione che si occupa del supporto per le immagini
+     * @param $image immagine da analizzare
+     * @param $tipo variabile che indirizza al tipo di file di default da settare nel caso in cui $image = null
+     * @return array contenente informazioni sul tipo e i dati che costituiscono un immagine (possono essere anche degli array)
+     */
+    public function setImage($image, $tipo) {
+        if (isset($image)) {
+            $pic64 = base64_encode($image->getData());  //Encodes data with MIME base64
+            $type = $image->getType();
+        }
+        elseif ($tipo == 'user') {   // file_get_contents returns the file in a string, starting at the specified offset up to maxlen bytes
+            $data = file_get_contents( $_SERVER['DOCUMENT_ROOT'] . '/BookAndPlay/Smarty/template/img/user.png');
+            $pic64= base64_encode($data);
+            $type = "image/png";
+        }
+        else {
+            $data = file_get_contents( $_SERVER['DOCUMENT_ROOT'] . '/BookAndPlay/Smarty/templete/img/calcio.png');
+            $pic64= base64_encode($data);
+            $type = "image/png";
+        }
+        return array($type, $pic64);
     }
 
 }
