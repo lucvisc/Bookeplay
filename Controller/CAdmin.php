@@ -249,6 +249,31 @@ class CAdmin{
 	        header('Location: /BookAndPlay/User/login');
     }
 
+    /**Funzione che permette di modificare una determinata prenotazione
+     * @throws SmartyException
+     */
+    static function modifica($id){
+	    if(CUser::isLogged()){
+	        $pm= new FPersistentManager();
+	        $view= new VAdmin();
+	        $account= unserialize($_SESSION['account']);
+	        if ($account->getEmail()== 'admin@admin.com'){
+	            if ($_SERVER['REQUEST_METHOD'] == "GET"){
+
+                }
+
+            }
+	        else{
+                $view = new VError();
+                $view->error('1');
+            }
+
+        }
+	    else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
 	/**
 	 * Funzione utilizzata per visualizzare l'elenco delle partite.
 	 * 1) se il metodo di richiesta HTTP è GET e si è loggati con le credenziali dell'amministratore viene visualizzata

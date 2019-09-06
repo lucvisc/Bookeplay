@@ -40,9 +40,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Giorno` (
   `Giorno` varchar(10) not null,
   `FasciaOraria` varchar(11) not null,
-   PRIMARY KEY (`Giorno`, `FasciaOraria`),
-
-   CHECK (FasciaOraria in ('10:11','11:12','12:13','15:16','17:18','19:20','20:21','21:22'))
+   PRIMARY KEY (`Giorno`, `FasciaOraria`)
 )
 ENGINE = InnoDB;
 
@@ -75,7 +73,7 @@ CREATE TABLE mediauser (
     `filename` varchar(50) NOT NULL,
     `type` varchar(50) NOT NULL,
     `emailutente`  varchar (50) NOT NULL,
-    `immagine` blob NOT NULL,
+    `immagine` blob,
     PRIMARY KEY (emailutente)  
 )
 ENGINE=InnoDB;

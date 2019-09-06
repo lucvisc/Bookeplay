@@ -102,8 +102,10 @@ class FPersistentManager {
      */
     public static function load($field, $val,$Fclass) {
         $ris = null;
-        $ris = $Fclass::loadByField($field,$val);
-        return $ris;
+        if ( $Fclass != "FMediaUser") {
+            $ris = $Fclass::loadByField($field, $val);
+            return $ris;
+        }
     }
 
     /**
