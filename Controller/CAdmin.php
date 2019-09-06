@@ -218,37 +218,6 @@ class CAdmin{
         }
     }
 
-	/**
-	 * Funzione utile per eliminare una prenotazione.
-	 * 1) se il metodo di richiesta HTTP è GET e si è loggati come amministratore, avviene il reindirizzamento alla pagina contenenti le partite;
-	 * 2) se il metodo di richiesta HTTP è POST (loggati come amminstratore), può essere eliminata una prenotazione;
-	 * 3) se il metodo di richiesta HTTP è GET e non si è loggati, avviene il reindirizzamento verso la pagina di login;
-	 * 4) se il metodo di richiesta HTTP è GET e si è loggati come utente (non amministratore) compare una pagina di errore 401.
-	 * @param $id
-	 * @throws SmartyException
-	 */
-	static function cancellaPrenotazione($id){
-	    if (CUser::isLogged()){
-            if($_SERVER['REQUEST_METHOD'] == "POST") {
-                $pm = new FPersistentManager();
-                $pm->delete("id", $id, "FBooking");
-                header('Location: /BookAndPlay/Admin/partite');
-            }
-            elseif($_SERVER['REQUEST_METHOD'] == "GET") {
-                    $account = unserialize($_SESSION['account']);
-                    if ($account->getEmail() == "admin@admin.com") {
-                        header('Location: /BookAndPlay/Admin/partite');
-                    }
-                    else {
-                        $view = new VError();
-                        $view->error('1');
-                    }
-                }
-            }
-	    else
-	        header('Location: /BookAndPlay/User/login');
-    }
-
     /**Funzione che permette di modificare una determinata prenotazione
      * @throws SmartyException
      */
@@ -259,6 +228,7 @@ class CAdmin{
 	        $account= unserialize($_SESSION['account']);
 	        if ($account->getEmail()== 'admin@admin.com'){
 	            if ($_SERVER['REQUEST_METHOD'] == "GET"){
+	                $view->show
 
                 }
 

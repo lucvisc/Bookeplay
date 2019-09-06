@@ -133,8 +133,8 @@ class VGestionePartite {
      * @param $idPren id della campagna appena creata.
      */
 
-    public function showFinePrenotazione($idPren){
-        if(CUtente::isLogged()) $this->smarty->assign('userlogged',$_SESSION['username']);
+    public function showFinePrenotazione($idPren, $img){
+        $this->smarty->assign('userlogged','userlogged');
         $this->smarty->assign('idPren',$idPren);
         $this->smarty->display('finePrenotazione.tpl');
     }
@@ -146,10 +146,10 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPartite(EUser $user, EAccount $acc,$part) {  //$part,$img
-        //list($type,$pic64) = $this->setImage($img, 'user');
+    public function showPartite(EUser $user, EAccount $acc, $img, $part) {
+        list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
-        //$this->smarty->assign('pic64', $pic64);
+        $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
@@ -187,15 +187,15 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showRiepilogo(EUser $user, EAccount $acc, $part) { //, $part,$img
-        //list($type,$pic64) = $this->setImage($img, 'user');
+    public function showRiepilogo(EUser $user, EAccount $acc, $img, $part) { //, $part,$img
+        list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
-        //$this->smarty->assign('pic64', $pic64);
+        $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
-        $this->smarty->assign('array',$part);
+        $this->smarty->assign('partita',$part);
         $this->smarty->display('riepilogo.tpl');
     }
 
@@ -206,10 +206,10 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showVaiAllaPartita(EUser $user, EAccount $acc, $part) { //,$img
-        //list($type,$pic64) = $this->setImage($img, 'user');
+    public function showVaiAllaPartita(EUser $user, EAccount $acc, $img, $part) { //,$img
+        list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
-        //$this->smarty->assign('pic64', $pic64);
+        $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged', "loggato");
         $this->smarty->assign('nome', $user->getName());
         $this->smarty->assign('cognome', $user->getSurname());
@@ -225,10 +225,10 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $pren) {  //,$img
-        //list($type,$pic64) = $this->setImage($img, 'user');
+    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $img, $pren) {  //,$img
+        list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
-        //$this->smarty->assign('pic64', $pic64);
+        $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
@@ -244,10 +244,10 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPrenotazioneErrata(EUser $user, EAccount $acc) {  //,$img
-        //list($type,$pic64) = $this->setImage($img, 'user');
+    public function showPrenotazioneErrata(EUser $user, EAccount $acc, $img) {  //,$img
+        list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
-        //$this->smarty->assign('pic64', $pic64);
+        $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());

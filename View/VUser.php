@@ -28,7 +28,10 @@ class VUser {
      * @param $array elenco delle partite da visualizzare
      * @throws SmartyException
      */
-    public function loginOk($acc, $user){
+    public function loginOk($acc, $user, $img){
+        list($type, $pic64) = $this->setImage($img, 'user');
+        //$this->smarty->assign('type', $type);
+        $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged', "loggato");
         $this->smarty->assign('nome', $user->getName());
         $this->smarty->assign('cognome', $user->getSurname());
@@ -59,9 +62,9 @@ class VUser {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showProfile(EUser $user, EAccount $acc, EAddress $addr, $pic64)
+    public function showProfile(EUser $user, EAccount $acc, EAddress $addr, $img)
     {
-        //list($type, $pic64) = $this->setImage($img, 'user');
+        list($type, $pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged', "loggato");
@@ -85,11 +88,11 @@ class VUser {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showProfileUser(EUser $user, EAccount $acc)
+    public function showProfileUser(EUser $user, EAccount $acc, $img)
     {
-        //list($type, $pic64) = $this->setImage($img, 'user');
+        list($type, $pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
-        //$this->smarty->assign('pic64', $pic64);
+        $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged', "loggato");
         $this->smarty->assign('nome', $user->getName());
         $this->smarty->assign('cognome', $user->getSurname());
@@ -180,10 +183,9 @@ class VUser {
             $pic64 = base64_encode($data);
         }
         $this->smarty->assign('userlogged',"loggato");
-        //$this->smarty->assign('pic64',$pic64);
+        $this->smarty->assign('pic64',$pic64);
         $this->smarty->assign('username',$acc->getUsername());
         $this->smarty->assign('name',$user->getName());
-        //$this->smarty->assign('conto',$acc->getConto());
         $this->smarty->assign('surname',$user->getSurname());
         $this->smarty->assign('email',$acc->getEmail());
         $this->smarty->display('modificaProfilo.tpl');

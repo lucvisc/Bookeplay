@@ -262,7 +262,6 @@ class CUser {
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
             if (CUser::isLogged()) {
                 $account = unserialize($_SESSION['account']);
-                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $addr = $pm->load("email", $account->getEmail(), "FAddress");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
