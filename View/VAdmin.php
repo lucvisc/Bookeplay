@@ -106,5 +106,15 @@ class VAdmin {
         $this->smarty->display('adminCrea.tpl');
     }
 
+    /**
+     * Funzione che permette di modificare la partita di riferimento
+     */
+    public function showModificaPartita($partita, $gg, $disp){
+        $this->smarty->assign('partita', $partita);
+        $this->smarty->assign('gg', $gg);
+        $this->smarty->assign('disp', $disp);
+        $this->smarty->display('adminModifica.tpl');
+    }
+
 }
 ?>
