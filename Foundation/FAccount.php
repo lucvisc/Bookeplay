@@ -80,7 +80,8 @@ class FAccount {
         $db=FDatabase::getInstance();
         $db->storeDB(static::getClass() ,$acc);
         $id=$acc->getEmail();
-        $obj1->setID($id);
+        $test=$obj1->setID($id);
+        print ("$test\n");
         FUser::store($obj1);
         $obj2->setID($id);
         FAddress::store($obj2);
