@@ -53,21 +53,19 @@ class CGestionePartite {
             $pm= new FPersistentManager();
             if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $account = unserialize($_SESSION['account']);
-                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                $img = $pm->loadImg($account->getEmail());
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                $view->showFormCreation($user, $account, null, null ,'no');
+                $view->showFormCreation($user, $account, $img,  null, null ,'no');
             }
             else {
                 if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $account = unserialize($_SESSION['account']);
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                    $img = $pm->loadImg($account->getEmail());
                     $giorno = new EGiorno($_POST['giorno'], $_POST['fascia_oraria']);
                     $gg=$pm->loadGiorno($_POST['giorno'], $_POST['fascia_oraria']);
-
-                    print_r($gg);
 
                     if (!isset($gg)) {
                         $pm->insertGiorno($giorno);
@@ -78,10 +76,18 @@ class CGestionePartite {
                         $conto = $account->getConto();
                         $pm::update('conto', $conto, 'email', $account->getEmail(), "FAccount");
                         $acc = $pm->load('email', $account->getEmail(), "FAccount");
+                        $img = $pm->loadImg($account->getEmail());
                         $prenotazione=$pm->loadPrenotazioneEff($_POST['giorno'], $_POST['fascia_oraria']);
-                        $view->showPrenotazioneEffettuata($user, $acc, $prenotazione); //, $img
+
+                        $newAcc = $pm->load('email',$account->getEmail(), "FAccount");
+                        $salvare = serialize($newAcc);
+                        $_SESSION['account'] = $salvare;
+
+                        print_r($prenotazione);
+
+                        $view->showPrenotazioneEffettuata($user, $acc, $img, $prenotazione); //
                     } else {
-                        $view->showFormCreation($user, $account, null, null, "no_giorno");
+                        $view->showFormCreation($user, $account, $img,  null, null, "no_giorno");
                     }
                 }
             }
@@ -99,16 +105,16 @@ class CGestionePartite {
             $view = new VGestionePartite();
             $pm= new FPersistentManager();
             $account = unserialize($_SESSION['account']);
-            //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+            $img = $pm->loadImg($account->getEmail());
             $user = $pm->load("email", $account->getEmail(), "FUser");
             $acc = $pm->load("email", $account->getEmail(), "FAccount");
             $pren= $pm->VerificaPrenotazione($id, $account->getEmail());
 
             if (isset($pren)){
-
+                $view->showPrenotazioneErrata($user, $acc, $img);
             }
             else {
-                if ($account->getConto >= 5) {
+                if ($account->getConto() >= 5) {
                     $pren_partecipa = $pm->insertPren_partecipa($id, $account->getEmail());
                     $account = EAccount::PagaPartita($account);
                     $conto = $account->getConto();
@@ -116,10 +122,14 @@ class CGestionePartite {
                     $acc = $pm->load('email', $account->getEmail(), "FAccount");
                     $part = $pm->load('idP', $id, "FBooking");
 
-                    $view->showPrenotazioneEffettuata($user, $acc, $part);
+                    $newAcc = $pm->load('email',$account->getEmail(), "FAccount");
+                    $salvare = serialize($newAcc);
+                    $_SESSION['account'] = $salvare;
+
+                    $view->showPrenotazioneEffettuata($user, $acc, $img, $part);
                 }
                 else {
-                    $view->showPrenotazioneErrata($user, $acc);
+                    $view->showPrenotazioneErrata($user, $acc, $img);
                 }
             }
         }
@@ -139,7 +149,7 @@ class CGestionePartite {
             if (get_class($account) == "EAccount") {
                 $view = new VGestionePartite();
                 $pm = new FPersistentManager();
-                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                $img = $pm->loadImg($account->getEmail());
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $giorno=self::splitGiorno($_POST['giorno']);
@@ -147,7 +157,7 @@ class CGestionePartite {
 
                 print_r($partDisp);
 
-                $view->showFormCreation($user, $acc, $partDisp, $giorno,'no');
+                $view->showFormCreation($user, $acc, $img, $partDisp, $giorno,'no');
             } else {
                 header('Location: /BookAndPlay/User/login');
             }
@@ -221,21 +231,21 @@ class CGestionePartite {
             if ($_SERVER['REQUEST_METHOD'] == "GET"){
                 $account = unserialize($_SESSION['account']);
                 if (get_class($account) == "EAccount") {
-                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
-                $user = $pm->load("email", $account->getEmail(), "FUser");
-                $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                $view->showPartite($user, $acc, null);
+                    $img = $pm->loadImg($account->getEmail());
+                    $user = $pm->load("email", $account->getEmail(), "FUser");
+                    $acc = $pm->load("email", $account->getEmail(), "FAccount");
+                    $view->showPartite($user, $acc, $img, null);
                 }
             }
             elseif ($_SERVER['REQUEST_METHOD'] == "POST"){
                 $account = unserialize($_SESSION['account']);
                 if (get_class($account) == "EAccount") {
-                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                    $img = $pm->loadImg($account->getEmail());
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
                     $giorno=self::splitGiorno($_POST['giorno']);
                     $part = $pm->load("giorno", $giorno, "FBooking");
-                    $view->showPartite($user, $acc,$part);
+                    $view->showPartite($user, $acc,$img, $part);
                 }
 
             }
@@ -259,8 +269,9 @@ class CGestionePartite {
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $part = $pm->load('idP', $id, "FBooking");
+                $img = $pm->loadImg($account->getEmail());
 
-                $view->showVaiAllaPartita($user, $acc, $part);
+                $view->showVaiAllaPartita($user, $acc, $img, $part);
 
             }
         }
@@ -280,12 +291,12 @@ class CGestionePartite {
             if (get_class($account) == "EAccount") {
                 $view = new VGestionePartite();
                 $pm = new FPersistentManager();
-                //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                $img = $pm->loadImg($account->getEmail());
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $part=$pm->loadRiepilogo($account->getEmail());
 
-                $view->showRiepilogo($user, $acc, $part); //, $num
+                $view->showRiepilogo($user, $acc, $img, $part); //, $num
             } else {
                 header('Location: /BookAndPlay/User/login');
             }

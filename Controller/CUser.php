@@ -69,7 +69,6 @@ class CUser {
                     }
                     else {
                         header('Location: /BookAndPlay/User/profiloUtente');
-                        //CUser::profile();
                     }
                 }
                 else {
@@ -133,11 +132,11 @@ class CUser {
             $account = unserialize($_SESSION['account']);
             if (get_class($account) == "EAccount") {
                 if($account->getEmail() != 'admin@admin.com'){
-                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                    $img = $pm->loadImg($account->getEmail());
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $addr = $pm->load("email", $account->getEmail(), "FAddress");
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                    $view->showProfileUser($user, $acc, $addr);
+                    $view->showProfileUser($user, $acc, $addr, $img);
                 }
                 else {
                     header('Location: /BookAndPlay/Admin/homepage');
@@ -163,7 +162,8 @@ class CUser {
             if (CUser::isLogged())
                 $account= unserialize($_SESSION['account']);
                 if (get_class($account) == "EAccount") {
-                    $img = $pm->loadImg("emailUtente", $account->getEmail(), "FMediaUser");
+
+                    $img = $pm->loadImg($account->getEmail());
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $addr= $pm->load("email", $account->getEmail(), "FAddress");
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
@@ -190,11 +190,11 @@ class CUser {
                 $account = unserialize($_SESSION['account']);
                 if (get_class($account) == "EAccount") {
                     $pm = new FPersistentManager();
-                    //$img = $pm->load("emailUser", $account->getEmail(), "FMediaUser");
+                    $img = $pm->loadImg($account->getEmail());
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $addr = $pm->load("email", $account->getEmail(), "FAddress");
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                    $view->showProfileUser($user, $acc, $addr);
+                    $view->showProfileUser($user, $acc, $addr, $img);
                 }
             }
 			else {
@@ -221,13 +221,8 @@ class CUser {
 			$account = new EAccount($_POST['email'], $_POST['username'], $_POST['password'],$_POST['telnumber'], 0, " ", 1);
 			$addr = new EAddress(" ", $_POST['comune'], $_POST['provincia'], $_POST['cap'], $_POST['via'], $_POST['numero']);
 			$user = new EUser(" ", $_POST['name'], $_POST['surname'], $_POST['data_nascita'], $_POST['gender'], 'registrato');
-
-			print_r($account);
-			print_r($addr);
-			print_r($user);
             $pm::storeReg($account,$user, $addr);
-            //FAccount::store($account,$user, $addr);
-            if ($account!= null) {
+            if ($account != null) {
 				if (isset($_FILES['file'])) {
 					$nome_file = 'file';
 					$img = static::upload($account,"showFormRegistration",$nome_file);
@@ -254,12 +249,11 @@ class CUser {
 
     /**
      * Funzione che ha il compito di richiamare una nuova vista a partire da quella del profilo privato che permette la
-     * modifica di tutti i campi riguardanti un utente. Anche in questo caso, avviene la differenziazione tra i due tipi di utenti.
-     * 1) se il metodo della richiesta HTTP è GET e si è loggati, viene presentata la nuova vista per modificare i propri dati;
+     * modifica degli attributi dell'User
+     * 1) se il metodo della richiesta HTTP è GET e si è loggati, viene presentata la pagina per modificare i propri dati;
      * 2) se il metodo della richiesta HTTP è GET ma non si è loggati, allora avviene il reindirizzamento verso la form di login;
      * 3) se il metodo della richiesta HTTP è POST, vengono rilevati tutti i valori inseriti dall'utente per la modifica e dopo aver controllato
-     * 	  l'univocità dell'email (nel caso in cui venisse cambiata), la correttezza della password inserita e, se si è
-     *    trasportatore, l'univocità della nuova targa, si procede con l'update dei campi nel database per poi essere reindirizzati alla pagina del priprio profilo.
+     * 	  l'esistenza dell'email e la correttezza della password inserita
      */
     public function modificaProfilo() {
         $pm = new FPersistentManager();
@@ -272,64 +266,179 @@ class CUser {
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $addr = $pm->load("email", $account->getEmail(), "FAddress");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                $view->showModificaProfilo($user, $acc,"ok"); // $img,
+                $img = $pm->loadImg($account->getEmail());
+                $view->formModificaProfilo($user, $acc, $img, "ok"); //
 
             } else
                 header('Location: /BookAndPlay/User/login');
         }
         elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+            if(isset($_POST['file'])){
+                print "pieno";
+                $post=$_POST['file'];
+                print_r($post);
+            }
+            else {
+                print "vuoto";
+            }
+
             $account = unserialize($_SESSION['account']);  //Creates a PHP value from a stored representation
             $pm = new FPersistentManager();
-            //$img = $pm->load("emailutente", $account->getEmail(), "FMediaUser");
+            $img = $pm->loadImg($account->getEmail());
+            $acc = $pm->load("email", $account->getEmail(), "FAccount");
+            $user = $pm->load("email", $account->getEmail(), "FUser");
+            $addr = $pm->load("email", $account->getEmail(), "FAddress");
+
             if (get_class($account) == "EAccount") {
                 if ($account->getPassword() == $_POST['old_password']) {
                     if ($account->getEmail() == $_POST['email']) {
-                        //$statoimg = static::modificaprofiloimmagine($account);
-                        //if ($statoimg) {
-                            static::updateCampi($account, "FAccount", $_POST['username'], $_POST['new_password']);
-                            $newAcc =FAccount::loadByField('email',$account->getEmail());
-                            $salvare = serialize($newAcc);
-                            $_SESSION['account'] = $salvare;
+                        static::updateCampi($account, "FAccount", $_POST['username'], $_POST['new_password']);
+                        $newAcc = $pm->load('email',$account->getEmail(), "FAccount");
+                        $salvare = serialize($newAcc);
+                        $_SESSION['account'] = $salvare;
+
+                        $statoimg = static::modificaprofiloimmagine($account);
+                        if ($statoimg) { //Update della l'immagine di profilo
+
+                            if(isset($_FILE['file'])){
+                                print "pieno";
+                            }
+                            else {
+                                print "vuoto";
+                            }
+
+                            $size = $_FILES['file']['size'];
+                            $type = $_FILES['file']['type'];
+                            $nome = $_FILES['file']['name'];
+                            $data= file_get_contents($_FILES['file']['tmp_name']);
+                            $mediaUser= new EMediaUser($nome,$account->getEmail(),$type, $data);
+                            $pm->UpdateImg($mediaUser, $data);
+                        }
+                        else {
                             header('Location: /BookAndPlay/User/profilo');
-                        //}
+                        }
                     }
                     else {
                         $verificaEmail = $pm->exist("email", $_POST['email'], "FAccount");
                         if ($verificaEmail) {
                             //UTENTE GIA NEL DB
-                            $user = $pm->load("email", $account->getEmail(), "FUser");
-                            $view->showModificaProfilo($user, $account, "errorEmail"); // $img,
+                            $view->formModificaProfilo($user, $acc, $img, "errorEmail"); //
                         }
                         else {
-                            //$statoimg = static::modificaprofiloimmagine($account);
-                            //if ($statoimg) {
-                                static::updateCampi($account, "FAccount", $_POST['username'], $_POST['new_password']);
-                                $pm->update("email", $_POST['email'], "email", $account->getEmail(), "FAccount");
-                                $newAcc=$pm->load("email", $account->getEmail(), "FAccount");
-                                //$img =$pm->load("email", $account->getEmail(), "FMediaUser");
-                                $user = $pm->load("email", $account->getEmail(), "FUser");
-                                $addr = $pm->load("email", $account->getEmail(), "FAddress");
+                            static::updateCampi($account, "FAccount", $_POST['username'], $_POST['new_password']);
+                            $pm->update("email", $_POST['email'], "email", $account->getEmail(), "FAccount");
+                            $newAcc=$pm->load("email", $account->getEmail(), "FAccount");
+                            $user = $pm->load("email", $account->getEmail(), "FUser");
+                            $addr = $pm->load("email", $account->getEmail(), "FAddress");
+                            $salvare = serialize($newAcc);
+                            $_SESSION['account'] = $salvare;
 
-                                $salvare = serialize($newAcc);
-                                $_SESSION['account'] = $salvare;
-                                $view->showProfileUser($user, $newAcc, $addr); //,$img
-                            //}
+                            $statoimg = static::modificaprofiloimmagine($account);
+                            if ($statoimg) {
+                                $size = $_FILES['file']['size'];
+                                $type = $_FILES['file']['type'];
+                                $nome = $_FILES['file']['name'];
+                                $data= file_get_contents($_FILES['file']['tmp_name']);
+                                $mediaUser= new EMediaUser($nome,$account->getEmail(),$type, $data);
+                                $pm->UpdateImg($mediaUser, $data);
+                                $img = $pm->loadImg($account->getEmail());
+                            }
+                            $view->showProfileUser($user, $newAcc, $addr, $img);
                         }
                     }
                 } else {
                     //ERRORE PASSWORD
-                    $newAcc=$pm->load("email", $account->getEmail(), "FAccount");
-                    //$img =$pm->load("email", $account->getEmail(), "FMediaUser");
-                    $user = $pm->load("email", $account->getEmail(), "FUser");
-                    $addr = $pm->load("email", $account->getEmail(), "FAddress");
-                    $view->showModificaProfilo($user, $newAcc, 'errorPassw'); //, $img
+                    $view->formModificaProfilo($user, $acc, $img ,'errorPassw');
                 }
-
             }
             else {
                 header('Location: /BookAndPlay/User/login');
             }
         }
+    }
+    /**
+     * Funzione di supporto per le altre. Questa funzione, grazie alla chiamata della funzione upload(), si occupa di gestire
+     * il comportamento della form rispetto all'inserimento delle immagini dando la possibilità di notificare errori relativi al
+     * tipo di immagine o la dimensione.
+     * @param $account che  possiede un'immagine
+     * @return bool
+     */
+    static function modificaprofiloimmagine($account) {
+        $view = new VUser();
+        $pm = new FPersistentManager();
+        $ris = true;
+        $img1 = $pm->loadImg($account->getEmail());
+        if (get_class($account) == "EAccount") {
+            if (isset($_FILES['file'])) {
+                $nome_file = 'file';
+                $img = static::upload($account, "modificaUser",$nome_file);
+                $user=$pm->load('email', $account->getEmail(), "FUser");
+                $acc=$pm->load('email', $account->getEmail(), "FAccount");
+                switch ($img) {
+                    case "size":
+                        $ris = false;
+                        $view->formModificaProfilo($user, $acc, $img1, "errorSize");
+                        break;
+                    case "type":
+                        $ris = false;
+                        $view->formModificaProfilo($user, $acc, $img1, "errorType");
+                        break;
+                    case "ok":
+                        $ris = true;
+                        break;
+                }
+            }
+        }
+        return $ris;
+    }
+
+    /**
+     * Funzione di supporto che si occupa di verificare la correttezza dell'immagine inserita nella form di registrazione.
+     * Nel caso in cui non ci sono errori di inserimento, avviene la store dell'utente e la corrispondente immagine nel database.
+     * @param $account object Account
+     * @param $funz tipo di funzione da svolgere
+     * @param $nome_file passato nella form per l'immagine
+     * @return string stato
+     */
+    static function upload($account,$funz,$nome_file) {
+        $pm = new FPersistentManager();
+        $ris = null;
+        $nome = '';
+        $max_size = 300000;
+        $result = is_uploaded_file($_FILES[$nome_file]['tmp_name']);  //verifica se il file è stato passato dall'utente
+        if (!$result) {
+            //no immagine
+            if ($funz == "showFormRegistration") {
+                //$pm->store($account);
+                $ris = "ok";
+            }
+        }
+        else {
+            $size = $_FILES[$nome_file]['size'];
+            $type = $_FILES[$nome_file]['type'];
+            $data= file_get_contents($_FILES[$nome_file]['tmp_name']);
+            if ($size > $max_size) {       //Il file è troppo grande
+                $ris = "size";
+            }
+            elseif ($type == 'image/jpeg' || $type == 'image/png' || $type == 'image/jpg') {
+                $nome = $_FILES[$nome_file]['name'];
+                if ($funz == "showFormRegistration") {
+                    $mediaUser= new EMediaUser($nome,$account->getEmail(),$type, $data);
+                    $pm->storeMedia($mediaUser);
+                    $ris = "ok";
+                }
+                elseif ($funz == "modificaUser") {
+                    $mediaUser= new EMediaUser($nome,$account->getEmail(),$type, $data);
+                    $pm->UpdateImg($mediaUser, $data);
+                    $ris= "ok";
+                }
+            }
+            else {     //il media è in un formato diverso e non può essere salvato
+                $ris = "type";
+            }
+        }
+        return $ris;
     }
 
     /**
@@ -346,94 +455,5 @@ class CUser {
             $pm->update("password", $pass, "email", $account->getEmail(), $class);
     }
 
-	/**
-	 * Funzione di supporto che si occupa di verificare la correttezza dell'immagine inserita nella form di registrazione.
-	 * Nll caso in cui non ci sono errori di inserimento, avviene la store dell'utente e la corrispondente immagine nel database.
-	 * @param $utente obj utente
-	 * @param $funz tipo di funzione da svolgere
-	 * @param $nome_file passato nella form per l'immagine
-	 * @return string stato verifa immagine
-	 */
-	static function upload($account,$funz,$nome_file) {
-		$pm = new FPersistentManager();
-		$ris = null;
-		$nome = '';
-		$max_size = 300000;
-		$result = is_uploaded_file($_FILES[$nome_file]['tmp_name']);
-		if (!$result) {
-			//no immagine
-			if ($funz == "showFormRegistration") {
-				$pm->store($account);
-				$ris = "ok";
-			}
-		} else {
-			$size = $_FILES[$nome_file]['size'];
-			$type = $_FILES[$nome_file]['type'];
-			if ($size > $max_size) {
-				//Il file è troppo grande
-				$ris = "size";
-			}
-			elseif ($type == 'image/jpeg' || $type == 'image/png' || $type == 'image/jpg') {
-				$nome = $_FILES[$nome_file]['name'];
-				if ($funz == "showFormRegistration") {
-                    $pm = new FPersistentManager();
-					$pm->store($account);
-					$mediaUtente = new EMediaUser($nome, $account->getEmail());
-					$mediaUtente->setType($type);
-					$pm->storeMedia($mediaUtente,$nome_file);
-					$ris = "ok";
-				}
-				elseif ($funz == "modificaUser") {
-					$pm->delete("emailutente",$account->getEmail(),"FMediauser");
-					$mediaUtente = new EMediaUser($nome, $account->getEmail());
-					$mediaUtente->setType($type);
-					$pm->storeMedia($mediaUtente,$nome_file);
-					$ris = "ok";
-				}
-			}
-			else {
-				//formato diverso
-				$ris = "type";
-			}
-		}
-		return $ris;
-	}
-
-	/**
-	 * Funzione di supporto per le altre. Questa funzione, grazie alla chiamata della funzione upload(), si occupa di gestire
-	 * il comportamento della form rispetto all'inserimento delle immagini dando la possibilità di notificare errori relativi al
-	 * tipo di immagine o la dimensione. Ancora una volta avviene la differenziazione tra Cliente e Trasportatore dove nel secondo caso,
-	 * grazie alla funzione upload_mesia_mezzo viene gestito anche l'inserimento dell'altra immagine con eventuali errori da notificare all'utilizzatore del sito.
-	 * @param $utente possessore del media
-	 * @return bool
-	 */
-    static function modificaprofiloimmagine($account) {
-    	$view = new VUser();
-    	$pm = new FPersistentManager();
-    	$ris = true;
-    	$img1 = $pm->load("emailAccount", $account->getEmail(), "FMediaUser");
-    	if (get_class($account) == "EAccount") {
-    		if (isset($_FILES['file'])) {
-				$nome_file = 'file';
-    			$img = static::upload($account, "modificaAccount",$nome_file);
-    			$user=FUser::loadByIdAccount($account);
-    			switch ($img) {
-    				case "size":
-    					$ris = false;
-    					$view->formModificaProfilo($user, $account, $img1, "errorSize");
-    					break;
-    				case "type":
-    					$ris = false;
-                        $view->formModificaProfilo($user, $account, $img1, "errorSize");
-                        break;
-					case "ok":
-						$ris = true;
-						break;
-    			}
-    		}
-
-    	}
-    	return $ris;
-    }
-
 }
+?>
