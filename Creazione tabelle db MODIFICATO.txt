@@ -37,8 +37,6 @@ CREATE TABLE IF NOT EXISTS `Indirizzo` (
 )
 ENGINE = InnoDB;
 
-
-
 CREATE TABLE IF NOT EXISTS `Giorno` (
   `Giorno` varchar(10) not null,
   `FasciaOraria` varchar(11) not null,
@@ -77,7 +75,8 @@ CREATE TABLE mediauser (
     `filename` varchar(50) NOT NULL,
     `type` varchar(50) NOT NULL,
     `emailutente`  varchar (50) NOT NULL,
-    `immagine` blob,
-    PRIMARY KEY (emailutente)
+    `immagine` blob NOT NULL,
+    PRIMARY KEY (emailutente)  
 )
 ENGINE=InnoDB;
+
