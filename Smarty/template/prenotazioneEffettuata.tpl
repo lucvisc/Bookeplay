@@ -17,7 +17,7 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay">Home</a></li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/info/informazioni">Informazioni</a> </li> 
           {if $userlogged!='nouser'} 
@@ -41,7 +41,7 @@
   <div class="py-5 h-100" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
+        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle m-2 ml-4" width="120" height="120" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
         <div class="col-md-7  offset-md-1" style="">
           <div class="row" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
             <div class="col-md-12" style="">
@@ -69,25 +69,25 @@
               <div class="col-md-12 col-1 m-2" style="">
                 <h3 class="text-light m-0 border border-light rounded" style="">
                   <div class="row">
-                    {if $partita}
+                   {if $partita}
                       {foreach $partita as $booking} 
-                      <h3 class="m-0 text-light border border-light rounded" style="">
-                        <div class="row">
-                          <div class="border-light my-2 ml-2" style="">
-                              <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
-                              <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
-                              <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
-                              <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
-                              <h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
-                              <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
-                              <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>
-                          </div>
-                        </div>
-                     </h3>
+                              <h3 class="m-0 text-light border border-light rounded" style="">
+                                <div class="row">
+                                  <div class="border-light my-2 ml-2" style="">
+                                      <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
+                                      <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
+                                      <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
+                                      <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
+                                      <h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
+                                      <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
+                                      <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>
+                                  </div>
+                                </div>
+                              </h3>
                       {/foreach}
                       {else} 
-                        <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
-                      {/if}
+                       <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
+                       {/if}
                   </div>
                 </h3>
               </div>

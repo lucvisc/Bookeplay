@@ -118,13 +118,19 @@
                               </div>
                               {else}
                               <div class="row">
-                                <div class="col-md-6" style=""></div>
-                                  <div class="col-md-6" style="">
+                                <div class="col-md-6" style="">
+                                    <form action="/BookAndPlay/Admin/modifica/{$booking->getIdbooking()}" method="GET">
+                                    <input type="text" hidden="" name="id" value="{$booking->getIdbooking()}">
+                                    <button class="btn btn-secondary text-light px-3 mx-3 mt-1 ml-5 mb-1">Modifica Partita</button>
+                                  </form>
+                                </div>                                
+                                <div class="col-md-6" style="">
                                     <form action="/BookAndPlay/Admin/partita/{$booking->getIdbooking()}" method="POST">
                                     <input type="text" hidden="" name="id" value="{$booking->getIdbooking()}">
                                     <button class="btn btn-danger text-light px-3 mx-3 mt-1 mb-1">Cancella Partita</button>
                                   </form>
                                 </div>
+                              </div>
                               </div>
                               {/if}
                             </div>

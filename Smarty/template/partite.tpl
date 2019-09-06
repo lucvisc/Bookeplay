@@ -40,7 +40,7 @@
   <div class="py-5" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
+        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle m-2 ml-4" width="120" height="120" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
         <div class="offset-md-1 col-md-7" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
           <div class="row">
             <div class="col-md-8" style="">

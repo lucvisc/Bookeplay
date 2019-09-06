@@ -44,7 +44,8 @@
   <div class="py-5 h-100" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
+        <div class="col-md-2 mx-4 mb-4" style="">
+          <img class="rounded-circle m-2 ml-4" width="120" height="120" src="data:image/jpeg;base64,{$pic64}" alt="profile picture"></div>
       </div>
     </div>
     <div class="container">
@@ -66,7 +67,9 @@
                 <div class="col-10 col-lg-12">
                     <div class="form-group"> <label for="form20" class="text-light">Username</label> <input type="text" value="{$username}" name="username" required="required" class="form-control" id="form16" placeholder="----------"></div>
                     <div class="form-group"> <label for="form21" class="text-light">Email</label> <input type="email" value="{$email}" name="email" required="required" class="form-control" id="form16" placeholder="----------"> </div>
-                    <div class="form-group"> <label for="form21" class="text-light">Cambia immagine del profilo</label> <input name="file" type="file" size"40"="" class="form-control" id="form16" <="" div=""></div>
+                    <div class="form-group"> 
+                      <label for="form21" class="text-light">Cambia immagine del profilo</label> 
+                      <input name="file" type="file" size="40" />
                     <div class="form-group"> <label for="form21" class="text-light">Inserisci la vecchia password</label> <input type="password" name="old_password" required="required" class="form-control" id="form16" <="" div=""></div>
                     <div class="form-group"> <label for="form21" class="text-light">Inserisci la nuova password</label> <input type="password" name="new_password" class="form-control" id="form16" <="" div=""> </div>
                     <div class="text-center">

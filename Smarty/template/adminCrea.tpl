@@ -31,7 +31,7 @@
   <div class="py-5 h-100" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle mb-3" width="90" height="90" src="data:image/jpeg;base64,{$pic64}"  alt="profile picture" /></div>
+        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle m-2 ml-4" width="120" height="120" src="data:image/jpeg;base64,{$pic64}"  alt="profile picture" /></div>
         <div class="col-md-7  offset-md-1" style="">
           <div class="row">
             <div class="col-md-12" style="">
