@@ -163,7 +163,7 @@ class CUser {
             if (CUser::isLogged())
                 $account= unserialize($_SESSION['account']);
                 if (get_class($account) == "EAccount") {
-                    $img = $pm->load("emailUtente", $account->getEmail(), "FMediaUser");
+                    $img = $pm->loadImg("emailUtente", $account->getEmail(), "FMediaUser");
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $addr= $pm->load("email", $account->getEmail(), "FAddress");
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
