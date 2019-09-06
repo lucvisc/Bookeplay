@@ -17,9 +17,9 @@
         <b> BookAndPlay</b>
       </a>
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
+        <li class="nav-item"> <a class="nav-link" href="BookAndPlay">Home</a></li>
         <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/Info/informazioni">Informazioni</a> </li>
         {if $userlogged!='nouser'}
         <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/User/profiloUtente">Profilo</a> </li>
         <li>

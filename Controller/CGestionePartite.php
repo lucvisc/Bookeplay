@@ -166,27 +166,6 @@ class CGestionePartite {
         }
     }
 
-    /**
-     * Funzione che serve per indirizzare ad una form che permette la modifica dei campi della prenotazione .
-     * 1) se il metodo di richiesta HTTP è GET e si è loggati, viene visualizzata la form;
-     * 2) se il metodo di richiesta HTTP è GET e non si è loggati, avviene il reindirizzamento verso la form di login.
-     * @param $id id della prenotazione che si vuol modificare
-     */
-    static function modificaPrenotazione($giorno)
-    {
-        $pm = new FPersistentManager();
-        $view = new VGestionePartite();
-        if( CUtente::isLogged() && ($_SERVER['REQUEST_METHOD'] == "GET")) {
-            $account = unserialize($_SESSION['account']);
-            if ($account->getEmail() == "admin@admin.com") {
-                $prenotazione = $pm::load("giorno", $giorno, "FGiorno");
-                $view->showPartite($giorno);
-            }
-            else
-                header('Location: /BookAndPlay/');
-        }
-        else header('Location: /BookAndPlay/User/login');
-    }
 
     /**
      * Funzione che viene invocata nel momento in cui si modificano i valori della prenotazione

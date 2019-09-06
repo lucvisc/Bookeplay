@@ -226,9 +226,31 @@ class CAdmin{
 	        $pm= new FPersistentManager();
 	        $view= new VAdmin();
 	        $account= unserialize($_SESSION['account']);
+            $partita = $pm->load('idP', $id, "FBooking");
+            $giorno= $partita[0]->getGiornobooking()->getGiorno();
+            $email = $partita[0]->getOrganizzatore();
 	        if ($account->getEmail()== 'admin@admin.com'){
 	            if ($_SERVER['REQUEST_METHOD'] == "GET"){
-	                $view->show
+                    $partDisp= $pm->loadGiornoDisp($giorno);
+	                $view->showModificaPartita($partita, $giorno, $partDisp, 'no_error');
+                }
+	            elseif ($_SERVER['REQUEST_METHOD'] == "POST"){
+	                if (isset($_POST['giorno']) AND isset($_POST['new_fascia_oraria'])){
+                        $prenotazione=$pm->loadPrenotazioneEff($_POST['giorno'], $_POST['new_fascia_oraria']);
+                        if (!isset($prenotazione)) {
+                            $pm::update('Giorno', $_POST['giorno'], 'email', $email, "FBooking");
+                            $pm::update('FasciaOraria', $_POST['new_fascia_oraria'], 'email', $email, "FBooking");
+                        }
+                        else{
+                            $view->showModificaPartita(null, null, null, 'no_error');
+                        }
+                    }
+	                else{
+	                    $prenotazione=$pm->loadPrenotazioneEff($giorno, $_POST['new_fascia_oraria']);
+	                    if (!isset($prenotazione)){
+                            $pm::update('FasciaOraria', $_POST['new_fascia_oraria'], 'email', $email, "FBooking");
+                        }
+                    }
 
                 }
 
@@ -237,7 +259,6 @@ class CAdmin{
                 $view = new VError();
                 $view->error('1');
             }
-
         }
 	    else {
             header('Location: /BookAndPlay/User/login');
