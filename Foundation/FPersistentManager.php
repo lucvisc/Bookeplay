@@ -55,8 +55,8 @@ class FPersistentManager {
      * Metodo che permette di effettuare la store dei media sul db.
      * @param $obj è un oggetto di tipo EMediaUser
      */
-    public static function UpdateImg($obj) {
-        FMediaUser::UpdateImg($obj);
+    public static function UpdateImg($obj, $media) {
+        FMediaUser::UpdateImg($obj, $media);
     }
 
     /**
