@@ -2,6 +2,7 @@
 {assign var='errorSize' value=$errorSize|default:'ok'} 
 {assign var='errorType' value=$errorType|default:'ok'} 
 {assign var='errorEmail' value=$errorEmail|default:'ok'}
+{assign var='errorPassw' value=$errorPassw|default:'ok'}
 <html>
 
 <head></head>
@@ -15,8 +16,7 @@
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="/BookAndPlay/">
-          <b> BookAndPlay</b>
+      <div class="collapse navbar-collapse" id="navbar12"> <a class="navbar-brand d-none d-md-block" href="/BookAndPlay/"><b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/">Home</a></li>
@@ -25,7 +25,8 @@
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item text-primary"> <a class="nav-link" href="/BookAndPlay/User/login">Log in</a> </li>
-          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/BookAndPlay/User/registrazioneUtente">Register</a> 
+        </li>
         </ul>
       </div>
     </div>
@@ -39,17 +40,39 @@
             <h3>Benvenuto</h3>
             <p>Dopo la registrazione potrai usufruire dei servizi offerti da BookAndPlay</p>
           </div>
-          <form class="text-left" enctype="multipart/form-data" action="/BookAndPlay/Utente/registazioneUtente" method="POST">
-            <div class="row register-form">
-              <div class="form-group" style=""> <label for="form16" class="text-light">Aggiungi la tua immagine</label> <input name="file" type="file" size="40" class="form-control" id="form16" <="" div="">
-                <div class="form-group" style=""> <label for="form16" class="text-light">Username</label> <input type="text" name="username" class="form-control" id="form16" placeholder="Johann W. Goethe"> </div>
-                <div class="form-group" style=""> <label for="form18" class="text-light">Email</label> <input type="email" name="email" class="form-control" id="form18" placeholder="j.goethe@werther.com"> </div>
-                <div class="form-row" style="">
-                  <div class="form-group col-md-6"> <label for="form19" class="text-light">Password</label> <input type="password" name="password" class="form-control" id="form19" placeholder="••••"> </div>
-                  <div class="form-group col-md-6 text-light"> <label for="form20">Conferma Password</label> <input type="password" name="password1" class="form-control" id="form20" placeholder="••••"> </div>
+          <div>
+            {if $errorPassw!='ok'} 
+                 <div style="color: red;">
+                  <p align="center">Attenzione! Le password inserite non corrispondono </p>
                 </div>
-                <div class="form-group" style=""> <label for="form20" class="text-light">Nome</label> <input type="text" name="nome" class="form-control" id="form16" placeholder="----------"> </div>
-                <div class="form-group" style=""> <label for="form21" class="text-light">Cognome</label> <input type="text" name="cognome" class="form-control" id="form16" placeholder="----------"> </div>
+                {/if}
+                {if $errorSize!='ok'} 
+                 <div style="color: red;">
+                  <p align="center">Attenzione! Formato immagine troppo grande! </p>
+                </div> 
+                {/if} 
+                {if $errorType!='ok'} 
+                <div style="color: red;">
+                  <p align="center">Attenzione! Formato immagine non supportato (provare con .png o .jpg)! </p>
+                </div> 
+                {/if} 
+                {if $errorEmail!='ok'} 
+                <div style="color: red;">
+                  <p align="center">Attenzione! Email già esistente! </p>
+                </div> 
+                {/if}
+          </div>
+          <form class="text-left" enctype="multipart/form-data" action="/BookAndPlay/User/registrazioneUtente" method="POST">
+            <div class="row register-form">
+              <div class="form-group" style=""> <label for="form16" class="text-light">Aggiungi la tua immagine</label> <input name="file" type="file" size="40" class="form-control" id="form16">
+                <div class="form-group" style=""> <label for="form16" class="text-light">Username</label> <input type="text" name="username" required="required" class="form-control" id="form16" placeholder="Johann W. Goethe"> </div>
+                <div class="form-group" style=""> <label for="form18" class="text-light">Email</label> <input type="email" name="email" required="required" class="form-control" id="form18" placeholder="j.goethe@werther.com"> </div>
+                <div class="form-row" style="">
+                  <div class="form-group col-md-6"> <label for="form19" class="text-light">Password</label> <input type="password" name="password" required="required" class="form-control" id="form19" placeholder="••••"> </div>
+                  <div class="form-group col-md-6 text-light"> <label for="form20">Conferma Password</label> <input type="password" name="password1" required="required" class="form-control" id="form20" placeholder="••••"> </div>
+                </div>
+                <div class="form-group" style=""> <label for="form20" class="text-light">Nome</label> <input type="text" name="name" class="form-control" id="form16" placeholder="----------"> </div>
+                <div class="form-group" style=""> <label for="form21" class="text-light">Cognome</label> <input type="text" name="surname" class="form-control" id="form16" placeholder="----------"> </div>
                 <div class="form-group" style=""> <label for="form22" class="text-light">Numero di telefono</label> <input type="text" name="telnumber" class="form-control" id="form16" placeholder="----------"> </div>
                 <div class="form-group" style=""> <label for="form23" class="text-light">Sesso</label> <input type="text" name="gender" class="form-control" id="form16" placeholder="Maschio/Femmina"> </div>
                 <div class="form-group" style=""> <label for="form24" class="text-light">Data di nascita</label> <input type="date" name="data_nascita" class="form-control" id="form16" placeholder="gg/mm/aaaa"> </div>
@@ -75,24 +98,15 @@
                   </div>
                 </div>
                 <div class="form-group" style="">
-                  <div class="form-check text-light"> <input class="form-check-input" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21"> I Agree with <a href="#">Term and Conditions</a> of the service </label> </div>
+                  <div class="form-check text-light"> <input class="form-check-input" required="required" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21"> I Agree with <a href="#">Term and Conditions</a> of the service </label> </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 shadow-none text-center ">
+                      <input type="submit" class="btn btn-primary" value="Registrati"/></i>
+                    </div>
+                  </div> 
                 </form>
-                <input type="submit" class="btnRegister" value="Registrati">
-                 {if $errorSize!='ok'} 
-                 <div style="color: red;">
-                  <p align="center">Attenzione! Formato immagine troppo grande! </p>
-                </div> 
-                {/if} 
-                {if $errorType!='ok'} 
-                <div style="color: red;">
-                  <p align="center">Attenzione! Formato immagine non supportato (provare con .png o .jpg)! </p>
-                </div> 
-                {/if} 
-                {if $errorEmail!='ok'} <div style="color: red;">
-                  <p align="center">Attenzione! Email già esistente! </p>
-                </div> 
-                {/if}
+                
               </div>
             </div>
           

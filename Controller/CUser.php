@@ -11,7 +11,6 @@ require_once 'include.php';
 
 class CUser {
 
-
 	/**
 	 * Funzione che consente il login di un utente registrato. Si possono avere diversi casi:
 	 * 1) se il metodo della richiesta HTTP è GET:
@@ -96,7 +95,7 @@ class CUser {
 	}
 
     /**
-     * Mostra la pagina di informazioni dell'applicazione
+     * Mostra la pagina iniziale dell'applicazione
      */
     static function showHomepage() {
         $view = new VUser();
@@ -202,7 +201,7 @@ class CUser {
 				$view->showFormRegistration();
 			}
 		}else if($_SERVER['REQUEST_METHOD']=="POST") {
-			static::registUserVerifica();
+			static::VerificaRegistrazioneUser();
 		}
 	}
 
@@ -211,19 +210,25 @@ class CUser {
 	 * In questo metodo avviene la verifica sull'univocità dell'email inserita;
 	 * se questa verifiche non riscontrano problemi, si passa verifica dell'immagine inserita e quindi alla store nel db vera e propria del cliente.
 	 */
-	static function registUserVerifica () {
+	static function VerificaRegistrazioneUser() {
 		$pm = new FPersistentManager();
-		$veremail = $pm->exist("email", $_POST['email'],"FAccount");
 		$view = new VUser();
+		$veremail = $pm->exist("email", $_POST['email'],"FAccount");
 		if ($veremail){
 			$view->registrationError("email");
 		}
-		else {
-			$account = new EAccount($_POST['username'], md5($_POST['password']), $_POST['email'],$_POST['telnumber'], " ", " ", true);
-			$addr = new EAddress($_POST['comune'], $_POST['provincia'], $_POST['cap'], $_POST['via'], $_POST['numero']);
-			$user = new EUser($_POST['name'], $_POST['surname'],$_POST['data_nascita'], $_POST['gender'], $addr, $account);
-			FAccount::store($account,$user,$addr);
-			if ($account!= null) {
+		elseif ($_POST['password'] == $_POST['password1']){
+			$account = new EAccount($_POST['email'], $_POST['username'], $_POST['password'],$_POST['telnumber'], 0, " ", 1);
+			$addr = new EAddress(" ", $_POST['comune'], $_POST['provincia'], $_POST['cap'], $_POST['via'], $_POST['numero']);
+			$user = new EUser(" ", $_POST['name'], $_POST['surname'], $_POST['data_nascita'], $_POST['gender'], 'registrato');
+
+			print_r($account);
+			print_r($addr);
+			print_r($user);
+            //$pm::storeReg($account,$user, $addr);
+            FAccount::store($account,$user, $addr);
+
+            if ($account!= null) {
 				if (isset($_FILES['file'])) {
 					$nome_file = 'file';
 					$img = static::upload($account,"showFormRegistration",$nome_file);
@@ -240,7 +245,12 @@ class CUser {
 					}
 				}
 			}
+            $view->showFormLogin();
+
 		}
+		else {
+            $view->registrationError("password");
+        }
 	}
 
     /**
@@ -325,11 +335,11 @@ class CUser {
 
     /**
      * Funzione che si occupa di fare tutti i controlli necessari per aggiornare i campi che un utente desidera modificare
-     * nella sua form di modifica profilo
+     * nella sua form di modifica profilo, viene utilizzata dalla function modificaprofilo
      * @param $account obj rappresentante l'account di un user
      * @param $class classe del account che richiede le modifiche
      */
-    static function updateCampi($account,$class, $username, $pass) {
+    static private function updateCampi($account,$class, $username, $pass) {
         $pm = new FPersistentManager();
         if ($account->getUsername() != $username)
             $pm->update("username", $username, "email", $account->getEmail(), $class);

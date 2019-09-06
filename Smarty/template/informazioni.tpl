@@ -43,7 +43,7 @@
       <div class="row" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
         <div class="col-md-10" style="">
           <h2 class="mb-3 text-light">BookAndPlay: un modo semplice e veloce per giocare a calcetto</h2>
-          <p class="text-light">Il progetto nasce dall'idea di due giovani studenti dell'università dell'Aquila: Luca Visconti e Catriel del biase. BookAndPlay è stato sviluppato per rispondere alle esigenze di organizzazione amatoriale che ogni giorno si presentano, mettendo a disposizione una piattaforma di "incontri" per partite di calcetto per uno specifico centro sportivo.&nbsp;</p>
+          <p class="text-light">Il progetto nasce dall'idea di due giovani studenti dell'università dell'Aquila: Luca Visconti e Catriel del biase. BookAndPlay è stato sviluppato per rispondere alle esigenze di organizzazione amatoriale che ogni giorno si presentano, mettendo a disposizione una piattaforma di "incontri" per partite di calcetto per uno specifico centro sportivo.</p>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
           <h2 class="mb-3 text-light">Perché sceglierci?</h2>
           <p class="text-light">Da utente non registrato puoi solo visionare le partite che altri utenti registrati hanno creato.<br>Da utente registrato oltre a poter visionare le partire, puoi partecipare ad una partita creata da un altro utente, in più puoi creare una partita nel giorno e nell'orario che più ti è comodo.<br>Che cosa aspetti a registrarti?</p>
           <div class="row">
-            <div class="col-md-12"><a class="btn btn-dark" href="register-support.html">Registrati</a></div>
+            <div class="col-md-12"><a class="btn btn-dark" href="/BookAndPlay/User/registrazioneUtente">Registrati</a></div>
           </div>
         </div>
       </div>

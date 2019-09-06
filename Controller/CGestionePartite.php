@@ -74,6 +74,10 @@ class CGestionePartite {
                         $pren = new EBooking(null, $_POST['livello'], $giorno->getGiorno(), $giorno->getFasceOrarie(), $_POST['descrizione'], null, $account->getEmail());
                         FBooking::store($pren);
                         FPren_partecipa::insert(null, $account->getEmail());
+                        $account = EAccount::PagaPartita($account);
+                        $conto = $account->getConto();
+                        $pm::update('conto', $conto, 'email', $account->getEmail(), "FAccount");
+                        $acc = $pm->load('email', $account->getEmail(), "FAccount");
                         $prenotazione=$pm->loadPrenotazioneEff($_POST['giorno'], $_POST['fascia_oraria']);
                         $view->showPrenotazioneEffettuata($user, $acc, $prenotazione); //, $img
                     } else {

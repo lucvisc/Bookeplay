@@ -16,15 +16,17 @@ class FPersistentManager {
      * @param $obj oggetto da dover salvare sul db
      * @return mixed
      */
-    public static function store($obj) {
+    public static function store($obj)
+    {
         $Eclass = get_class($obj);
         $Fclass = str_replace("E", "F", $Eclass);
-        if ($Fclass == "FBooking") {
-            $id = $Fclass::store($obj);
-            return $id;
+        if ($Fclass != "FAccount") {
+            if ($Fclass == "FBooking") {
+                $id = $Fclass::store($obj);
+                return $id;
+            } else
+                $Fclass::store($obj);
         }
-        else
-            $Fclass::store($obj);
     }
 
     /**
