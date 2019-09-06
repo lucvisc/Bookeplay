@@ -45,10 +45,10 @@ class FPersistentManager {
      * @param $obj comprensivo di nome e della foreign key (email utente/partita)
      * @param $nome_file chiave dell'array $_FILE
      */
-    public static function storeMedia($obj, $nome_file) {
+    public static function storeMedia($obj) {
         $Eclass = get_class($obj);
         $Fclass = str_replace("E", "F", $Eclass);
-        $Fclass::store($obj,$nome_file);
+        $Fclass::store($obj);
     }
 
     /**

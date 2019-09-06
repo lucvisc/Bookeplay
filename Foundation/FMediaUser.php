@@ -13,10 +13,10 @@ class FMediaUser {
     private static $class = "FMediaUser";
 
     /** tabella con la quale opera */
-    private static $tables="mediauser (`emailutente`,`filename`,`type`)";
+    private static $tables="mediauser (`emailutente`,`filename`,`type`,`immagine`)";
 
     /** valori della tabella */
-    private static $values="(:emailutente,:filename,:type)";    /**il primo id è quello di Emedia,il secondo di EMediaUtente**/
+    private static $values="(:emailutente,:filename,:type,:immagine)";    /**il primo id è quello di Emedia,il secondo di EMediaUtente**/
     /**
      *
      */
@@ -35,12 +35,10 @@ class FMediaUser {
 
     public static function bind($stmt, EMediaUser $media){
 
-        $si=$stmt->bindValue(':emailutente', $media->getEmailUser(), PDO::PARAM_STR);
-        print ("$si\n");
-        $si=$stmt->bindValue(':filename',$media->getFileName(), PDO::PARAM_STR);
-        print ("$si\n");
-        $si=$stmt->bindValue(':type',$media->getType(), PDO::PARAM_STR);
-        print ("$si\n");
+        $stmt->bindValue(':emailutente', $media->getEmailUser(), PDO::PARAM_STR);
+        $stmt->bindValue(':filename',$media->getFileName(), PDO::PARAM_STR);
+        $stmt->bindValue(':type',$media->getType(), PDO::PARAM_STR);
+        $stmt->bindValue(':immagine',$media->getData(), PDO::PARAM_LOB);
 
     }
 

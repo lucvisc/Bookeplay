@@ -37,12 +37,12 @@ class EMediaUser {
     private $type;
 
     //Dichiarazione del costruttore
-    public function __construct($fname, $emailUser, $tipo)
+    public function __construct($fname, $emailUser, $tipo, $dt=null)
     {
         $this->filename = $fname;
         $this->emailUser = $emailUser;
         $this->type=$tipo;
-        $this->data = NULL;
+        $this->data = $dt;
     }
 
     /**
