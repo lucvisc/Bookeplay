@@ -88,7 +88,7 @@ class VUser {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showProfileUser(EUser $user, EAccount $acc, $img)
+    public function showProfileUser(EUser $user, EAccount $acc, EAddress $addr, $img)
     {
         list($type, $pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
@@ -179,7 +179,7 @@ class VUser {
             $pic64 = base64_encode($img->getData());
         }
         else {
-            $data = file_get_contents( $_SERVER['DOCUMENT_ROOT'] . '/BookAndPlay/Smarty/template/img/user.png');
+            $data = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/BookAndPlay/Smarty/img/user.png');
             $pic64 = base64_encode($data);
         }
         $this->smarty->assign('userlogged',"loggato");
