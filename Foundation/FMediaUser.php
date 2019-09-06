@@ -42,7 +42,7 @@ class FMediaUser {
 
     }
 
-    public static function bindImg($stmt, EMediaUser $media){
+    public static function bindImg($stmt, $media){
         $media=$media->getData();
         $si=$stmt->bindParam(':immagine', $media, PDO::PARAM_LOB);
         print ("$si\n");
@@ -90,9 +90,9 @@ class FMediaUser {
         return $ris;
     }
 
-    public static function UpdateImg(EMediaUser $media){
+    public static function UpdateImg(EMediaUser $obj, $media){
         $db = FDatabase::getInstance();
-        $ris=$db->UpdateImg(static::getClass(), $media);
+        $ris=$db->UpdateImg(static::getClass(), $obj, $media);
         return $ris;
     }
 

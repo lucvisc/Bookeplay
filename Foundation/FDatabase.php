@@ -136,7 +136,7 @@ class FDatabase
         }
     }
 
-    public function UpdateImg($class, $obj)
+    public function UpdateImg($class, $obj, $media)
     {
         try {
             $this->db->beginTransaction();
@@ -150,7 +150,7 @@ class FDatabase
             print $obj->getData();
 
             $stmt = $this->db->prepare($query);
-            $class::bindImg($stmt, $obj);
+            $class::bindImg($stmt, $obj, $media);
             $stmt->execute();
 
             print_r($stmt->errorInfo());
