@@ -214,7 +214,8 @@ class FBooking{
         $gg = null;
         $db=FDatabase::getInstance();
         $result=$db->loadPrenotazioneEff($giorno, $fasciaoraria);
-        return $result;
+        $gg=new EBooking($result['idP'], $result['livello'], $result['Giorno'], $result['FasciaOraria'],  $result['note'], FPren_partecipa::loadPrenPart($result['idP']), $result['organizzatore']);
+        return $gg;
     }
 
 }
