@@ -28,6 +28,17 @@ class FPersistentManager {
     }
 
     /**
+     * Questo metodo ha il compito di registrare un utente
+     * @param EAccount $obj1
+     * @param EUser $obj2
+     * @param EAddress $obj3
+     */
+    public static function storeReg(EAccount $obj1,EUser $obj2,EAddress $obj3){
+        FAccount::store($obj1, $obj2, $obj3);
+    }
+
+
+    /**
      * Metodo che permette di effettuare la store dei media sul db.
      * @param $obj comprensivo di nome e della foreign key (email utente/partita)
      * @param $nome_file chiave dell'array $_FILE

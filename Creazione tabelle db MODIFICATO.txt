@@ -79,7 +79,7 @@ CREATE TABLE mediauser (
     `emailutente`  varchar (50) NOT NULL,
     `immagine` blob NOT NULL,
     PRIMARY KEY (emailutente),
-    FOREIGN KEY (emailutente) REFERENCES Account(email)  ON DELETE CASCADE ON UPDATE CASCADE
+    
 )
 ENGINE=InnoDB;
 
