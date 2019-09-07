@@ -39,6 +39,18 @@ class VAdmin {
             $value = $_POST['email'];
         return $value;
     }
+
+    /**
+     * Restituisce l'email dell'utente da bloccare/sbloccare dal campodi input
+     * Inviato con metodo post
+     * @return string contenente l'email dell'utente
+     */
+    function getCifra(){
+        $value = null;
+        if (isset($_POST['cifra']))
+            $value = $_POST['cifra'];
+        return $value;
+    }
     /**
      * Restituisce l'email dell'utente da bloccare/sbloccare dal campodi input
      * Inviato con metodo post
@@ -81,7 +93,8 @@ class VAdmin {
      * Funzione che permette di visualizzare la pagina di modifica del conto di un utente
      * @throws SmartyException
      */
-    public function showConto() {
+    public function showRicaricaConto($acc) {
+        $this->smarty->assign('acc',$acc);
         $this->smarty->display('adminConto.tpl');
     }
 

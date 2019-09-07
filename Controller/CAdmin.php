@@ -84,10 +84,6 @@ class CAdmin{
                 $pm = new FPersistentManager();
                 $email = $view->getEmail();
 
-                print "okBAN";
-                print_r($email);
-                print_r($_POST['email']);
-
                 $account = $pm->load("email", $email, "FAccount");
                 print_r($account);
                 $pm->update("activate", 0, "email", $email, "FAccount");
@@ -296,36 +292,50 @@ class CAdmin{
 	}
 
     /**
-     * Funzione utilizzata per aggiornare il conto di un Utente
+     * Funzione utilizzata per aggiornare il conto di un User
      * 1) se il metodo di richiesta HTTP è GET e si è loggati con le credenziali dell'amministratore viene visualizzata
-     * la pagina dove inserire l'username dell'utente al quale bisogna aggiungere una certa cifra di conto;
+     * la pagina dove inserire l'email al quale applicare l'aggiunta del conto
      * 2) se il metodo di richiesta HTTP è GET e si è loggati ma non come amministratore, viene visualizzata una pagina di errore 401;
-     * 3) altrimenti, reindirizza alla pagina di login.
+     * 3) se il metodo di richiesta HTTP è POST e si è loggati come amministratore avviene la ricarica del conto
+     * 4)se non si è loggati reindirizza alla pagina di login.
      */
-    static function ricaricaConto($username, float $conto){
-        if($_SERVER['REQUEST_METHOD'] == "GET") {
-            if (CUser::isLogged()) {
-                $account = unserialize($_SESSION['account']);
-                if ($account->getEmail() == "admin@admin.com") {
-                    $view = new VAdmin();
-                    $email= $view->getEmail();
-                    $pm = new FPersistentManager();
-                    $acc=FAccount::loadByUsername($username);
-                    $acc= new EAccount($acc);
-                    $conto=$acc->RicaricaAccount($conto);
-                    $pm->update("conto", $conto, "email", $email, "FAccount");
+    static function ricaricaConto(){
+        if (CUser::isLogged()) {
+            $pm= new FPersistentManager();
+            $view= new VAdmin();
+            $account = unserialize($_SESSION['account']);
+            if ($account->getEmail() == "admin@admin.com") {
+                    if($_SERVER['REQUEST_METHOD'] == "GET") {
+                        $view->showRicaricaConto(null);
+                    }
+                    elseif($_SERVER['REQUEST_METHOD'] == "POST") {
+                        if(!isset($_POST['cifra'])){
+                            $acc = $pm->load("email", $_POST['email'], "FAccount");
 
-                    header('Location: /BookAndPlay/Admin/ricaricaConto');
+                            $view->showRicaricaConto($acc);
+                        }
+                        else {
 
-                    //$view->showConto();
-                }
-                else {
-                    $view = new VError();
-                    $view->error('1');
-                }
+                            $email = $view->getEmail();
+                            $account = $pm->load('email', $email, "FAccount");
+                            $cifra = $view->getCifra();
+                            $account->RicaricaAccount($cifra);
+                            $conto = $account->getConto();
+                            $pm->update('conto', $conto, 'email', $email, "FAccount");
+                            $account = $pm->load('email', $email, "FAccount");
+
+                            $view->showRicaricaConto($account);
+                        }
+
+                    }
             }
-            else
-                header('Location: /BookAndPlay/User/login');
+            else {
+                $view = new VError();
+                $view->error('1');
+            }
+        }
+        else{
+            header('Location: /BookAndPlay/User/login');
         }
     }
 

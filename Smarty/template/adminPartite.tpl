@@ -50,9 +50,9 @@
       <div class="row" style="">
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/homepage">Elenco Account</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/partite">Crea/Cancella</i>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/modifica">Modifica Partita</i></a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/partite">Crea/Cancella </a>
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/ricaricaConto">Ricarica Conto</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/modificaProfilo">Modifica Profilo</a>
         </div>  
         <div class="col-9 col-md-8" style="">
           <div class="tab-content">
@@ -177,10 +177,10 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="/BookAndPlay/Admin/hompage">Home</a></li>
+            <li> <a href="/BookAndPlay/Admin/hompage">Home</a> </li>
             <li> <a href="/BookAndPlay/Admin/partite">Partite</a> </li>
-            <li> <a href="/BookAndPlay/Admin/modifica">Modifica Partite</a> </li>
             <li> <a href="/BookAndPlay/Admin/ricaricaConto">Ricarica Conto</a> </li>
+            <li> <a href="/BookAndPlay/Admin/modificaProfilo">Modifica Profilo</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">

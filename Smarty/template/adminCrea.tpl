@@ -31,7 +31,7 @@
   <div class="py-5 h-100" style="">
     <div class="container">
       <div class="row" style="">
-        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle m-2 ml-4" width="120" height="120" src="data:image/jpeg;base64,{$pic64}"  alt="profile picture" /></div>
+        <div class="col-md-2 mx-4 mb-4" style=""><img class="rounded-circle m-2 ml-4" width="120" height="120" src="/BookAndPlay/Smarty/img/user.png"  alt="profile picture" /></div>
         <div class="col-md-7  offset-md-1" style="">
           <div class="row">
             <div class="col-md-12" style="">
@@ -46,9 +46,9 @@
       <div class="row">
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/homepage">Elenco Account</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/partite">Crea/Cancella</i>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/modifica">Modifica Partita</i></a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/partite">Crea/Cancella </a>
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/ricaricaConto">Ricarica Conto</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/modificaProfilo">Modifica Profilo</a>
         </div>
         <div class="col-9 col-md-8" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <div class="tab-content">
@@ -163,10 +163,10 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="/BookAndPlay/Admin/homepage">Elenco Account</a></li>
-            <li> <a href="/BookAndPlay/Admin/partite">Crea/Cancella</i></li>
-            <li> <a href="/BookAndPlay/Admin/modifica">Modifica Partita</i></a></li>
-            <li> <a href="/BookAndPlay/Admin/ricaricaConto">Ricarica Conto</a></li>
+            <li> <a href="/BookAndPlay/Admin/hompage">Home</a> </li>
+            <li> <a href="/BookAndPlay/Admin/partite">Partite</a> </li>
+            <li> <a href="/BookAndPlay/Admin/ricaricaConto">Ricarica Conto</a> </li>
+            <li> <a href="/BookAndPlay/Admin/modificaProfilo">Modifica Profilo</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">

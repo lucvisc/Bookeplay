@@ -171,11 +171,11 @@ class EAccount {
 	}
 	/**
      * @access public 
-     * @param $cifra float 
+     * @param $cifra
      * Questo metodo viene richiamato dall'Admin per poter ricaricare un account ad un utente registrato
      * passando in ingresso il paramentro ID dell'user che intende ricaricare 
      */
-	public function RicaricaAccount(float $cifra){ 
+	public function RicaricaAccount($cifra){
 		$cont= $this->getConto();
 		$cont += $cifra;
 		$this->setConto($cont);
