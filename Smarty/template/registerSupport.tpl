@@ -64,7 +64,8 @@
           </div>
           <form class="text-left" enctype="multipart/form-data" action="/BookAndPlay/User/registrazioneUtente" method="POST">
             <div class="row register-form">
-              <div class="form-group" style=""> <label for="form16" class="text-light">Aggiungi la tua immagine</label> <input name="file" type="file" size="40" class="form-control" id="form16">
+              <div class="form-group" style=""> <label for="form16" class="text-light">Aggiungi la tua immagine</label> 
+                <input name="file" id="file" type="file" accept="image/png, image/jpeg, image/jpg" size="40" /></div>
                 <div class="form-group" style=""> <label for="form16" class="text-light">Username</label> <input type="text" name="username" required="required" class="form-control" id="form16" placeholder="Johann W. Goethe"> </div>
                 <div class="form-group" style=""> <label for="form18" class="text-light">Email</label> <input type="email" name="email" required="required" class="form-control" id="form18" placeholder="j.goethe@werther.com"> </div>
                 <div class="form-row" style="">

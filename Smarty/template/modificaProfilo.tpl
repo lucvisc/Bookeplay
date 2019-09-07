@@ -62,16 +62,15 @@
             <div class="col-md-12" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;" >
               <p style="">
               </p>
-              <form action="/BookAndPlay/User/modificaProfilo" method="POST">
+              <form enctype="multipart/form-data" action="/BookAndPlay/User/modificaProfilo" method="POST">
               <div class="row h-100">
                 <div class="col-10 col-lg-12">
                     <div class="form-group"> <label for="form20" class="text-light">Username</label> <input type="text" value="{$username}" name="username" required="required" class="form-control" id="form16" placeholder="----------"></div>
                     <div class="form-group"> <label for="form21" class="text-light">Email</label> <input type="email" value="{$email}" name="email" required="required" class="form-control" id="form16" placeholder="----------"> </div>
-                    <div class="form-group"> 
-                      <label for="form21" class="text-light">Cambia immagine del profilo</label> 
-                      <input name="file" type="file" size="40" />
-                    <div class="form-group"> <label for="form21" class="text-light">Inserisci la vecchia password</label> <input type="password" name="old_password" required="required" class="form-control" id="form16" <="" div=""></div>
-                    <div class="form-group"> <label for="form21" class="text-light">Inserisci la nuova password</label> <input type="password" name="new_password" class="form-control" id="form16" <="" div=""> </div>
+                    <div class="form-group"><label for="form21" class="text-light">Cambia immagine del profilo</label>
+                    <input name="file" id="file" type="file" accept="image/png, image/jpeg, image/jpg" size="40" /></div>
+                    <div class="form-group"> <label for="form21" class="text-light">Inserisci la vecchia password</label> <input type="password" name="old_password" required="required" class="form-control" id="form16"></div>
+                    <div class="form-group"> <label for="form21" class="text-light">Inserisci la nuova password</label> <input type="password" name="new_password" class="form-control" id="form16"></div>
                     <div class="text-center">
                       {if $errorEmail!='ok'} 
                         <div style="color: red;"> 

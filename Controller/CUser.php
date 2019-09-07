@@ -225,7 +225,7 @@ class CUser {
             if ($account != null) {
 				if (isset($_FILES['file'])) {
 					$nome_file = 'file';
-					$img = static::upload($account,"showFormRegistration",$nome_file);
+					$img = static::upload($account,"VerificaRegistrazioneUser",$nome_file);
 					switch ($img) {
 						case "size":
 							$view->registrationError("size");
@@ -273,15 +273,6 @@ class CUser {
         }
         elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-            if(isset($_POST['file'])){
-                print "pieno";
-                $post=$_POST['file'];
-                print_r($post);
-            }
-            else {
-                print "vuoto";
-            }
-
             $account = unserialize($_SESSION['account']);  //Creates a PHP value from a stored representation
             $pm = new FPersistentManager();
             $img = $pm->loadImg($account->getEmail());
@@ -299,20 +290,9 @@ class CUser {
 
                         $statoimg = static::modificaprofiloimmagine($account);
                         if ($statoimg) { //Update della l'immagine di profilo
+                            $img = $pm->loadImg($newAcc->getEmail());
 
-                            if(isset($_FILE['file'])){
-                                print "pieno";
-                            }
-                            else {
-                                print "vuoto";
-                            }
-
-                            $size = $_FILES['file']['size'];
-                            $type = $_FILES['file']['type'];
-                            $nome = $_FILES['file']['name'];
-                            $data= file_get_contents($_FILES['file']['tmp_name']);
-                            $mediaUser= new EMediaUser($nome,$account->getEmail(),$type, $data);
-                            $pm->UpdateImg($mediaUser, $data);
+                            $view->formModificaProfilo($user, $newAcc, $img, 'ok' );
                         }
                         else {
                             header('Location: /BookAndPlay/User/profilo');
@@ -335,12 +315,6 @@ class CUser {
 
                             $statoimg = static::modificaprofiloimmagine($account);
                             if ($statoimg) {
-                                $size = $_FILES['file']['size'];
-                                $type = $_FILES['file']['type'];
-                                $nome = $_FILES['file']['name'];
-                                $data= file_get_contents($_FILES['file']['tmp_name']);
-                                $mediaUser= new EMediaUser($nome,$account->getEmail(),$type, $data);
-                                $pm->UpdateImg($mediaUser, $data);
                                 $img = $pm->loadImg($account->getEmail());
                             }
                             $view->showProfileUser($user, $newAcc, $addr, $img);
@@ -409,7 +383,6 @@ class CUser {
         if (!$result) {
             //no immagine
             if ($funz == "showFormRegistration") {
-                //$pm->store($account);
                 $ris = "ok";
             }
         }
@@ -431,6 +404,11 @@ class CUser {
                     $mediaUser= new EMediaUser($nome,$account->getEmail(),$type, $data);
                     $pm->UpdateImg($mediaUser, $data);
                     $ris= "ok";
+                }
+                elseif($funz == "VerificaRegistrazioneUser"){
+                    $mediaUser= new EMediaUser($nome,$account->getEmail(),$type, $data);
+                    $pm->storeMedia($mediaUser);
+                    $ris = "ok";
                 }
             }
             else {     //il media è in un formato diverso e non può essere salvato

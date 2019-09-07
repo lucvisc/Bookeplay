@@ -84,7 +84,6 @@ class FBooking{
     {
         print_r($boo);
         $db=FDatabase::getInstance();
-        FGiorno::store($boo->getGiornobooking());
         $id=$db->storeDB(static::getClass() ,$boo);
         $boo->setIdbooking($id);//siccome idBooking è autoincrementate viene inserito nell'oggetto passato solo dopo lo store e quindi la creazione del suo id
     }

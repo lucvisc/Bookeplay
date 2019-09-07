@@ -160,7 +160,7 @@ class VUser {
      * @param $error tipo di errore nel caso in cui le modifiche siano sbagliate
      * @throws SmartyException
      */
-    public function formModificaProfilo(EUser $user, EAccount $acc,$error) { // $img,
+    public function formModificaProfilo(EUser $user, EAccount $acc, $img ,$error) { // $img,
         switch ($error) {
             case "errorEmail" :
                 $this->smarty->assign('errorEmail', "errore");
