@@ -71,38 +71,34 @@
                 </div>
               </div> 
               {if $acc} 
-              <div class="" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
-                <div class="row border-bottom border rounded ml-1 mr-1">
+              <div class="row border-bottom border rounded ml-1 mr-1">
                   <div class="col-md-9 " style="">
                     <p class="mt-1">
-                      <strong class="d-block text-light mt-4">{$acc->getUsername()} {$acc->getEmail()} </strong>
+                      <strong class="d-block text-light mt-3">{$acc->getUsername()} {$acc->getEmail()} </strong>
                     </p>
                   </div>
                   <div class="col-md-3" style="">
                     <form action="/BookAndPlay/Admin/bannaUtente" method="POST">
                       <input type="text" hidden="" name="email" value="{$acc->getEmail()}">
-                      <button class="btn btn-danger mt-3">Blocca utente</button>
+                      <button class="btn btn-danger mt-2">Blocca Utente</button>
                     </form>
                   </div>
                 </div>
-              </div> 
               {/if} 
               {if $ban} 
-              <div class="" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
-                <div class="row border-bottom border rounded ml-1 mr-1">
+               <div class="row border-bottom border rounded ml-1 mr-1">
                   <div class="col-md-9 " style="">
                     <p class="mt-1">
-                      <strong class="d-block text-light mt-4">{$ban->getUsername()} {$ban->getEmail()} </strong>
+                      <strong class="d-block text-light mt-3">{$ban->getUsername()} {$ban->getEmail()} </strong>
                     </p>
                   </div>
                   <div class="col-md-3" style="">
                     <form action="/BookAndPlay/Admin/attivaUtente" method="POST">
-                      <input type="text" hidden="" name="email" value="{$ban[$i]->getEmail()}">
-                      <button class="btn btn-success mt-3">Sblocca utente</button>
+                      <input type="text" hidden="" name="email" value="{$ban->getEmail()}">
+                      <button class="btn btn-success mt-2">Sblocca Utente</button>
                     </form>
                   </div>
                 </div>
-              </div> 
               {/if} 
               <div class="form-group row m-2" style="">
                 <div class="col-md-6" style="">
