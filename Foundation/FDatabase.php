@@ -136,30 +136,15 @@ class FDatabase
         }
     }
 
-    public function UpdateImg($class, $obj, $media)
-    {
+    public function UpdateImg($class, $obj, $media) {
         try {
             $this->db->beginTransaction();
             $query = "UPDATE ".self::tabella($class::getTables())." SET `immagine`= ".$class::getImmagine()." where emailutente='".$obj->getEmailUser()."';";
-            //$query = "INSERT INTO " . $class::getTables() . " VALUES ". $class::getValues()."LOAD_FILE('".$class::getImmagine()."'));";
-
-
-            print ("$query\n");
-            print $class::getImmagine();
-            print("\n");
-            print $obj->getData();
-
             $stmt = $this->db->prepare($query);
             $class::bindImg($stmt, $obj, $media);
             $stmt->execute();
-
-            print_r($stmt->errorInfo());
-
             $id = $this->db->lastInsertId();
             $this->db->commit();
-
-            print_r($this->db->errorInfo());
-
             $this->closeDbConnection();
             return $id;
         } catch (PDOException $e) {
