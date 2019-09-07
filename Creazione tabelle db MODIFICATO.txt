@@ -48,18 +48,17 @@ CREATE TABLE IF NOT EXISTS `prenotazione` (
   `idP` int(5) not null AUTO_INCREMENT,
   `Quota` int not NULL,
   `livello` enum('principiante','medio','avanzato','professionista') DEFAULT 'medio',
-  `Giorno` VARCHAR(45) not NULL,
+  `Giorno` VARCHAR(10) not NULL,
   `FasciaOraria` varchar(11) not NULL,
   `note` varchar(100),
   `organizzatore` varchar(45) not null,
    
   PRIMARY KEY (`idP`),
   FOREIGN KEY (Giorno,FasciaOraria) REFERENCES Giorno(`Giorno`,`FasciaOraria`) ON DELETE CASCADE ON UPDATE CASCADE
-
 )
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Pren_Partecipa` (
+CREATE TABLE IF NOT EXISTS `Pren_Partecipa`(
   `idPren` int(5) not null,
   `email` varchar(60) not null,
    PRIMARY KEY (`idPren`, `email`),

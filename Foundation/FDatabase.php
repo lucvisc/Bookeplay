@@ -75,7 +75,7 @@ class FDatabase
     {
         //viene passato il nome della classe che ermetterà di richiamare tutti i metodi di classe
         try {
-            //print_r($obj);
+
             $this->db->beginTransaction();// inizio di una transazione
             $query = 'INSERT INTO ' . $class::getTables() . ' VALUES ' . $class::getValues();//costruzione della query
             $stmt = $this->db->prepare($query);                         // prepara la query restituendo l'oggetto query

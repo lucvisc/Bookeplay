@@ -292,7 +292,7 @@ class FPersistentManager {
      * @param $place valore della fk verso Luogo
      * @return false|PDOStatement|null
      */
-    public function insertGiorno (  $gg) {
+    public function insertGiorno ($gg) {
         $ris = null;
         $ris = FGiorno::store($gg);
         return $ris;
