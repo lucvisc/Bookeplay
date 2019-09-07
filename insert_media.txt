@@ -1,5 +1,0 @@
-
-INSERT INTO `mediauser` (`id`, `filename`, `type`, `emailutente`, `immagine`) VALUES
-(1, 'admin.png', 'image/jpg', 'admin@admin.com', LOAD_FILE ('/Applications/XAMPP/xamppfiles/htdocs/BookAndPlay/Smarty/img/user.jpg')),
-(2, 'lucvisc.jpg', 'image/jpeg', 'luca.visco@hotmail.com', LOAD_FILE ('/Applications/XAMPP/xamppfiles/htdocs/BookAndPlay/Smarty/img/avatar_luca.jpg')),
-(3, 'catriel.jpg', 'image/jpeg', 'catdeb@hotmail.com', LOAD_FILE ('/Applications/XAMPP/xamppfiles/htdocs/BookAndPlay/Smarty/img/avatar_catiel.jpg'));
