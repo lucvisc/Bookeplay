@@ -230,7 +230,6 @@ class VGestionePartite {
      */
     public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $img, $pren) {  //,$img
         list($type,$pic64) = $this->setImage($img, 'user');
-        //$this->smarty->assign('type', $type);
         $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
         $this->smarty->assign('nome',$user->getName());
