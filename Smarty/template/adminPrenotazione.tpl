@@ -56,7 +56,7 @@
         <div class="col-9 col-md-8" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
           <div class="tab-content">
           </div>
-          <h2 class="ml-2 text-light border border-bottom" style="">Prenotazione Effettuata:</h2>
+          <h2 class="ml-3 text-light border-bottom" style="">Prenotazione Effettuata:</h2>
           <form>
             <div class="row">
               <div class="col-md-12" style="">

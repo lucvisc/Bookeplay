@@ -133,7 +133,7 @@
                   </div>
                   <div class="col-md-5 offset-md-1" style="">
                     <div class="input-group">
-                      <input type="number" name="giorno" class="form-control" id="inlineFormInputGroup" placeholder="--/--/----">
+                      <input type="date" name="new_giorno" class="form-control" id="inlineFormInputGroup" placeholder="--/--/----">
                     </div>
                   </div>
                 </div>

@@ -295,27 +295,35 @@ class CAdmin{
                     $partDisp= $pm->loadGiornoDisp($giorno);
 	                $view->showModificaPartita($partita, $giorno, $partDisp, 'no_error');
                 }
-	            elseif ($_SERVER['REQUEST_METHOD'] == "POST"){
-	                if (isset($_POST['giorno']) AND isset($_POST['new_fascia_oraria'])){
-                        $prenotazione=$pm->loadPrenotazioneEff($_POST['giorno'], $_POST['new_fascia_oraria']);
-                        if (!isset($prenotazione)) {
-                            $pm::update('Giorno', $_POST['giorno'], 'email', $email, "FBooking");
-                            $pm::update('FasciaOraria', $_POST['new_fascia_oraria'], 'email', $email, "FBooking");
+	            elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
+                    if (!isset($_POST['new_giorno'])) {
+                        if (isset($_POST['new_fascia_oraria'])) {
+                            $prenotazione = $pm->loadPrenotazioneEff($giorno, $_POST['new_fascia_oraria']);
+                            if (!isset($prenotazione)) {
+                                $pm::update('FasciaOraria', $_POST['new_fascia_oraria'], 'idP', $id, "FBooking");
+                                $partita = $pm->load('idP', $id, "FBooking");
+                                $view->showPrenotazione($partita);
+                            } else {
+                                $view->showModificaPartita(null, null, null, 'no_error');
+                            }
+                        } else {
+                            $view->showModificaPartita(null, null, null, 'no_error');
                         }
-                        else{
+                    } else {
+                        $newGiorno=self::splitGiorno($_POST['new_giorno']);
+                        $prenotazione = $pm->loadPrenotazioneEff($newGiorno, $_POST['new_fascia_oraria']);
+                        if (!isset($prenotazione)) {
+                            $pm::update('giorno', $newGiorno, 'idP', $id, "FBooking");
+                            $pm::update('FasciaOraria', $_POST['new_fascia_oraria'], 'idP', $id, "FBooking");
+                            $partita = $pm->load('idP', $id, "FBooking");
+
+                            $view->showPrenotazione($partita);
+                        } else {
                             $view->showModificaPartita(null, null, null, 'no_error');
                         }
                     }
-	                else{
-	                    $prenotazione=$pm->loadPrenotazioneEff($giorno, $_POST['new_fascia_oraria']);
-	                    if (!isset($prenotazione)){
-                            $pm::update('FasciaOraria', $_POST['new_fascia_oraria'], 'email', $email, "FBooking");
-                        }
-                    }
-
                 }
-
-            }
+	        }
 	        else{
                 $view = new VError();
                 $view->error('1');
