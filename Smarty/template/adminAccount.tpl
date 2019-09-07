@@ -100,17 +100,11 @@
                   </div>
                 </div>
               {/if} 
-              <div class="form-group row m-2" style="">
-                <div class="col-md-6" style="">
-                  <h3 class="text-light text-left">Elenco Utenti </h3>
-                </div>
-                <div class="col-md-6">
-                </div>
-              </div>
               <div class="row">
                 <main role="main" class="container">
                   <!-- UTENTI ATTIVI  -->
                   <div class="my-3 p-3" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+                    <h3 class="text-light text-left">Elenco Utenti </h3>
                     <h6 class="border-bottom text-light border-gray pb-2 mb-0">UTENTI ATTIVI (Username, Email)</h6>
                     <div class=" text-muted pt-3 "> 
                       {if $account} 
