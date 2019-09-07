@@ -114,9 +114,19 @@ class VAdmin {
      * @param $giorno associazione tra giorno e tutte le fasce orarie
      * @throws SmartyException
      */
-    public function showCrea(EGiorno $giorno) {
-        $this->smarty->assign('giorno',$giorno);
+    public function showCrea($giorno, $gg, $error) {
+        $this->smarty->assign('disp',$giorno);
+        $this->smarty->assign('gg',$gg);
+        $this->smarty->assign('errorGiorno', $error);
         $this->smarty->display('adminCrea.tpl');
+    }
+
+    /**
+     * Funzione che permetti di visualizzare la prenotazione effettuata dall'admin
+     */
+    public function showPrenotazione($partita){
+        $this->smarty->assign('partita', $partita);
+        $this->smarty->display('adminPrenotazione.tpl');
     }
 
     /**

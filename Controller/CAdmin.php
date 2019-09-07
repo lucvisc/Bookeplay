@@ -161,11 +161,76 @@ class CAdmin{
     }
 
     /**
+     * Funzione che si occupa di creare una partita
+     */
+    static function creaPartita(){
+        if(CUser::isLogged()){
+            $account=unserialize($_SESSION['account']);
+            $pm=new FPersistentManager();
+            $view= new VAdmin();
+            if ($account->getEmail()=='admin@admin.com'){
+                if ($_SERVER['REQUEST_METHOD'] == "GET") {
+                    $view->showCrea(null,null, 'si_giorno');
+                }
+                elseif($_SERVER['REQUEST_METHOD']=="POST"){
+                    $giorno = new EGiorno($_POST['giorno'], $_POST['fascia_oraria']);
+                    $gg=$pm->loadGiorno($_POST['giorno'], $_POST['fascia_oraria']);
+
+                    if (!isset($gg)) {
+                        $pm->insertGiorno($giorno);
+                        $pren = new EBooking(null, $_POST['livello'], $giorno->getGiorno(), $giorno->getFasceOrarie(), $_POST['descrizione'], null, $account->getEmail());
+                        $id=FBooking::store($pren);
+                        $prenotazione=$pm->loadPrenotazioneEff($_POST['giorno'], $_POST['fascia_oraria']);
+
+                        print_r($prenotazione);
+
+                        $view->showPrenotazione($prenotazione);
+                    } else {
+                        $view->showCrea( null, null, "no_giorno");
+                    }
+
+                }
+            }
+            else {
+                $view = new VError();
+                $view->error('1');
+            }
+        }
+        else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
+    /**
      * Funzione che si occupa di mostrare le partite per l'admin per un determinato giorno
      * una partita
      * @param
      */
     static function cercaGiorno() {
+        if (CUser::isLogged()) {
+            $account = unserialize($_SESSION['account']);
+            if ($account->getEmail()== 'admin@admin.com') {
+                $view = new VAdmin();
+                $pm = new FPersistentManager();
+
+                $giorno=self::splitGiorno($_POST['giorno']);
+                $partDisp= $pm->loadGiornoDisp($giorno);
+
+                $view->showCrea($partDisp, $giorno, 'sigiorno');
+            } else {
+                header('Location: /BookAndPlay/User/login');
+            }
+        } else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
+    /**
+     * Funzione che si occupa di mostrare le partite per l'admin per un determinato giorno
+     * una partita
+     * @param
+     */
+    static function cercaPartita() {
         if (CUser::isLogged()) {
                 $view = new VAdmin();
                 $pm = new FPersistentManager();

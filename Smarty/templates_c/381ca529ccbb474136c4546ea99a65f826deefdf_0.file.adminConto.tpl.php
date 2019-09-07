@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.33, created on 2019-09-07 19:01:57
+  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\adminConto.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5d73e2851261a7_45211500',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '381ca529ccbb474136c4546ea99a65f826deefdf' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\adminConto.tpl',
+      1 => 1567858670,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5d73e2851261a7_45211500 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html>
 
 <head></head>
@@ -53,6 +76,7 @@
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/homepage">Elenco Account</a>
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/partite">Crea/Cancella </a>
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/ricaricaConto">Ricarica Conto</a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/modificaProfilo">Modifica Profilo</a>
         </div>
         <div class="col-9 col-md-8" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">
           <div class="row">
@@ -70,7 +94,7 @@
                   </form>
                 </div>
               </div> 
-              {if $acc} 
+              <?php if ($_smarty_tpl->tpl_vars['acc']->value) {?> 
               <div class="row">
                 <div class="col-md-12" style="">
                   <div class="col-md-12 col-1 m-2" style="">
@@ -79,11 +103,16 @@
                         <h3 class="m-0 text-light " style="">
                           <div class="row">
                             <div class="border-light my-2 ml-2" style="">
-                              <h4 class="ml-5 text-light">Email: {$acc->getEmail()}</h4>
-                              <h4 class="ml-5 text-light">Username: {$acc->getUsername()}</h4>
-                              <h4 class="ml-5 text-light">Conto: {$acc->getConto()} €</h4>
-                              <h4 class="ml-5 text-light">Telefono: {$acc->getTelnumber()}</h4>
-                              <h4 class="ml-5 text-light">Descrizione: {$acc->getDescrizione()}</h4>
+                              <h4 class="ml-5 text-light">Email: <?php echo $_smarty_tpl->tpl_vars['acc']->value->getEmail();?>
+</h4>
+                              <h4 class="ml-5 text-light">Username: <?php echo $_smarty_tpl->tpl_vars['acc']->value->getUsername();?>
+</h4>
+                              <h4 class="ml-5 text-light">Conto: <?php echo $_smarty_tpl->tpl_vars['acc']->value->getConto();?>
+ €</h4>
+                              <h4 class="ml-5 text-light">Telefono: <?php echo $_smarty_tpl->tpl_vars['acc']->value->getTelnumber();?>
+</h4>
+                              <h4 class="ml-5 text-light">Descrizione: <?php echo $_smarty_tpl->tpl_vars['acc']->value->getDescrizione();?>
+</h4>
                             </div>
                           </div>
                         </h3>
@@ -92,7 +121,10 @@
                   </div>
                 </div>
               </div> 
-              {if {$acc->getActivate()}!='0'} 
+              <?php ob_start();
+echo $_smarty_tpl->tpl_vars['acc']->value->getActivate();
+$_prefixVariable1 = ob_get_clean();
+if ($_prefixVariable1 != '0') {?> 
               <div class="row">
                 <div class="form-group col-md-2 text-light mt-2" style="">
                   
@@ -103,23 +135,25 @@
                   <input type="number" name="cifra" class="form-control mt-2" id="form20" placeholder="---">
                 </div>
                 <div class="col-md-5  offset-md-2" style="">
-                    <input type="text" hidden="" name="email" value="{$acc->getEmail()}">
+                    <input type="text" hidden="" name="email" value="<?php echo $_smarty_tpl->tpl_vars['acc']->value->getEmail();?>
+">
                     <button class="btn btn-secondary mt-2">Ricarica Conto</button>
                   </form>
                 </div>
               </div> 
-              {else} <div class="row">
+              <?php } else { ?> <div class="row">
                 <div class="col-md-6" style=""></div>
                 <div class="col-md-6" style="">
                   <form action="/BookAndPlay/Admin/attivaUtente" method="POST">
-                    <input type="text" hidden="" name="email" value="{$acc->getEmail()}">
+                    <input type="text" hidden="" name="email" value="<?php echo $_smarty_tpl->tpl_vars['acc']->value->getEmail();?>
+">
                     <button class="btn btn-danger mt-2">Sblocca Utente</button>
                   </form>
                 </div>
               </div> 
-              {/if}
+              <?php }?>
             </div> 
-            {/if}
+            <?php }?>
           </div>
         </div>
       </div>
@@ -140,6 +174,7 @@
             <li> <a href="/BookAndPlay/Admin/hompage">Home</a> </li>
             <li> <a href="/BookAndPlay/Admin/partite">Partite</a> </li>
             <li> <a href="/BookAndPlay/Admin/ricaricaConto">Ricarica Conto</a> </li>
+            <li> <a href="/BookAndPlay/Admin/modificaProfilo">Modifica Profilo</a> </li>
           </ul>
         </div>
         <div class="col-lg-3 col-6 p-3">
@@ -171,9 +206,16 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
 </body>
 
-</html>
+</html><?php }
+}
