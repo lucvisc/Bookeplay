@@ -70,8 +70,8 @@ class CGestionePartite {
                     if (!isset($gg)) {
                         $pm->insertGiorno($giorno);
                         $pren = new EBooking(null, $_POST['livello'], $giorno->getGiorno(), $giorno->getFasceOrarie(), $_POST['descrizione'], null, $account->getEmail());
-                        FBooking::store($pren);
-                        FPren_partecipa::insert(null, $account->getEmail());
+                        $id=FBooking::store($pren);
+                        FPren_partecipa::insert($id, $account->getEmail());
                         $account = EAccount::PagaPartita($account);
                         $conto = $account->getConto();
                         $pm::update('conto', $conto, 'email', $account->getEmail(), "FAccount");

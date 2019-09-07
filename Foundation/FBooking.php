@@ -86,6 +86,7 @@ class FBooking{
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$boo);
         $boo->setIdbooking($id);//siccome idBooking è autoincrementate viene inserito nell'oggetto passato solo dopo lo store e quindi la creazione del suo id
+        return $id;
     }
 
     /**
