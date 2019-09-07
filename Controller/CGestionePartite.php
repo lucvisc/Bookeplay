@@ -34,7 +34,8 @@ class CGestionePartite {
             }
         }
         else {
-            header('Location: /BookAndPlay/User/login');
+            $view = new VGestionePartite();
+            $view->showPartiteAttive(null,'nouser');
         }
 
     }
