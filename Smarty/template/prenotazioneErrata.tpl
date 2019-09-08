@@ -85,6 +85,11 @@
                           <h4 class="ml-5 text-light">La tua partecipazione alla partita è stata cancellata</h4>
                         </div>
                       {else}
+                        {if $errorNum=='no_delete'}
+                          <div class="border-light my-2 ml-2" style="">
+                            <h4 class="ml-5 text-light">Non puoi disdire la partecipazione, questa operazione deve essere fatta prima di due giorni dalla partita</h4>
+                          </div>
+                        {else}
                     <div class="border-light my-2 ml-2" style="">
                       <h4 class="ml-5 text-light">Sei già presente in questa prenotazione</h4>
                     </div>
