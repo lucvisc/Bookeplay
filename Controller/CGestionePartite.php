@@ -278,7 +278,7 @@ class CGestionePartite {
                     $img = $pm->loadImg($account->getEmail());
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
-                    $view->showPartite($user, $acc, $img, null);
+                    $view->showPartite($user, $acc, $img, null, null);
                 }
             }
             elseif ($_SERVER['REQUEST_METHOD'] == "POST"){

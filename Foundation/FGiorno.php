@@ -115,6 +115,30 @@ class FGiorno {
     }
 
     /**
+     * Funzione che permette la load del giorno in base al paramentro giorno
+     * @param string $gg del giorno di riferimento
+     * @return object $gior
+     */
+    public static function loadGiornoFascia($field, $id)
+    {
+        $giorno = null;
+        $db = FDatabase::getInstance();
+        $result = $db->loadGiornoFascia(static::getClass(), $field, $id);
+        $rows_number = $db->interestedRows(static::getClass(), $field, $id);    //funzione richiamata,presente in FDatabase
+        if (($result != null) && ($rows_number == 1)) {
+            $giorno = new EGiorno($result['Giorno'], $result['FasciaOraria']);
+        } else {
+            if (($result != null) && ($rows_number > 1)) {
+                $giorno = array();
+                for ($i = 0; $i < count($result); $i++) {
+                    $giorno[] = new EGiorno($result[$i]['Giorno'], $result[$i]['FasciaOraria']);
+                }
+            }
+        }
+        return $giorno;
+    }
+
+    /**
      * Questo metodo restistuisce un array contenente solo le fascie orarie disponibili di un determinato giorno
      * @param $giorno da analizzare
      * @return mixed
@@ -132,7 +156,7 @@ class FGiorno {
             '18:00-19:00'=>'Disponibile',
             '20:00-21:00'=>'Disponibile',
             '21:00-22:00'=>'Disponibile');
-        $fascia=self::loadByField('Giorno', $giorno);
+        $fascia=self::loadGiornoFascia('Giorno', $giorno);
         $index=array_keys($array);
         if(isset($fascia)) {
             foreach ($fascia as $val) {
