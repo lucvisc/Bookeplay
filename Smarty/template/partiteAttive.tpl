@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/img/favicon.png">
 </head>
 
-<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: cover;  background-repeat: no-repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -119,7 +119,7 @@
       </div>
     </div>
   </div>
-  <div class="py-5" style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+  <div class="py-5" style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)); background-position: left bottom; background-size: 100%; background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 order-2 order-lg-1 p-0"></div>

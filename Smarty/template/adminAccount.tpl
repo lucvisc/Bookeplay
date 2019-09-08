@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/img/favicon.png">
 </head>
 
-<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left; background-size: cover;  background-repeat: no-repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -57,7 +57,7 @@
       <div class="row">
         <div class="col-md-3" style="">
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/homepage">Elenco Account</a>
-          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/partite">Crea/Cancella </a>
+          <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/partite">Partite</a>
           <a class="btn btn-block btn-info" href="/BookAndPlay/Admin/ricaricaConto">Ricarica Conto</a>
         </div>
         <div class="col-9 col-md-8" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); background-position: left top; background-size: 100%; background-repeat: repeat;">

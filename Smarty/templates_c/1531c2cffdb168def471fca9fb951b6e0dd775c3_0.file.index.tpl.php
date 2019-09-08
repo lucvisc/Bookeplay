@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-08 11:00:03
+/* Smarty version 3.1.33, created on 2019-09-08 22:36:43
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d74c313a55d87_10236406',
+  'unifunc' => 'content_5d75665b397b74_97922579',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1531c2cffdb168def471fca9fb951b6e0dd775c3' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\index.tpl',
-      1 => 1567849214,
+      1 => 1567974998,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d74c313a55d87_10236406 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d75665b397b74_97922579 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -44,13 +44,10 @@ function content_5d74c313a55d87_10236406 (Smarty_Internal_Template $_smarty_tpl)
     <?php echo '</script'; ?>
 >
 
-    <!-- stile della barra superiore -->
-    <link rel="stylesheet" href="/BookAndPly/Smarty/css/general.css">
-
     <title>BookAndPlay</title>
 </head>
 
-<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: cover;  background-repeat: no-repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
@@ -92,16 +89,16 @@ function content_5d74c313a55d87_10236406 (Smarty_Internal_Template $_smarty_tpl)
     <div class="container">
       <div class="row">
         <div class="col-lg-8 p-md-5 p-3 d-flex flex-column justify-content-center" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
-          <h1 class="text-light">A thousand sliders</h1>
-          <p class="mb-0 text-light">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.</p>
+          <h1 class="text-light">BOOK AND PLAY!</h1>
+          <p class="mb-0 text-light">Hai voglia di giocare una partita di calcetto ma non hai tempo di organizzarla?<br>Tranquillo, ci pensa BookAndPlay ad organizzarla, Registrati subito e crea o partecipa ad una partita</p>
         </div>
         <div class="col-lg-4 p-3">
           <div id="carousel2" class="carousel slide" data-ride="carousel" data-interval="5000">
             <div class="carousel-inner">
-              <div class="carousel-item active"> <img class="d-block w-100" src="https://static.pingendo.com/img-placeholder-1.svg"> </div>
-              <div class="carousel-item"> <img class="d-block w-100" src="https://static.pingendo.com/img-placeholder-2.svg"> </div>
-              <div class="carousel-item"> <img class="d-block w-100" src="https://static.pingendo.com/img-placeholder-3.svg"> </div>
-              <div class="carousel-item"> <img class="d-block w-100" src="https://static.pingendo.com/img-placeholder-4.svg"> </div>
+              <div class="carousel-item active"> <img class="d-block w-100" size="cover" src="/BookAndPlay/Smarty/img/calcetto4.jpg"> </div>
+              <div class="carousel-item"> <img class="d-block w-100" src="/BookAndPlay/Smarty/img/calcetto5.jpeg"> </div>
+              <div class="carousel-item"> <img class="d-block w-100" src="/BookAndPlay/Smarty/img/calcetto6.jpg"> </div>
+              <div class="carousel-item"> <img class="d-block w-100" src="/BookAndPlay/Smarty/img/calcetto7.jpg"> </div>
             </div>
             <a class="carousel-control-prev" href="#carousel2" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span></a>
@@ -116,7 +113,7 @@ function content_5d74c313a55d87_10236406 (Smarty_Internal_Template $_smarty_tpl)
     <div class="container">
       <div class="row">
         <div class="text-center mx-auto col-md-12">
-          <h1 class="text-light">I nostri campi</h1>
+          <h1 class="text-dark">I nostri campi</h1>
         </div>
       </div>
       <div class="row">
@@ -126,7 +123,7 @@ function content_5d74c313a55d87_10236406 (Smarty_Internal_Template $_smarty_tpl)
       </div>
     </div>
   </div>
-  <div class="py-3" style=" background-image: linear-gradient(to bottom, rgba(0, 0, 0, 255), rgba(0, 0, 0, 255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+  <div class="py-3" style=" background-image: linear-gradient(to bottom, rgba(0, 0, 0, 255), rgba(0, 0, 0, 255)); background-position: bottom left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-6 p-3">
@@ -144,23 +141,23 @@ function content_5d74c313a55d87_10236406 (Smarty_Internal_Template $_smarty_tpl)
           <h5> <b>About</b> </h5>
           <p class="mb-0"></p>
         </div>
-        <div class="col-lg-3 col-md-6 p-3">
+        <!--<div class="col-lg-3 col-md-6 p-3">
           <h5 style=""> <b>Follow us</b> </h5>
           <div class="row">
             <div class="col-md-12 d-flex align-items-center justify-content-between my-2"> <a href="#">
-                <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2"></i>
+                <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2" aria-hidden="true"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
+                <i class="d-block fa fa-instagram text-muted fa-lg mx-2" aria-hidden="true"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2"></i>
+                <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2" aria-hidden="true"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2"></i>
+                <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2" aria-hidden="true"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-reddit text-muted fa-lg mx-2"></i>
+                <i class="d-block fa fa-reddit text-muted fa-lg mx-2" aria-hidden="true"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
+                <i class="d-block fa fa-twitter text-muted fa-lg ml-2" aria-hidden="true"></i>
               </a> </div>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>

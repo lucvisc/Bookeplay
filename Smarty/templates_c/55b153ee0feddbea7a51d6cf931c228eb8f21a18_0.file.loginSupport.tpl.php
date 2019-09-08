@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-08 11:00:05
+/* Smarty version 3.1.33, created on 2019-09-08 22:05:36
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\loginSupport.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d74c3152484b2_19800212',
+  'unifunc' => 'content_5d755f10b7fd48_59101133',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '55b153ee0feddbea7a51d6cf931c228eb8f21a18' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\loginSupport.tpl',
-      1 => 1567672006,
+      1 => 1567949042,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d74c3152484b2_19800212 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d755f10b7fd48_59101133 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('error', (($tmp = @$_smarty_tpl->tpl_vars['error']->value)===null||$tmp==='' ? 'ok' : $tmp));?>
 <html>
@@ -115,23 +115,23 @@ function content_5d74c3152484b2_19800212 (Smarty_Internal_Template $_smarty_tpl)
           <h5> <b>About</b> </h5>
           <p class="mb-0"> </p>
         </div>
-        <div class="col-lg-3 col-md-6 p-3">
+        <!--<div class="col-lg-3 col-md-6 p-3">
           <h5 style=""> <b>Follow us</b> </h5>
           <div class="row">
             <div class="col-md-12 d-flex align-items-center justify-content-between my-2"> <a href="#">
-                <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2"></i>
+                <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2" aria-hidden="true"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
+                <i class="d-block fa fa-instagram text-muted fa-lg mx-2" aria-hidden="true"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2"></i>
+                <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2" aria-hidden="true"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2"></i>
+                <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2" aria-hidden="true"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-reddit text-muted fa-lg mx-2"></i>
+                <i class="d-block fa fa-reddit text-muted fa-lg mx-2" aria-hidden="true"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
+                <i class="d-block fa fa-twitter text-muted fa-lg ml-2" aria-hidden="true"></i>
               </a> </div>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>

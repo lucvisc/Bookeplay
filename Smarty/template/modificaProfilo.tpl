@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/img/favicon.png">
 </head>
 
-<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left; background-size: cover;  background-repeat: no-repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -75,9 +75,11 @@
                     <div class="form-group"> <label for="form20" class="text-light">Username</label> <input type="text" value="{$username}" name="username" required="required" class="form-control" id="form16" placeholder="----------"></div>
                     <div class="form-group"> <label for="form21" class="text-light">Email</label> <input type="email" value="{$email}" name="email" required="required" class="form-control" id="form16" placeholder="----------"> </div>
                     <div class="form-group"><label for="form21" class="text-light">Cambia immagine del profilo</label>
-                    <input name="file" id="file" type="file" accept="image/png, image/jpeg, image/jpg" size="40" /></div>
-                    <div class="form-group"> <label for="form21" class="text-light">Inserisci la vecchia password</label> <input type="password" name="old_password" required="required" class="form-control" id="form16"></div>
-                    <div class="form-group"> <label for="form21" class="text-light">Inserisci la nuova password</label> <input type="password" name="new_password" class="form-control" id="form16"></div>
+                      <input name="file" id="file" type="file" accept="image/png, image/jpeg, image/jpg" size="40" class="form-control" /></div>
+                    <div class="form-group"> <label for="form21" class="text-light">Inserisci la vecchia password</label>
+                      <input type="password" name="old_password" required="required" class="form-control" id="form16"></div>
+                    <div class="form-group"> <label for="form21" class="text-light">Inserisci la nuova password</label>
+                      <input type="password" name="new_password" class="form-control" id="form16"></div>
                     <div class="text-center">
                       {if $errorEmail!='ok'} 
                         <div style="color: red;"> 
@@ -138,7 +140,7 @@
           <div class="col-lg-3 col-6 p-3">
             <h5> <b>Main</b> </h5>
             <ul class="list-unstyled">
-              <li> <a href="#">Home</a><span class="sr-only">(current)</span> </li>
+              <li> <a href="/BookAndPlay">Home</a></li>
               <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
               <li> <a href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
             </ul>

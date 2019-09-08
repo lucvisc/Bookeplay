@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-09-08 15:16:27
+/* Smarty version 3.1.33, created on 2019-09-08 22:42:44
   from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\partiteAttive.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5d74ff2bec2c42_77411450',
+  'unifunc' => 'content_5d7567c4e00b11_04783829',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c747ad05541719358447bd1eccd14c9b38c36e30' => 
     array (
       0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\partiteAttive.tpl',
-      1 => 1567948582,
+      1 => 1567975362,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5d74ff2bec2c42_77411450 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d7567c4e00b11_04783829 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <?php $_smarty_tpl->_assignInScope('userlogged', (($tmp = @$_smarty_tpl->tpl_vars['userlogged']->value)===null||$tmp==='' ? 'nouser' : $tmp));?>
 <html>
@@ -34,7 +34,7 @@ function content_5d74ff2bec2c42_77411450 (Smarty_Internal_Template $_smarty_tpl)
   <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/img/favicon.png">
 </head>
 
-<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: cover;  background-repeat: no-repeat;">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -153,13 +153,14 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
       </div>
     </div>
   </div>
-  <div class="py-5" style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+  <div class="py-5" style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)); background-position: left bottom; background-size: 100%; background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 order-2 order-lg-1 p-0"></div>
       </div>
     </div>
   </div>
+  <footer>
   <div class="py-3 pt-5" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,255), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
@@ -199,6 +200,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
       </div>
     </div>
   </div>
+  </footer>
   <?php echo '<script'; ?>
  src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
 >

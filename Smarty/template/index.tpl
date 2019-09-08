@@ -22,7 +22,7 @@
     <title>BookAndPlay</title>
 </head>
 
-<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+<body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: cover;  background-repeat: no-repeat;">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar12">
         <span class="navbar-toggler-icon"></span>
@@ -64,16 +64,16 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 p-md-5 p-3 d-flex flex-column justify-content-center" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
-          <h1 class="text-light">A thousand sliders</h1>
-          <p class="mb-0 text-light">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.</p>
+          <h1 class="text-light">BOOK AND PLAY!</h1>
+          <p class="mb-0 text-light">Hai voglia di giocare una partita di calcetto ma non hai tempo di organizzarla?<br>Tranquillo, ci pensa BookAndPlay ad organizzarla, Registrati subito e crea o partecipa ad una partita</p>
         </div>
         <div class="col-lg-4 p-3">
           <div id="carousel2" class="carousel slide" data-ride="carousel" data-interval="5000">
             <div class="carousel-inner">
-              <div class="carousel-item active"> <img class="d-block w-100" src="https://static.pingendo.com/img-placeholder-1.svg"> </div>
-              <div class="carousel-item"> <img class="d-block w-100" src="https://static.pingendo.com/img-placeholder-2.svg"> </div>
-              <div class="carousel-item"> <img class="d-block w-100" src="https://static.pingendo.com/img-placeholder-3.svg"> </div>
-              <div class="carousel-item"> <img class="d-block w-100" src="https://static.pingendo.com/img-placeholder-4.svg"> </div>
+              <div class="carousel-item active"> <img class="d-block w-100" size="cover" src="/BookAndPlay/Smarty/img/calcetto4.jpg"> </div>
+              <div class="carousel-item"> <img class="d-block w-100" src="/BookAndPlay/Smarty/img/calcetto5.jpeg"> </div>
+              <div class="carousel-item"> <img class="d-block w-100" src="/BookAndPlay/Smarty/img/calcetto6.jpg"> </div>
+              <div class="carousel-item"> <img class="d-block w-100" src="/BookAndPlay/Smarty/img/calcetto7.jpg"> </div>
             </div>
             <a class="carousel-control-prev" href="#carousel2" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span></a>
@@ -88,7 +88,7 @@
     <div class="container">
       <div class="row">
         <div class="text-center mx-auto col-md-12">
-          <h1 class="text-light">I nostri campi</h1>
+          <h1 class="text-dark">I nostri campi</h1>
         </div>
       </div>
       <div class="row">
@@ -98,7 +98,7 @@
       </div>
     </div>
   </div>
-  <div class="py-3" style=" background-image: linear-gradient(to bottom, rgba(0, 0, 0, 255), rgba(0, 0, 0, 255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+  <div class="py-3" style=" background-image: linear-gradient(to bottom, rgba(0, 0, 0, 255), rgba(0, 0, 0, 255)); background-position: bottom left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-6 p-3">

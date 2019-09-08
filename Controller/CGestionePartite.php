@@ -41,7 +41,7 @@ class CGestionePartite {
             }
         }
         else {
-            if($_POST['giorno']!=null) {
+            if(isset($_POST['giorno'])){
                 $pm = new FPersistentManager();
                 $gg = self::splitGiorno($view->getGiorno());
                 $partite = $pm->load("giorno", $gg, "FBooking");
