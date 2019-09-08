@@ -149,10 +149,11 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPartite(EUser $user, EAccount $acc, $img, $part) {
+    public function showPartite(EUser $user, EAccount $acc, $img, $part, $num) {
         list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         $this->smarty->assign('pic64', $pic64);
+        $this->smarty->assign('num', $num);
         $this->smarty->assign('userlogged',"loggato");
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
@@ -166,9 +167,11 @@ class VGestionePartite {
      * @param $part elenco delle partite
      * @throws SmartyException
      */
-    public function showPartiteAttive($part,$logged) {
+    public function showPartiteAttive($part,$logged, $num,$nmax) {
         $this->smarty->assign('partite', $part);
         $this->smarty->assign('userlogged', $logged);
+        $this->smarty->assign('num', $num);
+        $this->smarty->assign('nmax', $nmax);
         $this->smarty->display('partiteAttive.tpl');
     }
 
@@ -190,12 +193,13 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showRiepilogo(EUser $user, EAccount $acc, $img, $part) { //, $part,$img
+    public function showRiepilogo(EUser $user, EAccount $acc, $img, $part, $num) { //, $part,$img
         list($type,$pic64) = $this->setImage($img, 'user');
         //$this->smarty->assign('type', $type);
         $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
         $this->smarty->assign('nome',$user->getName());
+        $this->smarty->assign('num',$num);
         $this->smarty->assign('cognome',$user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
         $this->smarty->assign('partita',$part);
@@ -228,10 +232,11 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $img, $pren) {  //,$img
+    public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $img, $pren, $num) {  //,$img
         list($type,$pic64) = $this->setImage($img, 'user');
         $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
+        $this->smarty->assign('num',$num);
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());
@@ -246,11 +251,12 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showPrenotazioneErrata(EUser $user, EAccount $acc, $img) {  //,$img
+    public function showPrenotazioneErrata(EUser $user, EAccount $acc, $img, $errorNum) {
+
         list($type,$pic64) = $this->setImage($img, 'user');
-        //$this->smarty->assign('type', $type);
         $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
+        $this->smarty->assign('errorNum',$errorNum);
         $this->smarty->assign('nome',$user->getName());
         $this->smarty->assign('cognome',$user->getSurname());
         $this->smarty->assign('conto',$acc->getConto());

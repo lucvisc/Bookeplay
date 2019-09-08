@@ -15,29 +15,39 @@ class CGestionePartite {
      * @param
      */
     static function partiteAttive(){
+        $view = new VGestionePartite();
         if(CUser::isLogged()){
             if ($_SERVER['REQUEST_METHOD'] == "GET"){
-                $view = new VGestionePartite();
-                $view->showPartiteAttive(null,'logged');
+                $view->showPartiteAttive(null,'logged',null, null);
             }
             elseif($_SERVER['REQUEST_METHOD'] == "POST"){
-                $view = new VGestionePartite();
                 $gg= self::splitGiorno($view->getGiorno());
-
                 $pm = new FPersistentManager();
                 $partite = $pm->load("giorno", $gg, "FBooking");
-                /*for($i=0; $i<count($partite); $i++) {
+                $nmax=count($partite);
+                for($i=0; $i<count($partite); $i++) {
                     $idP[$i] = $partite[$i]->getIdbooking();
                     $num[] = $pm->CountPartecipanti($idP[$i]);
-                }*/
-                $view->showPartiteAttive($partite, 'logged');
+                }
+                $view->showPartiteAttive($partite, 'logged', $num, $nmax);
             }
         }
         else {
-            $view = new VGestionePartite();
-            $view->showPartiteAttive(null,'nouser');
+            if($_POST['giorno']!=null) {
+                $pm = new FPersistentManager();
+                $gg = self::splitGiorno($view->getGiorno());
+                $partite = $pm->load("giorno", $gg, "FBooking");
+                $nmax = count($partite);
+                for ($i = 0; $i < count($partite); $i++) {
+                    $idP[$i] = $partite[$i]->getIdbooking();
+                    $num[] = $pm->CountPartecipanti($idP[$i]);
+                }
+                $view->showPartiteAttive($partite, 'nouser', $num, $nmax);
+            }
+            else {
+                $view->showPartiteAttive(null,'nouser',null, null);
+            }
         }
-
     }
 
     /**
@@ -73,6 +83,7 @@ class CGestionePartite {
                         $pren = new EBooking(null, $_POST['livello'], $giorno->getGiorno(), $giorno->getFasceOrarie(), $_POST['descrizione'], null, $account->getEmail());
                         $id=FBooking::store($pren);
                         FPren_partecipa::insert($id, $account->getEmail());
+                        $num=$pm->CountPartecipanti($id);
                         $account = EAccount::PagaPartita($account);
                         $conto = $account->getConto();
                         $pm::update('conto', $conto, 'email', $account->getEmail(), "FAccount");
@@ -86,7 +97,7 @@ class CGestionePartite {
 
                         print_r($prenotazione);
 
-                        $view->showPrenotazioneEffettuata($user, $acc, $img, $prenotazione); //
+                        $view->showPrenotazioneEffettuata($user, $acc, $img, $prenotazione,$num); //
                     } else {
                         $view->showFormCreation($user, $account, $img,  null, null, "no_giorno");
                     }
@@ -112,25 +123,32 @@ class CGestionePartite {
             $pren= $pm->VerificaPrenotazione($id, $account->getEmail());
 
             if (isset($pren)){
-                $view->showPrenotazioneErrata($user, $acc, $img);
+                $view->showPrenotazioneErrata($user, $acc, $img, 'no_error');
             }
             else {
                 if ($account->getConto() >= 5) {
-                    $pren_partecipa = $pm->insertPren_partecipa($id, $account->getEmail());
-                    $account = EAccount::PagaPartita($account);
-                    $conto = $account->getConto();
-                    $pm::update('conto', $conto, 'email', $account->getEmail(), "FAccount");
-                    $acc = $pm->load('email', $account->getEmail(), "FAccount");
-                    $part = $pm->load('idP', $id, "FBooking");
+                    $num=$pm->CountPartecipanti($id);
+                    if($num<=10) {
+                        $pren_partecipa = $pm->insertPren_partecipa($id, $account->getEmail());
+                        $num=$pm->CountPartecipanti($id);
+                        $account = EAccount::PagaPartita($account);
+                        $conto = $account->getConto();
+                        $pm::update('conto', $conto, 'email', $account->getEmail(), "FAccount");
+                        $acc = $pm->load('email', $account->getEmail(), "FAccount");
+                        $part = $pm->load('idP', $id, "FBooking");
 
-                    $newAcc = $pm->load('email',$account->getEmail(), "FAccount");
-                    $salvare = serialize($newAcc);
-                    $_SESSION['account'] = $salvare;
+                        $newAcc = $pm->load('email', $account->getEmail(), "FAccount");
+                        $salvare = serialize($newAcc);
+                        $_SESSION['account'] = $salvare;
 
-                    $view->showPrenotazioneEffettuata($user, $acc, $img, $part);
+                        $view->showPrenotazioneEffettuata($user, $acc, $img, $part, $num);
+                    }
+                    else{
+                        $view->showPrenotazioneErrata($user, $acc, $img, 'no_part');
+                    }
                 }
                 else {
-                    $view->showPrenotazioneErrata($user, $acc, $img);
+                    $view->showPrenotazioneErrata($user, $acc, $img, 'no_conto');
                 }
             }
         }
@@ -225,7 +243,11 @@ class CGestionePartite {
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
                     $giorno=self::splitGiorno($_POST['giorno']);
                     $part = $pm->load("giorno", $giorno, "FBooking");
-                    $view->showPartite($user, $acc,$img, $part);
+                    for($i=0; $i<count($part); $i++) {
+                        $idP[$i] = $part[$i]->getIdbooking();
+                        $num[] = $pm->CountPartecipanti($idP[$i]);
+                    }
+                    $view->showPartite($user, $acc,$img, $part,$num);
                 }
 
             }
@@ -275,8 +297,11 @@ class CGestionePartite {
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $part=$pm->loadRiepilogo($account->getEmail());
-
-                $view->showRiepilogo($user, $acc, $img, $part); //, $num
+                for($i=0; $i<count($part); $i++) {
+                    $idP[$i] = $part[$i]->getIdbooking();
+                    $num[] = $pm->CountPartecipanti($idP[$i]);
+                }
+                $view->showRiepilogo($user, $acc, $img, $part, $num); //, $num
             } else {
                 header('Location: /BookAndPlay/User/login');
             }
