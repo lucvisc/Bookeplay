@@ -80,6 +80,11 @@
                         <h4 class="ml-5 text-light">E' stato già raggiunto il numero massimo di partecipanti</h4>
                       </div>
                       {else}
+                      {if $errorNum=='delete'}
+                        <div class="border-light my-2 ml-2" style="">
+                          <h4 class="ml-5 text-light">La tua partecipazione alla partita è stata cancellata</h4>
+                        </div>
+                      {else}
                     <div class="border-light my-2 ml-2" style="">
                       <h4 class="ml-5 text-light">Sei già presente in questa prenotazione</h4>
                     </div>
