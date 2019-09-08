@@ -210,6 +210,18 @@ class FPersistentManager {
     }
 
     /**
+     * Metodo che permette di eliminare una riga dall tabella dati due parametri di ingresso
+     * vuole partecipare ad una partita
+     * @param $idPren
+     * @param $email
+     */
+    public static function deletePren_partecipa ($idPren, $email) {
+        $ris = null;
+        $ris = FPren_partecipa::delete($idPren, $email);
+        return $ris;
+    }
+
+    /**
      * Metodo che permette di verificare se un utente è gia presente in una prenotazione
      * @param $idPren
      * @param $email

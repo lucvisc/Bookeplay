@@ -100,6 +100,11 @@
                                   </div>
                                 </div>
                               </h3>
+                              <div class="row">
+                                <div class="col-md-6" style=""></div>
+                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/partita/{$booking->getIdbooking()}">Disdici Prenotazione</a>
+                                </div>
+                              </div>
                               {/foreach}
                               {else} 
                               <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 

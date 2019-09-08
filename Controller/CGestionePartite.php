@@ -37,8 +37,52 @@ class CGestionePartite {
             $view = new VGestionePartite();
             $view->showPartiteAttive(null,'nouser');
         }
-
     }
+
+
+    /**
+     * Questa funzione viene utilizzata per poter disiscrivere un utente dalla prenotazione nel quale partecipa
+     * la condizione è che può disiscriversi fino a due giorni prima del giorno della prenotazione
+     */
+    public static function disdici($id){
+        if (CUser::isLogged()){
+            $account=unserialize($_SESSION['account']);
+            $pm=new FPersistentManager();
+            $view= new VGestionePartite();
+            $partita=$pm->load('idP', $id, "FBooking");
+            $giorno=$partita[0]->getGiornobooking()->getGiorno();
+            $today = date("d/m/Y");
+            $giorno = strtotime($giorno);
+            $today = strtotime($today);
+            $diff = abs($giorno - $today);
+            $years = floor($diff / (365*60*60*24));
+            $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+            $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+            if($days>=1){
+                $pm->deletePren_partecipa($id, $account->getEmail());
+                $account = EAccount::ripristinaPartita($account);
+                $conto = $account->getConto();
+                $pm::update('conto', $conto, 'email', $account->getEmail(), "FAccount");
+
+                $acc = $pm->load('email', $account->getEmail(), "FAccount");
+                $user = $pm->load('email', $account->getEmail(), "FUser");
+                $img = $pm->loadImg($account->getEmail());
+                $prenotazione=$pm->loadPrenotazioneEff($_POST['giorno'], $_POST['fascia_oraria']);
+
+                $salvare = serialize($acc);
+                $_SESSION['account'] = $salvare;
+
+                $view->showPrenotazioneErrata($user, $acc, $img, 'delete');
+            }
+            else {
+                $view->showPrenotazioneErrata($user, $acc, $img, 'delete');
+            }
+        }
+        else {
+            header('Location: /BookAndPlay/User/login');
+        }
+    }
+
 
     /**
      * Funzione che viene richiamata per la creazione di una partita. Si possono avere diverse situazioni:
@@ -83,8 +127,6 @@ class CGestionePartite {
                         $newAcc = $pm->load('email',$account->getEmail(), "FAccount");
                         $salvare = serialize($newAcc);
                         $_SESSION['account'] = $salvare;
-
-                        print_r($prenotazione);
 
                         $view->showPrenotazioneEffettuata($user, $acc, $img, $prenotazione); //
                     } else {
