@@ -204,7 +204,7 @@ class FAccount {
         $acc=null;
         $db=FDatabase::getInstance();
         list ($result, $rows_number)=$db->loadAcc($input);
-        if(($result!=null) && ($rows_number == 1)) {        //:id,:username,:password,:email,:telnumb,:conto,:descrizione, :activate
+        if(($result!=null) && ($rows_number == 1)) {
             $acc[]=new EAccount($result['email'],$result['username'], $result['password'],$result['telnumb'],$result['conto'], $result['descrizione'], $result['activate']);
         }
         else {
