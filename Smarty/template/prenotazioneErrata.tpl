@@ -93,8 +93,10 @@
                     <div class="border-light my-2 ml-2" style="">
                       <h4 class="ml-5 text-light">Sei già presente in questa prenotazione</h4>
                     </div>
-                    {/if}
-                    {/if}
+                        {/if}
+                        {/if}
+                        {/if}
+                        {/if}
                     <div class="row">
                           <div class="col-md-6" style=""></div>
                           <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a></div>
