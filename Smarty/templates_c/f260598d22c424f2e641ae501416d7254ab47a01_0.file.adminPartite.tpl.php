@@ -1,15 +1,31 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.33, created on 2019-09-08 14:43:36
+  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\adminPartite.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5d74f7786fb221_52044332',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'f260598d22c424f2e641ae501416d7254ab47a01' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\adminPartite.tpl',
+      1 => 1567946612,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5d74f7786fb221_52044332 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="Luca Visconti, Catriel De Biase">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-  <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/img/favicon.png">
-</head>
+<head></head>
 
 <body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
@@ -91,9 +107,13 @@
                     </div>
                   </div>
                 
-                {if $partite}
-                {$i=0}
-                {foreach $partite as $booking} 
+                <?php if ($_smarty_tpl->tpl_vars['partite']->value) {?>
+                <?php $_smarty_tpl->_assignInScope('i', 0);?>
+                <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['partite']->value, 'booking');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
+?> 
                 <div class="row" style="">
                   <div class="col-md-12 ">
                     <div class="row" style="">
@@ -104,41 +124,53 @@
                               <h3 class="m-0 text-light border border-light rounded" style="">
                                 <div class="row">
                                   <div class="border-light my-2 ml-2" style="">
-                                      <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
-                                      <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
-                                      <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
-                                      <h4 class="ml-5 text-light">Partecipanti:  {$num[$i]}/10</h4>
-                                      {if $vaiPartita!='true'}
-                                      <h4 class="ml-5 text-light">Organizzatore: {$booking->getOrganizzatore()}</h4>
-                                      <h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
-                                      <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
-                                      <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>
-                                      {else}
-                                      {/if}
+                                      <h4 class="ml-5 text-light">ID Partita: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Giorno: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getGiorno();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Fascia Oraria: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getFasceOrarie();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Partecipanti:  <?php echo $_smarty_tpl->tpl_vars['num']->value[$_smarty_tpl->tpl_vars['i']->value];?>
+/10</h4>
+                                      <?php if ($_smarty_tpl->tpl_vars['vaiPartita']->value != 'true') {?>
+                                      <h4 class="ml-5 text-light">Organizzatore: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getOrganizzatore();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Quota: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getQuota();?>
+ €</h4>
+                                      <h4 class="ml-5 text-light">Livello: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getLivello();?>
+</h4>
+                                      <h4 class="ml-5 text-light">Note: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getNote();?>
+</h4>
+                                      <?php } else { ?>
+                                      <?php }?>
                                   </div>
                                 </div>
                               </h3>
-                              {if $vaiPartita}
+                              <?php if ($_smarty_tpl->tpl_vars['vaiPartita']->value) {?>
                               <div class="row">
                                 <div class="col-md-6" style=""></div>
-                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/Admin/partita/{$booking->getIdbooking()}">Vai alla partita</a></div>
+                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/Admin/partita/<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+">Vai alla partita</a></div>
                               </div>
-                              {else}
+                              <?php } else { ?>
                               <div class="row">
                                 <div class="col-md-6" style="">
-                                    <form action="/BookAndPlay/Admin/modifica/{$booking->getIdbooking()}" method="GET">
+                                    <form action="/BookAndPlay/Admin/modifica/<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+" method="GET">
                                     <button class="btn btn-secondary text-light px-3 mx-3 mt-1 ml-5 mb-1">Modifica Partita</button>
                                   </form>
                                 </div>                                
                                 <div class="col-md-6" style="">
-                                    <form action="/BookAndPlay/Admin/partita/{$booking->getIdbooking()}" method="POST">
-                                    <input type="text" hidden="" name="id" value="{$booking->getIdbooking()}">
+                                    <form action="/BookAndPlay/Admin/partita/<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+" method="POST">
+                                    <input type="text" hidden="" name="id" value="<?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+">
                                     <button class="btn btn-danger text-light px-3 mx-3 mt-1 mb-1">Cancella Partita</button>
                                   </form>
                                 </div>
                               </div>
                               </div>
-                              {/if}
+                              <?php }?>
                             </div>
                           </div>
                         </div>
@@ -146,11 +178,14 @@
                     </div>
                   </div>
                 </div>
-                {$i=$i+1}
-                {/foreach} 
-                {else} 
+                <?php $_smarty_tpl->_assignInScope('i', $_smarty_tpl->tpl_vars['i']->value+1);?>
+                <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?> 
+                <?php } else { ?> 
                   <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
-                {/if}
+                <?php }?>
               </div>
             </div>
           </div>
@@ -197,30 +232,37 @@
           <h5> <b>About</b> </h5>
           <p class="mb-0"> </p>
         </div>
-        <!--<div class="col-lg-3 col-md-6 p-3">
-           <h5 style=""> <b>Follow us</b> </h5>
-           <div class="row">
-             <div class="col-md-12 d-flex align-items-center justify-content-between my-2"> <a href="#">
-                 <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2" aria-hidden="true"></i>
-               </a> <a href="#">
-                 <i class="d-block fa fa-instagram text-muted fa-lg mx-2" aria-hidden="true"></i>
-               </a> <a href="#">
-                 <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2" aria-hidden="true"></i>
-               </a> <a href="#">
-                 <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2" aria-hidden="true"></i>
-               </a> <a href="#">
-                 <i class="d-block fa fa-reddit text-muted fa-lg mx-2" aria-hidden="true"></i>
-               </a> <a href="#">
-                 <i class="d-block fa fa-twitter text-muted fa-lg ml-2" aria-hidden="true"></i>
-               </a> </div>
-           </div>-->
+        <div class="col-lg-3 col-md-6 p-3">
+          <h5 style=""> <b>Follow us</b> </h5>
+          <div class="row">
+            <div class="col-md-12 d-flex align-items-center justify-content-between my-2"> <a href="#">
+                <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2" aria-hidden="true"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-instagram text-muted fa-lg mx-2" aria-hidden="true"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2" aria-hidden="true"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2" aria-hidden="true"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-reddit text-muted fa-lg mx-2" aria-hidden="true"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-twitter text-muted fa-lg ml-2" aria-hidden="true"></i>
+              </a> </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
 </body>
 
-</html>
+</html><?php }
+}

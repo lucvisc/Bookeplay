@@ -1,15 +1,31 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.33, created on 2019-09-08 12:39:53
+  from 'C:\xampp\htdocs\BookAndPlay\Smarty\template\adminPrenotazione.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.33',
+  'unifunc' => 'content_5d74da791a7da5_92653231',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '3241451e06b930d2a25989f1354ccd3ac5fce04e' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\BookAndPlay\\Smarty\\template\\adminPrenotazione.tpl',
+      1 => 1567923521,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5d74da791a7da5_92653231 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Luca Visconti, Catriel De Biase">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-    <link rel="icon" type="image/png" href="/BookAndPlay/Smarty/img/favicon.png">
-</head>
+<head></head>
 
 <body style=" background-image: url(/BookAndPlay/Smarty/img/sfondo_2.jpg);  background-position: top left;  background-size: 100%;  background-repeat: repeat;">
   <meta charset="utf-8">
@@ -70,25 +86,38 @@
                 <div class="col-md-12 col-1 m-2" style="">
                   <h3 class="text-light ml-1 m-0 border rounded" style="">
                      <div class="row">
-                     {if $partita}
-                        {foreach $partita as $booking}
+                     <?php if ($_smarty_tpl->tpl_vars['partita']->value) {?>
+                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['partita']->value, 'booking');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['booking']->value) {
+?>
                                 <h3 class="m-0 text-light " style="">
                                   <div class="row">
                                     <div class="border-light my-2 ml-2" style="">
-                                        <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
-                                        <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
-                                        <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
+                                        <h4 class="ml-5 text-light">ID Partita: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getIdbooking();?>
+</h4>
+                                        <h4 class="ml-5 text-light">Giorno: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getGiorno();?>
+</h4>
+                                        <h4 class="ml-5 text-light">Fascia Oraria: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getGiornobooking()->getFasceOrarie();?>
+</h4>
                                         <h4 class="ml-5 text-light">Partecipanti:  0/10</h4>
-                                        <h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
-                                        <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
-                                        <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>
+                                        <h4 class="ml-5 text-light">Quota: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getQuota();?>
+ €</h4>
+                                        <h4 class="ml-5 text-light">Livello: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getLivello();?>
+</h4>
+                                        <h4 class="ml-5 text-light">Note: <?php echo $_smarty_tpl->tpl_vars['booking']->value->getNote();?>
+</h4>
                                     </div>
                                   </div>
                                 </h3>
-                        {/foreach}
-                     {else}
+                        <?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                     <?php } else { ?>
                        <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p>
-                     {/if}
+                     <?php }?>
                     </div>
                   </h3>
                 </div>
@@ -128,30 +157,37 @@
           <h5> <b>About</b> </h5>
           <p class="mb-0"> </p>
         </div>
-        <!--<div class="col-lg-3 col-md-6 p-3">
+        <div class="col-lg-3 col-md-6 p-3">
           <h5 style=""> <b>Follow us</b> </h5>
           <div class="row">
             <div class="col-md-12 d-flex align-items-center justify-content-between my-2"> <a href="#">
-                <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2" aria-hidden="true"></i>
+                <i class="d-block fa fa-facebook-official text-muted fa-lg mr-2"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-instagram text-muted fa-lg mx-2" aria-hidden="true"></i>
+                <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2" aria-hidden="true"></i>
+                <i class="d-block fa fa-google-plus-official text-muted fa-lg mx-2"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2" aria-hidden="true"></i>
+                <i class="d-block fa fa-pinterest-p text-muted fa-lg mx-2"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-reddit text-muted fa-lg mx-2" aria-hidden="true"></i>
+                <i class="d-block fa fa-reddit text-muted fa-lg mx-2"></i>
               </a> <a href="#">
-                <i class="d-block fa fa-twitter text-muted fa-lg ml-2" aria-hidden="true"></i>
+                <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
               </a> </div>
-          </div>-->
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"><?php echo '</script'; ?>
+>
 </body>
 
-</html>
+</html><?php }
+}
