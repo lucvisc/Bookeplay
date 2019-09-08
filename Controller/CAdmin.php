@@ -418,8 +418,13 @@ class CAdmin{
      * gg/mm/aaaa.
      */
     static function splitGiorno($giorno){
-        $giorno=str_split($giorno,1);
-        $gg=$giorno[8].$giorno[9]."/".$giorno[5].$giorno[6]."/".$giorno[0].$giorno[1].$giorno[2].$giorno[3];
+        if ($giorno!=null) {
+            $giorno = str_split($giorno, 1);
+            $gg = $giorno[8] . $giorno[9] . "/" . $giorno[5] . $giorno[6] . "/" . $giorno[0] . $giorno[1] . $giorno[2] . $giorno[3];
+        }
+        else{
+            $gg=null;
+        }
         return $gg;
     }
 
