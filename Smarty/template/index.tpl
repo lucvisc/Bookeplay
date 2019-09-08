@@ -95,9 +95,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4 p-3"> <img class="img-fluid d-block" src="https://static.pingendo.com/cover-bubble-light.svg"> </div>
-        <div class="col-md-4 p-3"> <img class="img-fluid d-block" src="https://static.pingendo.com/cover-moon.svg"> </div>
-        <div class="col-md-4 p-3"> <img class="img-fluid d-block" src="https://static.pingendo.com/cover-bubble-dark.svg"> </div>
+
+        <div class="col-md-4 p-3 ml-5 mr-5" > <img class="img-fluid d-block" src="/BookAndPlay/Smarty/img/calcetto2.jpg"> </div>
+        <div class="col-md-4 p-3 ml-5 mr-5" > <img class="img-fluid d-block" src="/BookAndPlay/Smarty/img/calcetto3.jpg"> </div>
       </div>
     </div>
   </div>

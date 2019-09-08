@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {assign var='userlogged' value=$userlogged|default:'nouser'}
+{assign var='errorNum' value=$errorNum|default:'noError'}
+
 <html>
 
 <head></head>
@@ -68,12 +70,24 @@
               <div class="col-md-12 col-1 m-2" style="">
                 <h3 class="text-light m-0 border border-light rounded" style="">
                   <div class="row">
-                        <div class="border-light my-2 ml-2" style="">
-                            <h4 class="ml-5 text-light">Sei già presente in questa prenotazione</h4>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6" style=""></div>
-                            <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a></div>
+                    {if $errorNum=='no_conto'}
+                      <div class="border-light my-2 ml-2" style="">
+                        <h4 class="ml-5 text-light">Non hai il conto sufficiente per la prenotazione</h4>
+                      </div>
+                    {else}
+                    {if $errorNum=='no_part'}
+                      <div class="border-light my-2 ml-2" style="">
+                        <h4 class="ml-5 text-light">E' stato già raggiunto il numero massimo di partecipanti</h4>
+                      </div>
+                      {else}
+                    <div class="border-light my-2 ml-2" style="">
+                      <h4 class="ml-5 text-light">Sei già presente in questa prenotazione</h4>
+                    </div>
+                    {/if}
+                    {/if}
+                    <div class="row">
+                          <div class="col-md-6" style=""></div>
+                          <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/riepilogo">Riepilogo</a></div>
                         </div>
                   </div>
                 </h3>

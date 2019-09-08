@@ -78,7 +78,7 @@
                                         <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
                                         <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
                                         <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
-                                        <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
+                                        <h4 class="ml-5 text-light">Partecipanti:  {$num}/10</h4>
                                         <h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
                                         <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
                                         <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>

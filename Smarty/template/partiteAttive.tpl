@@ -73,9 +73,10 @@
                       </form>
                     </div>
                   </div>
-                </div> 
-                {if $partite} 
-                {foreach $partite as $booking} 
+                </div>
+                {if $partite}
+                {$i=0}
+                {foreach $partite as $booking}
                 <div class="row" style="">
                   <div class="col-md-12 ">
                     <div class="row" style="">
@@ -89,7 +90,7 @@
                                     <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
                                     <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
                                     <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>           
-                                    <h4 class="ml-5 text-light">Partecipanti: 0/10</h4> 
+                                    <h4 class="ml-5 text-light">Partecipanti: {$num[$i]}/10</h4>
                                   </div>
                                 </div>
                               </h3>
@@ -99,8 +100,9 @@
                       </div>
                     </div>
                   </div>
-                </div> 
-                {/foreach} 
+                </div>
+                {$i=$i+1}
+                {/foreach}
                 {else} <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
                 {/if}
               </div>
@@ -110,7 +112,7 @@
       </div>
     </div>
   </div>
-  <div class="py-5" style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgb(0, 0, 0)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+  <div class="py-5" style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)); background-position: left top; background-size: 100%; background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 order-2 order-lg-1 p-0"></div>
@@ -123,7 +125,7 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="#">Home</a><span class="sr-only">(current)</span> </li>
+            <li> <a href="/BookAndPlay">Home</a> </li>
             <li> <a href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
             <li> <a href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
           </ul>
