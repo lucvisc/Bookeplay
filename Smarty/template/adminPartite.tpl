@@ -178,7 +178,7 @@
       </div>
     </div>
   </div>
-  <div class="py-5" >
+  <div class="py-5" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,255)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 order-2 order-lg-1 p-0"></div>
