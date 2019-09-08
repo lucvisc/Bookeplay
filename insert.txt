@@ -37,7 +37,10 @@ VALUES
 INSERT INTO `pren_partecipa` values 
 (1, 'catdeb@hotmail.com'),
 (1, 'luca.visco@hotmail.com'),
-(2, 'catdeb@hotmail.com');
+(5, 'luca.visco@hotmail.com'),
+(2, 'catdeb@hotmail.com'),
+(3, 'catdeb@hotmail.com'),
+(4, 'catdeb@hotmail.com');
 
 INSERT INTO `mediauser` ( `filename`, `type`, `emailutente`, `immagine`) VALUES
 ('catriel.jpg', 'image/jpg', 'catdeb@hotmail.com', LOAD_FILE ('/xampp/htdocs/BookAndPlay/Smarty/img/avatar_catriel.jpg')),
