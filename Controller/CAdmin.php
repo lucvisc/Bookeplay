@@ -296,20 +296,23 @@ class CAdmin{
 	                $view->showModificaPartita($partita, $giorno, $partDisp, 'no_error');
                 }
 	            elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-                    if (!isset($_POST['new_giorno'])) {
+                    if ($_POST['new_giorno']== null) {
                         if (isset($_POST['new_fascia_oraria'])) {
                             $prenotazione = $pm->loadPrenotazioneEff($giorno, $_POST['new_fascia_oraria']);
                             if (!isset($prenotazione)) {
                                 $pm::update('FasciaOraria', $_POST['new_fascia_oraria'], 'idP', $id, "FBooking");
                                 $partita = $pm->load('idP', $id, "FBooking");
                                 $view->showPrenotazione($partita);
-                            } else {
+                            }
+                            else {
                                 $view->showModificaPartita(null, null, null, 'no_error');
                             }
-                        } else {
+                        }
+                        else {
                             $view->showModificaPartita(null, null, null, 'no_error');
                         }
-                    } else {
+                    }
+                    else {
                         $newGiorno=self::splitGiorno($_POST['new_giorno']);
                         $prenotazione = $pm->loadPrenotazioneEff($newGiorno, $_POST['new_fascia_oraria']);
                         if (!isset($prenotazione)) {
