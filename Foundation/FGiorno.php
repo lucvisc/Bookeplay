@@ -189,7 +189,7 @@ class FGiorno {
     public static function update($field, $newvalue, $pk, $id)
     {
         $db = FDatabase::getInstance();
-        $result = $db->updateDB(static::getClass(), $field, $newvalue, $pk, $id);
+        $result = $db->updateDBGiorno(static::getClass(), $field, $newvalue, $pk, $id);
         if ($result) return true;
         else return false;
     }
@@ -203,7 +203,7 @@ class FGiorno {
     public static function delete($field, $id)
     {
         $db = FDatabase::getInstance();
-        $result = $db->deleteDB(static::getClass(), $field, $id);   //funzione richiamata,presente in FDatabase
+        $result = $db->deleteDBGiorno(static::getClass(), $id);   //funzione richiamata,presente in FDatabase
         if ($result)
             return true;
         else
