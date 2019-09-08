@@ -143,7 +143,7 @@ class FUser {
     }
 
     /**
-     * Metodo che aggiorna i campi di un Address
+     * Metodo che aggiorna i campi di un0 user
      * @param $field campo nel quale si vuole modificare il valore
      * @param $newvalue nuovo valore da assegnare
      * @param $pk nome della colonna utilizzata per l'espressione "where" della query
@@ -179,43 +179,5 @@ class FUser {
         }
         return $us;
     }
-
-
-
-
-    /**
-     * Metodo che  permette di ritornare gli utenti del db, filtrandoli attraverso una stringa in input,
-     * la quale può contenere solo il nome, solo il cognome o nome e cognome dell'utente interessato
-     * @param $string valore inserito nella barra di ricerca dell'admin
-     * @return object|null $utente Utenteloggato
-     */
-    public static function loadUtentiByString($string){
-        $utente = null;
-        $toSearch = null;
-        // attraverso gli spazi divido le parole immesse nella barra di ricerca
-        $pieces = explode(" ", $string);
-        // prendo l'ultimo elemento dell'array e se questo coincide con il primo elemento, so che devo cercare il match
-        // o solo con il nome o solo con il cognome
-        $lastElement = end($pieces);
-        if ($pieces[0] == $lastElement) {
-            $toSearch = 'nome';
-        }
-        $db=FDatabase::getInstance();
-        list ($result, $rows_number)=$db->utentiByString($pieces, $toSearch);
-        if(($result!=null) && ($rows_number == 1)) {
-            $utente= new EUser($result['idAcc'],$result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
-        }
-        else {
-            if(($result!=null) && ($rows_number > 1)){
-                $utente = array();
-                for($i=0; $i<count($result); $i++){
-                    $utente[]=new EUser($result['idAcc'],$result['name'], $result['surname'], $result['dataNascita'],$result['gender'],$result['tipo']);
-                }
-            }
-        }
-        return $utente;
-    }
-
-
 }
 ?>

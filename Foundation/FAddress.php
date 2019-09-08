@@ -66,7 +66,7 @@ class FAddress {
     }
 
     /**
-     * Permette la load sul db
+     * Permette la load sul db dell'indirizzo
      * @param $id valore da confrontare per trovare l'oggetto
      * @param $field campo nel quale effettuare la ricerca
      * @return object $address Address
@@ -89,22 +89,7 @@ class FAddress {
         }
         return $address;
     }
-    /**
-     * Permette la load sul db
-     * @param int l'id dell'oggetto indirizzo
-     * @return object $address indirizzo
-     */
-    public static function loadByIdAccount($id){
-        $sql="SELECT * FROM ".static::getTables()." WHERE idAcc=".$id.";";
-        $db=FDatabase::getInstance();
-        $result=$db->loadsingle($sql);
-        if($result!=null){
-            $address=new EAddress($result['idAcc'],$result['Comune'], $result['Provincia'], $result['CAP'],$result['Via'],$result['NumCivico']);
-            $address->setId($result['id']);
-            return $address;
-        }
-        else return null;
-    }
+
 
     /**
      * Funzione che permette di verificare se esiste un indirizzo nel database

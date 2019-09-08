@@ -92,7 +92,7 @@ class FMediaUser {
 
     public static function UpdateImg(EMediaUser $obj, $media){
         $db = FDatabase::getInstance();
-        $ris=$db->UpdateImg(static::getClass(), $obj, $media);
+        $ris=$db->UpdateImg($obj, $media);
         return $ris;
     }
 

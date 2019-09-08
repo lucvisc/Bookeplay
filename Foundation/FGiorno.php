@@ -115,7 +115,7 @@ class FGiorno {
     }
 
     /**
-     * Funzione che permette la load del giorno in base al paramentro giorno
+     * Funzione che permette la load della fascia oraria in base al paramentro giorno
      * @param string $gg del giorno di riferimento
      * @return object $gior
      */
