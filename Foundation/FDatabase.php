@@ -735,7 +735,7 @@ class FDatabase
      */
     public function loadAcc($input) {
         try {
-            $query = "SELECT * FROM account WHERE  activate = " . $input . " ;";
+            $query = "SELECT * FROM account, utente WHERE  account.email=utente.email AND tipo='registrato' AND activate = " . $input . " ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
 
