@@ -51,21 +51,15 @@ class CUser {
         $view = new VUser();
         $pm = new FPersistentManager();
         $account = $pm->loadLogin($_POST['email'], $_POST['password']);
-
-        if ($account != null && $account->getActivate() != 0 ){ //&& $account->getActivate() != false
-
-            if (session_status() == PHP_SESSION_NONE) {
-                session_set_cookie_params('3600'); // 1 ora dal login
+        if ($account != null && $account->getActivate() != 0 ){
+            if (session_status() == PHP_SESSION_NONE) {         //se nella sessione non è presente alcun parametro
+                session_set_cookie_params('3600');       // setta i cookie e la sessione ad 1 ora dal login
                 session_start();
-                $salvare = serialize($account);
-                $_SESSION['account'] = $salvare;
-
-                print($_SESSION['account']);
-
-                if ($_POST['email'] != 'admin@admin.com') {
+                $salvare = serialize($account);                 //salviamo l'account di chi ha effettuato l'accesso
+                $_SESSION['account'] = $salvare;                //nella variabile globale poiché consideriamo che l'HTTP è un protocollo
+                if ($_POST['email'] != 'admin@admin.com') {     //senza stato
                     if (isset($_COOKIE['nome_visitato'])) {
                         header('Location: /BookAndPlay/User/profiloUtente');
-                        //$view->showProfile();
                     }
                     else {
                         header('Location: /BookAndPlay/User/profiloUtente');
@@ -81,12 +75,33 @@ class CUser {
         }
     }
 
+    /**
+     * Metodo che verifica se l'utente è loggato, attreverso la verifia sul PHPSESSID, se lo status delle sessione è
+     * vuoto allora iniziane uno con session_start() che è un session ID che trasmette tra il browser ed il server le
+     * richieste HTTP, se il PHPSESSID non esiste ma esite la SESSION con allora poni l'identificativo uguale a true che
+     * specifica che l'utente o l'admin sono gia loggati
+     * Questa funzione puo essere utilizzata soprattutto per controllare se un utente non loggato prova ad accedere
+     * ad un URL di un utente loggato
+     */
+    static function isLogged() {
+        $identificato = false;
+        if (isset($_COOKIE['PHPSESSID'])) {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+        }
+        if (isset($_SESSION['account'])) {
+            $identificato = true;
+        }
+        return $identificato;
+    }
+
 
 	/**
 	 * Funzione che provvede alla rimozione delle variabili di sessione, alla sua distruzione e a rinviare alla homepage
 	 */
 	static function logout(){
-     //   session_name('BookAndPlay');
+     // session_name('BookAndPlay');
 		session_start();
 		session_unset();
 		session_destroy();
@@ -101,29 +116,17 @@ class CUser {
         $view->Homepage();
     }
 
-	/**
-	 * Metodo che verifica se l'utente è loggato
-	 */
-	static function isLogged() {
-		$identificato = false;
-		if (isset($_COOKIE['PHPSESSID'])) {
-			if (session_status() == PHP_SESSION_NONE) {
-				session_start();
-			}
-		}
-		if (isset($_SESSION['account'])) {
-			$identificato = true;
-		}
-		return $identificato;
-	}
 
+    /**
+     * Funzione utilizzata per visualizzare l'errore
+     */
 	public function error() {
     	$view = new VError();
     	$view->error('1');
 	}
 
-    /** Metodo che mostra il profilo dell'utente loggato o il profilo di un altro utente a seconda del tipo di URL:
-     *
+    /**
+     *Metodo che mostra il profilo dell'utente loggato o il profilo di un altro utente a seconda del tipo di URL:
      */
     static function profiloUtente() {
         $view = new VUser();
@@ -152,8 +155,8 @@ class CUser {
     }
 
 
-    /** Metodo che mostra il profilo dell'utente loggato o il profilo di un altro utente a seconda del tipo di URL:
-     *
+    /**
+     * Metodo che mostra il profilo dell'utente loggato
      */
     static function profilo() {
         $view = new VUser();
@@ -179,9 +182,10 @@ class CUser {
 
 	/**
 	 * Funzione che si occupa di mostrare la form di registrazione per un utente
-	 * 1) se il metodo della richiesta HTTP è GET e si è loggati, avviene il reindirizzamento alla homepage;
+	 * 1) se il metodo della richiesta HTTP è GET e si è loggati, avviene il reindirizzamento alla pagina del profilo;
 	 * 2) se il metodo della richiesta HTTP è GET e non si è loggati, avviene il reindirizzamento vero e proprio alla form di registrazione;
-	 * 3) se il metodo della richiesta HTTP è POST viene invocato il metodo registra_cliente() che si occupa della gestione dei dati inseriti nella form.
+	 * 3) se il metodo della richiesta HTTP è POST viene invocato il metodo di registrazione che si occupa di gestire
+     * i dati inseriti nella form
 	 */
 	static function registrazioneUtente(){
 		if($_SERVER['REQUEST_METHOD']=="GET") {
@@ -206,9 +210,10 @@ class CUser {
 	}
 
 	/**
-	 * Funzione di supporto che si occupa di verificare i dati inseriti nella form di registrazione per il cliente .
-	 * In questo metodo avviene la verifica sull'univocità dell'email inserita;
-	 * se questa verifiche non riscontrano problemi, si passa verifica dell'immagine inserita e quindi alla store nel db vera e propria del cliente.
+	 * Funzione di supporto che si occupa di verificare i dati inseriti nella form di registrazione per un utente
+	 * In questo metodo avviene in primo luogo la verifica sull'univocità dell'email inserita;
+	 * se non ci sono problemi sull'email, si passa verifica dell'immagine inserita e successivamente al salvataggio dei
+     * dati immessi dall'utente che intende registrarsi
 	 */
 	static function VerificaRegistrazioneUser() {
 		$pm = new FPersistentManager();
@@ -248,12 +253,12 @@ class CUser {
 	}
 
     /**
-     * Funzione che ha il compito di richiamare una nuova vista a partire da quella del profilo privato che permette la
-     * modifica degli attributi dell'User
+     * Funzione che ha il compito di richiamare la form della modifica del profilo e successivamente di reperire i dati immessi
      * 1) se il metodo della richiesta HTTP è GET e si è loggati, viene presentata la pagina per modificare i propri dati;
      * 2) se il metodo della richiesta HTTP è GET ma non si è loggati, allora avviene il reindirizzamento verso la form di login;
-     * 3) se il metodo della richiesta HTTP è POST, vengono rilevati tutti i valori inseriti dall'utente per la modifica e dopo aver controllato
-     * 	  l'esistenza dell'email e la correttezza della password inserita
+     * 3) se il metodo della richiesta HTTP è POST, vengono rilevati tutti i valori inseriti dall'utente per la modifica
+     * e dopo aver controllato l'esistenza dell'email e la correttezza della password inserita si passa alla modifica
+     * vera e propria del profilo
      */
     public function modificaProfilo() {
         $pm = new FPersistentManager();
@@ -331,10 +336,10 @@ class CUser {
         }
     }
     /**
-     * Funzione di supporto per le altre. Questa funzione, grazie alla chiamata della funzione upload(), si occupa di gestire
-     * il comportamento della form rispetto all'inserimento delle immagini dando la possibilità di notificare errori relativi al
-     * tipo di immagine o la dimensione.
-     * @param $account che  possiede un'immagine
+     * Funzione di supporto per la modifica del profilo
+     * Questa funzione, grazie alla chiamata della funzione upload(), si occupa di gestire il comportamento della form
+     * rispetto all'inserimento delle immagini e fornendo la possibilià di notificare degli errori
+     * @param $account che possiede un'immagine
      * @return bool
      */
     static function modificaprofiloimmagine($account) {
@@ -368,9 +373,10 @@ class CUser {
 
     /**
      * Funzione di supporto che si occupa di verificare la correttezza dell'immagine inserita nella form di registrazione.
+     * e nella form di modifica
      * Nel caso in cui non ci sono errori di inserimento, avviene la store dell'utente e la corrispondente immagine nel database.
      * @param $account object Account
-     * @param $funz tipo di funzione da svolgere
+     * @param $funz tipo di funzione da svolgere, poiché è utilizzata da più funzioni
      * @param $nome_file passato nella form per l'immagine
      * @return string stato
      */
@@ -420,9 +426,11 @@ class CUser {
 
     /**
      * Funzione che si occupa di fare tutti i controlli necessari per aggiornare i campi che un utente desidera modificare
-     * nella sua form di modifica profilo, viene utilizzata dalla function modificaprofilo
+     * nella sua form di modifica profilo, viene utilizzata dalla function modificaProfilo
      * @param $account obj rappresentante l'account di un user
      * @param $class classe del account che richiede le modifiche
+     * @param $username variabile inserita da input (reperita da $_POST['username'])
+     * @param $pass variabile inserita da input (reperita da $_POST['password'])
      */
     static private function updateCampi($account,$class, $username, $pass) {
         $pm = new FPersistentManager();

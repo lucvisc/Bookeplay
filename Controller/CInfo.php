@@ -8,6 +8,9 @@
 require_once 'include.php';
 class CInfo {
 
+    /**
+     * Funzione utilizzata per visualizzare tutte le indormazioni riguardanti l'applicazione
+     */
 	public function informazioni(){
 	    if (CUser::isLogged()) {
             $view = new VInfo();

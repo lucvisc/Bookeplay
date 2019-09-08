@@ -13,7 +13,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-
     <title>Errore!</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/cover/">
@@ -33,7 +32,7 @@
 
         </div>
       </header>
-
+      
       <main role="main" class="inner cover">
         <h1 class="cover-heading text-primary">Qualcosa è andato storto</h1>
         <p class="lead">Si sono verificati errori dovuti alla mancanza di componenti non installati o non attivati nel browser. Si prega di riprovare dopo aver attivato JavaScript e attivato i cookie.</p>

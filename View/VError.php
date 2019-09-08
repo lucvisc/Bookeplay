@@ -14,7 +14,7 @@ class VError {
 	 */
 	public function __construct()
 	{
-		$this->smarty = StartSmarty::configuration();
+		$this->smarty = ConfSmarty::configuration();
 	}
 
 	/**
@@ -25,7 +25,7 @@ class VError {
 		$this->smarty->assign('i', $i);
 		switch ($i) {
 			case 1 :
-				$this->smarty->assign('testo', 'Autorizzazione necessaria.');
+				$this->smarty->assign('testo', 'Non hai una autorizzazione necessaria.');
 				break;
 			case 4 :
 				$this->smarty->assign('testo', 'La URL richiesta non esiste/non è stata trovata su questo server.');

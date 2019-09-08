@@ -17,7 +17,7 @@ class VAdmin {
     }
 
     /**
-     * Restituisce l'username dell'utente da bloccare/sbloccare dal campodi input
+     * Restituisce l'username dell'utente da bloccare/sbloccare dal campo di input
      * Inviato con metodo post
      * @return string contenente l'username dell'utente
      */
@@ -41,7 +41,7 @@ class VAdmin {
     }
 
     /**
-     * Restituisce l'email dell'utente da bloccare/sbloccare dal campodi input
+     * Restituisce la cifra che l'admin deve caricare sull'account dell'utente
      * Inviato con metodo post
      * @return string contenente l'email dell'utente
      */
@@ -52,7 +52,7 @@ class VAdmin {
         return $value;
     }
     /**
-     * Restituisce l'email dell'utente da bloccare/sbloccare dal campodi input
+     * Restituisce il giorno per la ricerca delle partite
      * Inviato con metodo post
      * @return string contenente l'email dell'utente
      */
@@ -64,7 +64,8 @@ class VAdmin {
     }
 
     /**
-     * Funzione che permette di visualizzare la pagina home dell'admin (contenente tutti gli utenti della piattaforma),divisi in attivi e bannati.
+     * Funzione che permette di visualizzare la pagina home dell'admin (contenente tutti gli utenti della piattaforma)
+     * divisi in attivi e bannati.
      * @param $utentiAttivi array di utenti attivi
      * @param $utentiBannati array di utenti bannati
      * @throws SmartyException
@@ -111,7 +112,7 @@ class VAdmin {
     }
 
     /**
-     * Funzione che permette di visualizzare la pagina per creare
+     * Funzione che permette di visualizzare la pagina per creare una prenotazione
      * @param $giorno associazione tra giorno e tutte le fasce orarie
      * @throws SmartyException
      */

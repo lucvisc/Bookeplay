@@ -18,8 +18,9 @@ class VGestionePartite {
     {
         $this->smarty = ConfSmarty::configuration();
     }
+
     /**
-     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=giorno
+     * Funzione che permette di acquisire i dati immessi nel campo input, con name=giorno
      * @return mixed|null
      */
     public function getGiorno(){
@@ -30,46 +31,13 @@ class VGestionePartite {
     }
 
     /**
-     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=fascia_oraria
+     * Funzione che permette di acquisire i dati immessi nel campo input, con name=fascia_oraria
      * @return mixed|null
      */
     public function getFasciaOraria(){
         $value = null;
         if (isset($_POST['fascia_oraria']))
             $value = $_POST['fascia_oraria'];
-        return $value;
-    }
-
-    /**
-     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=livello
-     * @return mixed|null
-     */
-    public function getNote() {
-        $value = null;
-        if (isset($_POST['descrizione']))
-            $value = $_POST['descrizione'];
-        return $value;
-    }
-
-        /**
-     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=livello
-     * @return mixed|null
-     */
-    public function getLivello(){
-        $value = null;
-        if (isset($_POST['livello']))
-            $value = $_POST['livello'];
-        return $value;
-    }
-
-    /**
-     * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=num_gioc
-     * @return mixed|null
-     */
-    public function getNumeroGiocatori(){
-        $value = null;
-        if (isset($_POST['num_gioc']))
-            $value = $_POST['num_gioc'];
         return $value;
     }
 
@@ -83,6 +51,7 @@ class VGestionePartite {
             $value = $_POST['old_fascia_oraria'];
         return $value;
     }
+
     /**
      * Funzione che permette di acquisire i dati immessi nel campo input, aventi name=new_fascia_oraria
      * @return mixed|null
@@ -91,6 +60,28 @@ class VGestionePartite {
         $value = null;
         if (isset($_POST['new_fascia_oraria']))
             $value = $_POST['new_fascia_oraria'];
+        return $value;
+    }
+
+    /**
+     * Funzione che permette di acquisire i dati immessi nel campo input, con name=note
+     * @return mixed|null
+     */
+    public function getNote() {
+        $value = null;
+        if (isset($_POST['descrizione']))
+            $value = $_POST['descrizione'];
+        return $value;
+    }
+
+        /**
+     * Funzione che permette di acquisire i dati immessi nel campo input, con name=livello
+     * @return mixed|null
+     */
+    public function getLivello(){
+        $value = null;
+        if (isset($_POST['livello']))
+            $value = $_POST['livello'];
         return $value;
     }
 
@@ -115,12 +106,10 @@ class VGestionePartite {
      * @param $utente oggetto utente che effettua l'inserimento dei dati nei campi della partita
      * @param $error codice di errore con diversi significati. In base al suo valore verrà eventualmente visualizzato un messaggio
      * di errore nella pagina di creazione della partita
-     * @throws SmartyException
      */
     public function showFormCreation(EUser $utente, EAccount $acc, $img, $part,  $giorno, $error){
             $this->statoForm($error);
-            list($type,$pic64) = $this->setImage($img, 'user');
-            //$this->smarty->assign('type', $type);
+            $pic64 = $this->setImage($img, 'user');
             $this->smarty->assign('pic64', $pic64);
             $this->smarty->assign('nome', $utente->getName());
             $this->smarty->assign('cognome', $utente->getSurname());
@@ -135,7 +124,6 @@ class VGestionePartite {
      * Funzione che si occupa di far visualizzare la pagina di fine creazione della prenotazione
      * @param $idPren id della campagna appena creata.
      */
-
     public function showFinePrenotazione($idPren, $img){
         $this->smarty->assign('userlogged','userlogged');
         $this->smarty->assign('idPren',$idPren);
@@ -144,14 +132,12 @@ class VGestionePartite {
 
     /**
      * Funzione che si occupa di gestire la visualizzazione delle parite per un utente loggato
-     * @param $user informazioni sull' utente da visualizzare
+     * @param $user, $acc informazioni sull' utente da visualizzare
      * @param $part elenco delle partite
      * @param $img immagine dell'utente
-     * @throws SmartyException
      */
     public function showPartite(EUser $user, EAccount $acc, $img, $part, $num) {
-        list($type,$pic64) = $this->setImage($img, 'user');
-        //$this->smarty->assign('type', $type);
+        $pic64 = $this->setImage($img, 'user');
         $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('num', $num);
         $this->smarty->assign('userlogged',"loggato");
@@ -163,7 +149,7 @@ class VGestionePartite {
     }
 
     /**
-     * Funzione che si occupa di gestire la visualizzazione delle parite attive di un utente non loggato
+     * Funzione che si occupa di gestire la visualizzazione delle parite attive di un utente non loggato e loggato
      * @param $part elenco delle partite
      * @throws SmartyException
      */
@@ -176,26 +162,24 @@ class VGestionePartite {
     }
 
     /**
-     * Funzione che si occupa di gestire la visualizzazione delle parite attive di un utente non loggato
+     * Funzione che si occupa di gestire la visualizzazione delle parite attive di un utente non loggato e loggato
      * @param $part elenco delle partite
      * @throws SmartyException
      */
-    public function CercaPartiteAttive($part) { //, $num
+    public function CercaPartiteAttive($part) {
         $this->smarty->assign('array',$part);
-        //$this->smarty->assign('num', $num);
         $this->smarty->display('partiteAttive.tpl');
     }
 
     /**
-     * Funzione che si occupa di gestire la visualizzazione delle parite per un utente loggato
+     * Funzione che si occupa di gestire la visualizzazione delle riepilogo delle peartite per un utente loggato
      * @param $user informazioni sull' utente da visualizzare
      * @param $part elenco delle partite
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showRiepilogo(EUser $user, EAccount $acc, $img, $part, $num) { //, $part,$img
-        list($type,$pic64) = $this->setImage($img, 'user');
-        //$this->smarty->assign('type', $type);
+    public function showRiepilogo(EUser $user, EAccount $acc, $img, $part, $num) {
+        $pic64 = $this->setImage($img, 'user');
         $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
         $this->smarty->assign('nome',$user->getName());
@@ -213,9 +197,8 @@ class VGestionePartite {
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
-    public function showVaiAllaPartita(EUser $user, EAccount $acc, $img, $part) { //,$img
-        list($type,$pic64) = $this->setImage($img, 'user');
-        //$this->smarty->assign('type', $type);
+    public function showVaiAllaPartita(EUser $user, EAccount $acc, $img, $part) {
+        $pic64 = $this->setImage($img, 'user');
         $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged', "loggato");
         $this->smarty->assign('nome', $user->getName());
@@ -226,14 +209,14 @@ class VGestionePartite {
     }
 
     /**
-     * Funzione che si occupa di gestire la prenotazione delle parite per un utente loggato
+     * Funzione che si occupa di presentare la fine della prenotazione
      * @param $user informazioni sull' utente da visualizzare
      * @param $pren elenco delle partite
      * @param $img immagine dell'utente
      * @throws SmartyException
      */
     public function showPrenotazioneEffettuata(EUser $user, EAccount $acc, $img, $pren, $num) {  //,$img
-        list($type,$pic64) = $this->setImage($img, 'user');
+        $pic64 = $this->setImage($img, 'user');
         $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
         $this->smarty->assign('num',$num);
@@ -252,8 +235,7 @@ class VGestionePartite {
      * @throws SmartyException
      */
     public function showPrenotazioneErrata(EUser $user, EAccount $acc, $img, $errorNum) {
-
-        list($type,$pic64) = $this->setImage($img, 'user');
+        $pic64 = $this->setImage($img, 'user');
         $this->smarty->assign('pic64', $pic64);
         $this->smarty->assign('userlogged',"loggato");
         $this->smarty->assign('errorNum',$errorNum);
@@ -285,24 +267,21 @@ class VGestionePartite {
      * Funzione che si occupa del supporto per le immagini
      * @param $image immagine da analizzare
      * @param $tipo variabile che indirizza al tipo di file di default da settare nel caso in cui $image = null
-     * @return array contenente informazioni sul tipo e i dati che costituiscono un immagine (possono essere anche degli array)
+     * @return variabile contenente informazioni dei dati che costituiscono un immagine (possono essere anche degli array)
      */
     public function setImage($image, $tipo) {
         if (isset($image)) {
             $pic64 = base64_encode($image->getData());  //Encodes data with MIME base64
-            $type = $image->getType();
         }
         elseif ($tipo == 'user') {   // file_get_contents returns the file in a string, starting at the specified offset up to maxlen bytes
             $data = file_get_contents( $_SERVER['DOCUMENT_ROOT'] . '/BookAndPlay/Smarty/template/img/user.png');
             $pic64= base64_encode($data);
-            $type = "image/png";
         }
         else {
             $data = file_get_contents( $_SERVER['DOCUMENT_ROOT'] . '/BookAndPlay/Smarty/templete/img/calcio.png');
             $pic64= base64_encode($data);
-            $type = "image/png";
         }
-        return array($type, $pic64);
+        return $pic64;
     }
 
 }

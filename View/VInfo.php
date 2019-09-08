@@ -7,8 +7,7 @@
  */
 require_once 'include.php';
 
-class VInfo
-{
+class VInfo {
 
     private $smarty;
 
@@ -20,7 +19,8 @@ class VInfo
     }
 
     /**
-     * Mostra la pagina di informazioni dell'applicazione
+     * Mostra la pagina di informazioni dell'applicazione con il passaggio del parametro logged per capire se un utente
+     * è loggato o meno e per adattare il template alla variabile
      */
     public function showInformazioni($logged){
         $this->smarty->assign('userlogged',$logged);

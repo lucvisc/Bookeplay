@@ -8,12 +8,22 @@
 
 //require_once 'include.php';
 class CAdmin{
+
+    /**
+     * Funzione utilizzata per visualizzare l'errore
+     */
+    public function error() {
+        $view = new VError();
+        $view->error('1');
+    }
+
     /**
      * Funzione utilizzata per visualizzare la pagina dell'amministratore, nella quale sono presenti tutti gli utenti della piattaforma.
 	 * Gli utenti sono divisi in due liste: bannati e attivi.
-     * 1) se il metodo di richiesta HTTP è GET e si è loggati con le credenziali dell'amministratore viene visualizzata la homepage con l'elenco di tutti gli utenti;
+     * 1) se il metodo di richiesta HTTP è GET e si è loggati con le credenziali dell'amministratore viene visualizzata
+     *    la homepage con l'elenco di tutti gli utenti attivi e bannati;
 	 * 2) se il metodo di richiesta HTTP è GET e si è loggati ma non come amministratore, viene visualizzata una pagina di errore 401;
-	 * 3) altrimenti, reindirizza alla pagina di login.
+	 *    altrimenti, reindirizza alla pagina di login.
      */
 	static function homepage () {
         if (CUser::isLogged()) {
@@ -71,8 +81,8 @@ class CAdmin{
 
 	/**
 	 * Funzione utile per cambiare lo stato di un utente
-	 * 1) se il metodo di richiesta HTTP è GET e si è loggati come amministratore, si visualizza la home dell'amministratore;
-	 * 2) se il metodo di richiesta HTTP è POST loggati come amministratore avviene l'azione vera e propria di bannare l'utente
+	 * 1) se il metodo di richiesta HTTP è GET e si è loggati come amministratore, è possibile cambiare lo stato di un utente;
+	 * 2) se il metodo di richiesta HTTP è POST e si loggati come amministratore avviene l'azione vera e propria di bannare l'utente
 	 * 	  cambiando il suo stato in false
 	 * 3) se il metodo di richiesta HTTP è GET e non si è loggati, avviene il reindirizzamento verso la pagina di login;
 	 * 4) se il metodo di richiesta HTTP è GET e si è loggati come utente compare una pagina di errore 401.
@@ -94,9 +104,6 @@ class CAdmin{
 		elseif($_SERVER['REQUEST_METHOD'] == "GET") {
 		        $account = unserialize($_SESSION['account']);
 				if ($account->getEmail() == "admin@admin.com") {
-
-				    print "okNON ENtra";
-
 					header('Location: /BookAndPlay/Admin/homepage');
 				}
 				else {
@@ -110,38 +117,43 @@ class CAdmin{
     }
 
 	/**
-	 * Funzione utile per cambiare lo stato di visibilità di un utente (nel caso specifico porta la visibilità a true).
-	 * 1) se il metodo di richiesta HTTP è GET e si è loggati come amministratore si visualizza la home dell'amministratore;
-	 * 2) se il metodo di richiesta HTTP è POST loggati come amministratore si puà riattivare l'utente cambiando il suo stato in true
-	 * 3) se il metodo di richiesta HTTP è GET e non si è loggati, avviene il reindirizzamento verso la pagina di login;
-	 * 4) se il metodo di richiesta HTTP è GET e si è loggati come utente compare una pagina di errore 401.
+	 * Funzione utile per cambiare lo stato di un utente .
+     * 1) se il metodo di richiesta HTTP è GET e si è loggati come amministratore, è possibile cambiare lo stato di un utente;
+     * 2) se il metodo di richiesta HTTP è POST e si loggati come amministratore avviene l'azione vera e propria di sbloccare l'utente
+     * 	  cambiando il suo stato in true
+     * 3) se il metodo di richiesta HTTP è GET e non si è loggati, avviene il reindirizzamento verso la pagina di login;
+     * 4) se il metodo di richiesta HTTP è GET e si è loggati come utente compare una pagina di errore 401.
 	 */
 	static function attivaUtente(){
-		if($_SERVER['REQUEST_METHOD'] == "POST") {
-			$view = new VAdmin();
-			$pm = new FPersistentManager();
-			$email = $view->getEmail();
-			$pm->update("activate", 1, "email", $email, "FAccount");
-			header('Location: /BookAndPlay/Admin/homepage');
-		}
-		elseif($_SERVER['REQUEST_METHOD'] == "GET") {
-			if (CUser::isLogged()) {
-				$account = unserialize($_SESSION['account']);
-				if ($account->getEmail() == "admin@admin.com") {
-					header('Location: /BookAndPlay/Admin/homepage');
-				}
-				else {
-					$view = new VError();
-					$view->error('1');
-				}
-			}
-			else
-				header('Location: /BookAndPlay/User/login');
+	    if (CUser::isLogged()) {
+            if($_SERVER['REQUEST_METHOD'] == "POST") {
+                $view = new VAdmin();
+                $pm = new FPersistentManager();
+                $email = $view->getEmail();
+                $pm->update("activate", 1, "email", $email, "FAccount");
+                header('Location: /BookAndPlay/Admin/homepage');
+            }
+            elseif($_SERVER['REQUEST_METHOD'] == "GET") {
+                $account = unserialize($_SESSION['account']);
+                if ($account->getEmail() == "admin@admin.com") {
+                    header('Location: /BookAndPlay/Admin/homepage');
+                }
+                else {
+                    $view = new VError();
+                    $view->error('1');
+                }
+            }
+	    }
+	    else{
+	        header('Location: /BookAndPlay/User/login');
 		}
     }
 
     /**
      * Funzione che si occupa di mostrare le partite per l'admin con la possibilità di creare o cancellare una partita
+     * 1) se non si è loggati avviene il reindirizzamento alla pagina di login
+     * 2) se l'utente è loggato ma non come amministratore compare una pagina 401 di errore
+     * 3) i loggati come amministratore avviene l'azione vera e propria della funzione
      */
     static function partite(){
         if (CUser::isLogged()) {
@@ -161,7 +173,7 @@ class CAdmin{
     }
 
     /**
-     * Funzione che si occupa di creare una partita
+     * Funzione che si occupa di creare una partita per un admin
      */
     static function creaPartita(){
         if(CUser::isLogged()){
@@ -203,7 +215,6 @@ class CAdmin{
 
     /**
      * Funzione che si occupa di mostrare le partite per l'admin per un determinato giorno
-     * una partita
      * @param
      */
     static function cercaGiorno() {
@@ -253,11 +264,11 @@ class CAdmin{
     }
 
     /**
-     * Funzione che visualizza una specifica prenotazione per poter essere semplicemente visualizzata oppure eliminata
+     * Funzione che visualizza una specifica prenotazione per poter essere visualizzata oppure eliminata
      * con l'accesso come amministratore
      * Se il metodo di richiesta HTTP è GET, l'admin sta chiedendo di vedere più informazioni riguardanti la partita presa in considerazione
      * Se il metodo di richiesta HTTP è POST, l'admin sta eliminando la prenotazione cliccando sull'apposito bottone
-     * Se si prova ad accedere con un utente loggato (e non con l'admin) ti reindirizza all'errore 401
+     * Se si prova ad accedere con un utente loggato ti reindirizza all'errore 401
      * Se si prova ad accedere con un utente non loggato, reindirizza alla pagina di login
      */
     static function partita($id){
@@ -289,8 +300,9 @@ class CAdmin{
         }
     }
 
-    /**Funzione che permette di modificare una determinata prenotazione
-     * @throws SmartyException
+    /**
+     * Funzione che permette di modificare una determinata prenotazione per l'amministratore, altrimenti viene rindirizzato
+     * alla pagina di login oppure ad un errore 401 di non autorizzazione
      */
     static function modifica($id){
 	    if(CUser::isLogged()){
@@ -391,29 +403,27 @@ class CAdmin{
             $view= new VAdmin();
             $account = unserialize($_SESSION['account']);
             if ($account->getEmail() == "admin@admin.com") {
-                    if($_SERVER['REQUEST_METHOD'] == "GET") {
-                        $view->showRicaricaConto(null);
+                if($_SERVER['REQUEST_METHOD'] == "GET") {
+                    $view->showRicaricaConto(null);
+                }
+                elseif($_SERVER['REQUEST_METHOD'] == "POST") {
+                    if(!isset($_POST['cifra'])){
+                        $acc = $pm->load("email", $_POST['email'], "FAccount");
+                        $view->showRicaricaConto($acc);
                     }
-                    elseif($_SERVER['REQUEST_METHOD'] == "POST") {
-                        if(!isset($_POST['cifra'])){
-                            $acc = $pm->load("email", $_POST['email'], "FAccount");
+                    else {
+                        $email = $view->getEmail();
+                        $account = $pm->load('email', $email, "FAccount");
+                        $cifra = $view->getCifra();
+                        $account->RicaricaAccount($cifra);
+                        $conto = $account->getConto();
+                        $pm->update('conto', $conto, 'email', $email, "FAccount");
+                        $account = $pm->load('email', $email, "FAccount");
 
-                            $view->showRicaricaConto($acc);
-                        }
-                        else {
-
-                            $email = $view->getEmail();
-                            $account = $pm->load('email', $email, "FAccount");
-                            $cifra = $view->getCifra();
-                            $account->RicaricaAccount($cifra);
-                            $conto = $account->getConto();
-                            $pm->update('conto', $conto, 'email', $email, "FAccount");
-                            $account = $pm->load('email', $email, "FAccount");
-
-                            $view->showRicaricaConto($account);
-                        }
-
+                        $view->showRicaricaConto($account);
                     }
+
+                }
             }
             else {
                 $view = new VError();
