@@ -59,12 +59,7 @@ class EUser {
  	public function getID(){
  	    return $this->email;//restituisce l'id dell'istanza utente creata con il corrispondente account
     }
-    /*
-     public function __toString(){
-        $st="Nome: ".$this->name." Cognome: ".$this->surname." Username: ".$this->username;
-        return $st;
-     }
-    */
+
  	//Dichiarazione dei metodi Get
  	/**
      * @access public
@@ -73,6 +68,7 @@ class EUser {
  	public function getName(){
  		return $this->name;
  	}
+
  	/**
      * @access public
      * @return string
@@ -80,6 +76,7 @@ class EUser {
  	public function getSurname(){
  		return $this->surname;
  	}
+
     /**
      * @access public
      * @return string
@@ -87,6 +84,7 @@ class EUser {
     public function getDatanasc(){
         return $this->datanasc;
     }
+
  	/**
      * @access public
      * @return string
@@ -101,6 +99,7 @@ class EUser {
  	public function getAddress(){
  		return $this->address;
  	}
+
  	/**
      * @access public
      * @return EAccount
@@ -108,6 +107,7 @@ class EUser {
  	public function getAccout(){
  		return $this->account;
  	}
+
  	//Dichiarazione dei metodi Set
  	/**
      * @access public
@@ -116,6 +116,7 @@ class EUser {
  	public function setName(string $na){
  		$this->name = $na;
  	}
+
  	/**
      * @access public
      * @param $sur string
@@ -123,6 +124,7 @@ class EUser {
  	public function setSurname(string $sur){
  		$this->surname = $sur;
  	}
+
     /**
      * @access public
      * @param $datnas string
@@ -130,6 +132,7 @@ class EUser {
     public function setDatanasc(string $datnas){
         $this->datanasc = $datnas;
     }
+
  	/**
      * @access public
      * @param $gen string
@@ -137,6 +140,7 @@ class EUser {
  	public function setGender(string $gen){
  		$this->gender = $gen;
  	}
+
  	/**
      * @access public
      * @param $addr EAddress
@@ -144,6 +148,7 @@ class EUser {
  	public function setAddress(EAddress $addr){
  		$this->address = $addr;
  	}
+
  	/**
      * @access public
      * @param $acco EAccount
@@ -151,69 +156,6 @@ class EUser {
  	public function setAccount(EAccount $acco){
  		$this->account = $acco;
  	}
-    /**
-     * Aggiorna
-     * @param $field campo selezionato
-     * @param $val
-     * @param $id
-     */
-    static function Update($field,$val,$id){
-        $db=FDatabase::getInstance();
-        $db->update('Utente',$id,$field,$val);
-    }
-
-     /********************VALIDATION*******************
-     *Funzioni ausiliari che verificano la corrispendenza con i valori di ingresso
-     */
-     /**
-     * Verificano la corrispondenza con il valore in input con i requisiti
-     * @param $val valore in input
-     * @return bool
-     */
-     static function validationName($val):bool{
-          $replace=array(" ","'");
-          if(!preg_match("/^([a-zA-Z]{3,30})$/",str_replace($replace,'',$val))){
-               return false;
-          }
-          else return true;
-     }
-    
-     /**
-     * Verificano la corrispondenza con il valore in input con i requisiti
-     * @param $val valore in input
-     * @return bool
-     */
-     static function validationSurname($val):bool{
-          $replace=array(" ","'");
-          if(!preg_match("/^([a-zA-Z]{3,30})$/",str_replace($replace,'',$val))){
-               return false;
-          }
-          else return true;
-     }
-    /**
-     * Verificano la corrispondenza con il valore in input con i requisiti richiesti
-     * @param $val valore inserito
-     * @return bool
-     */
-    static function valDatanasc($val):bool{
-        $date=explode('-',$val);
-        if(!checkdate($date[1],$date[2],$date[0])){
-            return false;
-        }
-        else return true;
-    }
-
-     /**
-     * Verificano la corrispondenza con il valore in input con i requisiti
-     * @param $val valore in input
-     * @return bool
-     */
-     static function validationGender($val):bool{
-          if(!($val=="m" || $val=="M" || $val=="F" || $val=="f")){
-               return false;
-          }
-          return true;
-    }
 
  }
 

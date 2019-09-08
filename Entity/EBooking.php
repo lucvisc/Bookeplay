@@ -128,6 +128,7 @@ class EBooking {
     public function setOrganizzatore($org){
         $this->organizzatore=$org;
     }
+
     /**
      * @access public
      * questo metodo viene utilizzato per identificare univocamente una prenotazione, è indentificata automaticamente
@@ -136,6 +137,7 @@ class EBooking {
     public function setIdbooking(int $i){
         $this->idbooking = $i;
     }
+
     /**
      * @access public
      * @param $liv string
@@ -153,11 +155,9 @@ class EBooking {
     }
 
     /**
-    // * @access public
-    // * @param $quot float 
-    // * Per difedrse fasce orarie c'è una diversa quota da pagare, impostare per alcune fasce orarie, per esempio
-    // * quelle serali, impostare una tariffa aggiuntiva per la luce ed il riscaldamento !!!!!!!!!!!!!!!!!!!
-    // */
+     * @access public
+     * @param $quot float
+     */
     public function setQuota(float $quot){
         $this->quota = $quot;
     }

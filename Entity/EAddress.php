@@ -63,40 +63,44 @@ class EAddress {
     }
 
 	//Dichichiarazione dei metodi Get
-	/**
+
+	/**restituisce il comune
      * @access public
      * @return string
      */
 	public function getComune(){
-		return $this->comune;	//restituisce il comune 
+		return $this->comune;
 	}
-	/**
+
+	/**restituisce la provincia
      * @access public
      * @return string
      */
 	public function getProvincia(){
-		return $this->provincia;// restituisce la provincia 
+		return $this->provincia;
 	}
-    /**
+
+    /**restituisce il codice di avviamento postale
      * @access public
      * @return int
      */
     public function getCap(){
-        return $this->cap;// restituisce il codice di avviamento postale
+        return $this->cap;
     }
-	/**
+
+	/**restituisce la via
      * @access public
      * @return string
      */
 	public function getVia(){
-		return $this->via; 		//restituisce la via 
+		return $this->via;
 	}
-	/**
+	/**restituisce il numero civico
      * @access public
      * @return string
      */
 	public function getNcivico(){
-		return $this->ncivico; 	//restituisce il numero civico 
+		return $this->ncivico;
 	}
 
 	//Dichiarazione dei metodi set 
@@ -107,6 +111,7 @@ class EAddress {
 	public function setComune(string $c){
 		$this->comune = $c;
 	}
+
 	/**
      * @access public
      * @param $p string
@@ -114,6 +119,7 @@ class EAddress {
 	public function setProvincia(string $p){
 		$this->provincia = $p;
 	}
+
     /**
      * @access public
      * @param $ca int
@@ -121,6 +127,7 @@ class EAddress {
     public function setCap(int $ca){
         $this->cap = $ca;
     }
+
 	/**
      * @access public
      * @param $v string
@@ -128,6 +135,7 @@ class EAddress {
 	public function setVia(string $v){
 		$this->via = $v;
 	}
+	
 	/**
      * @access public
      * @param $n string

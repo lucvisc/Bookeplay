@@ -2,7 +2,6 @@
 
 /**
  * La classe EMedia contiene tutti gli attributi e metodi base che riguardano l'immagine dell'user.
- * Contiene i seguenti attributi (e i relativi metodi):
  * -id: è un identificativo autoincrement, relativo ai media;
  * -emailUser: è il corrispondere attributo per associare l'immagine all'user
  * -filename: nome del media;

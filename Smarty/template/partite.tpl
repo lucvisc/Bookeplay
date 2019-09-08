@@ -24,7 +24,7 @@
           <b> BookAndPlay</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a><span class="sr-only">(current)</span> </li>
+          <li class="nav-item"> <a class="nav-link" href="/BookAndPlay">Home</a></li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/GestionePartite/partiteAttive">Partite Attive</a> </li>
           <li class="nav-item"> <a class="nav-link" href="/BookAndPlay/info/informazioni">Informazioni</a> </li>
           {if $userlogged!='nouser'} 
@@ -68,10 +68,6 @@
         </div>
         <div class="col-9 col-md-8" style="">
           <div class="tab-content">
-            <div class="tab-pane fade" id="tabtwo" role="tabpanel"><a class="btn btn-primary" href="#">Button</a></div>
-            <div class="tab-pane fade" id="tabthree" role="tabpanel">
-              <p class="" <="" p="">
-              </p>
             </div>
           </div>
           <div class="row">
@@ -172,7 +168,7 @@
         <div class="col-lg-3 col-6 p-3">
           <h5> <b>Main</b> </h5>
           <ul class="list-unstyled">
-            <li> <a href="#">Home</a><span class="sr-only">(current)</span> </li>
+            <li> <a href="/BookAndPlay">Home</a></li>
             <li> <a href="/BookAndPlay/GestionePartite/PartiteAttive">Partite Attive</a> </li>
             <li> <a href="/BookAndPlay/Info/Informazioni">Informazioni</a> </li>
           </ul>
