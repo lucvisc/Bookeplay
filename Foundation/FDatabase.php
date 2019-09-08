@@ -167,9 +167,6 @@ class FDatabase
             $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE " . $field . "='" . $id . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-
-            //print_r($stmt->errorInfo());
-
             $num = $stmt->rowCount();
             if ($num == 0) {
                 $result = null;                             //nessuna riga interessata. return null
@@ -371,6 +368,41 @@ class FDatabase
             }
             return $result;
 
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
+    /**
+     * Metodo di supporto per le load degli oggetti presenti nelle varie tabelle
+     * @param $class classe del foundation che sfrutta il metodo
+     * @param $field campo da usare per la ricerca
+     * @param $id valore da usare per la ricerca
+     * @return array|mixed|null valore che cambia a seconda che il risultato sia zero, uono o più oggetti
+     */
+    public function loadGiornoFascia($class, $field, $id)
+    {
+        try {
+            $query = "SELECT Giorno, FasciaOraria FROM " . self::tabella($class::getTables()) . " WHERE " . $field . "='" . $id . "';";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+
+            print_r($stmt->errorInfo());
+
+            $num = $stmt->rowCount();
+            if ($num == 0) {
+                $result = null;                             //nessuna riga interessata. return null
+            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
+            } else {
+                $result = array();                         //nel caso in cui piu' righe fossero interessate
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
+                while ($row = $stmt->fetch())
+                    $result[] = $row;                       //ritorna un array di righe.
+            }
+            return $result;
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
