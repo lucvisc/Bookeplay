@@ -156,7 +156,7 @@ class FBooking{
 
     /**
      * Metodo che permette di ritornare tutte le prenotazioni da oggi
-     * @param $giorno
+     * @param $giorno di riferimento
      * @return object $username Account
      */
     public static function LoadBooking( string $giorno){
@@ -179,7 +179,7 @@ class FBooking{
 
     /**
      * Metodo per restituire tutte le prenotazione a cui ha partecipato un determinato utente
-     * @param $email di riferimento
+     * @param $email di riferimento del'utente d'interesse
      * @return array|EBooking|null
      */
     public static function riepilogoPrenotazione($email){
@@ -187,7 +187,6 @@ class FBooking{
         $db=FDatabase::getInstance();
         $result=$db->Riepilogo($email);
         $rows_number = $db->interestedRows('FPren_partecipa', 'email', $email);//funzione richiamata,presente in FDatabase
-
         if(($result!=null) && ($rows_number == 1)) {
             $boo[]=new EBooking($result['idP'], $result['livello'], $result['Giorno'],  $result['FasciaOraria'], $result['note'],null, null);
         }
@@ -203,9 +202,7 @@ class FBooking{
     }
 
     /**
-     * Funzione che permette di poter reperire dal database eventuali istanze di oggetti che soddisfano i dati immessi
-     * in input nella form di login. L'utente recuperato potà essere trasportatore, cliente o admin.
-     * Viene ritornato l'utente utenteloggato/trasportatore/cliente
+     * Metodo che permette di recuperare le informazioni riguardanti l'ultima prenotazione fatta
      * @param $giorno
      * @param $fasciaoraria
      * @return object|null

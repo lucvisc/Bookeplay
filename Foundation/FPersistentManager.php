@@ -52,7 +52,7 @@ class FPersistentManager {
     }
 
     /**
-     * Metodo che permette di effettuare la store dei media sul db.
+     * Metodo che permette di aggiornare dei media sul db.
      * @param $obj è un oggetto di tipo EMediaUser
      */
     public static function UpdateImg($obj, $media) {
@@ -145,7 +145,7 @@ class FPersistentManager {
     }
 
     /**
-     * Metodo che permette di ottenere tutte le partite presenti sul db
+     * Metodo che permette di ottenere tutte le fascie orarie libere di un determinato giorno
      * @return array|EBooking|null
      */
     public static function loadGiornoDisp ($giorno) {
@@ -249,18 +249,6 @@ class FPersistentManager {
     public static function loadGiornoPren ($input) {
         $ris = null;
         $ris = FGiorno::loadGiorni($input);
-        return $ris;
-    }
-
-    /**
-     * Metodo che permette di ottenere dal db istanze di una classe specifica, che rispettano una specifica passata in input
-     * @param $input stringa da ricercare
-     * @param $Fclass classe Foundation che effettuerà la query
-     * @return null|bool
-     */
-    public static function loadByParola($input, $Fclass) {
-        $ris = null;
-        $ris = $Fclass::loadByParola($input);
         return $ris;
     }
 

@@ -10,7 +10,7 @@ if (file_exists('config.inc.php')) require_once 'config.inc.php';
 
 /**
  * Lo scopo di questa classe e' quello di fornire un accesso unico al DBMS, cosi che l'accesso
- * ai dati persistenti da parte degli strati superiore dell'applicazione sia piu' intuitivo.
+ * ai dati persistenti da parte degli strati superiori dell'applicazione sia piu' intuitivo.
  *
  * @author Luca, Catriel
  * @package Foundation
@@ -81,14 +81,8 @@ class FDatabase
             $stmt = $this->db->prepare($query);                         // prepara la query restituendo l'oggetto query
             $class::bind($stmt, $obj);//fa il matching tra i parametri ed i valori delle variabili
             $stmt->execute();//esecuzione dell'oggetto stmt
-
-            print_r($stmt->errorInfo());
-
             $id = $this->db->lastInsertId();// Returns the ID of the last inserted row or sequence value
             $this->db->commit();// rende definitiva la transazione
-
-            print_r($this->db->errorInfo());
-
             $this->closeDbConnection();                     //chiudiamo la connessione al db
             return $id;                                     //Ritorna l'id del record appena inserito nel db
         } catch (PDOException $e) {
@@ -105,26 +99,14 @@ class FDatabase
      * @param $nome_file nome della chiave dell'array superglobale $_FILE
      * @return string|null
      */
-
-    /*
-     * INSERT INTO `mediauser` ( `filename`, `type`, `emailutente`, `immagine`)
-     * VALUES('catriel.jpg', 'image/jpg', 'catdeb@hotmail.com', LOAD_FILE ('/xampp/htdocs/BookAndPlay/Smarty/img/avatar_catriel.jpg'));
-     */
     public function storeMedia($class, $obj)
     {
         try {
             $this->db->beginTransaction();
             $query = 'INSERT INTO ' . $class::getTables() . ' VALUES ' . $class::getValues();
-            //$query = "INSERT INTO " . $class::getTables() . " VALUES ". $class::getValues()."LOAD_FILE('".$class::getImmagine()."'));";
-
-            print ("$query\n");
-
             $stmt = $this->db->prepare($query);
             $class::bind($stmt, $obj);
             $stmt->execute();
-
-            print_r($stmt->errorInfo());
-
             $id = $this->db->lastInsertId();
             $this->db->commit();
             $this->closeDbConnection();
@@ -136,12 +118,18 @@ class FDatabase
         }
     }
 
-    public function UpdateImg($class, $obj, $media) {
+    /**
+     * Metodo utilizzato per aggiornare l'immagine di un utente
+     * @param $obj oggetto utente di riferimento
+     * @param $media nuovo da mettere
+     * @return string|null
+     */
+    public function UpdateImg($obj, $media) {
         try {
             $this->db->beginTransaction();
-            $query = "UPDATE ".self::tabella($class::getTables())." SET `immagine`= ".$class::getImmagine()." where emailutente='".$obj->getEmailUser()."';";
+            $query = "UPDATE mediauser SET `immagine`= ".FMediaUser::getImmagine()." where emailutente='".$obj->getEmailUser()."';";
             $stmt = $this->db->prepare($query);
-            $class::bindImg($stmt, $obj, $media);
+            FMediaUser::bindImg($stmt, $obj, $media);
             $stmt->execute();
             $id = $this->db->lastInsertId();
             $this->db->commit();
@@ -186,25 +174,6 @@ class FDatabase
         }
     }
 
-    /**
-     * Funzione che viene utilizzata per la load quando ci si aspetta che la query produca un solo risultato (esempio load per id).
-     * @param $sql query da eseguire
-     */
-    public function loadSingle($sql)
-    {
-        try {
-            $this->db->beginTransaction();
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $this->closeDbConnection();
-            return $row;
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            die;
-            return null;
-        }
-    }
 
     /**
      * Metodo che restituisce il numero di righe ineteressate dalla query
@@ -466,9 +435,9 @@ class FDatabase
     }
 
     /**
-     * Metodo che verifica l'accesso di un utente , controllando che le credenziali (email e password) siano presenti nel db
+     * Metodo che verifica se esiste la prenotazione per un eventuale modifica da parte del client
      * @param $email ,email dell'account dell' utente
-     * @param $pass , password dell'account dell'utente
+     * @param $idPren , id di prenotazione d'interesse
      * @return mixed|null a seconda se l'account dell'utente è presente o meno della tabella
      */
     public function loadVerificaPrenotazione($idPren, $email)
@@ -496,9 +465,9 @@ class FDatabase
     }
 
     /**
-     * Funzione utilizzata per ritornare i giorni.
+     * Funzione utilizzata per ritornare tutte le fascie orarie di un giorno specifico.
      * Utilizzata nella pagina admin
-     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @param $giorno  giorno specifico
      * @return array|null
      */
     public function getGiorni($giorno)
@@ -525,115 +494,6 @@ class FDatabase
             $this->db->rollBack();
             return null;
         }
-    }
-
-    /**
-     * Funzione utilizzata per ritornare le partite con uno specifico livello
-     * Utilizzata nel momento in cui si filtra per livello
-     * @param $livello che defisce il livello di una partita
-     * @return array|null
-     */
-    public function getLivello($livello)
-    {
-        try {
-            $query = "SELECT * FROM partita WHERE  Livello = " . $livello . " ;";
-            $stmt = $this->db->prepare($query);
-            $stmt->execute();
-            $num = $stmt->rowCount();
-            if ($num == 0) {
-                $result = null;        //nessuna riga interessata. return null
-            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
-            } else {
-                $result = array();                         //nel caso in cui piu' righe fossero interessate
-                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
-                while ($row = $stmt->fetch())
-                    $result[] = $row;                    //ritorna un array di righe.
-            }
-            return array($result, $num);
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
-            return null;
-        }
-    }
-
-    /**
-     * Funzione utilizzata per ritornare le partite
-     * Utilizzata nella ricerca di una partita dato un giorno
-     * @param $giorno definisce tutte le partire che possono essere giocate in un giorno
-     * @return array|null
-     */
-    public function getPartite($giorno)
-    {
-        try {
-            $query = "SELECT giorno,fascia FROM giorno, fasceorarie WHERE idFasciaOraria=idFascia AND giorno = " . $giorno . " ;";
-            $stmt = $this->db->prepare($query);
-            $stmt->execute();
-            $num = $stmt->rowCount();
-            if ($num == 0) {
-                $result = null;        //nessuna riga interessata. return null
-            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
-            } else {
-                $result = array();                         //nel caso in cui piu' righe fossero interessate
-                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
-                while ($row = $stmt->fetch())
-                    $result[] = $row;                    //ritorna un array di righe.
-            }
-            return array($result, $num);
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
-            return null;
-        }
-    }
-
-    /**
-     * Funzione utilizzata per ritornare le partite disponibili
-     * Utilizzata nella ricerca di una partita disponibile dato un giorno
-     * @param $giorno definisce tutte le partire disponibili che sono presenti per un determinato giorno
-     * @return array|null
-     */
-    public function getPartiteDisp($giorno)
-    {
-        try {
-            $query = "SELECT giorno,fascia FROM giorno, fasceorarie WHERE idFasciaOraria=idFascia AND disp='Disponibile' AND giorno = " . $giorno . " ;";
-            $stmt = $this->db->prepare($query);
-            $stmt->execute();
-            $num = $stmt->rowCount();
-            if ($num == 0) {
-                $result = null;        //nessuna riga interessata. return null
-            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
-            } else {
-                $result = array();                         //nel caso in cui piu' righe fossero interessate
-                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
-                while ($row = $stmt->fetch())
-                    $result[] = $row;                    //ritorna un array di righe.
-            }
-            return array($result, $num);
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
-            return null;
-        }
-    }
-
-    /**
-     * Da una tupla ricevuta di una query istanzia l'oggetto corrispondente
-     * @param class il nome della classe
-     * @param row array la tupla restituita dal dbms
-     * @return obj l'oggetto risultato dell'elaborazione
-     */
-    private function createObjectFromRow(string $class, $row)
-    {
-        $obj = NULL; //oggetto che conterra' l'istanza dell'elaborazione
-
-        if (class_exists($class)) {
-            $obj = $class::createObjectFromRow($row);
-        }
-        return $obj;
     }
 
     /**
@@ -728,9 +588,9 @@ class FDatabase
     }
 
     /**
-     * Funzione utilizzata per ritornare gli account
+     * Funzione utilizzata per ritornare gli account attivi (non bloccati) sul sito
      * Utilizzata nella pagina admin
-     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @param $input  valore booleano che definisce lo stato degli utenti desiderati
      * @return array|null
      */
     public function loadAcc($input) {
@@ -738,9 +598,6 @@ class FDatabase
             $query = "SELECT * FROM account, utente WHERE  account.email=utente.email AND tipo='registrato' AND activate = " . $input . " ;";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-
-            print_r($stmt->errorInfo());
-
             $num = $stmt->rowCount();
             if ($num == 0) {
                 $result = null;        //nessuna riga interessata. return null
@@ -774,11 +631,7 @@ class FDatabase
             $query = "SELECT * FROM account WHERE  username = '" . $acc . " ';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-
-            print_r($this->db->errorInfo());
-
             $num = $stmt->rowCount();
-            print ("$num\n");
             if ($num == 0) {
                 $result = null;        //nessuna riga interessata. return null
             } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
@@ -789,43 +642,7 @@ class FDatabase
                 while ($row = $stmt->fetch())
                     $result[] = $row;                    //ritorna un array di righe.
             }
-            print_r($result);
             return array($result, $num);
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
-            return null;
-        }
-    }
-
-    /**
-     * @return il numero degli utenti nel database
-     */
-    public function ContaUtenti()
-    {
-        try {
-            $query = ("SELECT COUNT(*) FROM account");
-            $stmt = $this->db->prepare($query);
-            $stmt->execute();
-            return $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
-            return null;
-        }
-    }
-
-    /**
-     * @return la somma di tutti i conti di tutti gli utenti oppure |null in caso di errore
-     */
-    public function ContoTot()
-    {
-        try {
-            $query = ("SELECT SUM(conto) as totale FROM account GROUP BY (id)");
-            $stmt = $this->db->prepare($query);
-            $stmt->execute();
-            return $result = $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
@@ -836,7 +653,7 @@ class FDatabase
     /**
      * Funzione utilizzata per ritornare le prenotazioni di un specifico giorno.
      * Utilizzata nella pagina admin
-     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @param $giorno  giorno di interesse per la query
      * @return array|null
      */
     public function getBooking($giorno)
@@ -846,7 +663,7 @@ class FDatabase
             echo $query;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-            print_r($stmt->errorInfo());
+            //print_r($stmt->errorInfo());
             $num = $stmt->rowCount();
             echo $num;
             if ($num == 0) {
@@ -870,7 +687,7 @@ class FDatabase
     /**
      * Funzione utilizzata per ritornare i partecipanti di una specifica prenotazione.
      * Utilizzata nella pagina admin
-     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @param $idPrend id della prenotazione della quale si vuole conoscere il numero dei partecipanti
      * @return array|null
      */
     public function getPrenotazionePartecipa($idPren)
@@ -903,9 +720,9 @@ class FDatabase
 
 
     /**
-     * Funzione utilizzata per ritornare i partecipanti di una specifica prenotazione.
+     * Metodo utelizzato per ritornare tutte le partite associate ad un specifico account
      * Utilizzata nella pagina admin
-     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @param $email di un specifico account
      * @return array|null
      */
     public function Riepilogo($email)
@@ -967,7 +784,7 @@ class FDatabase
     /**
      * Funzione utilizzata per ritornare lo user specificato.
      * Utilizzata nella pagina admin
-     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
+     * @param $us id dell'utente associato anche al corrispettivo account
      * @return array|null
      */
     public function getUser($us)
@@ -995,26 +812,6 @@ class FDatabase
         }
     }
 
-    /**
-     * Metodo che restituisce il numero di righe interessate dalla query
-     * @return int|null
-     */
-    public function rowsPrenotazione()
-    {
-        try {
-            $this->db->beginTransaction();
-            $query = "SELECT * FROM prenotazione;";
-            $stmt = $this->db->prepare($query);
-            $stmt->execute();
-            $num = $stmt->rowCount();
-            $this->closeDbConnection();
-            return $num;
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
-            return null;
-        }
-    }
 
     /**
      * Metodo he restituisce il numero dei partecipanti
@@ -1038,37 +835,6 @@ class FDatabase
         }
 
 
-    }
-
-    /**
-     * Funzione utilizzata per ritornare gli utenti attivi e bannati.
-     * Utilizzata nella pagina admin
-     * @param $state  valore booleano che definisce lo stato degli utenti desiderati
-     * @return array|null
-     */
-    public function getUtenti($tipo)
-    {
-        try {
-            $query = "SELECT * FROM user WHERE  tipo = " . $tipo . " AND email <> 'admin@admin.com';";
-            $stmt = $this->db->prepare($query);
-            $stmt->execute();
-            $num = $stmt->rowCount();
-            if ($num == 0) {
-                $result = null;        //nessuna riga interessata. return null
-            } elseif ($num == 1) {                          //nel caso in cui una sola riga fosse interessata
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
-            } else {
-                $result = array();                         //nel caso in cui piu' righe fossero interessate
-                $stmt->setFetchMode(PDO::FETCH_ASSOC);   //imposta la modalità di fetch come array associativo
-                while ($row = $stmt->fetch())
-                    $result[] = $row;                    //ritorna un array di righe.
-            }
-            return array($result, $num);
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
-            return null;
-        }
     }
 }
 ?>
