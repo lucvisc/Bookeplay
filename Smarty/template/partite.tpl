@@ -68,6 +68,10 @@
         </div>
         <div class="col-9 col-md-8" style="">
           <div class="tab-content">
+            <div class="tab-pane fade" id="tabtwo" role="tabpanel"><a class="btn btn-primary" href="#">Button</a></div>
+            <div class="tab-pane fade" id="tabthree" role="tabpanel">
+              <p class="" <="" p="">
+              </p>
             </div>
           </div>
           <div class="row">

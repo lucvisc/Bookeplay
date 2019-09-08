@@ -254,7 +254,7 @@ class VGestionePartite {
             case "no" :
                 $this->smarty->assign('successo', "si");
                 break;
-            case "no_facia_oraria":
+            case "no_fascia_oraria":
                 $this->smarty->assign('no_fascia_oraria', "errore");
                 break;
             case "no_giorno":

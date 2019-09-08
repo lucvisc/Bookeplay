@@ -135,7 +135,7 @@ class EAddress {
 	public function setVia(string $v){
 		$this->via = $v;
 	}
-	
+
 	/**
      * @access public
      * @param $n string

@@ -161,7 +161,7 @@ class CAdmin{
             $pm = new FPersistentManager();
             $account = unserialize($_SESSION['account']);
             if ($account->getEmail() == "admin@admin.com") {
-                $view->showCreaCancella(null, null, null);
+                $view->showCreaCancella(null, null, null, 'sigiorno');
             } else {
                 $view = new VError();
                 $view->error('1');
@@ -185,20 +185,33 @@ class CAdmin{
                     $view->showCrea(null,null, 'si_giorno');
                 }
                 elseif($_SERVER['REQUEST_METHOD']=="POST"){
-                    $giorno = new EGiorno($_POST['giorno'], $_POST['fascia_oraria']);
-                    $gg=$pm->loadGiorno($_POST['giorno'], $_POST['fascia_oraria']);
+                    if(EGiorno::verificaGiorno($_POST['giorno'])) {
 
-                    if (!isset($gg)) {
-                        $pm->insertGiorno($giorno);
-                        $pren = new EBooking(null, $_POST['livello'], $giorno->getGiorno(), $giorno->getFasceOrarie(), $_POST['descrizione'], null, $account->getEmail());
-                        $id=FBooking::store($pren);
-                        $prenotazione=$pm->loadPrenotazioneEff($_POST['giorno'], $_POST['fascia_oraria']);
+                        print "ok giorno";
 
-                        print_r($prenotazione);
+                        if(EGiorno::verificaFascia($_POST['fascia_oraria'])) {
 
-                        $view->showPrenotazione($prenotazione);
-                    } else {
-                        $view->showCrea( null, null, "no_giorno");
+                            print "ok Fascia";
+
+                            $giorno = new EGiorno($_POST['giorno'], $_POST['fascia_oraria']);
+                            $gg = $pm->loadGiorno($_POST['giorno'], $_POST['fascia_oraria']);
+                            if (!isset($gg)) {
+                                $pm->insertGiorno($giorno);
+                                $pren = new EBooking(null, $_POST['livello'], $giorno->getGiorno(), $giorno->getFasceOrarie(), $_POST['descrizione'], null, $account->getEmail());
+                                $id = FBooking::store($pren);
+                                $prenotazione = $pm->loadPrenotazioneEff($_POST['giorno'], $_POST['fascia_oraria']);
+                                $view->showPrenotazione($prenotazione);
+                            }
+                            else {
+                                $view->showCrea(null, null, "no_giorno");
+                            }
+                        }
+                        else {
+                            $view->showCrea(null, null, "fascia");
+                        }
+                    }
+                    else {
+                        $view->showCrea(null, null, "error");
                     }
 
                 }
@@ -224,14 +237,21 @@ class CAdmin{
                 $view = new VAdmin();
                 $pm = new FPersistentManager();
 
-                $giorno=self::splitGiorno($_POST['giorno']);
-                $partDisp= $pm->loadGiornoDisp($giorno);
+                $giorno = self::splitGiorno($_POST['giorno']);
+                if (EGiorno::verificaGiorno($giorno)) {
+                    $partDisp = $pm->loadGiornoDisp($giorno);
 
-                $view->showCrea($partDisp, $giorno, 'sigiorno');
-            } else {
+                    $view->showCrea($partDisp, $giorno, 'sigiorno');
+                }
+                else {
+                    $view->showCrea(null, null, 'error');
+                }
+            }
+            else {
                 header('Location: /BookAndPlay/User/login');
             }
-        } else {
+        }
+        else {
             header('Location: /BookAndPlay/User/login');
         }
     }
@@ -243,21 +263,26 @@ class CAdmin{
      */
     static function cercaPartita() {
         if (CUser::isLogged()) {
-                $view = new VAdmin();
-                $pm = new FPersistentManager();
-                $giorno=self::splitGiorno($view->getGiorno());
-                $part= $pm->load('Giorno', $giorno,"FBooking");
-                if ($part!=null) {
+            $view = new VAdmin();
+            $pm = new FPersistentManager();
+            $giorno = self::splitGiorno($view->getGiorno());
+            if (EGiorno::verificaGiorno($giorno)) {
+                $part = $pm->load('Giorno', $giorno, "FBooking");
+                if ($part != null) {
                     for ($i = 0; $i < count($part); $i++) {
                         $idP[$i] = $part[$i]->getIdbooking();
                         $num[] = $pm->CountPartecipanti($idP[$i]);
                     }
                 }
-                else{
-                    $num=null;
+                else {
+                    $num = null;
                 }
-                $view->showCreaCancella($part, true, $num);
+                $view->showCreaCancella($part, true, $num, 'sigiorno');
             }
+            else {
+                $view->showCreaCancella(null, null, null, 'errore');
+            }
+        }
         else {
             header('Location: /BookAndPlay/User/login');
         }
@@ -283,11 +308,11 @@ class CAdmin{
                         $idP[$i] = $partita[$i]->getIdbooking();
                         $num[] = $pm->CountPartecipanti($idP[$i]);
                     }
-                    $view->showCreaCancella($partita, null, $num);
+                    $view->showCreaCancella($partita, null, $num,'sigiorno');
                 }
                 elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $pm->delete('idP',$id,"FBooking");
-                    $view->showCreaCancella(null, null, null);
+                    $view->showCreaCancella(null, null, null, 'sigiorno');
                 }
             }
             else {
@@ -312,18 +337,42 @@ class CAdmin{
             $partita = $pm->load('idP', $id, "FBooking");
             $giorno= $partita[0]->getGiornobooking()->getGiorno();
             $email = $partita[0]->getOrganizzatore();
+            $partDisp= $pm->loadGiornoDisp($giorno);
 	        if ($account->getEmail()== 'admin@admin.com'){
 	            if ($_SERVER['REQUEST_METHOD'] == "GET"){
-                    $partDisp= $pm->loadGiornoDisp($giorno);
-	                $view->showModificaPartita($partita, $giorno, $partDisp, 'no_error');
+
+	                $view->showModificaPartita($partita, $giorno, $partDisp, 'no_errornull');
                 }
 	            elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-                    if ($_POST['new_giorno']== null) {
+                    if ($_POST['new_giorno'] == null) {
                         if (isset($_POST['new_fascia_oraria'])) {
-                            $prenotazione = $pm->loadPrenotazioneEff($giorno, $_POST['new_fascia_oraria']);
+                            if (EGiorno::verificaFascia($_POST['new_fascia_oraria'])) {
+                                $prenotazione = $pm->loadPrenotazioneEff($giorno, $_POST['new_fascia_oraria']);
+                                if (!isset($prenotazione)) {
+                                    $pm::update('FasciaOraria', $_POST['new_fascia_oraria'], 'idP', $id, "FBooking");
+                                    $partita = $pm->load('idP', $id, "FBooking");
+                                    $view->showPrenotazione($partita);
+                                } else {
+                                    $view->showModificaPartita(null, null, null, 'no_error');
+                                }
+                            }
+                            else {
+                                $view->showModificaPartita($partita, $giorno, $partDisp, 'fascia');
+                            }
+                        }
+                        else {
+                            $view->showModificaPartita(null, null, null, 'fascia');
+                        }
+                    }
+                    else {
+                        $newGiorno=self::splitGiorno($_POST['new_giorno']);
+                        if (EGiorno::verificaGiorno($newGiorno)) {
+                            $prenotazione = $pm->loadPrenotazioneEff($newGiorno, $_POST['new_fascia_oraria']);
                             if (!isset($prenotazione)) {
+                                $pm::update('giorno', $newGiorno, 'idP', $id, "FBooking");
                                 $pm::update('FasciaOraria', $_POST['new_fascia_oraria'], 'idP', $id, "FBooking");
                                 $partita = $pm->load('idP', $id, "FBooking");
+
                                 $view->showPrenotazione($partita);
                             }
                             else {
@@ -331,20 +380,7 @@ class CAdmin{
                             }
                         }
                         else {
-                            $view->showModificaPartita(null, null, null, 'no_error');
-                        }
-                    }
-                    else {
-                        $newGiorno=self::splitGiorno($_POST['new_giorno']);
-                        $prenotazione = $pm->loadPrenotazioneEff($newGiorno, $_POST['new_fascia_oraria']);
-                        if (!isset($prenotazione)) {
-                            $pm::update('giorno', $newGiorno, 'idP', $id, "FBooking");
-                            $pm::update('FasciaOraria', $_POST['new_fascia_oraria'], 'idP', $id, "FBooking");
-                            $partita = $pm->load('idP', $id, "FBooking");
-
-                            $view->showPrenotazione($partita);
-                        } else {
-                            $view->showModificaPartita(null, null, null, 'no_error');
+                                $view->showModificaPartita(null, null, null, 'giorno');
                         }
                     }
                 }

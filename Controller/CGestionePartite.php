@@ -125,27 +125,38 @@ class CGestionePartite {
                     $user = $pm->load("email", $account->getEmail(), "FUser");
                     $acc = $pm->load("email", $account->getEmail(), "FAccount");
                     $img = $pm->loadImg($account->getEmail());
-                    $giorno = new EGiorno($_POST['giorno'], $_POST['fascia_oraria']);
-                    $gg=$pm->loadGiorno($_POST['giorno'], $_POST['fascia_oraria']);
-                    if (!isset($gg)) {
-                        $pm->insertGiorno($giorno);
-                        $pren = new EBooking(null, $_POST['livello'], $giorno->getGiorno(), $giorno->getFasceOrarie(), $_POST['descrizione'], null, $account->getEmail());
-                        $id=FBooking::store($pren);
-                        FPren_partecipa::insert($id, $account->getEmail());
-                        $num=$pm->CountPartecipanti($id);
-                        $account = EAccount::PagaPartita($account);
-                        $conto = $account->getConto();
-                        $pm::update('conto', $conto, 'email', $account->getEmail(), "FAccount");
-                        $acc = $pm->load('email', $account->getEmail(), "FAccount");
-                        $img = $pm->loadImg($account->getEmail());
-                        $prenotazione=$pm->loadPrenotazioneEff($_POST['giorno'], $_POST['fascia_oraria']);
-                        $newAcc = $pm->load('email',$account->getEmail(), "FAccount");
-                        $salvare = serialize($newAcc);
-                        $_SESSION['account'] = $salvare;
-                        $view->showPrenotazioneEffettuata($user, $acc, $img, $prenotazione,$num); //
+                    if (EGiorno::verificaGiorno($_POST['giorno'])) {
+                        if(EGiorno::verificaFascia($_POST['fascia_oraria'])) {
+                            $giorno = new EGiorno($_POST['giorno'], $_POST['fascia_oraria']);
+                            $gg = $pm->loadGiorno($_POST['giorno'], $_POST['fascia_oraria']);
+                            if (!isset($gg)) {
+                                $pm->insertGiorno($giorno);
+                                $pren = new EBooking(null, $_POST['livello'], $giorno->getGiorno(), $giorno->getFasceOrarie(), $_POST['descrizione'], null, $account->getEmail());
+                                $id = FBooking::store($pren);
+                                FPren_partecipa::insert($id, $account->getEmail());
+                                $num = $pm->CountPartecipanti($id);
+                                $account = EAccount::PagaPartita($account);
+                                $conto = $account->getConto();
+                                $pm::update('conto', $conto, 'email', $account->getEmail(), "FAccount");
+                                $acc = $pm->load('email', $account->getEmail(), "FAccount");
+                                $img = $pm->loadImg($account->getEmail());
+                                $prenotazione = $pm->loadPrenotazioneEff($_POST['giorno'], $_POST['fascia_oraria']);
+                                $newAcc = $pm->load('email', $account->getEmail(), "FAccount");
+                                $salvare = serialize($newAcc);
+                                $_SESSION['account'] = $salvare;
+                                $view->showPrenotazioneEffettuata($user, $acc, $img, $prenotazione, $num); //
 
-                    } else {
-                        $view->showFormCreation($user, $account, $img,  null, null, "no_giorno");
+                            }
+                            else {
+                                $view->showFormCreation($user, $account, $img, null, null, "no_giorno");
+                            }
+                        }
+                        else {
+                            $view->showFormCreation($user, $account, $img, null, null, "no_fascia_oraria");
+                        }
+                    }
+                    else {
+                        $view->showFormCreation($user, $account, $img, null, null, "no_giorno");
                     }
                 }
             }
@@ -216,15 +227,19 @@ class CGestionePartite {
                 $user = $pm->load("email", $account->getEmail(), "FUser");
                 $acc = $pm->load("email", $account->getEmail(), "FAccount");
                 $giorno=self::splitGiorno($_POST['giorno']);
-                $partDisp= $pm->loadGiornoDisp($giorno);
-
-                print_r($partDisp);
-
-                $view->showFormCreation($user, $acc, $img, $partDisp,  $giorno,'no');
-            } else {
+                if(EGiorno::verificaGiorno($giorno)){
+                    $partDisp= $pm->loadGiornoDisp($giorno);
+                    $view->showFormCreation($user, $acc, $img, $partDisp,  $giorno,'no');
+                }
+                else {
+                    $view->showFormCreation($user, $account, $img,  null, null, "no_giorno");
+                }
+            }
+            else {
                 header('Location: /BookAndPlay/User/login');
             }
-        } else {
+        }
+        else {
             header('Location: /BookAndPlay/User/login');
         }
     }

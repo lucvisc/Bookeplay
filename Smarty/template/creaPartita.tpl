@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {assign var='userlogged' value=$userlogged|default:'nouser'}
+{assign var='giorno' value=$giorno|default:'noerror'}
+{assign var='no_fascia_oraria' value=$no_fascia_oraria|default:'noerror'}
 <html>
 
 <head>
@@ -89,24 +91,36 @@
         <div class="row">
           <div class="col-md-12 col-lg-12 text-center">
             <div class="table-responsive">
-              <table class="table table-striped table-dark">
-                <thead>
-                <tr>
-                  <th scope="col" class="">Fasce Orarie disponibili per il giorno {$gg}</th>
-                </tr>
-                </thead>
-                {if $array}
-                  {foreach $array as $giorno}
-                    <tbody>
-                    <!--Tabella che mostra le fasce orarie-->
-                    <tr>
-                      <th scope="row">{$giorno}</th>
-                    </tr>
-                    </tbody>
-                  {/foreach}
+              {if $no_fascia_oraria =='errore'}
+                <div style="color: red;">
+                  <p align="center">La fascia oraria è stata scritta in maniera errata </p>
+                </div>
+              {else}
+                {if $giorno =='errore'}
+                <div style="color: red;">
+                  <p align="center">Il parametro giorno è stato scritto in maniera errata</p>
+                </div>
                 {else}
-                <p class="text-light text-center mt-2">Tutte le fasce orarie sono disponibili</p>
+                <table class="table table-striped table-dark">
+                  <thead>
+                  <tr>
+                    <th scope="col" class="">Fasce Orarie disponibili per il giorno {$gg}</th>
+                  </tr>
+                  </thead>
+                  {if $array}
+                    {foreach $array as $giorno}
+                      <tbody>
+                      <!--Tabella che mostra le fasce orarie-->
+                      <tr>
+                        <th scope="row">{$giorno}</th>
+                      </tr>
+                      </tbody>
+                    {/foreach}
+                  {else}
+                  <p class="text-light text-center mt-2">Tutte le fasce orarie sono disponibili</p>
+                  {/if}
                 {/if}
+              {/if}
               </table>
             </div>
           </div>

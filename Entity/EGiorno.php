@@ -25,23 +25,6 @@ class EGiorno {
 	//Dichiarazione del costruttore ATTENZIONE MODIFICA TEMPORANEA PER ADATTARE LA CLASSE ALLA MODIFICA SUL DB SULL'UNIONE DELLE TABELLE GIORNO E FASCIA!
 	function __construct(string $gg=null, string $fasce= null){
 		$this->giorno = $gg;
-
-		/*Inizializzazione dell'attributo fasce che contiene gli orari disponibili per un giorno
-        $fasce = array(
-            '8.00-9.00'=>'Disponibile',
-            '9.00-10.00'=>'Disponibile',
-            '10.00-11.00'=>'Disponibile',
-            '11.00-12.00'=>'Disponibile',
-            '11.00-13.00'=>'Disponibile',
-            '13.00-14.00'=>'Disponibile',
-            '14.00-15.00'=>'Disponibile',
-            '15.00-16.00'=>'Disponibile',
-            '16.00-17.00'=>'Disponibile',
-            '17.00-18.00'=>'Disponibile',
-            '18.00-19.00'=>'Disponibile',
-            '19.00-20.00'=>'Disponibile',
-            '20.00-21.00'=>'Disponibile',
-            '21.00-22.00'=>'Disponibile',*/
 		$this->fasciaoraria = $fasce;
 	}
 
@@ -60,15 +43,7 @@ class EGiorno {
 	public function getFasceOrarie(){
 		return $this->fasciaoraria;
 	}
-	/**
-	 * Metodo che ritorna la singola fascia oraria, se non si ha interesse di visualizzarle tutte
-	 * @access public
-	 * @return string
-	 */
-	/*public function getSingolaFasciaOraria(int $i){
-        $fascia= $this->getFasceOrarie();
-        return  $fascia[$i]['fascia'];
-   }*/
+
 	/**
 	 * Metodo che ritorna la disponibilità della singola fascia oraria
 	 * @access public
@@ -90,6 +65,8 @@ class EGiorno {
 		else echo "La data è stata scritta in maniera errata";
 	}
 
+	/****************** VALIDAZIONE DELL'INPUT *****************************/
+
 	/**
 	 * @access private
 	 * @param $g string
@@ -97,13 +74,9 @@ class EGiorno {
 	 */
 	public static function verificaGiorno(string $g){
 		$g= preg_replace("/[^0-9]+/i",'',$g); //rimuovi i caratteri indesiderati
-		//echo "$g\n";
 		$gg=substr($g, 0, 2);
-		//echo "$gg\n"; 	 
 		$mm=substr($g, 2, 2);
-		//echo "$mm\n";
 		$aa=substr($g, 4, 4);
-		//echo "$aa\n";
 		$year=date('Y');
 		$gg=(int)$gg;
 		$mm=(int)$mm;
@@ -112,6 +85,26 @@ class EGiorno {
 		if ( $gg <= 31) {				//verifica sul giorno, mese e anno, se scritti correttamente
 			if ( $mm <= 12){
 				if( $aa >= $year ){	return true; }
+				else {return false;}
+			}
+			else {return false;}
+		}
+		else {return false;}
+	}
+
+	/**
+	 * La funzione è utilizzata per verificare se la fascia oraria è stata scritta in maniera corretta
+	 */
+	public static function verificaFascia(string $fascia){
+		$fascia = str_split($fascia, 1);
+		if (count($fascia)<12){
+			if ($fascia[0]<3 && $fascia[1]<10 && $fascia[2]=':' && $fascia[3]<1 && $fascia[4]<1 ){
+				if($fascia[5]='-'){
+					if ($fascia[6]<3 && $fascia[7]<10 && $fascia[8]=':' && $fascia[9]<1 && $fascia[10]<1){
+						return true;
+					}
+					else {return false;}
+				}
 				else {return false;}
 			}
 			else {return false;}

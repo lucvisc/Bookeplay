@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+{assign var='giorno' value=$giorno|default:'sigiorno'}
 <html>
 
 <head>
@@ -85,12 +85,17 @@
                     <div class="col-md-3   offset-md-1" style=""><a class="btn btn-secondary rounded text-center m-0" style="" href="/BookAndPlay/Admin/creaPartita">Crea Partita</a></div>
                   </div>
                   </div>
+                  {if $giorno =='errore'}
+                <div style="color: red;">
+                  <p align="center">Il parametro giorno è stato scritto in maniera errata</p>
+                </div>
+                {else} 
                   <div class="row" style="">
                     <div class="col-md-11 text-light" style="">
                       <h3 class="text-center mt-1 mb-0 text-light">Partite Attive</h3>
                     </div>
                   </div>
-                
+               
                 {if $partite}
                 {$i=0}
                 {foreach $partite as $booking} 
@@ -150,6 +155,7 @@
                 {/foreach} 
                 {else} 
                   <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
+                {/if}
                 {/if}
               </div>
             </div>

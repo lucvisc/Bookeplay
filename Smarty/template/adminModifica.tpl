@@ -81,6 +81,16 @@
               </div>
             </div>
           </div>
+          {if $error=='fascia'}
+              <div style="color: red;">
+                <p align="center">La fascia oraria è stata scritta in maniera errata</p>
+              </div>
+          {/if}
+          {if $error=='giorno'}
+              <div style="color: red;">
+                <p align="center">Il parametro giorno è stato scritto in maniera errata</p>
+              </div>
+          {/if}
           <div class="row" style="">
             <div class="col-md-12 col-lg-12 text-center" style="">
               <div class="table-responsive"> 
@@ -90,7 +100,7 @@
                   <th scope="col" class="">Fasce Orarie disponibili per il giorno {$gg}</th>
                 </tr>
                 </thead>
-                {if $error!='no_error'}
+              {if $error!='no_error'}
                 {if $disp}
                   {foreach $disp as $giorno}
                     <tbody>

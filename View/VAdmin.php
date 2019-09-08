@@ -104,10 +104,11 @@ class VAdmin {
      * @param $partiteAttive array di partite attive
      * @throws SmartyException
      */
-    public function showCreaCancella($partiteAttive, $vaiPartita,$num) {
+    public function showCreaCancella($partiteAttive, $vaiPartita,$num, $error) {
         $this->smarty->assign('partite',$partiteAttive);
         $this->smarty->assign('num',$num);
         $this->smarty->assign('vaiPartita', $vaiPartita);
+        $this->smarty->assign('giorno', $error);
         $this->smarty->display('adminPartite.tpl');
     }
 
@@ -119,7 +120,7 @@ class VAdmin {
     public function showCrea($giorno, $gg, $error) {
         $this->smarty->assign('disp',$giorno);
         $this->smarty->assign('gg',$gg);
-        $this->smarty->assign('errorGiorno', $error);
+        $this->smarty->assign('error', $error);
         $this->smarty->display('adminCrea.tpl');
     }
 
@@ -134,10 +135,11 @@ class VAdmin {
     /**
      * Funzione che permette di modificare la partita di riferimento
      */
-    public function showModificaPartita($partita, $gg, $disp){
+    public function showModificaPartita($partita, $gg, $disp, $error){
         $this->smarty->assign('partita', $partita);
         $this->smarty->assign('gg', $gg);
         $this->smarty->assign('disp', $disp);
+        $this->smarty->assign('error', $error);
         $this->smarty->display('adminModifica.tpl');
     }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{assign var='errorGiorno' value=$errorGiorno|default:'sigiorno'}
+{assign var='error' value=$error|default:'sigiorno'}
 <html>
 
 <head>
@@ -80,7 +80,17 @@
             </div>
           </div>
         </div>
-        {if $errorGiorno!='nogiorno'}
+        {if $error =='fascia'}
+          <div style="color: red;">
+              <p align="center">La fascia oraria è stata scritta in maniera errata</p>
+            </div>
+        {else}
+        {if $error=='error'}
+          <div style="color: red;">
+              <p align="center">Il giorno è stato scritto in maniera errata</p>
+            </div>
+        {else}
+        {if $error!='no_giorno'}
         <div class="row">
           <div class="col-md-12 col-lg-12 text-center">
             <div class="table-responsive">
@@ -164,6 +174,8 @@
               <p align="center">Attenzione! il giorno e la fascia oraria sono già occupati</p>
           </div>
         {/if}
+      {/if}
+      {/if}
       </div>
     </div>
   </div>

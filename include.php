@@ -30,7 +30,6 @@
     require_once 'Entity\EMediaUser.php';
     require_once 'Entity\EAccount.php';
     require_once 'Entity\EAddress.php';
-    require_once 'Entity\EAdmin.php';
     require_once 'Entity\EBooking.php';
     require_once 'Entity\EGiorno.php';
 
@@ -54,7 +53,6 @@
     require_once 'View\VError.php';
     require_once 'View\VGestionePartite.php';
     require_once 'View\VInfo.php';
-    //require_once 'View\VIndex.php';
 
     /**
     * Inclusione dei file contenuti nella cartella View
@@ -64,6 +62,5 @@
     require_once 'Controller\CFrontController.php';
     require_once 'Controller\CGestionePartite.php';
     require_once 'Controller\CInfo.php';
-    //require_once 'Controller\CIndex.php';
 
     ?>
