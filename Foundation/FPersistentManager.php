@@ -76,7 +76,7 @@ class FPersistentManager {
      * @param $val valore del campo che si vuole eliminare
      * @param $Fclass nome della classe Foundation da richiamare
      */
-    public static function delete($field, $val,$Fclass) {
+    public static function delete($field, $val, $Fclass) {
         $Fclass::delete($field,$val);
     }
 

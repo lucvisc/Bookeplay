@@ -149,7 +149,7 @@ class CAdmin{
             $pm = new FPersistentManager();
             $account = unserialize($_SESSION['account']);
             if ($account->getEmail() == "admin@admin.com") {
-                $view->showCreaCancella(null, null);
+                $view->showCreaCancella(null, null, null);
             } else {
                 $view = new VError();
                 $view->error('1');
@@ -236,10 +236,16 @@ class CAdmin{
                 $pm = new FPersistentManager();
                 $giorno=self::splitGiorno($view->getGiorno());
                 $part= $pm->load('Giorno', $giorno,"FBooking");
-
-                print_r($part);
-
-                $view->showCreaCancella($part, true);
+                if ($part!=null) {
+                    for ($i = 0; $i < count($part); $i++) {
+                        $idP[$i] = $part[$i]->getIdbooking();
+                        $num[] = $pm->CountPartecipanti($idP[$i]);
+                    }
+                }
+                else{
+                    $num=null;
+                }
+                $view->showCreaCancella($part, true, $num);
             }
         else {
             header('Location: /BookAndPlay/User/login');
@@ -262,11 +268,15 @@ class CAdmin{
             if ($account->getEmail() == 'admin@admin.com') {
                 if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     $partita = $pm->load('idP', $id, "FBooking");
-                    $view->showCreaCancella($partita, null);
+                    for($i=0; $i<count($partita); $i++) {
+                        $idP[$i] = $partita[$i]->getIdbooking();
+                        $num[] = $pm->CountPartecipanti($idP[$i]);
+                    }
+                    $view->showCreaCancella($partita, null, $num);
                 }
                 elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $pm->delete('idP',$id,"FBooking");
-                    $view->showCreaCancella(null, null);
+                    $view->showCreaCancella(null, null, null);
                 }
             }
             else {

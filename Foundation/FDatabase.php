@@ -290,36 +290,7 @@ class FDatabase
         }
     }
 
-    /**
-     * Metodo che permette di aggiornare il valore di un attributo passato come parametro
-     * @param $class ,classe interessata
-     * @param $field campo da aggiornare
-     * @param $newvalue nuovo valore da inserire
-     * @param $pk chiave primaria della classe interessata
-     * @return bool|null a seconda se la modifica è avvenuta o meno
-     */
-    public function deleteDBGiorno($class, $id)
-    {
-        try {
-            $this->db->beginTransaction();
-            $query = "DELETE FROM " . self::tabella($class::getTables()) . " WHERE Giorno='" . $id[1] . "'AND 	FasciaOraria='" . $id[2] ."';";
-            $stmt = $this->db->prepare($query);
-            $stmt->execute();
 
-            print_r($stmt->errorInfo());
-
-            $this->db->commit();
-
-            print_r($this->db->errorInfo());
-
-            $this->closeDbConnection();
-            return true;
-        } catch (PDOException $e) {
-            echo "Attenzione errore: " . $e->getMessage();
-            $this->db->rollBack();
-            return false;
-        }
-    }
 
     /**
      * Metodo che verifica l'esistenza di un oggetto nel database

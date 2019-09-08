@@ -227,7 +227,7 @@ class FGiorno {
     public static function delete($field, $id)
     {
         $db = FDatabase::getInstance();
-        $result = $db->deleteDBGiorno(static::getClass(), $id);   //funzione richiamata,presente in FDatabase
+        $result = $db->deleteDB(static::getClass(), $field, $id);   //funzione richiamata,presente in FDatabase
         if ($result)
             return true;
         else

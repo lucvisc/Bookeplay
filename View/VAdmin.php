@@ -103,8 +103,9 @@ class VAdmin {
      * @param $partiteAttive array di partite attive
      * @throws SmartyException
      */
-    public function showCreaCancella($partiteAttive, $vaiPartita) {
+    public function showCreaCancella($partiteAttive, $vaiPartita,$num) {
         $this->smarty->assign('partite',$partiteAttive);
+        $this->smarty->assign('num',$num);
         $this->smarty->assign('vaiPartita', $vaiPartita);
         $this->smarty->display('adminPartite.tpl');
     }
