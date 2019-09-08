@@ -243,13 +243,7 @@ class FDatabase
             $query = "UPDATE " . self::tabella($class::getTables()) . " SET " . $field . "='" . $newvalue . "' WHERE " . $pk . "='" . $id . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-
-            print_r($stmt->errorInfo());
-
             $this->db->commit();
-
-            print_r($this->db->errorInfo());
-
             $this->closeDbConnection();
             return true;
         } catch (PDOException $e) {
@@ -328,9 +322,6 @@ class FDatabase
             $query = "SELECT Giorno, FasciaOraria FROM " . self::tabella($class::getTables()) . " WHERE " . $field . "='" . $id . "';";
             $stmt = $this->db->prepare($query);
             $stmt->execute();
-
-            print_r($stmt->errorInfo());
-
             $num = $stmt->rowCount();
             if ($num == 0) {
                 $result = null;                             //nessuna riga interessata. return null
@@ -390,13 +381,10 @@ class FDatabase
             $query = null;
             $class = "FPren_partecipa";
             $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE idPren ='" . $idPre . "';";
-
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
-
             return $num;
-
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
@@ -416,7 +404,6 @@ class FDatabase
             $query = null;
             $class = "FAccount";
             $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE email ='" . $email . "' AND password ='" . $pass . "';";
-
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
@@ -426,7 +413,6 @@ class FDatabase
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);   //ritorna una sola riga
             }
             return $result;
-
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
@@ -475,7 +461,6 @@ class FDatabase
         try {
             $query = "SELECT * FROM giorno WHERE  Giorno = " . $giorno . " ;";
             $stmt = $this->db->prepare($query);
-
             $stmt->execute();
             $num = $stmt->rowCount();
             if ($num == 0) {
@@ -511,7 +496,6 @@ class FDatabase
             $stmt->execute();
             $this->db->commit();
             $this->closeDbConnection();
-
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
@@ -694,7 +678,6 @@ class FDatabase
     {
         try {
             $query = "SELECT * FROM pren_partecipa where idPren=" . "'" . $idPren . "'" . "  ;";
-            //echo $query;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             //print_r($stmt->errorInfo());
@@ -729,7 +712,6 @@ class FDatabase
     {
         try {
             $query = "SELECT idP, Quota, livello, Giorno, FasciaOraria, note FROM prenotazione, pren_partecipa  where idP=idPren AND email='" . $email . "';";
-            //echo $query;
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             //print_r($stmt->errorInfo());
