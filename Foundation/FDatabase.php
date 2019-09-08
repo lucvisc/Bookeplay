@@ -596,6 +596,29 @@ class FDatabase
         return $obj;
     }
 
+    /**
+     * Metodo che elimina un partecipante ad una prenotazione nel db
+     * @param $idPren , id della prenotazione
+     * @param $email , email dell'account che sta partecipando alla prenotazione
+     * @return false|PDOStatement|null
+     */
+    public function deletePrenPartecipa($idPren, $email)
+    {
+        try {
+            $this->db->beginTransaction();
+            $query = "DELETE FROM  pren_partecipa  WHERE idPren='" . $idPren . "' AND email='" . $email . "';";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $this->db->commit();
+            $this->closeDbConnection();
+
+        } catch (PDOException $e) {
+            echo "Attenzione errore: " . $e->getMessage();
+            $this->db->rollBack();
+            return null;
+        }
+    }
+
 
     /**
      * Metodo che aggiunge un partecipante ad una prenotazione nel db

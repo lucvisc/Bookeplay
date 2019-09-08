@@ -92,31 +92,33 @@
                     </div>
                   </div>
                 </div> 
-                {if $array} 
-                {foreach $array as $booking} 
-                <div class="row" style="">
-                  <div class="col-md-12 ">
-                    <div class="row" style="">
-                      <div class="col-md-12">
-                        <div class="row">
-                          <div class="col-md-11" style="">
-                            <div class="col-md-12 col-1 m-2" style="">
-                              <h3 class="m-0 text-light border border-light rounded" style="">
-                                <div class="row">
-                                  <div class="border-light my-2 ml-2" style="">
-                                      <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
-                                      <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
-                                      <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
-                                      <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
-                                      <!--<h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
-                                      <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
-                                      <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>-->
+                {if $array}
+                  {$i=0}
+                  {foreach $array as $booking}
+                  <div class="row" style="">
+                    <div class="col-md-12 ">
+                      <div class="row" style="">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-11" style="">
+                              <div class="col-md-12 col-1 m-2" style="">
+                                <h3 class="m-0 text-light border border-light rounded" style="">
+                                  <div class="row">
+                                    <div class="border-light my-2 ml-2" style="">
+                                        <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
+                                        <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
+                                        <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
+                                        <h4 class="ml-5 text-light">Partecipanti:  {$num[$i]}/10</h4>
+                                        <!--<h4 class="ml-5 text-light">Quota: {$booking->getQuota()} €</h4>
+                                        <h4 class="ml-5 text-light">Livello: {$booking->getLivello()}</h4>
+                                        <h4 class="ml-5 text-light">Note: {$booking->getNote()}</h4>-->
+                                    </div>
                                   </div>
+                                </h3>
+                                <div class="row">
+                                  <div class="col-md-6" style=""></div>
+                                  <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/partita/{$booking->getIdbooking()}">Vai alla partita</a></div>
                                 </div>
-                              </h3>
-                              <div class="row">
-                                <div class="col-md-6" style=""></div>
-                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/partita/{$booking->getIdbooking()}">Vai alla partita</a></div>
                               </div>
                             </div>
                           </div>
@@ -124,7 +126,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                    {$i=$i+1}
                 {/foreach} 
                 {else} 
                   <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 

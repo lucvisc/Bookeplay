@@ -49,9 +49,6 @@ class FPren_partecipa {
         return self::$values;
     }
 
-
-
-
     /**
      * Metodo che permette di inserire un partecipante ad una prenotazione nel database
      * @param $idPren, id della prenotazione
@@ -61,6 +58,18 @@ class FPren_partecipa {
     static function insert ($idPren , $email) {
         $db = FDatabase::getInstance();
         $id = $db->insertPren_partecipa($idPren, $email);
+        return $id;
+    }
+
+    /**
+     * Metodo che permette di inserire un partecipante ad una prenotazione nel database
+     * @param $idPren, id della prenotazione
+     * @param $email, id dell'account che sta partecipando alla prenotazione
+     * @return false|PDOStatement|null
+     */
+    static function delete ($idPren , $email) {
+        $db = FDatabase::getInstance();
+        $id = $db->deletePrenPartecipa($idPren, $email);
         return $id;
     }
 
@@ -122,9 +131,6 @@ class FPren_partecipa {
         $result=$db->getCountPartecipa($id);
         return $result;
     }
-
-
-
 
 
 

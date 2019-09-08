@@ -196,6 +196,19 @@ class EAccount {
 		return $account;
 	}
 
+    /**Questo metodo viene richiamato per poter ripristinare il pagamento di una partita in cui si cancella la prenotazione
+     * @access public
+     * @param $quota float
+
+     */
+    public static function ripristinaPartita($account){
+        $cont=$account->getConto();
+        (int) $quota=50;
+        $cont += $quota / 10 ;
+        $account->setConto($cont);
+        return $account;
+    }
+
     /**
      * @access private 
      * @param $lunghezza int

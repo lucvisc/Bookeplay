@@ -89,25 +89,32 @@
                           <div class="col-md-11" style="">
                             <div class="col-md-12 col-1 m-2" style="">
                               {if $partita}
-                              {foreach $partita as $booking} 
-                              <h3 class="m-0 text-light border border-light rounded" style="">
-                                <div class="row">
-                                  <div class="border-light my-2 ml-2" style="">
-                                      <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
-                                      <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
-                                      <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
-                                      <h4 class="ml-5 text-light">Partecipanti:  /10</h4>
+                                {$i=0}
+                                {foreach $partita as $booking}
+                                <h3 class="m-0 text-light border border-light rounded" style="">
+                                  <div class="row">
+                                    <div class="border-light my-2 ml-2" style="">
+                                        <h4 class="ml-5 text-light">ID Partita: {$booking->getIdbooking()}</h4>
+                                        <h4 class="ml-5 text-light">Giorno: {$booking->getGiornobooking()->getGiorno()}</h4>
+                                        <h4 class="ml-5 text-light">Fascia Oraria: {$booking->getGiornobooking()->getFasceOrarie()}</h4>
+                                        <h4 class="ml-5 text-light">Partecipanti:  {$num[$i]}/10</h4>
+                                    </div>
                                   </div>
                                 </div>
                               </h3>
                               <div class="row">
                                 <div class="col-md-6" style=""></div>
-                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/partita/{$booking->getIdbooking()}">Disdici Prenotazione</a>
+                                <div class="col-md-6" style=""><a class="btn text-light px-3 btn-secondary mx-5 mb-1" href="/BookAndPlay/GestionePartite/disdici/{$booking->getIdbooking()}">Disdici Prenotazione</a>
                                 </div>
                               </div>
                               {/foreach}
                               {else} 
                               <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p> 
+                                </h3>
+                                  {$i=$i+1}
+                                {/foreach}
+                                {else}
+                                <p class="text-light text-center mt-2">Non sono presenti delle partite con tale parametro di ricerca</p>
                               {/if}
                             </div>
                           </div>

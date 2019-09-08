@@ -310,4 +310,8 @@ class FPersistentManager {
         return $ris;
     }
 
+    public function countPrenPart(){
+
+    }
+
 }
