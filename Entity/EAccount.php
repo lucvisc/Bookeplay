@@ -110,15 +110,7 @@ class EAccount {
 		return $this->activate;
 	}
 
-	//Dichiarazione dei metodi set 
-	///**
-    // * @access public
-    // * @param $i string
-    // */
-	//public function setId(){
-    //    $i = EAccount::generaStringaRandom(10);
-	//	$this->id =$i;
-	//}
+	//Dichiarazione dei metodi set
 
 	/**
      * @access public
