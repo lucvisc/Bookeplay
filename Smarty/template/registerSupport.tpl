@@ -143,12 +143,10 @@
               </div>
               </div>
               <div class="form-group" style="">
-                <div class="form-check text-light"> 
-                  <input class="form-check-input" type="checkbox" id="form21" value="on"> 
-                  <label class="form-check-label" for="form21"> I Agree with <a href="#">Term and Conditions</a> of the service </label> 
+                <div class="form-check text-light">  
                 </div>
               </div>
-              <input type="submit" class="btnRegister" value="Registrati"/>
+              <input type="submit" class="btn btn-primary" value="Registrati"/>
           </form>
               
             </div>
