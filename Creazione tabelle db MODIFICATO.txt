@@ -1,5 +1,5 @@
-
-
+DROP DATABASE IF EXISTS bookeplay
+CREATE DATABASE bookeplay
 USE my_bookeplay;
 
 CREATE TABLE IF NOT EXISTS  `account` (
@@ -78,7 +78,7 @@ CREATE TABLE mediauser (
     `filename` varchar(50) NOT NULL,
     `type` varchar(50) NOT NULL,
     `emailutente`  varchar (50) NOT NULL,
-    `immagine` blob,
+    `immagine` MEDIUMBLOB,
     PRIMARY KEY (emailutente),
     FOREIGN KEY (emailutente) REFERENCES account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
 )
