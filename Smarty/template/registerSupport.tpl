@@ -40,15 +40,12 @@
   </nav>
   <div class="py-5 text-center h-100" style="">
     <div class="container register">
-      <div class="row" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+      <div class="row h-100" style="  background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
         <div class="mx-auto col-lg-6 col-10">
-          <div class="text-light">
-            <img src="/BookAndPlay/Smarty/favicon.png" alt="">
-            <h3>Benvenuto</h3>
-            <p>Dopo la registrazione potrai usufruire dei servizi offerti da BookAndPlay</p>
-          </div>
-          <div>
-            {if $errorPassw!='ok'} 
+              <div class="text-light">
+                    <h3>Benvenuto</h3>
+                    <p>Dopo la registrazione potrai usufruire dei servizi offerti da BookAndPlay</p>
+                {if $errorPassw!='ok'} 
                  <div style="color: red;">
                   <p align="center">Attenzione! Le password inserite non corrispondono </p>
                 </div>
@@ -68,59 +65,97 @@
                   <p align="center">Attenzione! Email già esistente! </p>
                 </div> 
                 {/if}
-          </div>
-          <form class="text-left" enctype="multipart/form-data" action="/BookAndPlay/User/registrazioneUtente" method="POST">
-            <div class="row register-form">
-              <div class="form-group" style=""> <label for="form16" class="text-light">Aggiungi la tua immagine</label> 
-                <input name="file" id="file" type="file" accept="image/png, image/jpeg, image/jpg" size="40" /></div>
-                <div class="form-group" style=""> <label for="form16" class="text-light">Username</label> <input type="text" name="username" required="required" class="form-control" id="form16" placeholder="Johann W. Goethe"> </div>
-                <div class="form-group" style=""> <label for="form18" class="text-light">Email</label> <input type="email" name="email" required="required" class="form-control" id="form18" placeholder="j.goethe@werther.com"> </div>
-                <div class="form-row" style="">
-                  <div class="form-group col-md-6"> <label for="form19" class="text-light">Password</label> <input type="password" name="password" required="required" class="form-control" id="form19" placeholder="••••"> </div>
-                  <div class="form-group col-md-6 text-light"> <label for="form20">Conferma Password</label> <input type="password" name="password1" required="required" class="form-control" id="form20" placeholder="••••"> </div>
-                </div>
-                <div class="form-group" style=""> <label for="form20" class="text-light">Nome</label> <input type="text" name="name" class="form-control" id="form16" placeholder="----------"> </div>
-                <div class="form-group" style=""> <label for="form21" class="text-light">Cognome</label> <input type="text" name="surname" class="form-control" id="form16" placeholder="----------"> </div>
-                <div class="form-group" style=""> <label for="form22" class="text-light">Numero di telefono</label> <input type="text" name="telnumber" class="form-control" id="form16" placeholder="----------"> </div>
-                <div class="form-group" style=""> <label for="form23" class="text-light">Sesso</label> <input type="text" name="gender" class="form-control" id="form16" placeholder="Maschio/Femmina"> </div>
-                <div class="form-group" style=""> <label for="form24" class="text-light">Data di nascita</label> <input type="date" name="data_nascita" class="form-control" id="form16" placeholder="gg/mm/aaaa"> </div>
-                <div class="form-row" style="">
-                  <div class="form-group col-md-10" style=""> <label for="form25" class="text-light">Indirizzo</label> <input type="text" name="via" class="form-control" id="form19" placeholder="--------"> </div>
-                  <div class="form-group col-md-2 text-light" style=""> <label for="form26">N°</label> <input type="text" name="numero" class="form-control" id="form20" placeholder="---"> </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4" style="">
-                    <div class="form-group row">
-                      <div class="col-10 col-md-12"><input type="text" name="cap" class="form-control" id="form19" placeholder="CAP"></div>
-                    </div>
-                  </div>
-                  <div class="col-md-4" style="">
-                    <div class="form-group row">
-                      <div class="col-10 col-md-11" style=""><input type="text" name="comune" class="form-control" id="form19" placeholder="Comune"></div>
-                    </div>
-                  </div>
-                  <div class="col-md-4" style="">
-                    <div class="form-group row">
-                      <div class="col-10 col-md-11 " style=""><input type="text" name="provincia" class="form-control" id="form19" placeholder="Provincia"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group" style="">
-                  <div class="form-check text-light"> <input class="form-check-input" required="required" type="checkbox" id="form21" value="on"> <label class="form-check-label" for="form21"> I Agree with <a href="#">Term and Conditions</a> of the service </label> </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 shadow-none text-center ">
-                      <input type="submit" class="btn btn-primary" value="Registrati"/></i>
-                    </div>
-                  </div> 
-                </form>
-                
               </div>
+          <form class="text-left" enctype="multipart/form-data" action="/BookAndPlay/User/registrazioneUtente" method="POST">
+            <div class="row register-form">    
+              <div class="form-group" style=""> 
+                <label for="form16" class="text-light">Aggiungi la tua immagine</label> 
+                <input name="file" id="file" type="file" accept="image/png, image/jpeg, image/jpg" size="40" class="form-control"</div>
+              <div class="form-group" style=""> 
+                <label for="form16" class="text-light">Username</label> 
+                <input type="text" name="username" required="required" class="form-control" id="form16" placeholder="Johann W. Goethe"> 
+              </div>
+              <div class="form-group" style=""> 
+                <label for="form18" class="text-light">Email</label> 
+                <input type="email" name="email" required="required" class="form-control" id="form18" placeholder="j.goethe@werther.com">
+              </div>
+              <div class="form-row" style="">
+                <div class="form-group col-md-6"> 
+                  <label for="form19" class="text-light">Password</label> 
+                  <input type="password" name="password" required="required" class="form-control" id="form19" placeholder="••••">
+                </div>
+                <div class="form-group col-md-6 text-light"> 
+                  <label for="form20">Conferma Password</label> 
+                  <input type="password" name="password1" required="required" class="form-control" id="form20" placeholder="••••"> 
+                </div>
+              </div>
+              <div class="form-group" style=""> 
+                <label for="form20" class="text-light">Nome</label> 
+                <input type="text" name="name" class="form-control" id="form16" placeholder="----------"> 
+              </div>
+              <div class="form-group" style=""> 
+                <label for="form21" class="text-light">Cognome</label> 
+                <input type="text" name="surname" class="form-control" id="form16" placeholder="----------"> 
+              </div>
+              <div class="form-group" style=""> 
+                <label for="form22" class="text-light">Numero di telefono</label> 
+                <input type="text" name="telnumber" class="form-control" id="form16" placeholder="----------"> 
+              </div>
+              <div class="form-group" style=""> 
+                <label for="form23" class="text-light">Sesso</label> 
+                <input type="text" name="gender" class="form-control" id="form16" placeholder="M/F"> 
+              </div>
+              <div class="form-group" style=""> 
+                <label for="form24" class="text-light">Data di nascita</label> 
+                <input type="date" name="data_nascita" class="form-control" id="form16" placeholder="gg/mm/aaaa"> 
+              </div>
+              <div class="form-row" style="">
+              <div class="form-group col-md-10" style=""> 
+                <label for="form25" class="text-light">Indirizzo</label> 
+                <input type="text" name="via" class="form-control" id="form19" placeholder="--------"> 
+              </div>
+              <div class="form-group col-md-2 text-light" style=""> 
+                <label for="form26">N°</label> 
+                <input type="text" name="numero" class="form-control" id="form20" placeholder="---"> 
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-4" style="">
+                <div class="form-group row">
+                  <div class="col-10 col-md-12">
+                    <input type="text" name="cap" class="form-control" id="form19" placeholder="CAP">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4" style="">
+                <div class="form-group row">
+                  <div class="col-10 col-md-11" style="">
+                    <input type="text" name="comune" class="form-control" id="form19" placeholder="Comune">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4" style="">
+                <div class="form-group row">
+                  <div class="col-10 col-md-11 " style="">
+                    <input type="text" name="provincia" class="form-control" id="form19" placeholder="Provincia">
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="form-group" style="">
+                <div class="form-check text-light"> 
+                  <input class="form-check-input" type="checkbox" id="form21" value="on"> 
+                  <label class="form-check-label" for="form21"> I Agree with <a href="#">Term and Conditions</a> of the service </label> 
+                </div>
+              </div>
+              <input type="submit" class="btnRegister" value="Registrati"/>
+          </form>
+              
             </div>
-          
         </div>
       </div>
     </div>
+  </div>
     <div class="py-5" style=" background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,254)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
       <div class="container">
         <div class="row">
