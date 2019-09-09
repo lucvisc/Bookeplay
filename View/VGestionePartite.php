@@ -260,6 +260,9 @@ class VGestionePartite {
             case "no_giorno":
                 $this->smarty->assign('giorno', "errore");
                 break;
+            case "no_conto":
+                $this->smarty->assign('no_conto', "errore");
+                break;
         }
     }
 

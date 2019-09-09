@@ -82,7 +82,6 @@ class FBooking{
      */
     public static function store(EBooking $boo) // viene storizzato prima L'oggetto giorno perchè sarà poi foreign key di prenotazione
     {
-        print_r($boo);
         $db=FDatabase::getInstance();
         $id=$db->storeDB(static::getClass() ,$boo);
         $boo->setIdbooking($id);//siccome idBooking è autoincrementate viene inserito nell'oggetto passato solo dopo lo store e quindi la creazione del suo id

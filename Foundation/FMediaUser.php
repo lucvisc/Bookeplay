@@ -44,8 +44,7 @@ class FMediaUser {
 
     public static function bindImg($stmt, $media){
         $media=$media->getData();
-        $si=$stmt->bindParam(':immagine', $media, PDO::PARAM_LOB);
-        print ("$si\n");
+        $stmt->bindParam(':immagine', $media, PDO::PARAM_LOB);
     }
 
     /**

@@ -2,6 +2,7 @@
 {assign var='userlogged' value=$userlogged|default:'nouser'}
 {assign var='giorno' value=$giorno|default:'noerror'}
 {assign var='no_fascia_oraria' value=$no_fascia_oraria|default:'noerror'}
+{assign var='no_conto' value=$no_conto|default:'noerror'}
 <html>
 
 <head>
@@ -91,6 +92,10 @@
         <div class="row">
           <div class="col-md-12 col-lg-12 text-center">
             <div class="table-responsive">
+              {if $no_conto=='errore'}
+              <div style="color: red;">
+                <p align="center">Non hai il saldo sufficiente per prenotare una partita</p>
+              </div>
               {if $no_fascia_oraria =='errore'}
                 <div style="color: red;">
                   <p align="center">La fascia oraria è stata scritta in maniera errata </p>
@@ -121,6 +126,7 @@
                   {/if}
                 {/if}
               {/if}
+                  {/if}
               </table>
             </div>
           </div>

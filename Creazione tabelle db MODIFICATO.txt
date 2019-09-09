@@ -1,9 +1,9 @@
-DROP DATABASE IF EXISTS bookeplay;
-CREATE DATABASE bookeplay;
-USE bookeplay;
 
-CREATE TABLE IF NOT EXISTS  `Account` (
-  `email` varchar(45) NULL UNIQUE,
+
+USE my_bookeplay;
+
+CREATE TABLE IF NOT EXISTS  `account` (
+  `email` varchar(45) NOT NULL UNIQUE,
   `username` varchar(45)  NOT NULL UNIQUE,
   `password` VARCHAR(45) not NULL,
   `telnumb` char(10) NOT NULL,
@@ -11,9 +11,10 @@ CREATE TABLE IF NOT EXISTS  `Account` (
   `descrizione` varchar(150) NULL,
   `activate` Boolean not null,
   PRIMARY KEY (`email`) )
-ENGINE = InnoDB;
+ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Utente` (
+
+CREATE TABLE IF NOT EXISTS `utente` (
   `email` varchar(45) not null,
   `name` VARCHAR(45) not NULL,
   `surname` VARCHAR(45) not NULL,
@@ -21,11 +22,12 @@ CREATE TABLE IF NOT EXISTS `Utente` (
   `gender` ENUM('M','F') NULL,
   `tipo` enum('registrato', 'admin'),
   PRIMARY KEY (email),
-  FOREIGN KEY (email) REFERENCES Account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (email) REFERENCES account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
 )
-ENGINE = InnoDB;
+ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Indirizzo` (
+
+CREATE TABLE IF NOT EXISTS `indirizzo` (
   `email` varchar(45) not NULL,
   `Comune` VARCHAR(45) not NULL,
   `Provincia` varchar(45) NULL,
@@ -33,16 +35,17 @@ CREATE TABLE IF NOT EXISTS `Indirizzo` (
   `Via` varchar(45) not null,
   `NumCivico` char(3) not null,
   PRIMARY KEY (`Via`, `CAP`),
-  FOREIGN KEY (email) REFERENCES Utente(`email`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (email) REFERENCES utente(`email`) ON DELETE CASCADE ON UPDATE CASCADE
 )
-ENGINE = InnoDB;
+ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Giorno` (
+CREATE TABLE IF NOT EXISTS `giorno` (
   `Giorno` varchar(10) not null,
   `FasciaOraria` varchar(11) not null,
    PRIMARY KEY (`Giorno`, `FasciaOraria`)
 )
-ENGINE = InnoDB;
+ENGINE=InnoDB;
+
 
 
 CREATE TABLE IF NOT EXISTS `prenotazione` (
@@ -55,18 +58,20 @@ CREATE TABLE IF NOT EXISTS `prenotazione` (
   `organizzatore` varchar(45) not null,
   PRIMARY KEY (`idP`)
 )
-ENGINE = InnoDB;
+ENGINE=InnoDB;
 
 
 
-CREATE TABLE IF NOT EXISTS `Pren_Partecipa`(
+
+CREATE TABLE IF NOT EXISTS `pren_partecipa`(
   `idPren` int(5) not null,
   `email` varchar(60) not null,
    PRIMARY KEY (`idPren`, `email`),
-   FOREIGN KEY (idPren) REFERENCES Prenotazione(`idP`) ON DELETE CASCADE ON UPDATE CASCADE,
-   FOREIGN KEY (email) REFERENCES Account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
+   FOREIGN KEY (idPren) REFERENCES prenotazione(`idP`) ON DELETE CASCADE ON UPDATE CASCADE,
+   FOREIGN KEY (email) REFERENCES account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
 )
-ENGINE = InnoDB;
+ENGINE=InnoDB;
+
 
 CREATE TABLE mediauser (
 
@@ -75,9 +80,10 @@ CREATE TABLE mediauser (
     `emailutente`  varchar (50) NOT NULL,
     `immagine` blob,
     PRIMARY KEY (emailutente),
-    FOREIGN KEY (emailutente) REFERENCES Account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (emailutente) REFERENCES account(`email`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
+
 
 
 

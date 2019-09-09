@@ -284,7 +284,6 @@ class CUser {
             $acc = $pm->load("email", $account->getEmail(), "FAccount");
             $user = $pm->load("email", $account->getEmail(), "FUser");
             $addr = $pm->load("email", $account->getEmail(), "FAddress");
-
             if (get_class($account) == "EAccount") {
                 if ($account->getPassword() == $_POST['old_password']) {
                     if ($account->getEmail() == $_POST['email']) {
@@ -317,7 +316,6 @@ class CUser {
                             $addr = $pm->load("email", $account->getEmail(), "FAddress");
                             $salvare = serialize($newAcc);
                             $_SESSION['account'] = $salvare;
-
                             $statoimg = static::modificaprofiloimmagine($account);
                             if ($statoimg) {
                                 $img = $pm->loadImg($account->getEmail());

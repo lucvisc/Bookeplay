@@ -432,7 +432,6 @@ class FDatabase
             $query = null;
             $class = "FPren_partecipa";
             $query = "SELECT * FROM " . self::tabella($class::getTables()) . " WHERE idPren ='" . $idPren . "' AND email ='" . $email . "';";
-
             $stmt = $this->db->prepare($query);
             $stmt->execute();
             $num = $stmt->rowCount();
@@ -519,7 +518,6 @@ class FDatabase
             $stmt->execute();
             $this->db->commit();
             $this->closeDbConnection();
-
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
@@ -542,7 +540,6 @@ class FDatabase
             $this->db->commit();
             $this->closeDbConnection();
             return $id;
-
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
@@ -563,7 +560,6 @@ class FDatabase
             $this->db->commit();
             $this->closeDbConnection();
             return $id;
-
         } catch (PDOException $e) {
             echo "Attenzione errore: " . $e->getMessage();
             $this->db->rollBack();
